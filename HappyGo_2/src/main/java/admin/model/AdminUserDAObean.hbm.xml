@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2012/3/7 ?W?? 09:15:15 by Hibernate Tools 3.3.0.GA -->
+<hibernate-mapping>
+	<class name="admin.model.AdminUserDAObean" table="HG_AdminUser">
+		<id name="ADM_ID" type="string">
+			<column name="ADM_ID" />
+			<generator class="assigned" />
+		</id>
+		<property name="ADM_PWD" type="string">
+			<column name="ADM_PWD" />
+		</property>
+		<property name="ADM_NAME" type="string">
+			<column name="ADM_NAME" />
+		</property>
+		<property name="ADM_ROLEID" type="string">
+			<column name="ADM_ROLEID" />
+		</property>
+		<property name="ADM_UPDATETIME" type="date">
+			<column name="ADM_UPDATETIME" />
+		</property>
+		<property name="ADM_UPDATEUSER" type="string">
+			<column name="ADM_UPDATEUSER" />
+		</property>
+	</class>
+</hibernate-mapping>
