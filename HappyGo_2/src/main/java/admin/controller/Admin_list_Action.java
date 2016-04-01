@@ -15,15 +15,13 @@ import admin.model.AdminUserDAObean;
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
-
-
 public class Admin_list_Action extends ActionSupport implements SessionAware {
 	private Map<String, Object> sessionMap;
 	private String ADM_ID;
-	private String ADM_PWD;
+	//private String ADM_PWD;
 	private String ADM_NAME;
-	private String ADM_ROLEID;
-	private String ADM_UPDATEUSER;
+//	private String ADM_ROLEID;
+//	private String ADM_UPDATEUSER;
 	//private String prodaction;
 //	public String getProdaction() {
 //		return prodaction;
@@ -37,43 +35,41 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 		return ADM_ID;
 	}
 
-	public void setADM_ID(String aDM_ID) {
-		ADM_ID = aDM_ID;
+	public void setADM_ID(String ADM_ID) {
+		this.ADM_ID = ADM_ID;
 	}
 
-	public String getADM_PWD() {
-		return ADM_PWD;
-	}
-
-	public void setADM_PWD(String aDM_PWD) {
-		ADM_PWD = aDM_PWD;
-	}
+//	public String getADM_PWD() {
+//		return ADM_PWD;
+//	}
+//
+//	public void setADM_PWD(String aDM_PWD) {
+//		ADM_PWD = aDM_PWD;
+//	}
 
 	public String getADM_NAME() {
 		return ADM_NAME;
 	}
 
-	public void setADM_NAME(String aDM_NAME) {
-		ADM_NAME = aDM_NAME;
+	public void setADM_NAME(String ADM_NAME) {
+		this.ADM_NAME = ADM_NAME;
 	}
 
-	public String getADM_ROLEID() {
-		return ADM_ROLEID;
-	}
-
-	public void setADM_ROLEID(String aDM_ROLEID) {
-		ADM_ROLEID = aDM_ROLEID;
-	}
-
-	public String getADM_UPDATEUSER() {
-		return ADM_UPDATEUSER;
-	}
-
-	public void setADM_UPDATEUSER(String aDM_UPDATEUSER) {
-		ADM_UPDATEUSER = aDM_UPDATEUSER;
-	}
-	
-	
+//	public String getADM_ROLEID() {
+//		return ADM_ROLEID;
+//	}
+//
+//	public void setADM_ROLEID(String aDM_ROLEID) {
+//		ADM_ROLEID = aDM_ROLEID;
+//	}
+//
+//	public String getADM_UPDATEUSER() {
+//		return ADM_UPDATEUSER;
+//	}
+//
+//	public void setADM_UPDATEUSER(String aDM_UPDATEUSER) {
+//		ADM_UPDATEUSER = aDM_UPDATEUSER;
+//	}	
 
 	@Override
 	public void setSession(Map<String, Object> arg0) {
@@ -136,9 +132,9 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 		
 		bean.setADM_ID(ADM_ID);
 		bean.setADM_NAME(ADM_NAME);
-		bean.setADM_PWD(ADM_PWD);
-		bean.setADM_ROLEID(ADM_ROLEID);
-		bean.setADM_UPDATEUSER(ADM_UPDATEUSER);
+		bean.setADM_PWD("");
+		bean.setADM_ROLEID("");
+		bean.setADM_UPDATEUSER("");
 		return bean;
 	}
 
@@ -146,9 +142,9 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 		System.out.println("execute");
 		AdminUserDAObean bean = checkkeyin();
 		HttpServletRequest req = ServletActionContext.getRequest();
-		String  prodaction=req.getParameter("prodaction");
-		if ("select".equals(prodaction)) {
-			List<AdminUserDAObean> result = adminUserDAOService.select(bean);
+//		String  prodaction=req.getParameter("prodaction");
+//		if ("select".equals(prodaction)) {
+			List<AdminUserDAObean> result = adminUserDAOService.select(null);
 			if (result == null) {
 				System.out.println("select fail");
 				this.addFieldError("action", "Insert fail");
@@ -157,27 +153,27 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 				req.setAttribute("select", result);
 				return Action.SUCCESS;
 			}
-		} else if ("insert".equals(prodaction)) {
-			AdminUserDAObean result = adminUserDAOService.insert(bean);
-			if (result == null) {
-				System.out.println("insert fail");
-				this.addFieldError("action", "Insert fail");
-			} else {
-				System.out.println("insert ok");
-				req.setAttribute("insert", result);
-				return Action.INPUT;
-			}
-		} else if ("update".equals(prodaction)) {
-			AdminUserDAObean result = adminUserDAOService.update(bean);
-			if (result == null) {
-				System.out.println("update fail");
-				this.addFieldError("action", "update fail");
-			} else {
-				req.setAttribute("update", result);
-				System.out.println("update ok");
-				return Action.INPUT;
-			}
-		} 
+//		} else if ("insert".equals(prodaction)) {
+//			AdminUserDAObean result = adminUserDAOService.insert(bean);
+//			if (result == null) {
+//				System.out.println("insert fail");
+//				this.addFieldError("action", "Insert fail");
+//			} else {
+//				System.out.println("insert ok");
+//				req.setAttribute("insert", result);
+//				return Action.INPUT;
+//			}
+//		} else if ("update".equals(prodaction)) {
+//			AdminUserDAObean result = adminUserDAOService.update(bean);
+//			if (result == null) {
+//				System.out.println("update fail");
+//				this.addFieldError("action", "update fail");
+//			} else {
+//				req.setAttribute("update", result);
+//				System.out.println("update ok");
+//				return Action.INPUT;
+//			}
+//		} 
 		System.out.println("final");
 		return Action.INPUT;
 	}

@@ -11,7 +11,7 @@
 <body>
 	<div>
 		<!-- <form action="mag_1.jsp" method="get"> -->
-		<form action="<c:url value="/dayuNameSpace/weblogin.controller" />"  method="get">
+		<form action="<c:url value="/dayuNameSpace/weblogin.action" />"  method="get">
 			<TABLE>
 				<TR>
 					<TH colspan='2' bgcolor='#d4edec'><label>內部管理登入</label></TH>

@@ -29,8 +29,10 @@
 	</bean>
 
 	<!--[_______________structs2 追加部分____________________________] -->
-	<bean id="admin_Login_Action" class="admin.controller.Admin_Login_Action"
-		scope="prototype">
+	<bean id="admin_Login_Action" class="admin.controller.Admin_Login_Action"		scope="prototype">
+		<property name="adminUserDAOService" ref="adminUserDAOService"></property>
+	</bean>
+	<bean id="admin_userlist_Action" class="admin.controller.Admin_list_Action"		scope="prototype">
 		<property name="adminUserDAOService" ref="adminUserDAOService"></property>
 	</bean>
 </beans>
