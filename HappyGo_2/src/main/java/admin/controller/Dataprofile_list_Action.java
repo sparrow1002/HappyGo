@@ -1,6 +1,5 @@
 package admin.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -9,63 +8,56 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
-import admin.model.AdminUserDAOService;
-import admin.model.AdminUserDAObean;
 import admin.model.DataProfileDAOBean;
 import admin.model.DataProfileDAOService;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class Admin_list_Action extends ActionSupport implements SessionAware {
+public class Dataprofile_list_Action extends ActionSupport implements
+		SessionAware {
 	private Map<String, Object> sessionMap;
-	private String ADM_ID;
-	private String ADM_PWD;
-	private String ADM_NAME;
-	private String ADM_ROLEID;
+	private String DAP_GROUP;
+	private String DAP_ID;
+	private String DAP_VALUE;
+	private String DAP_DESC;
 
-	public String getADM_ID() {
-		return ADM_ID;
+	public String getDAP_GROUP() {
+		return DAP_GROUP;
 	}
 
-	public void setADM_ID(String ADM_ID) {
-		this.ADM_ID = ADM_ID;
+	public void setDAP_GROUP(String dAP_GROUP) {
+		DAP_GROUP = dAP_GROUP;
 	}
 
-	public String getADM_PWD() {
-		return ADM_PWD;
+	public String getDAP_ID() {
+		return DAP_ID;
 	}
 
-	public void setADM_PWD(String aDM_PWD) {
-		ADM_PWD = aDM_PWD;
+	public void setDAP_ID(String dAP_ID) {
+		DAP_ID = dAP_ID;
 	}
 
-	public String getADM_NAME() {
-		return ADM_NAME;
+	public String getDAP_VALUE() {
+		return DAP_VALUE;
 	}
 
-	public void setADM_NAME(String ADM_NAME) {
-		this.ADM_NAME = ADM_NAME;
+	public void setDAP_VALUE(String dAP_VALUE) {
+		DAP_VALUE = dAP_VALUE;
 	}
 
-	public String getADM_ROLEID() {
-		return ADM_ROLEID;
+	public String getDAP_DESC() {
+		return DAP_DESC;
 	}
 
-	public void setADM_ROLEID(String aDM_ROLEID) {
-		ADM_ROLEID = aDM_ROLEID;
+	public void setDAP_DESC(String dAP_DESC) {
+		DAP_DESC = dAP_DESC;
 	}
 
 	@Override
 	public void setSession(Map<String, Object> sessionMap) {
 		// TODO Auto-generated method stub
 		this.sessionMap = sessionMap;
-	}
-
-	private AdminUserDAOService adminUserDAOService;
-
-	public void setAdminUserDAOService(AdminUserDAOService adminUserDAOService) {
-		this.adminUserDAOService = adminUserDAOService;
 	}
 
 	private DataProfileDAOService dataProfileDAOService;
@@ -75,9 +67,7 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 		this.dataProfileDAOService = dataProfileDAOService;
 	}
 
-	private SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-	private AdminUserDAObean checkkeyin() {
+	private DataProfileDAOBean checkkeyin() {
 		// int iID = 0;
 		// if (id != null && id.trim().length() != 0) {
 		// try {
@@ -120,35 +110,30 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 		// }
 		// }
 
-		AdminUserDAObean bean = new AdminUserDAObean();
-		System.out.println("ADM_ID");
-		bean.setADM_ID(ADM_ID);
-		bean.setADM_NAME("");
-		bean.setADM_PWD("");
-		bean.setADM_ROLEID("");
-		bean.setADM_UPDATEUSER("");
+		DataProfileDAOBean bean = new DataProfileDAOBean();
+
+		bean.setDAP_GROUP(DAP_GROUP);
+		bean.setDAP_ID(DAP_ID);
+		System.out.println("DAP_ID:" + DAP_ID);
+		bean.setDAP_VALUE(DAP_VALUE);
+		bean.setDAP_DESC(DAP_DESC);
 		return bean;
 	}
 
 	public String execute() throws Exception {
 		System.out.println("execute");
-		AdminUserDAObean bean = checkkeyin();
+		DataProfileDAOBean bean = checkkeyin();
 		HttpServletRequest req = ServletActionContext.getRequest();
 		String mode = req.getParameter("mode");
-		DataProfileDAOBean beans = new DataProfileDAOBean();
-		beans.setDAP_GROUP("ROLEID");
-		List<DataProfileDAOBean> dataprofileresult;
-		dataprofileresult = dataProfileDAOService.select(beans);
-		System.out.println(dataprofileresult);
-		req.setAttribute("roleid", dataprofileresult);
+
 		// System.out.println("mode:" + mode);
 		if ("select".equals(mode)) {
-			List<AdminUserDAObean> result;
-			System.out.println("ADM_ID:" + ADM_ID);
-			if (ADM_ID != null && !ADM_ID.equals(""))
-				result = adminUserDAOService.select(bean);
+			List<DataProfileDAOBean> result;
+			System.out.println("DAP_GROUP:" + DAP_GROUP);
+			if (DAP_GROUP != null && !DAP_GROUP.equals(""))
+				result = dataProfileDAOService.select(bean);
 			else
-				result = adminUserDAOService.select(null);
+				result = dataProfileDAOService.select(null);
 			if (result == null) {
 				System.out.println("select fail");
 				this.addFieldError("action", "Insert fail");
@@ -158,25 +143,25 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 				return Action.SUCCESS;
 			}
 		} else if ("selectitem".equals(mode)) {
-			List<AdminUserDAObean> result;
-			// System.out.println(ADM_ID);
-			if (ADM_ID != null && ADM_ID.trim() != "")
-				result = adminUserDAOService.select(bean);
-			else
-				result = adminUserDAOService.select(null);
+			DataProfileDAOBean result;
+			List<DataProfileDAOBean> results;
+			System.out.println("DAP_GROUP" + DAP_GROUP);
+			System.out.println("DAP_ID" + DAP_ID);
+			result = dataProfileDAOService.selectitems(bean);
+
 			if (result == null) {
 				System.out.println("selectitem fail");
 				this.addFieldError("action", "Insert fail");
 			} else {
 				System.out.println("selectitem ok");
-				req.setAttribute("selectitem", result.get(0));
-				result = adminUserDAOService.select(null);
-				req.setAttribute("select", result);
+				req.setAttribute("selectitem", result);
+				results = dataProfileDAOService.select(null);
+				req.setAttribute("select", results);
 				return Action.SUCCESS;
 			}
 		} else if ("insert".equals(mode)) {
 
-			AdminUserDAObean result = adminUserDAOService.insert(bean);
+			DataProfileDAOBean result = dataProfileDAOService.insert(bean);
 			if (result == null) {
 				System.out.println("insert fail");
 				this.addFieldError("action", "Insert fail");
@@ -186,25 +171,24 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 				return Action.INPUT;
 			}
 		} else if ("edit".equals(mode)) {
-			bean.setADM_ID(ADM_ID);
-			List<AdminUserDAObean> result;
-			if (ADM_ID != null && ADM_ID.trim() != "")
-				result = adminUserDAOService.select(bean);
-			else
-				result = adminUserDAOService.select(null);
+			bean.setDAP_GROUP(DAP_GROUP);
+			bean.setDAP_ID(DAP_ID);
+			List<DataProfileDAOBean> results;
+			DataProfileDAOBean result;
+			result = dataProfileDAOService.selectitems(bean);
+
 			if (result == null) {
 				System.out.println("update fail");
 				this.addFieldError("action", "update fail");
 			} else {
-				req.setAttribute("select", result);
-				result = adminUserDAOService.select(bean);
-				req.setAttribute("edit", result.get(0));
-				System.out.println("edit ok:" + result.size());
+				System.out.println(result);
+				results = dataProfileDAOService.select(null);
+				req.setAttribute("select", results);
+				req.setAttribute("edit", result);			
 				return Action.SUCCESS;
 			}
 		}
 		System.out.println("final");
 		return Action.INPUT;
 	}
-
 }

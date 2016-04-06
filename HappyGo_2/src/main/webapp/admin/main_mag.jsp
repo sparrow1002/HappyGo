@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +10,7 @@
 <script src="../jquery/jquery-2.1.4.min.js"></script>
 <script src="../jquery/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="../jquery/jquery-ui.theme.css">
+<script src="../js/menu.js"></script>
 <style type="text/css">
 #menus {
 	margin: 0;
@@ -17,11 +19,11 @@
 	position: relative;
 	width: 600px;
 	float: left;
-	background: #000;
-	border: 10px ridgt #38c2bb;
+	background: #FF8800   ;
+	border: 10px ridgt #FFBB00;
 	border-radius: 20px;
 	bgcolor: gold;
-	box-shadow: 1px 1px 100px 10px #38c2bb;
+	box-shadow: 1px 1px 100px 10px #FFEE99;
 }
 
 #menus li {
@@ -46,8 +48,8 @@
 	position: absolute;
 	left: 0;
 	width: 600px;
-	color: #fff;
-	background: #06c url('bottom.gif') no-repeat bottom;
+	color: #886600 ;
+	background: #FFBB66 url('bottom.gif') no-repeat bottom;
 	display: none;
 }
 
@@ -64,31 +66,7 @@
 }
 </style>
 <script type="text/javascript">
-	$(function() {
-		// 幫 #menu li 加上 hover 事件
-		$('#menus>li').hover(
-				function() {
-					// 先找到 li 中的子選單
-					var _this = $(this), _subnav = _this.children('ul');
-
-					// 變更目前母選項的背景顏色
-					// 同時滑入子選單(如果有的話)
-					_this.css('backgroundColor', '#06c');
-					_subnav.stop(true, true).slideDown(400);
-				},
-				function() {
-					// 變更目前母選項的背景顏色
-					// 同時滑出子選單(如果有的話)
-					// 也可以把整句拆成上面的寫法
-					$(this).css('backgroundColor', '').children('ul').stop(
-							true, true).slideUp(400);
-				});
-
-		// 取消超連結的虛線框
-		$('a').focus(function() {
-			this.blur();
-		});
-	});
+	
 
 	function showpage(page) {
 		var page1 = document.getElementById("show_1"); //會員資料維護
@@ -195,8 +173,8 @@
 			<li><a href="">系統管理</a>
 				<ul>
 					<li><a onclick="showpage('11');">登入管理</a></li>
-					<li><a onclick="showpage('12');">權限設定</a></li>
-					<li><a onclick="showpage('13');">資料設定</a></li>
+					<li><a	href='<c:url value="/dayuNameSpace/maguserlist.action?mode=select"/>'>權限設定</a></li>
+					<li><a	href='<c:url value="/dayuNameSpace/dataprofilelist.action?mode=select"/>'>資料設定</a></li>
 					<!-- <li><a onclick="showpage('14');">現金折扣設定</a></li> -->
 				</ul></li>
 			<li><a href="../index.jsp">回首頁</a></li>
@@ -634,7 +612,7 @@
 				</TR>
 			</TABLE>
 			<TABLE>
-				
+
 				<TR>
 					<TD colspan='2' bgcolor='#d4edec' align="center">
 						<TABLE>
@@ -1123,9 +1101,8 @@
 							<option value="04">特銷狀態</option>
 							<option value="04">折扣現金比率</option>
 							<option value="04">交易換點比率</option>
-					</select>
-					<input type="button" id="startdate"
-									name="startdate"  value="新增群組項目"></TD>
+					</select> <input type="button" id="startdate" name="startdate"
+						value="新增群組項目"></TD>
 				</TR>
 				<TR>
 					<TD colspan='2' bgcolor='#d4edec' align="center">
@@ -1141,14 +1118,14 @@
 								<TD bgcolor='#85d6d2'>男</TD>
 								<TD bgcolor='#a9d999'>性別-男</TD>
 								<TD bgcolor='#85d6d2'><input type="button" id="startdate"
-									name="startdate"  value="修改"></TD>
+									name="startdate" value="修改"></TD>
 							</TR>
-						<TR>
+							<TR>
 								<TD bgcolor='#a9d999'>2</TD>
 								<TD bgcolor='#85d6d2'>女</TD>
 								<TD bgcolor='#a9d999'>性別-女</TD>
 								<TD bgcolor='#85d6d2'><input type="button" id="startdate"
-									name="startdate"  value="修改"></TD>
+									name="startdate" value="修改"></TD>
 							</TR>
 						</TABLE>
 					</TD>

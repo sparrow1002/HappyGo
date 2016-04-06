@@ -18,6 +18,12 @@
 			<result name="input" >/admin/userlist.jsp</result>
 			<result name="success" >/admin/userlist.jsp</result>
 		</action>
+		
+		<action name="dataprofilelist" class="admin.controller.Dataprofile_list_Action">
+			<!-- controller.Login_Action-->
+			<result name="input" >/admin/DataProfile.jsp</result>
+			<result name="success" >/admin/DataProfile.jsp</result>
+		</action>
 	</package>
 	<package name="dayuPackage2" namespace="/dayu" extends="struts-default">
 		

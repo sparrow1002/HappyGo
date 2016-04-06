@@ -28,8 +28,10 @@ public class AdminUserDAOService {
 	public List<AdminUserDAObean> select(AdminUserDAObean bean) {
 		List<AdminUserDAObean> result = null;
 		if (bean != null && bean.getADM_ID() != "") {
+			System.out.println("AdminUserDAObean select :"+bean.getADM_ID());
 			AdminUserDAObean temp = adminUserDAO.select(bean.getADM_ID());
 			if (temp != null) {
+				System.out.println("AdminUserDAObean select ok :"+bean.getADM_ID());
 				result = new ArrayList<AdminUserDAObean>();
 				result.add(temp);
 			}
