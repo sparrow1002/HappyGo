@@ -6,12 +6,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import AAA000.DayDevice;
 import Administer.model.HG_PromotionBonus_Bean;
 import cardPoint.model.dao.CardPointDAO_JDBC;
 
 public class CardPointService {
 	private CardPointDAO pointDAO = new CardPointDAO_JDBC();
-	private String today = this.getToday();//今天yyyymmdd
+	private DayDevice dayDevice = new DayDevice();
+	private String today = dayDevice.getToday();//今天yyyymmdd
 	private String unUse = "1";//HG_DataProfile 未使用
 	private String used = "2";//HG_DataProfile 已使用
 	private String updateUser = "lib0405";//目前寫死 還沒寫
@@ -24,7 +26,7 @@ public class CardPointService {
 		//String dDate = "20161113";
 		String status = "1";
 		
-		//System.out.println(service.calculateAfterDate(dDate,service.lifeDay));
+		//System.out.println(service.dayDevice.calculateAfterDate(dDate,service.lifeDay));
 		//System.out.println(service.calculateAddPoint(-200));
 		
 		
@@ -143,7 +145,7 @@ public class CardPointService {
 		//insert new point
 		if (bean.getPointDre()>0 && updateOk) {
 			newBean.setTranId(today);//目前暫訂
-			newBean.setdDate(this.calculateAfterDate(today,this.lifeDay));
+			newBean.setdDate(dayDevice.calculateAfterDate(today,this.lifeDay));
 			newBean.setPointAdd(bean.getPointDre());
 			newBean.setTranDate(today);
 			newBean.setMemberId(bean.getMemberId());
@@ -156,26 +158,26 @@ public class CardPointService {
 		return false;
 	}
 	//=================================================
-	public String getToday(){
-		java.util.Date date = new Date();
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");       
-	    String strToday = sdf.format(date);       
-	    return strToday;
-	}
-	public String calculateAfterDate(String strDate, int addDay){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		
-		java.util.Date date = null;
-		String strAfterDate = null;
-		try {
-			date = sdf.parse(strDate);
-			java.util.Date afterDate = new Date(date.getTime() + 1000L*3600*24*addDay); 
-			strAfterDate = sdf.format(afterDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return strAfterDate;
-	}
+//	public String getToday(){
+//		java.util.Date date = new Date();
+//	    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");       
+//	    String strToday = sdf.format(date);       
+//	    return strToday;
+//	}
+//	public String calculateAfterDate(String strDate, int addDay){
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+//		
+//		java.util.Date date = null;
+//		String strAfterDate = null;
+//		try {
+//			date = sdf.parse(strDate);
+//			java.util.Date afterDate = new Date(date.getTime() + 1000L*3600*24*addDay); 
+//			strAfterDate = sdf.format(afterDate);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		return strAfterDate;
+//	}
 	public int calculateCost(int totalCost, int discount){
 		int cost = totalCost - discount;
 		return cost;
