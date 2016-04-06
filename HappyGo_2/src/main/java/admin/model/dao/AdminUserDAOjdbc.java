@@ -1,6 +1,7 @@
 package admin.model.dao;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,24 +13,27 @@ import javax.sql.DataSource;
 import admin.model.AdminUserDAO;
 import admin.model.AdminUserDAObean;
 
-
-
 public class AdminUserDAOjdbc implements AdminUserDAO {
-//	private static final String URL = "jdbc:sqlserver://localhost:1433;database=III_HAPPYGO";
-//	private static final String USERNAME = "sa";
-//	private static final String PASSWORD = "Abc1234";
-	private DataSource datasource;	
+	// private static final String URL =
+	// "jdbc:sqlserver://localhost:1433;database=happygo";
+	// private static final String USERNAME = "sa";
+	// private static final String PASSWORD = "sa123456";
+	private DataSource datasource;
+
 	public static void main(String[] args) {
 		AdminUserDAO dao = new AdminUserDAOjdbc();
-		AdminUserDAObean bean = dao.select("A000000001");		
+		AdminUserDAObean bean = dao.select("A000000001");
 		System.out.println(bean);
 	}
+
 	public AdminUserDAOjdbc() {
-		
+
 	}
+
 	public AdminUserDAOjdbc(DataSource datasource) {
 		this.datasource = datasource;
 	}
+
 	private static final String SELECT_BY_USERID = "select * from HG_AdminUser where ADM_ID=?";
 	private static final String SELECTALL = "select * from HG_AdminUser";
 
@@ -40,11 +44,13 @@ public class AdminUserDAOjdbc implements AdminUserDAO {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		try {
-			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			 conn = datasource.getConnection();
+			// conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = datasource.getConnection();
 			pst = conn.prepareStatement(SELECT_BY_USERID);
 			pst.setString(1, userid);
 			rs = pst.executeQuery();
+			System.out.println("AdminUserDAObean select process:"
+					+ SELECT_BY_USERID);
 			if (rs.next()) {
 				result = new AdminUserDAObean();
 				result.setADM_ID(rs.getString("ADM_ID"));
@@ -53,7 +59,12 @@ public class AdminUserDAOjdbc implements AdminUserDAO {
 				result.setADM_ROLEID(rs.getString("ADM_ROLEID"));
 				result.setADM_UPDATETIME(rs.getDate("ADM_UPDATETIME"));
 				result.setADM_UPDATEUSER(rs.getString("ADM_UPDATEUSER"));//
-			}
+
+				System.out.println(rs.getString("ADM_ID")
+						+ rs.getString("ADM_PWD"));
+			} else
+				System.out.println("AdminUserDAObean select process errror:"
+						+ userid);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -89,8 +100,8 @@ public class AdminUserDAOjdbc implements AdminUserDAO {
 
 		List<AdminUserDAObean> result = null;
 		try {
-			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			 conn = datasource.getConnection();
+			// conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = datasource.getConnection();
 			pst = conn.prepareStatement(SELECTALL);
 			rs = pst.executeQuery();
 			result = new ArrayList<AdminUserDAObean>();
@@ -137,8 +148,8 @@ public class AdminUserDAOjdbc implements AdminUserDAO {
 		Connection conn = null;
 		PreparedStatement pst = null;
 		try {
-			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			 conn = datasource.getConnection();
+			// conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = datasource.getConnection();
 			pst = conn.prepareStatement(UPDATE);
 
 			pst.setString(1, bean.getADM_PWD());
@@ -173,22 +184,22 @@ public class AdminUserDAOjdbc implements AdminUserDAO {
 	}
 
 	private static final String INSERT = "INSERT INTO HG_AdminUser (ADM_ID,ADM_PWD,ADM_NAME,ADM_ROLEID,ADM_UPDATETIME,ADM_UPDATEUSER)  VALUES  (?,?,?,?,?,getdate(),?)";
-	
+
 	@Override
 	public AdminUserDAObean insert(AdminUserDAObean bean) {
 		AdminUserDAObean result = null;
 		Connection conn = null;
 		PreparedStatement pst = null;
 		try {
-			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			 conn = datasource.getConnection();
+			// conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = datasource.getConnection();
 			pst = conn.prepareStatement(INSERT);
 			// ADM_ID,ADM_PWD,ADM_NAME,ADM_ROLEID,ADM_UPDATETIME,ADM_UPDATEUSER
 			if (bean != null) {
 				pst.setString(1, bean.getADM_ID());
 				pst.setString(2, bean.getADM_PWD());
 				pst.setString(3, bean.getADM_NAME());
-				pst.setString(2, bean.getADM_ROLEID());
+				pst.setString(4, bean.getADM_ROLEID());
 				pst.setString(5, bean.getADM_UPDATEUSER());
 				int i = pst.executeUpdate();
 				if (i == 1) {

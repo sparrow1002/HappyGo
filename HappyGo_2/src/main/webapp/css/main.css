@@ -1,13 +1,13 @@
 body {
-	background: black;
+	background: #FFFFDD;
 }
 TABLE {
 	padding: 0;
 	border: 10px ridgt #38c2bb;
 	border-radius: 20px;
-	bgcolor: gold;
+	bgcolor: #FFFAFA;
 	width: 800px;	
-	box-shadow: 1px 1px 100px 10px #38c2bb;
+	box-shadow: 1px 1px 100px 10px #FFFFFF;
 }
 TH {
 	border: 0 groove #e98153;
@@ -23,11 +23,11 @@ TH:hover {
 }
 TR:hover {
 	background: #f0d5e1;
-	color: white;
+	/*color: white;*/
 }
 TD:hover {
-	background: black;
-	color: #f3f0c9;
+	background: #FFFFBB;
+	/*color: #f3f0c9;*/
 }
 
 #menu {
@@ -35,8 +35,8 @@ TD:hover {
 	bgcolor: gold;
 	background-color: #85d6d2;
 	overflow: auto !important;
-	/*內容超過容器時要如何顯示 auto讓連覽器自行判斷 important強制設定為最高不得複寫*/
-	overflow /**/: hidden; /*ie5看的*/
+	/*�摰寡��捆������＊蝷� auto霈��閬賢�銵� important撘瑕閮剖���擃���神*/
+	overflow /**/: hidden; /*ie5����*/
 		border: 10px ridgt #38c2bb;
 	border-radius: 20px;
 	bgcolor: gold;
@@ -64,3 +64,55 @@ TD:hover {
 	color: #FFFFFF;
 }
 
+table.t2 {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: Georgia;
+}
+
+.t2 caption {
+	padding-bottom: 0.5em;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+
+
+.t2 th, .t2 td {
+	padding: 4px 8px;
+	border: 2px solid #fff;
+	background: #khaki;
+}
+
+
+.t2 thead th {
+	padding: 2px 8px;
+	background: #B8860B ;
+	text-align: left;
+	font-weight: normal;
+	font-size: 13px;
+	color: #fff;
+}
+
+.t2 tbody tr:nth-child(odd) *:nth-child(even), .t2 tbody tr:nth-child(even) *:nth-child(odd)
+	{
+	background: #F5F5DC;
+}
+
+.t2 tfoot th {
+	padding: 2px 8px;
+	background: #f69546;
+	text-align: left;
+	font-weight: normal;
+	font-size: 10px;
+	color: #fff;
+}
+
+.t2 tr *:nth-child(3), .t2 tr *:nth-child(4) {
+	text-align: right;
+}
+
+.t2 tr:hover {
+	color:#ff0000;
+	background: #F0E68C;
+}

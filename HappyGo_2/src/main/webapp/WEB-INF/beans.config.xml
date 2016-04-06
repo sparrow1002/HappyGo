@@ -28,11 +28,23 @@
 		<constructor-arg ref="adminUserDAO"></constructor-arg>
 	</bean>
 
+	<bean id="dataProfileDAO" class="admin.model.dao.DataProfileDAOjdbc">
+		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
+	<bean id="dataProfileDAOService" class="admin.model.DataProfileDAOService">
+		<constructor-arg ref="dataProfileDAO"></constructor-arg>
+	</bean>
+
 	<!--[_______________structs2 追加部分____________________________] -->
 	<bean id="admin_Login_Action" class="admin.controller.Admin_Login_Action"		scope="prototype">
 		<property name="adminUserDAOService" ref="adminUserDAOService"></property>
 	</bean>
 	<bean id="admin_userlist_Action" class="admin.controller.Admin_list_Action"		scope="prototype">
 		<property name="adminUserDAOService" ref="adminUserDAOService"></property>
+		<property name="dataProfileDAOService" ref="dataProfileDAOService"></property>
+	</bean>
+	
+	<bean id="admin_dataprofile_Action" class="admin.controller.Dataprofile_list_Action"		scope="prototype">
+		<property name="dataProfileDAOService" ref="dataProfileDAOService"></property>
 	</bean>
 </beans>
