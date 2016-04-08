@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>使用者管理</title>
+<title>ROLE SETTING</title>
 <link rel="stylesheet" href="../css/main.css">
 <script src="../jquery/jquery-2.1.4.min.js"></script>
 <script src="../jquery/jquery-ui.js"></script>
@@ -35,9 +35,10 @@
 		}
 		//alert(aryPara["mode"]);
 		$('#users-contain').hide();
+		
 		if (aryPara["mode"] != null && aryPara["mode"].toString() == "edit"
 				|| aryPara["mode"].toString() == "selectitem") {
-
+			
 			//alert(aryPara["mode"].toString());
 			$('#users-contain').show();
 			$('#users-contain').dialog({
@@ -91,12 +92,19 @@
 			});
 		}
 	});
+	
+	var a = '<%=request.getAttribute("message")%>' ;
+	if(a!=null && a!="")
+		alert(a);
 </script>
+
 </head>
 <body>
 	<h3>
-		<a id="main" href="<c:url value="/admin/main_mag.jsp" />">後台系統主頁 </a>
-		<a id="dataprofile" href="<c:url value="/dayuNameSpace/rolelist.action?mode=select" />">角色權限設定</a>
+		<a id="main" href="<c:url value="/admin/main_mag.jsp" />">後台角色主頁 </a>
+		<a id="dataprofile"
+			href="<c:url value="/dayuNameSpace/rolelist.action?mode=select" />">代碼設定
+		</a>
 	</h3>
 	<div style="width: 800px; height: 600px;">
 		<table style="background-color: #F0E68C;">
@@ -104,61 +112,50 @@
 				<tr>
 					<th colspan="2">後台系統使用者管理</th>
 				</tr>
-				<tr>
-					<th align="right" style="width: 100px;"><label>使用者ID</label></th>
-					<th align="left">
-						<form action='<c:url value="/dayuNameSpace/maguserlist.action"/>'
-							method="get">
-							<input type="text" name="ADM_ID" value=""> 
-							<input type="hidden" name="mode" value="select"> 
-							<input type="submit" value="查詢">
-						</form>
-					</th>
-				</tr>
+
 			</thead>
 			<tbody>
 				<tr>
-					<td colspan="2"><c:if test="${not empty select}">
+					<td colspan="2"><c:if test="${not empty userlist}">
 							<table id="userslist" class="t2">
-								<thead>
-									<tr>
-										<th>使用者帳號</th>
-										<th>使用者密碼</th>
-										<th>使用者名稱</th>
-										<th>使用者身分</th>
-										<th>帳號更新者</th>
-										<th>帳號更新日</th>
-										<th></th>
-									</tr>
-								</thead>
 								<tbody>
-									<c:forEach var="row" items="${select}">
-										<c:url value="/dayuNameSpace/maguserlist.action"
-											var="path_select" scope="page">
-											<c:param name="ADM_ID" value="${row.ADM_ID}" />
-											<c:param name="ADM_PWD" value="${row.ADM_PWD}" />
-											<c:param name="ADM_NAME" value="${row.ADM_NAME}" />
-											<c:param name="ADM_ROLEID" value="${row.ADM_ROLEID}" />
-											<c:param name="mode" value="selectitem" />
-										</c:url>
-										<c:url value="/dayuNameSpace/maguserlist.action"
-											var="path_edit" scope="page">
-											<c:param name="ADM_ID" value="${row.ADM_ID}" />
-											<c:param name="ADM_PWD" value="${row.ADM_PWD}" />
-											<c:param name="ADM_NAME" value="${row.ADM_NAME}" />
-											<c:param name="ADM_ROLEID" value="${row.ADM_ROLEID}" />
-											<c:param name="mode" value="edit" />
-										</c:url>
-										<tr>
-											<td><a href="${path_select}">${row.ADM_ID}</a></td>
-											<td>${row.ADM_PWD}</td>
-											<td>${row.ADM_NAME}</td>
-											<td>${row.ADM_ROLEID}</td>
-											<td>${row.ADM_UPDATEUSER}</td>
-											<td>${row.ADM_UPDATETIME}</td>
-											<td><button	onclick="window.location.href='${path_edit}'">修改</button></td>
-										</tr>
-									</c:forEach>
+									<tr>
+										<td><c:forEach var="userlist" items="${userlist}">
+												<form
+													action='<c:url value="/dayuNameSpace/rolelist.action?mode=select"/>'
+													method="get">
+													<table>
+														<tr>
+															<td style="width: 100px">${userlist.value}</td>
+															<td><c:forEach var="right" items="${right}">
+																	<c:set var="salary" scope="page" value="1" />
+																	<c:forEach var="rolelist" items="${rolelist}">
+																		<c:if
+																			test="${userlist.key==rolelist.ROL_ROLEID && right.RIG_RIGHTID==rolelist.ROL_RIGHTID}">
+																			<c:set var="salary" scope="page" value="2" />
+																		</c:if>
+																	</c:forEach>
+																	<c:choose>
+																		<c:when test="${salary==2}">
+																			<input type="checkbox" id="${right.RIG_RIGHTID}"
+																				name="${right.RIG_RIGHTID}" checked="checked" />
+																			<label for="${right.RIG_RIGHTID}">${right.RIG_DESC}</label>
+																			<br />
+																		</c:when>
+																		<c:otherwise>
+																			<input type="checkbox" id="${right.RIG_RIGHTID}"
+																				name="${right.RIG_RIGHTID}" />
+																			<label for="${right.RIG_RIGHTID}">${right.RIG_DESC}</label>
+																			<br />
+																		</c:otherwise>
+																	</c:choose>
+																</c:forEach></td>
+															<td><input type="submit" value="修改"><input type="hidden" name="userid" value="${userlist.key}"><input type="hidden" name="mode" value="edit"></td>
+														</tr>
+													</table>
+												</form>
+											</c:forEach></td>
+									</tr>
 								</tbody>
 							</table>
 						</c:if></td>
@@ -186,29 +183,13 @@
 						<c:if test="${not empty edit}">
 							<tr>
 								<td>使用者帳號</td>
-								<td><input id="ADM_ID" name="ADM_ID" type="text"
-									value=${edit.ADM_ID}></td>
+								<td><input id="ROL_ROLEID" name="ROL_ROLEID" type="text"
+									value=${edit.ROL_ROLEID}></td>
 							</tr>
 							<tr>
 								<td>使用者密碼</td>
-								<td><input id="ADM_PWD" name="ADM_PWD" type="text"
-									value=${edit.ADM_PWD}></td>
-							</tr>
-							<tr>
-								<td>使用者名稱</td>
-								<td><input id="ADM_NAME" name="ADM_NAME" type="text"
-									value=${edit.ADM_NAME}></td>
-							</tr>
-							<tr>
-								<td>使用者角色</td>
-								<td><select size="1" name="ADM_ROLEID">
-										<c:forEach var="roleid" items="${roleid}">
-											<option value="${roleid.DAP_ID}"
-												${(roleid.DAP_ID==edit.ADM_ROLEID)?'selected':'' }>${roleid.DAP_VALUE}
-										</c:forEach>
-								</select> <!-- <input id="ADM_ROLEID" name="ADM_ROLEID" type="text"
-									value=${edit.ADM_ROLEID}><input id="mode" name="mode"
-									type="hidden" value="select"> --></td>
+								<td><input id="ROL_RIGHTID" name="ROL_RIGHTID" type="text"
+									value=${edit.ROL_RIGHTID}></td>
 							</tr>
 							<tr>
 								<td><input name="formSubmit" type="submit" value="儲存" /></td>
@@ -218,22 +199,15 @@
 						<c:if test="${not empty selectitem}">
 							<tr>
 								<td>使用者帳號</td>
-								<td>${selectitem.ADM_ID}</td>
+								<td>${selectitem.ROL_ROLEID}</td>
 							</tr>
 							<tr>
 								<td>使用者密碼</td>
-								<td>${selectitem.ADM_PWD}</td>
+								<td>${selectitem.ROL_RIGHTID}</td>
 							</tr>
 							<tr>
-								<td>使用者名稱</td>
-								<td>${selectitem.ADM_NAME}</td>
-							</tr>
-							<tr>
-								<td>使用者角色</td>
-								<td>${selectitem.ADM_ROLEID}</td>
-							</tr>
-							<tr>
-								<td colspan="2"  align="center"><input value="確認" type="button"></td>
+								<td colspan="2" align="center"><input value="確認"
+									type="button"></td>
 							</tr>
 						</c:if>
 					</tbody>

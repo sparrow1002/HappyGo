@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="../css/main.css">
 <script src="../jquery/jquery-2.1.4.min.js"></script>
 <script src="../jquery/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="../jquery/jquery-ui.theme.css">
+<link rel="stylesheet" href="../jquery/base/jquery-ui-1.9.2.custom.min.css">
 <script src="../js/menu.js"></script>
 <style type="text/css">
 #menus {
@@ -80,9 +80,7 @@
 		var page9 = document.getElementById("show_9"); //特店點數查詢
 		var page10 = document.getElementById("show_10"); //點數交易處理查詢
 		var page11 = document.getElementById("show_11"); //登入管理
-		var page12 = document.getElementById("show_12"); //權限設定
-		var page13 = document.getElementById("show_13"); //資料設定
-		var page14 = document.getElementById("show_14"); //現金折扣設定
+		
 		page1.style.display = "none";
 		page2.style.display = "none";
 		page3.style.display = "none";
@@ -94,9 +92,7 @@
 		page9.style.display = "none";
 		page10.style.display = "none";
 		page11.style.display = "none";
-		page12.style.display = "none";
-		page13.style.display = "none";
-		page14.style.display = "none";
+		
 		switch (page) {
 		case "1":
 			page1.style.display = "inline";
@@ -131,15 +127,7 @@
 		case "11":
 			page11.style.display = "inline";
 			break;
-		case "12":
-			page12.style.display = "inline";
-			break;
-		case "13":
-			page13.style.display = "inline";
-			break;
-		case "14":
-			page14.style.display = "inline";
-			break;
+	
 		}
 	}
 </script>
@@ -1033,109 +1021,6 @@
 			</TABLE>
 		</form>
 	</div>
-	<div id="show_12" style="display: none;" class="level1">
-		<!--權限設定  -->
-		<form action="main_mag.jsp" method="get">
-			<TABLE>
-				<TR>
-					<TH colspan='2' bgcolor='#d4edec'><label>系統權限設定</label></TH>
-				</TR>
-				<TR>
-					<TD bgcolor='#bce6e4' align="right">使用者類型</TD>
-					<TD bgcolor='#85d6d2'><select name="sex" size="1" id="sex">
-							<option value="01" selected>會員</option>
-							<option value="02">特店</option>
-							<option value="03">線上客服</option>
-							<option value="04">管理者</option>
-					</select></TD>
-				</TR>
-				<TR>
-					<TD colspan='2' bgcolor='#d4edec' align="center">
-						<TABLE>
-							<TR>
-								<TH bgcolor='#a9d999'></TH>
-								<TH bgcolor='#85d6d2'>權限代碼</TH>
-								<TH bgcolor='#a9d999'>權限名稱</TH>
-								<TH bgcolor='#85d6d2'>對應網頁</TH>
-							</TR>
-							<TR>
-								<TD bgcolor='#a9d999'><input type="checkbox" id="startdate"
-									name="startdate"></TD>
-								<TD bgcolor='#85d6d2'>C01</TD>
-								<TD bgcolor='#a9d999'>會員資料維護</TD>
-								<TD bgcolor='#85d6d2'>cus_2.jsp</TD>
-							</TR>
-							<TR>
-								<TD bgcolor='#a9d999'><input type="checkbox" id="startdate"
-									name="startdate"></TD>
-								<TD bgcolor='#85d6d2'>C02</TD>
-								<TD bgcolor='#a9d999'>即時點數查詢</TD>
-								<TD bgcolor='#85d6d2'>cus_3.jsp</TD>
-							</TR>
-							<TR>
-								<TD bgcolor='#a9d999'><input type="checkbox" id="startdate"
-									name="startdate"></TD>
-								<TD bgcolor='#85d6d2'>C03</TD>
-								<TD bgcolor='#a9d999'>點數交易查詢</TD>
-								<TD bgcolor='#85d6d2'>cus_4.jsp</TD>
-							</TR>
-						</TABLE>
-					</TD>
-				</TR>
-			</TABLE>
-		</form>
-	</div>
-	<div id="show_13" style="display: none;" class="level1">
-		<!--資料設定  -->
-		<form action="main_mag.jsp" method="get">
-			<TABLE>
-				<TR>
-					<TH colspan='2' bgcolor='#d4edec'><label>基本資料設定</label></TH>
-				</TR>
-				<TR>
-					<TD bgcolor='#bce6e4' align="right">代碼群組</TD>
-					<TD bgcolor='#85d6d2'><select name="sex" size="1" id="sex">
-							<option value="01" selected>性別</option>
-							<option value="02">會員狀態</option>
-							<option value="03">特店狀態</option>
-							<option value="04">特銷狀態</option>
-							<option value="04">折扣現金比率</option>
-							<option value="04">交易換點比率</option>
-					</select> <input type="button" id="startdate" name="startdate"
-						value="新增群組項目"></TD>
-				</TR>
-				<TR>
-					<TD colspan='2' bgcolor='#d4edec' align="center">
-						<TABLE>
-							<TR>
-								<TH bgcolor='#a9d999'>代碼ID</TH>
-								<TH bgcolor='#85d6d2'>代碼數值</TH>
-								<TH bgcolor='#a9d999'>代碼說明</TH>
-								<TH bgcolor='#85d6d2'></TH>
-							</TR>
-							<TR>
-								<TD bgcolor='#a9d999'>1</TD>
-								<TD bgcolor='#85d6d2'>男</TD>
-								<TD bgcolor='#a9d999'>性別-男</TD>
-								<TD bgcolor='#85d6d2'><input type="button" id="startdate"
-									name="startdate" value="修改"></TD>
-							</TR>
-							<TR>
-								<TD bgcolor='#a9d999'>2</TD>
-								<TD bgcolor='#85d6d2'>女</TD>
-								<TD bgcolor='#a9d999'>性別-女</TD>
-								<TD bgcolor='#85d6d2'><input type="button" id="startdate"
-									name="startdate" value="修改"></TD>
-							</TR>
-						</TABLE>
-					</TD>
-				</TR>
-			</TABLE>
-		</form>
-	</div>
-	<div id="show_14" style="display: none;" class="level1">
-		<!--現金折扣設定  -->
-		<form action="main_mag.jsp" method="get"></form>
-	</div>
+	
 </body>
 </html>
