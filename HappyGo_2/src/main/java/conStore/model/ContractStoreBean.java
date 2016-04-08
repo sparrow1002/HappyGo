@@ -1,19 +1,19 @@
-package store;
+package conStore.model;
 
-public class HG_ContractStoreBean {
-	private String cos_storeid; 	//varchar(10) not null,
-	private String cos_name;	//nvarchar(30),
-	private String cos_pwd;	//varchar(10) not null,
-	private String cos_taxcode;	//char(8),
-	private String cos_address;	//nvarchar(50),
-	private String cos_status;	//char(1),
-	private String cos_phone;	//varchar(10),
-	private String cos_contact;	//nvarchar(10),
-	private String cos_createtime;	//char(8),
-	private String cos_deletime;	//char(8),
-	private java.util.Date cos_updatetime;	//datetime not null default getdate(),
-	private String cos_updateuser;	//varchar(10)
-	
+public class ContractStoreBean {
+	private String cos_storeid; 	//varchar(10) not null,特店代號
+	private String cos_name;	//nvarchar(30),特店名稱
+	private String cos_pwd;	//varchar(10) not null,特店密碼
+	private String cos_taxcode;	//char(8),統一編號
+	private String cos_address;	//nvarchar(50),特店地址
+	private String cos_status;	//char(1),特店狀態
+	private String cos_phone;	//varchar(10),連絡電話
+	private String cos_contact;	//nvarchar(10),聯絡人
+	private String cos_createtime;	//char(8),特店生效日
+	private String cos_deletime;	//char(8),特店失效日
+	private String cos_updatetime;	//datetime not null default getdate(),異動日期
+	private String cos_updateuser;	//varchar(10) 異動者
+
 	@Override
 	public String toString() {
 		return "HG_ContractStoreBean [cos_storeid=" + cos_storeid
@@ -106,11 +106,11 @@ public class HG_ContractStoreBean {
 		this.cos_deletime = cos_deletime;
 	}
 
-	public java.util.Date getCos_updatetime() {
+	public String getCos_updatetime() {
 		return cos_updatetime;
 	}
 
-	public void setCos_updatetime(java.util.Date cos_updatetime) {
+	public void setCos_updatetime(String cos_updatetime) {
 		this.cos_updatetime = cos_updatetime;
 	}
 

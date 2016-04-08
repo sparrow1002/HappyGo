@@ -1,6 +1,6 @@
-package store;
+package conStore.model;
 
-public class HG_PProjectStoreBean {
+public class PProjectStoreBean {
 	private String pps_projid;	//varchar(10) not null,
 	private String pps_storgpid;	//varchar(10) not null,
 	private String pps_storeid;	//varchar(10) not null,
