@@ -26,29 +26,26 @@ public class RightDAOjdbc implements RightDAO {
 	 * @see admin.model.dao.RightDAO#select(java.lang.String)
 	 */
 	@Override
-	public List<RightDAOBean> select(RightDAOBean beans) {
+	public RightDAOBean select(RightDAOBean beans) {
 
 		Connection conn = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 
-		List<RightDAOBean> result = null;
+		RightDAOBean result = null;
 		try {
 			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			conn = datasource.getConnection();
 			pst = conn.prepareStatement(SELECT_BY_RIGHTID);
 			pst.setString(1, beans.getRIG_RIGHTID());
 			rs = pst.executeQuery();
-			result = new ArrayList<RightDAOBean>();
-			while (rs.next()) {
-				RightDAOBean bean = new RightDAOBean();
-				bean.setRIG_RIGHTID(rs.getString("RIG_RIGHTID"));
-				bean.setRIG_FUNTION(rs.getString("RIG_FUNTION"));
-				bean.setRIG_DESC(rs.getString("RIG_DESC"));
-				bean.setRIG_UPDATETIME(rs.getDate("RIG_UPDATETIME"));
-				bean.setRIG_UPDATEUSER(rs.getString("RIG_UPDATEUSER"));
-
-				result.add(bean);
+			result = new RightDAOBean();
+			while (rs.next()) {				
+				result.setRIG_RIGHTID(rs.getString("RIG_RIGHTID"));
+				result.setRIG_FUNTION(rs.getString("RIG_FUNTION"));
+				result.setRIG_DESC(rs.getString("RIG_DESC"));
+				result.setRIG_UPDATETIME(rs.getDate("RIG_UPDATETIME"));
+				result.setRIG_UPDATEUSER(rs.getString("RIG_UPDATEUSER"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

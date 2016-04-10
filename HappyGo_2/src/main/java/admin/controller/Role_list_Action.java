@@ -110,6 +110,7 @@ public class Role_list_Action extends ActionSupport implements SessionAware {
 						this.addFieldError("action", "Insert fail");
 					} else {
 						System.out.println("select ok");
+						result = roleDAOService.selectall();
 						req.setAttribute("rolelist", result);
 						req.setAttribute("right", result2);
 					}

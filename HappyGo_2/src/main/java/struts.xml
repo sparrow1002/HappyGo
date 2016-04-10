@@ -28,6 +28,11 @@
 			<result name="input" >/admin/RoleList.jsp</result>
 			<result name="success" >/admin/RoleList.jsp</result>
 		</action>
+		<action name="rightlist" class="admin.controller.Role_right_Action">
+			<!-- controller.Login_Action-->
+			<result name="input" >/admin/RoleRightSetting.jsp</result>
+			<result name="success" >/admin/RoleRightSetting.jsp</result>
+		</action>
 	</package>
 	<package name="dayuPackage2" namespace="/dayu" extends="struts-default">
 		

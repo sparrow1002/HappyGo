@@ -5,28 +5,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>使用者管理</title>
-
+<title>Insert title here</title>
 </head>
 <body>
 	<c:import url="/admin/TopMeau.jsp" />
+
 	<div style="width: 800px; height: 600px;">
 		<table style="background-color: #F0E68C;">
 			<thead>
 				<tr>
-					<th colspan="2">後台系統使用者管理</th>
-				</tr>
-				<tr>
-					<th align="right" style="width: 100px;"><label>使用者ID</label></th>
-					<th align="left">
-						<form action='<c:url value="/dayuNameSpace/maguserlist.action"/>'
-							method="get">
-							<input type="text" name="ADM_ID" value=""> <input
-								type="hidden" name="mode" value="select"> <input
-								type="submit" value="查詢">
-						</form>
-					</th>
-				</tr>
+					<th colspan="2">後台系統權限項目管理</th>
+				</tr>				
 			</thead>
 			<tbody>
 				<tr>
@@ -34,40 +23,27 @@
 							<table id="userslist" class="t2">
 								<thead>
 									<tr>
-										<th>使用者帳號</th>
-										<th>使用者密碼</th>
-										<th>使用者名稱</th>
-										<th>使用者身分</th>
-										<th>帳號更新者</th>
-										<th>帳號更新日</th>
+										<th>權限代碼</th>
+										<th>權限說明</th>
+										<th>權限對應功能</th>
+										<th>權限更新日</th>
+										<th>權限更新者</th>
 										<th></th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach var="row" items="${select}">
-										<c:url value="/dayuNameSpace/maguserlist.action"
-											var="path_select" scope="page">
-											<c:param name="ADM_ID" value="${row.ADM_ID}" />
-											<c:param name="ADM_PWD" value="${row.ADM_PWD}" />
-											<c:param name="ADM_NAME" value="${row.ADM_NAME}" />
-											<c:param name="ADM_ROLEID" value="${row.ADM_ROLEID}" />
-											<c:param name="mode" value="selectitem" />
-										</c:url>
-										<c:url value="/dayuNameSpace/maguserlist.action"
-											var="path_edit" scope="page">
-											<c:param name="ADM_ID" value="${row.ADM_ID}" />
-											<c:param name="ADM_PWD" value="${row.ADM_PWD}" />
-											<c:param name="ADM_NAME" value="${row.ADM_NAME}" />
-											<c:param name="ADM_ROLEID" value="${row.ADM_ROLEID}" />
+										<c:url value="/dayuNameSpace/rightlist.action" var="path_edit"
+											scope="page">
+											<c:param name="RIG_RIGHTID" value="${row.RIG_RIGHTID}" />
 											<c:param name="mode" value="edit" />
 										</c:url>
 										<tr>
-											<td><a href="${path_select}">${row.ADM_ID}</a></td>
-											<td>${row.ADM_PWD}</td>
-											<td>${row.ADM_NAME}</td>
-											<td>${row.ADM_ROLEID}</td>
-											<td>${row.ADM_UPDATEUSER}</td>
-											<td>${row.ADM_UPDATETIME}</td>
+											<td><a href="${path_edit}">${row.RIG_RIGHTID}</a></td>
+											<td>${row.RIG_DESC}</td>
+											<td>${row.RIG_FUNTION}</td>
+											<td>${row.RIG_UPDATETIME}</td>
+											<td>${row.RIG_UPDATEUSER}</td>
 											<td><button
 													onclick="window.location.href='${path_edit}'">修改</button></td>
 										</tr>
@@ -85,7 +61,7 @@
 
 		<div id="users-contain" class="ui-widget">
 			<form name="myForm" id="myForm"
-				action='<c:url value="/dayuNameSpace/maguserlist.action?mode=update"/>'
+				action='<c:url value="/dayuNameSpace/rightlist.action?mode=update"/>'
 				method="get">
 				<h1>使用者資料</h1>
 				<table id="users" class="t2">
@@ -98,57 +74,26 @@
 					<tbody>
 						<c:if test="${not empty edit}">
 							<tr>
-								<td>使用者帳號</td>
-								<td><input id="ADM_ID" name="ADM_ID" type="text"
-									value=${edit.ADM_ID}></td>
+								<td>權限代碼</td>
+								<td><input id="RIG_RIGHTID" name="RIG_RIGHTID" type="text"
+									value=${edit.RIG_RIGHTID}></td>
 							</tr>
 							<tr>
-								<td>使用者密碼</td>
-								<td><input id="ADM_PWD" name="ADM_PWD" type="text"
-									value=${edit.ADM_PWD}></td>
+								<td>權限說明</td>
+								<td><input id="RIG_DESC" name="RIG_DESC" type="text"
+									value=${edit.RIG_DESC}></td>
 							</tr>
 							<tr>
-								<td>使用者名稱</td>
-								<td><input id="ADM_NAME" name="ADM_NAME" type="text"
-									value=${edit.ADM_NAME}></td>
+								<td>權限對應功能</td>
+								<td><input id="RIG_FUNTION" name="RIG_FUNTION" type="text"
+									value=${edit.RIG_FUNTION}></td>
 							</tr>
 							<tr>
-								<td>使用者角色</td>
-								<td><select size="1" name="ADM_ROLEID">
-										<c:forEach var="roleid" items="${roleid}">
-											<option value="${roleid.DAP_ID}"
-												${(roleid.DAP_ID==edit.ADM_ROLEID)?'selected':'' }>${roleid.DAP_VALUE}
-										</c:forEach>
-								</select> <!-- <input id="ADM_ROLEID" name="ADM_ROLEID" type="text"
-									value=${edit.ADM_ROLEID}><input id="mode" name="mode"
-									type="hidden" value="select"> --></td>
-							</tr>
-							<tr>
-								<td colspan="2"><input name="formSubmit" type="submit"
-									value="儲存" /><input id="cancel" value="取消" type="button"></td>
+								<td colspan="2">
+								<input name="formSubmit" type="submit"	value="儲存" />
+								<input id="cancel" value="取消" type="button">
+								<input type="hidden" name="mode" value="update"></td>
 
-							</tr>
-						</c:if>
-						<c:if test="${not empty selectitem}">
-							<tr>
-								<td>使用者帳號</td>
-								<td>${selectitem.ADM_ID}</td>
-							</tr>
-							<tr>
-								<td>使用者密碼</td>
-								<td>${selectitem.ADM_PWD}</td>
-							</tr>
-							<tr>
-								<td>使用者名稱</td>
-								<td>${selectitem.ADM_NAME}</td>
-							</tr>
-							<tr>
-								<td>使用者角色</td>
-								<td>${selectitem.ADM_ROLEID}</td>
-							</tr>
-							<tr>
-								<td colspan="2" align="center"><input id="cancel"
-									value="確認" type="button"></td>
 							</tr>
 						</c:if>
 					</tbody>
@@ -178,8 +123,7 @@
 		}
 		//alert(aryPara["mode"]);
 		$('#users-contain').hide();
-		if (aryPara["mode"] != null && aryPara["mode"].toString() == "edit"
-				|| aryPara["mode"].toString() == "selectitem") {
+		if (aryPara["mode"] != null && aryPara["mode"].toString() == "edit") {
 
 			//alert(aryPara["mode"].toString());
 			$('#users-contain').show();
@@ -239,7 +183,7 @@
 	});
 	
 	var message = '<%=request.getAttribute("message")%>';
-	if (message != null && message.trim() != "" && message.trim() != "null")
+	if (message != null && message != "")
 		alert(message);
 </script>
 </html>

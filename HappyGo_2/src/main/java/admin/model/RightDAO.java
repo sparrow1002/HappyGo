@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface RightDAO {
 
-	public abstract List<RightDAOBean> select(RightDAOBean bean);
+	public abstract RightDAOBean select(RightDAOBean bean);
 
 	public abstract List<RightDAOBean> select();
 

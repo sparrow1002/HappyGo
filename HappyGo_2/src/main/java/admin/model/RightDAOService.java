@@ -21,8 +21,8 @@ public class RightDAOService {
 		return result;
 	}
 	
-	public List<RightDAOBean> select(RightDAOBean bean) {
-		List<RightDAOBean> result=null;		
+	public RightDAOBean select(RightDAOBean bean) {
+		RightDAOBean result=null;		
 		result = rightDAO.select(bean);
 		return result;
 	}

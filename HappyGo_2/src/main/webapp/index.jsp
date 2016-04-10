@@ -10,7 +10,7 @@
 </head>
 <body>
 	<header>
-	<div id="menus">
+	<div>
 		<nav>
 		<ul id="menu">
 			<li><a href="">Happy GO 說明</a></li>
