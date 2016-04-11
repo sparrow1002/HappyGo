@@ -169,7 +169,19 @@ public class Dataprofile_list_Action extends ActionSupport implements
 				System.out.println("insert ok");
 				req.setAttribute("insert", result);
 			}
-		} else if ("edit".equals(mode)) {
+		}
+		else if ("update".equals(mode)) {
+			DataProfileDAOBean result = dataProfileDAOService.update(bean);
+			if (result == null) {
+				System.out.println("insert fail");
+				this.addFieldError("action", "Insert fail");
+				req.setAttribute("message", "資料更新失敗!!");
+			} else {
+				System.out.println("insert ok");
+				req.setAttribute("message", "資料更新成功!!");
+			}
+		}
+		else if ("edit".equals(mode)) {
 			bean.setDAP_GROUP(DAP_GROUP);
 			bean.setDAP_ID(DAP_ID);
 			List<DataProfileDAOBean> results;

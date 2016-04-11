@@ -296,5 +296,11 @@
 			});
 		}
 	});
+	
+	
+
+	var message = '<%=request.getAttribute("message")%>';
+	if (message != null && message.trim() != "" && message.trim() != "null")
+		alert(message);
 </script>
 </html>

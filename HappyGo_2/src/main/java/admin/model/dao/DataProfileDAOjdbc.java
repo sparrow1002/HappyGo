@@ -254,7 +254,7 @@ public class DataProfileDAOjdbc implements DataProfileDAO {
 		return result;
 	}
 
-	private static final String UPDATE = "UPDATE HG_DataProfile SET DAP_ID =?,DAP_VALUE =?,DAP_DESC =?,DAP_UPDATETIME =getdate(),DAP_UPDATEUSER =? WHERE DAP_GROUP = ?";
+	private static final String UPDATE = "UPDATE HG_DataProfile SET DAP_VALUE =?,DAP_DESC =?,DAP_UPDATETIME =getdate(),DAP_UPDATEUSER =? WHERE DAP_GROUP = ? and DAP_ID =?";
 
 	/*
 	 * (non-Javadoc)
@@ -269,11 +269,12 @@ public class DataProfileDAOjdbc implements DataProfileDAO {
 		try {
 			conn = datasource.getConnection();
 			pst = conn.prepareStatement(UPDATE);
-			pst.setString(1, bean.getDAP_ID());
-			pst.setString(2, bean.getDAP_VALUE());
-			pst.setString(3, bean.getDAP_DESC());
-			pst.setString(4, bean.getDAP_UPDATEUSER());
-
+			
+			pst.setString(1, bean.getDAP_VALUE());
+			pst.setString(2, bean.getDAP_DESC());
+			pst.setString(3, bean.getDAP_UPDATEUSER());
+			pst.setString(4, bean.getDAP_GROUP());
+			pst.setString(5, bean.getDAP_ID());
 			int i = pst.executeUpdate();
 			if (i == 1) {
 				return bean;
