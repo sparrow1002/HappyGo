@@ -16,13 +16,20 @@
 					<th colspan="2">後台系統代碼管理</th>
 				</tr>
 				<tr>
-					<th align="right" style="width: 100px;"><label>使用者ID</label></th>
+					<th align="right" style="width: 100px;"><label>代碼群組</label></th>
 					<th align="left">
-						<form action='<c:url value="/dayuNameSpace/dataprofilelist.action"/>'
+						<form
+							action='<c:url value="/dayuNameSpace/dataprofilelist.action"/>'
 							method="get">
 							<input type="text" name="DAP_GROUP" value=""> <input
 								type="hidden" name="mode" value="select"> <input
 								type="submit" value="查詢">
+						</form>
+						<form
+							action='<c:url value="/dayuNameSpace/dataprofilelist.action"/>'
+							method="get">
+							<input type="hidden" name="mode" value="newitem"> <input
+								type="submit" value="新增項目">
 						</form>
 					</th>
 				</tr>
@@ -83,19 +90,19 @@
 		</table>
 
 		<div id="users-contain" class="ui-widget">
-			<form name="myForm" id="myForm"
-				action='<c:url value="/dayuNameSpace/dataprofilelist.action?mode=update"/>'
-				method="get">
-				<h1>代碼項目</h1>
-				<table id="users" class="t2">
-					<thead>
-						<tr>
-							<th>項目</th>
-							<th>內容</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:if test="${not empty edit}">
+			<c:if test="${not empty edit}">
+				<form name="myForm" id="myForm"
+					action='<c:url value="/dayuNameSpace/dataprofilelist.action?mode=update"/>'
+					method="get">
+					<h1>代碼項目</h1>
+					<table id="users" class="t2">
+						<thead>
+							<tr>
+								<th>項目</th>
+								<th>內容</th>
+							</tr>
+						</thead>
+						<tbody>
 							<tr>
 								<td>代碼群組</td>
 								<td><input id="DAP_GROUP" name="DAP_GROUP" type="text"
@@ -117,35 +124,93 @@
 									value=${edit.DAP_DESC}></td>
 							</tr>
 							<tr>
-								<td><input name="formSubmit" type="submit" value="儲存" /></td>
-								<td><input  id="cancel" value="取消" type="button"></td>
+								<td colspan="2">								
+									<input name="formSubmit" type="submit"	value="儲存" /> 
+									<input id="cancel" value="取消" type="button">
+									<input name="mode" type="hidden" value="update" /> 
+								</td>
 							</tr>
-						</c:if>
-						<c:if test="${not empty selectitem}">
+						</tbody>
+					</table>
+				</form>
+			</c:if>
+			<c:if test="${not empty selectitem}">
+				<table id="users" class="t2">
+					<thead>
+						<tr>
+							<th>項目</th>
+							<th>內容</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>代碼群組</td>
+							<td>${selectitem.DAP_GROUP}</td>
+						</tr>
+						<tr>
+							<td>代碼編號</td>
+							<td>${selectitem.DAP_ID}</td>
+						</tr>
+						<tr>
+							<td>代碼文字</td>
+							<td>${selectitem.DAP_VALUE}</td>
+						</tr>
+						<tr>
+							<td>代碼描述</td>
+							<td>${selectitem.DAP_DESC}</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center"><input id="cancel" value="確認"
+								type="button"></td>
+						</tr>
+					</tbody>
+				</table>
+			</c:if>
+			<c:if test="${not empty newitem}">
+				<form name="myForm" id="myForm"
+					action='<c:url value="/dayuNameSpace/dataprofilelist.action"/>'
+					method="get">
+					<h1>代碼項目</h1>
+					<table id="users" class="t2">
+						<thead>
+							<tr>
+								<th>項目</th>
+								<th>內容</th>
+							</tr>
+						</thead>
+						<tbody>
 							<tr>
 								<td>代碼群組</td>
-								<td>${selectitem.DAP_GROUP}</td>
+								<td><input id="DAP_GROUP" name="DAP_GROUP" type="text"
+									value=${newitem.DAP_GROUP}></td>
 							</tr>
 							<tr>
 								<td>代碼編號</td>
-								<td>${selectitem.DAP_ID}</td>
+								<td><input id="DAP_ID" name="DAP_ID" type="text"
+									value=${newitem.DAP_ID}></td>
 							</tr>
 							<tr>
 								<td>代碼文字</td>
-								<td>${selectitem.DAP_VALUE}</td>
+								<td><input id="DAP_VALUE" name="DAP_VALUE" type="text"
+									value=${newitem.DAP_VALUE}></td>
 							</tr>
 							<tr>
 								<td>代碼描述</td>
-								<td>${selectitem.DAP_DESC}</td>
+								<td><input id="DAP_DESC" name="DAP_DESC" type="text"
+									value=${newitem.DAP_DESC}></td>
 							</tr>
 							<tr>
-								<td colspan="2"  align="center"><input id="cancel" value="確認"
-									type="button"></td>
+								<td colspan="2">
+									<input name="formSubmit" type="submit"	value="儲存" /> 
+									<input id="cancel" value="取消" type="button">
+									<input name="mode" type="hidden" value="insert" /> 
+								</td>
 							</tr>
-						</c:if>
-					</tbody>
-				</table>
-			</form>
+						</tbody>
+					</table>
+				</form>
+			</c:if>
+
 		</div>
 	</div>
 </body>
@@ -171,7 +236,8 @@
 		//alert(aryPara["mode"]);
 		$('#users-contain').hide();
 		if (aryPara["mode"] != null && aryPara["mode"].toString() == "edit"
-				|| aryPara["mode"].toString() == "selectitem") {
+				|| aryPara["mode"].toString() == "selectitem"
+				|| aryPara["mode"].toString() == "new") {
 
 			//alert(aryPara["mode"].toString());
 			$('#users-contain').show();
@@ -207,15 +273,14 @@
 				}
 			}
 		};
-		
+
 		$('#main').button();
 		$('#dataprofile').button();
-		
+
 		$('#userslist').DataTable(opt);
 		$('#users-contain').hide();
 		if (aryPara["mode"] != null
-				&& (aryPara["mode"].toString() == "edit" || aryPara["mode"]
-						.toString() == "selectitem")) {
+				&& (aryPara["mode"].toString() == "edit" || aryPara["mode"].toString() == "selectitem"|| aryPara["mode"].toString() == "newitem")) {
 			//alert("test");
 			$('#users-contain').show();
 			$('#users-contain').dialog({

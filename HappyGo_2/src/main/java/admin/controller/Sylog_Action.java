@@ -51,45 +51,36 @@ public class Sylog_Action extends ActionSupport implements SessionAware {
 
 		HttpServletRequest req = ServletActionContext.getRequest();
 		String mode = req.getParameter("mode");
-		// DataProfileDAOBean beans = new DataProfileDAOBean();
-
-		// List<DataProfileDAOBean> dataprofileresult;
-		// dataprofileresult = dataProfileDAOService.select(beans);
-		// System.out.println(dataprofileresult);
-		// req.setAttribute("roleid", dataprofileresult);
-		// System.out.println("mode:" + mode);
+		List<SyslogDAOBean> result = null;
 		if ("select".equals(mode)) {
-			List<SyslogDAOBean> result = syslogDAOService.select();
+			result = syslogDAOService.select();
 			if (result == null) {
 				System.out.println("select fail");
 				this.addFieldError("action", "Insert fail");
 			} else {
 				System.out.println("select ok");
 				req.setAttribute("select", result);
-				return Action.SUCCESS;
 			}
 		} else if ("selectitem".equals(mode)) {
-			List<SyslogDAOBean> result;
 			// System.out.println(ADM_ID);
 			if (LOG_USERID != null && LOG_USERID.trim() != "") {
 				SyslogDAOBean bean = new SyslogDAOBean();
 				bean.setLOG_USERID(LOG_USERID);
 				result = syslogDAOService.select(bean);
+
 			} else
 				result = syslogDAOService.select();
 			if (result == null) {
 				System.out.println("selectitem fail");
 				this.addFieldError("action", "Insert fail");
+				result = syslogDAOService.select();
+				req.setAttribute("select", result);
 			} else {
 				System.out.println("selectitem ok");
-				req.setAttribute("selectitem", result.get(0));
-				SyslogDAOBean bean = new SyslogDAOBean();
-				result = syslogDAOService.select(null);
 				req.setAttribute("select", result);
-				return Action.SUCCESS;
 			}
 		}
 		System.out.println("final");
-		return Action.INPUT;
+		return Action.SUCCESS;
 	}
 }

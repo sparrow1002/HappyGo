@@ -95,7 +95,7 @@ public class SyslogDAOjdbc implements SyslogDAO {
 		try {
 			// conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			conn = datasource.getConnection();
-			pst = conn.prepareStatement(SELECTALL);
+			pst = conn.prepareStatement(SELECT_BY_USERID);
 			pst.setString(1, orgbean.getLOG_USERID());
 			rs = pst.executeQuery();
 			result = new ArrayList<SyslogDAOBean>();

@@ -128,20 +128,20 @@ public class Dataprofile_list_Action extends ActionSupport implements
 
 		// System.out.println("mode:" + mode);
 		if ("select".equals(mode)) {
-			List<DataProfileDAOBean> result;
-			System.out.println("DAP_GROUP:" + DAP_GROUP);
-			if (DAP_GROUP != null && !DAP_GROUP.equals(""))
-				result = dataProfileDAOService.select(bean);
-			else
-				result = dataProfileDAOService.select(null);
-			if (result == null) {
-				System.out.println("select fail");
-				this.addFieldError("action", "Insert fail");
-			} else {
-				System.out.println("select ok");
-				req.setAttribute("select", result);
-				return Action.SUCCESS;
-			}
+//			List<DataProfileDAOBean> result;
+//			System.out.println("DAP_GROUP:" + DAP_GROUP);
+//			if (DAP_GROUP != null && !DAP_GROUP.equals(""))
+//				result = dataProfileDAOService.select(bean);
+//			else
+//				result = dataProfileDAOService.select(null);
+//			if (result == null) {
+//				System.out.println("select fail");
+//				this.addFieldError("action", "Insert fail");
+//			} else {
+//				System.out.println("select ok");
+//				req.setAttribute("select", result);
+//				return Action.SUCCESS;
+//			}
 		} else if ("selectitem".equals(mode)) {
 			DataProfileDAOBean result;
 			List<DataProfileDAOBean> results;
@@ -154,13 +154,13 @@ public class Dataprofile_list_Action extends ActionSupport implements
 				this.addFieldError("action", "Insert fail");
 			} else {
 				System.out.println("selectitem ok");
-				req.setAttribute("selectitem", result);
-				results = dataProfileDAOService.select(null);
-				req.setAttribute("select", results);
-				return Action.SUCCESS;
+				req.setAttribute("selectitem", result);			
 			}
+		} else if ("newitem".equals(mode)) {	
+			System.out.println("newitem ok");
+			System.out.println(bean);
+			req.setAttribute("newitem", bean);		
 		} else if ("insert".equals(mode)) {
-
 			DataProfileDAOBean result = dataProfileDAOService.insert(bean);
 			if (result == null) {
 				System.out.println("insert fail");
@@ -168,7 +168,6 @@ public class Dataprofile_list_Action extends ActionSupport implements
 			} else {
 				System.out.println("insert ok");
 				req.setAttribute("insert", result);
-				return Action.INPUT;
 			}
 		} else if ("edit".equals(mode)) {
 			bean.setDAP_GROUP(DAP_GROUP);
@@ -181,14 +180,13 @@ public class Dataprofile_list_Action extends ActionSupport implements
 				System.out.println("update fail");
 				this.addFieldError("action", "update fail");
 			} else {
-				System.out.println(result);
-				results = dataProfileDAOService.select(null);
-				req.setAttribute("select", results);
-				req.setAttribute("edit", result);			
-				return Action.SUCCESS;
+				
+				req.setAttribute("edit", result);
 			}
 		}
+		List<DataProfileDAOBean> results = dataProfileDAOService.select(null);
+		req.setAttribute("select", results);
 		System.out.println("final");
-		return Action.INPUT;
+		return Action.SUCCESS;
 	}
 }
