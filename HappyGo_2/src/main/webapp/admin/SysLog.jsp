@@ -18,10 +18,10 @@
 				<tr>
 					<th align="right" style="width: 100px;"><label>使用者ID</label></th>
 					<th align="left">
-						<form action='<c:url value="/dayuNameSpace/maguserlist.action"/>'
+						<form action='<c:url value="/dayuNameSpace/sysloglist.action"/>'
 							method="get">
-							<input type="text" name="ADM_ID" value=""> <input
-								type="hidden" name="mode" value="select"> <input
+							<input type="text" name="LOG_USERID" value=""> <input
+								type="hidden" name="mode" value="selectitem"> <input
 								type="submit" value="查詢">
 						</form>
 					</th>
