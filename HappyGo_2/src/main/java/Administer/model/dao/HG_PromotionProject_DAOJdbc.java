@@ -22,7 +22,7 @@ public class HG_PromotionProject_DAOJdbc {
 	public HG_PromotionProject_DAOJdbc() {
 		try {
 			Context ctx = new InitialContext();
-			dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/xxx");
+			dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/websource");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}

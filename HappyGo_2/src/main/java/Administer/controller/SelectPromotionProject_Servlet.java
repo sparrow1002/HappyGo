@@ -70,7 +70,7 @@ public class SelectPromotionProject_Servlet extends HttpServlet {
 		System.out.println("驗證HTML Form資料");
 		if(error!=null && !error.isEmpty()) {
 			request.getRequestDispatcher(
-					"/administer/PromotionProject/selectProj.jsp").forward(request, response);
+					"/Administer/PromotionProject/selectProj.jsp").forward(request, response);
 			return;
 		}
 		//呼叫Model
@@ -88,11 +88,11 @@ public class SelectPromotionProject_Servlet extends HttpServlet {
 //			HG_PromotionProject_Bean result = (HG_PromotionProject_Bean) PMOPJservice.select(bean);
 			request.setAttribute("select", result);
 			request.getRequestDispatcher(
-					"/administer/PromotionProject/display.jsp").forward(request, response);
+					"/Administer/PromotionProject/display.jsp").forward(request, response);
 		} else  {
 			error.put("action", "Unknown Action:"+promotionProject);
 			request.getRequestDispatcher(
-					"/administer/PromotionProject/selectProj.jsp").forward(request, response);
+					"/Administer/PromotionProject/selectProj.jsp").forward(request, response);
 		}
 	}
 

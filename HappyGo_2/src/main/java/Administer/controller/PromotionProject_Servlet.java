@@ -98,7 +98,7 @@ public class PromotionProject_Servlet extends HttpServlet {
 				
 				if(error!=null && !error.isEmpty()) {
 					request.getRequestDispatcher(
-							"/administer/PromotionProject/index.jsp").forward(request, response);
+							"/Administer/PromotionProject/index.jsp").forward(request, response);
 					return;
 				}
 				
@@ -135,7 +135,7 @@ public class PromotionProject_Servlet extends HttpServlet {
 						System.out.println("Servlet_4_2");
 					}
 					request.getRequestDispatcher(
-							"/administer/PromotionProject/index.jsp").forward(request, response);
+							"/Administer/PromotionProject/index.jsp").forward(request, response);
 				} else if(promotionProject!=null && promotionProject.equals("Update")) {
 					System.out.println("Update");
 					int result = 0;
@@ -146,7 +146,7 @@ public class PromotionProject_Servlet extends HttpServlet {
 						request.setAttribute("update", result);
 					}
 					request.getRequestDispatcher(
-							"/administer/PromotionProject/index.jsp").forward(request, response);
+							"/Administer/PromotionProject/index.jsp").forward(request, response);
 				}
 			}
 
