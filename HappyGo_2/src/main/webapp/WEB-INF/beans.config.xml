@@ -76,4 +76,3 @@
 		<property name="rightDAOService" ref="rightDAOService"></property>
 	</bean>
 </beans>
-
