@@ -111,6 +111,11 @@
 				<td align="center"><input type="submit" name="promotionProject"
 					value="Update"></td>
 			</tr>
+			<tr>
+				<td align="center"><input type="button" value="Back"
+				onclick="location.href='<c:url value="/Administer/PromotionProject/index.jsp" />'">
+				</td>
+			</tr>
 		</table>
 	</form>
 </body>

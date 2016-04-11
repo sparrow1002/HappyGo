@@ -54,9 +54,15 @@
 				<td><input type="text" name="PTP_DELDATE" id="PTP_DELDATE" value=""></td>
 			</tr>
 			<tr>
-				<td><input type="submit" name="promotionProject" value="select"></td>
+				<td align="center"><input type="submit" name="promotionProject" value="select">
+				</td>
+			</tr>
+			<tr>
+				<td align="center"><input type="button" value="Back"
+				onclick="location.href='<c:url value="/Administer/PromotionProject/index.jsp" />'">
+				</td>
+			</tr>
 		</table>
 	</form>
-	<input type="submit" value="Back" onclick="location.href='<c:url value="/Administer/PromotionProject/index.jsp" />'">
 </body>
 </html>

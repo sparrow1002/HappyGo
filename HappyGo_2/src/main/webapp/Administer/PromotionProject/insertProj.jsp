@@ -58,19 +58,21 @@
 				</td>
 			<tr>
 				<td style="border: 1px solid black">固定給點 <input type="checkbox"
-					id="PTP_FIXPOINT"> <br> 紅利條件： <!-- <select size=5>
-						<option value="singleCondition">1_消費紅利(單一條件)
-						<option value="moreCondition">2_消費紅利(多條件) 
-						</select> --> (大於等於)<input type="text" name="PTB_VALUE"
-					value="請在此輸入金額"> <br> 可獲得紅利： <input type="text"
+					id="PTP_FIXPOINT">
+				</td>
+			</tr>
+			<tr>
+				<td> 紅利條件：(大於等於)<input type="text" name="PTB_VALUE"
+					value="請在此輸入金額">可獲得紅利： <input type="text"
 					name="PTB_POINT" value="請在此輸入點數">
 				</td>
-				<!-- add new item Dynamically in the show block 新增其他消費金額-->
+			</tr>
+			<tr>
+				<!-- click the button to add new item 新增其他消費金額-->
 				<td><div id="showBlock"></div></td>
 			</tr>
 			<tr>
 				<!-- click the button to add new item 新增其他消費金額-->
-<!-- 			<td><input type="button" id="btn" value="addItem" /></td> -->
 				<td><input type="button" id="btn" value="新增其它消費金額"></td>
 			</tr>
 			<tr>
@@ -106,10 +108,13 @@
 				<td align="center"><input type="submit" name="promotionProject"
 					value="Insert"></td>
 			</tr>
+			<tr>
+				<td align="center"><input type="button" value="Back"
+				onclick="location.href='<c:url value="/Administer/PromotionProject/index.jsp" />'">
+				</td>
+			</tr>
 		</table>
 	</form>
-	<input type="submit" value="Back"
-		onclick="location.href='<c:url value="/Administer/PromotionProject/index.jsp" />'">
 	
 	
 	
@@ -121,7 +126,7 @@
 		var txtId = 1;
 		  //add input block in showBlock
 		  $("#btn").click(function () {
-		      $("#showBlock").append('<div id="div' + txtId + '">Input:<input type="text" name="test[]" /> <input type="button" value="del" onclick="deltxt('+txtId+')"></div>');
+		      $("#showBlock").append('<div id="div' + txtId + '">紅利條件：(大於等於) <input type="text" name="PTB_VALUE" value="請在此輸入金額"/>可獲得紅利： <input type="text" name="PTB_POINT" value="請在此輸入點數"><input type="button" value="刪除" onclick="deltxt('+txtId+')"></div>');
 		      txtId++;
 		  });
 		  //remove div
