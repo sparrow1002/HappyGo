@@ -17,12 +17,21 @@
 			<!-- controller.Login_Action-->
 			<result name="input" >/admin/userlist.jsp</result>
 			<result name="success" >/admin/userlist.jsp</result>
-		</action>
-		
+		</action>		
 		<action name="dataprofilelist" class="admin.controller.Dataprofile_list_Action">
 			<!-- controller.Login_Action-->
 			<result name="input" >/admin/DataProfile.jsp</result>
 			<result name="success" >/admin/DataProfile.jsp</result>
+		</action>
+		<action name="rolelist" class="admin.controller.Role_list_Action">
+			<!-- controller.Login_Action-->
+			<result name="input" >/admin/RoleList.jsp</result>
+			<result name="success" >/admin/RoleList.jsp</result>
+		</action>
+		<action name="rightlist" class="admin.controller.Role_right_Action">
+			<!-- controller.Login_Action-->
+			<result name="input" >/admin/RoleRightSetting.jsp</result>
+			<result name="success" >/admin/RoleRightSetting.jsp</result>
 		</action>
 	</package>
 	<package name="dayuPackage2" namespace="/dayu" extends="struts-default">

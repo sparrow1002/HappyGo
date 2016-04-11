@@ -6,100 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>使用者管理</title>
-<link rel="stylesheet" href="../css/main.css">
-<script src="../jquery/jquery-2.1.4.min.js"></script>
-<script src="../jquery/jquery-ui.js"></script>
-<script src="../jquery/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="../jquery/base/jquery-ui-1.9.2.custom.min.css">
-<link rel="stylesheet" type="text/css"
-	href="../jquery/jquery.dataTables.min.css" />
-<script>
-	var strUrl = location.search;
-	var getPara, ParaVal;
-	var aryPara = [];
-	function submi_form() {
-		var myForm = document.forms['myForm'];
-		var formSubmit = document.getElementById('formSubmit');
-		formSubmit.onclick = function() {
-			myForm.submit();
-		}
-	}
-	if (strUrl.indexOf("?") != -1) {
-		var getSearch = strUrl.split("?");
-		getPara = getSearch[1].split("&");
-		for (i = 0; i < getPara.length; i++) {
-			ParaVal = getPara[i].split("=");
-			aryPara.push(ParaVal[0]);
-			aryPara[ParaVal[0]] = ParaVal[1];
-		}
-		//alert(aryPara["mode"]);
-		$('#users-contain').hide();
-		if (aryPara["mode"] != null && aryPara["mode"].toString() == "edit"
-				|| aryPara["mode"].toString() == "selectitem") {
-
-			//alert(aryPara["mode"].toString());
-			$('#users-contain').show();
-			$('#users-contain').dialog({
-				autoOpen : true,
-				modal : false
-			});
-		}
-	}
-	$(function() {
-		var opt = {
-			"info" : false,
-			"lengthChange" : false,
-			"searching" : false,
-			"stateSave" : true,
-			"oLanguage" : {
-
-				"sProcessing" : "處理中...",
-				"sLengthMenu" : "顯示 _MENU_ 項結果",
-				"sZeroRecords" : "沒有匹配結果",
-				"sInfo" : "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-				"sInfoEmpty" : "顯示第 0 至 0 項結果，共 0 項",
-				"sInfoFiltered" : "(從 _MAX_ 項結果過濾)",
-				"sSearch" : "搜索:",
-				"oPaginate" : {
-					"sFirst" : "首頁",
-					"sPrevious" : "上頁",
-					"sNext" : "下頁",
-					"sLast" : "尾頁"
-				}
-			}
-		};
-		$('#main').button();
-		$('#dataprofile').button();
-		$('#userslist').DataTable(opt);
-		$('#users-contain').hide();
-		if (aryPara["mode"] != null
-				&& (aryPara["mode"].toString() == "edit" || aryPara["mode"]
-						.toString() == "selectitem")) {
-			//alert("test");
-			$('#users-contain').show();
-			$('#users-contain').dialog({
-				open : function() {
-					// On open, hide the original submit button
-					$(this).find("[type=button]").click(function() {
-						$('#users-contain').dialog("close");
-					});
-				},
-				close : function() {
-					$('#users-contain').dialog("close");
-				}
-			});
-		}
-	});
-</script>
 
 </head>
-
 <body>
-	<h3>
-		<a id="main" href="<c:url value="/admin/main_mag.jsp" />">後台系統主頁 </a>
-		<a id="dataprofile" href="<c:url value="/dayuNameSpace/dataprofilelist.action?mode=select" />">代碼設定 </a>
-	</h3>
+	<c:import url="/admin/TopMeau.jsp" />
 	<div style="width: 800px; height: 600px;">
 		<table style="background-color: #F0E68C;">
 			<thead>
@@ -214,8 +124,9 @@
 									type="hidden" value="select"> --></td>
 							</tr>
 							<tr>
-								<td><input name="formSubmit" type="submit" value="儲存" /></td>
-								<td><input value="取消" type="button"></td>
+								<td colspan="2"><input name="formSubmit" type="submit"
+									value="儲存" /><input id="cancel" value="取消" type="button"></td>
+
 							</tr>
 						</c:if>
 						<c:if test="${not empty selectitem}">
@@ -236,7 +147,8 @@
 								<td>${selectitem.ADM_ROLEID}</td>
 							</tr>
 							<tr>
-								<td colspan="2"  align="center"><input value="確認" type="button"></td>
+								<td colspan="2" align="center"><input id="cancel"
+									value="確認" type="button"></td>
 							</tr>
 						</c:if>
 					</tbody>
@@ -245,4 +157,89 @@
 		</div>
 	</div>
 </body>
+<script>
+	var strUrl = location.search;
+	var getPara, ParaVal;
+	var aryPara = [];
+	function submi_form() {
+		var myForm = document.forms['myForm'];
+		var formSubmit = document.getElementById('formSubmit');
+		formSubmit.onclick = function() {
+			myForm.submit();
+		}
+	}
+	if (strUrl.indexOf("?") != -1) {
+		var getSearch = strUrl.split("?");
+		getPara = getSearch[1].split("&");
+		for (i = 0; i < getPara.length; i++) {
+			ParaVal = getPara[i].split("=");
+			aryPara.push(ParaVal[0]);
+			aryPara[ParaVal[0]] = ParaVal[1];
+		}
+		//alert(aryPara["mode"]);
+		$('#users-contain').hide();
+		if (aryPara["mode"] != null && aryPara["mode"].toString() == "edit"
+				|| aryPara["mode"].toString() == "selectitem") {
+
+			//alert(aryPara["mode"].toString());
+			$('#users-contain').show();
+			$('#users-contain').dialog({
+				autoOpen : true,
+				modal : false
+			});
+		}
+	}
+	$("#cancel").click(function() {
+		$('#users-contain').dialog("close");
+	});
+	$(function() {
+		var opt = {
+			"info" : false,
+			"lengthChange" : false,
+			"searching" : false,
+			"stateSave" : true,
+			"oLanguage" : {
+
+				"sProcessing" : "處理中...",
+				"sLengthMenu" : "顯示 _MENU_ 項結果",
+				"sZeroRecords" : "沒有匹配結果",
+				"sInfo" : "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+				"sInfoEmpty" : "顯示第 0 至 0 項結果，共 0 項",
+				"sInfoFiltered" : "(從 _MAX_ 項結果過濾)",
+				"sSearch" : "搜索:",
+				"oPaginate" : {
+					"sFirst" : "首頁",
+					"sPrevious" : "上頁",
+					"sNext" : "下頁",
+					"sLast" : "尾頁"
+				}
+			}
+		};
+		$('#main').button();
+		$('#dataprofile').button();
+		$('#userslist').DataTable(opt);
+		$('#users-contain').hide();
+		if (aryPara["mode"] != null
+				&& (aryPara["mode"].toString() == "edit" || aryPara["mode"]
+						.toString() == "selectitem")) {
+			//alert("test");
+			$('#users-contain').show();
+			$('#users-contain').dialog({
+				open : function() {
+					// On open, hide the original submit button
+					$(this).find("[type=button]").click(function() {
+						$('#users-contain').dialog("close");
+					});
+				},
+				close : function() {
+					$('#users-contain').dialog("close");
+				}
+			});
+		}
+	});
+	
+	var message = '<%=request.getAttribute("message")%>';
+	if (message != null && message.trim() != "" && message.trim() != "null")
+		alert(message);
+</script>
 </html>

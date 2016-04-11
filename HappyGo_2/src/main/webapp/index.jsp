@@ -10,7 +10,7 @@
 </head>
 <body>
 	<header>
-	<div id="menus">
+	<div>
 		<nav>
 		<ul id="menu">
 			<li><a href="">Happy GO 說明</a></li>
@@ -23,7 +23,7 @@
 	</div>
 	</header>
 	<div id="content">
-		<img alt="" src="img/happygobackupground.jpg">
+		<img alt="" src="img/main.jpg">
 		<div>
 			<footer>
 			<p style="color: white;">E-amil:dayu2004@gmail.com &nbsp;
