@@ -22,6 +22,32 @@
 	</repositories>
 
 	<dependencies>
+		<!--4/11 jasperreport&pdf -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>4.7.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.5.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>xml-apis</groupId>
+			<artifactId>xml-apis</artifactId>
+			<version>1.4.01</version>
+		</dependency>
+		<!-- END -->
+	
 		<!-- 2016/3/31 DAYU ADD BEGIN -->
 		<!-- AOP -->
 		<dependency>
@@ -160,6 +186,15 @@
 				<version>2.3</version>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			
+						<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<!-- 讓產生的 .classpath 包含 source jar -->
+					<downloadSources>true</downloadSources>
 				</configuration>
 			</plugin>
 		</plugins>
