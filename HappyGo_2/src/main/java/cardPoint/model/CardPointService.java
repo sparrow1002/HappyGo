@@ -8,6 +8,9 @@ import java.util.List;
 
 import AAA000.DayDevice;
 import Administer.model.HG_PromotionBonus_Bean;
+import Administer.model.HG_PromotionMethod_Bean;
+import Administer.model.HG_PromotionMethod_DAO;
+import Administer.model.HG_PromotionProject_Bean;
 import cardPoint.model.dao.CardPointDAO_JDBC;
 
 public class CardPointService {
@@ -15,36 +18,41 @@ public class CardPointService {
 	private DayDevice dayDevice = new DayDevice();
 	private String today = dayDevice.getToday();//今天yyyymmdd
 	private String unUse = "1";//HG_DataProfile 未使用
-	private String used = "2";//HG_DataProfile 已使用
+	private String used = "0";//HG_DataProfile 已使用
 	private String updateUser = "lib0405";//目前寫死 還沒寫
 	private int lifeDay = 30;//dDate=today+lifeDay 目前寫死 should select from HG_DataProfile	
 	
 	public static void main(String[] args) {
 		CardPointService service = new CardPointService();
-		String memberId = "jdbc03";
+		String memberId = "jdbc01";
 		String dDate = service.today;
 		//String dDate = "20161113";
 		String status = "1";
 		
 		//System.out.println(service.dayDevice.calculateAfterDate(dDate,service.lifeDay));
 		//System.out.println(service.calculateAddPoint(-200));
+		/*System.out.println(service.parseMMdd("20071101"));
+		System.out.println(service.parseMM("15750324"));*/
+		String strValue = "03";
 		
-		
+		String sex = "A";
+		String value = "A";
+		System.out.println(sex.equals(value));
 		/*List<CardPointBean> cpb = service.selectPoint(memberId, dDate, status);
 		for(CardPointBean bean : cpb)
-			System.out.println(bean);*/
-		/*int totalPoint = service.totalPoint(memberId);
-		System.out.println("totalPoint= "+totalPoint);*/
-		//System.out.println(service.LastPoint(memberId));
+			System.out.println(bean);
+		int totalPoint = service.totalPoint(memberId);
+		System.out.println("totalPoint= "+totalPoint);
+		System.out.println(service.LastPoint(memberId));*/
 		//更改未使用點數狀態
-		/*boolean updateUsePoint = service.updateUsePoint(54, cpb, "test0405");
+		/*boolean updateUsePoint = service.updateUsePoint(54, cpb, 2016041100000001L);
 		if(updateUsePoint){
 			System.out.println("updateUsePoint OK");
 		}else{
 			System.out.println("updateUsePoint error");
 		}*/
 		//取消交易
-		/*boolean cancelOk = service.cancelTran("TRANID1");
+		/*boolean cancelOk = service.cancelTran(201604110002L);
 		if(cancelOk){
 			System.out.println("cancelTran OK");
 		}else{
@@ -70,7 +78,7 @@ public class CardPointService {
 		return pointDAO.selectLastPoint(memberId, today, unUse);
 	}
 	
-	public boolean updateUsePoint(int usePoint, List<CardPointBean> listBean, String tranId){
+	public boolean updateUsePoint(int usePoint, List<CardPointBean> listBean, long useTranId){
 		CardPointBean bean = new CardPointBean();
 		CardPointBean newBean = new CardPointBean();
 		int size = listBean.size();
@@ -84,7 +92,7 @@ public class CardPointService {
 			usePoint = usePoint - point;
 			System.out.println("CardPointService updateUsePoint usePoint="+usePoint);
 			bean.setStatus(used);
-			bean.setUseTranId(tranId);
+			bean.setUseTranId(useTranId);
 			bean.setUpdateUser(updateUser);
 			boolean updateOk = pointDAO.update(unUse , bean);
 			System.out.println("CardPointService updateUsePoint updateOk:"+updateOk);
@@ -100,7 +108,7 @@ public class CardPointService {
 				newBean.setTranDate(bean.getTranDate());
 				newBean.setMemberId(bean.getMemberId());
 				newBean.setStatus(unUse);
-				newBean.setUseTranId(tranId);
+				newBean.setUseTranId(useTranId);
 				newBean.setUpdateUser(updateUser);
 				boolean insertOk = pointDAO.insert(newBean);
 				System.out.println("CardPointService updateUsePoint insertOk:"+insertOk);
@@ -115,7 +123,7 @@ public class CardPointService {
 		return false;
 	}
 	
-	public boolean ddddddddd(String memberId , int totalCost, int discount){
+	public boolean ddddddddd(String memberId, int totalCost, int discount){
 		if( this.totalPoint(memberId) >= discount ){
 			
 		
@@ -131,7 +139,7 @@ public class CardPointService {
 		}
 	}
 	
-	public boolean cancelTran(String tranId){
+	public boolean cancelTran(long tranId){
 		//XXXXXXXXXXXXX-------------> update HG_Shopping's SOP_STATUS
 		
 		CardPointBean bean = new CardPointBean();
@@ -144,7 +152,7 @@ public class CardPointService {
 		System.out.println("CardPointService cancelTran update:"+bean);
 		//insert new point
 		if (bean.getPointDre()>0 && updateOk) {
-			newBean.setTranId(today);//目前暫訂
+			newBean.setTranId(Long.parseLong(today));//目前暫訂
 			newBean.setdDate(dayDevice.calculateAfterDate(today,this.lifeDay));
 			newBean.setPointAdd(bean.getPointDre());
 			newBean.setTranDate(today);
@@ -154,30 +162,23 @@ public class CardPointService {
 			pointDAO.insert(newBean);
 			System.out.println("CardPointService cancelTran insert:"+newBean);
 			return true;
+		} else if(bean.getPointDre()==0 && updateOk){
+			return true;
 		}
 		return false;
 	}
 	//=================================================
-//	public String getToday(){
-//		java.util.Date date = new Date();
-//	    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");       
-//	    String strToday = sdf.format(date);       
-//	    return strToday;
-//	}
-//	public String calculateAfterDate(String strDate, int addDay){
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-//		
-//		java.util.Date date = null;
-//		String strAfterDate = null;
-//		try {
-//			date = sdf.parse(strDate);
-//			java.util.Date afterDate = new Date(date.getTime() + 1000L*3600*24*addDay); 
-//			strAfterDate = sdf.format(afterDate);
-//		} catch (ParseException e) {
-//			e.printStackTrace();
-//		}
-//		return strAfterDate;
-//	}
+	public int parseMMdd(String yyyyMMdd){
+		String strMMdd = yyyyMMdd.substring(4);
+		int MMdd = Integer.parseInt(strMMdd);
+		return MMdd;
+	}
+	public int parseMM(String yyyyMMdd){
+		String strMM = yyyyMMdd.substring(4, 6);
+		int MM = Integer.parseInt(strMM);
+		return MM;
+	}
+	//=================================================
 	public int calculateCost(int totalCost, int discount){
 		int cost = totalCost - discount;
 		return cost;
@@ -193,6 +194,26 @@ public class CardPointService {
 		}
 		return addPoint;
 	}
+	
+	/*public int bonus(int cost, int point, HG_PromotionProject_Bean proBean){
+		int bonus = 0;
+		List<HG_PromotionBonus_Bean> PBListBean;//dao ;use proBean.getId();
+		String model = PBListBean.get(0).getModel();
+		switch (model) {
+			case "1":
+				bonus = bonusMod1(cost, PBListBean);
+				break;
+			case "2":
+				bonus = bonusMod2(point, PBListBean);
+				break;
+			default:
+				break;
+		}
+		if(this.getFixPoint() > 0){
+			bonus += this.getFixPoint();
+		}
+		return bonus;
+	}
 	public int getFixPoint(){
 		//HG_PromotionProject_Bean bean = new HG_PromotionProject_Bean();
 		//bean = HG_PromotionProjectDAO.select(PTP_PROJID);
@@ -200,7 +221,7 @@ public class CardPointService {
 		int fixPoint = 10;
 		return fixPoint;
 	}
-	public int calculateBonus(int cost, List<HG_PromotionBonus_Bean> PBListBean){
+	public int bonusMod1(int cost, List<HG_PromotionBonus_Bean> PBListBean){
 		int bonus = 0;
 		for(HG_PromotionBonus_Bean bean:PBListBean){
 			if(cost >= bean.getPTB_VALUE() ){
@@ -211,8 +232,112 @@ public class CardPointService {
 		}
 		return bonus;
 	}
-	public boolean confirmMember(){
+	public int bonusMod2(int point, List<HG_PromotionBonus_Bean> PBListBean){
+		int time = PBListBean.get(0).getPTB_POINT();
+		int bonus = point*time - point;
+		return bonus;
+	}
+	
+	public boolean confirm(){
+		HG_Member memberBean;//dao
+		List<HG_PromotionMethod_Bean> PMListBean;//dao
+		for(HG_PromotionMethod_Bean proMBean:PMListBean){
+			String model = proMBean.getModel();
+			switch (model) {
+				case "1":
+					if(!this.confirmMod1(memberBean, proMBean))
+						return false;
+					break;
+				case "2":
+					if(!this.confirmMod2(memberBean, proMBean))
+						return false;
+					break;
+				case "3":
+					if(!this.confirmMod3(memberBean, proMBean))
+						return false;
+					break;
+				case "4":
+					if(!this.confirmMod4(memberBean, proMBean))
+						return false;
+					break;
+				case "5":
+					if(!this.confirmMod5(memberBean, proMBean))
+						return false;
+					break;
+				case "6":
+					if(!this.confirmMod6(memberBean, proMBean))
+						return false;
+					break;
+				default:
+					break;
+			}
+		}
+		return true;
+	}
+	public boolean confirmMod1(HG_Member memberBean , HG_PromotionMethod_Bean proMBean){
+		String birthday = memberBean.getBirthday;
+		int birthMMdd = this.parseMMdd(birthday);
+		String strValue = proMBean.getPTM_VALUE();
+		int value = Integer.parseInt(strValue);
+		if(birthMMdd == value){
+			return true;
+		}
+		return false;
+	}
+	public boolean confirmMod2(){
+		return false;
+	}
+	public boolean confirmMod3(HG_Member memberBean , HG_PromotionMethod_Bean proMBean){
+		String birthday = memberBean.getBirthday();
+		int birthMMdd = this.parseMM(birthday);
+		String strValue = proMBean.getPTM_VALUE();
+		int value = Integer.parseInt(strValue);
+		if(birthMMdd == value){
+			return true;
+		}
+		return false;
+	}
+	public boolean confirmMod4(HG_Member memberBean , HG_PromotionMethod_Bean proMBean){
+		String sex = memberBean.getSex();
+		String value = proMBean.getPTM_VALUE();
+		if(sex.equals(value)){
+			return true;
+		}
+		return false;
+	}
+	public boolean confirmMod5(HG_Member memberBean , HG_PromotionMethod_Bean proMBean){
+		String memberId = memberBean.getMemberId();
+		int num = 0;//推薦數 目前寫死還沒寫
+		String strOper = proMBean.getPTM_OPER();
+		String strValue = proMBean.getPTM_VALUE();
+		int value = Integer.parseInt(strValue);
+		if(strOper.equals(">")){
+			if(num > value)
+				return true;
+		}
+		if(strOper.equals("<")){
+			if(num < value)
+				return true;
+		}
+		if(strOper.equals("=")){
+			if(num == value)
+				return true;
+		}
+		if(strOper.equals(">=")){
+			if(num >= value)
+				return true;
+		}
+		if(strOper.equals("<=")){
+			if(num <= value)
+				return true;
+		}
+			
 		
 		return false;
 	}
+	public boolean confirmMod6(){
+		return false;
+	}*/
+	
+	
 }

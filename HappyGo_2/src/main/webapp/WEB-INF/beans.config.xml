@@ -90,4 +90,3 @@
 		<property name="syslogDAOService" ref="syslogDAOService"></property>
 	</bean>
 </beans>
-

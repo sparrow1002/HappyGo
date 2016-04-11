@@ -13,6 +13,8 @@ public class DayDevice {
 		//System.out.println(dayDevice.parse_WebtoDB("2012/01/01"));
 		//System.out.println(dayDevice.parse_DBtoWeb("20120101"));
 		
+		//if("20">"19")
+		//System.out.println();
 	}
 	
 	public String getToday(){

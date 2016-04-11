@@ -4,23 +4,23 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class CardPointBean implements Serializable{
-	private String tranId;
+	private long tranId;
 	private String dDate;
 	private int pointAdd;
 	private int pointDre;
 	private String tranDate;
 	private String memberId;
 	private String status;
-	private String useTranId;
+	private long useTranId;
 
 	private Timestamp updateTime;
 	private String updateUser;
 	
 	
-	public String getTranId() {
+	public long getTranId() {
 		return tranId;
 	}
-	public void setTranId(String tranId) {
+	public void setTranId(long tranId) {
 		this.tranId = tranId;
 	}
 	public String getdDate() {
@@ -59,10 +59,10 @@ public class CardPointBean implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getUseTranId() {
+	public long getUseTranId() {
 		return useTranId;
 	}
-	public void setUseTranId(String useTranId) {
+	public void setUseTranId(long useTranId) {
 		this.useTranId = useTranId;
 	}
 	public Timestamp getUpdateTime() {
@@ -79,12 +79,13 @@ public class CardPointBean implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "HG_CardPointBean [tranId=" + tranId + ", dDate=" + dDate
+		return "CardPointBean [tranId=" + tranId + ", dDate=" + dDate
 				+ ", pointAdd=" + pointAdd + ", pointDre=" + pointDre
 				+ ", tranDate=" + tranDate + ", memberId=" + memberId
 				+ ", status=" + status + ", useTranId=" + useTranId
 				+ ", updateTime=" + updateTime + ", updateUser=" + updateUser
 				+ "]";
 	}
+
 
 }
