@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ROLE SETTING</title>
+<title>Insert title here</title>
 </head>
 <body>
 	<c:import url="/admin/TopMeau.jsp" />
@@ -12,54 +13,45 @@
 		<table style="background-color: #F0E68C;">
 			<thead>
 				<tr>
-					<th colspan="2">後台系統使用者管理</th>
+					<th colspan="2">後台系統紀錄檢視</th>
+				</tr>
+				<tr>
+					<th align="right" style="width: 100px;"><label>使用者ID</label></th>
+					<th align="left">
+						<form action='<c:url value="/dayuNameSpace/maguserlist.action"/>'
+							method="get">
+							<input type="text" name="ADM_ID" value=""> <input
+								type="hidden" name="mode" value="select"> <input
+								type="submit" value="查詢">
+						</form>
+					</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td colspan="2"><c:if test="${not empty userlist}">
+					<td colspan="2"><c:if test="${not empty select}">
 							<table id="userslist" class="t2">
-								<tbody>
+								<thead>
 									<tr>
-										<td><c:forEach var="userlist" items="${userlist}">
-												<form
-													action='<c:url value="/dayuNameSpace/rolelist.action?mode=select"/>'
-													method="get">
-													<table>
-														<tr>
-															<td style="width: 100px">${userlist.value}</td>
-															<td><c:forEach var="right" items="${right}">
-																	<c:set var="salary" scope="page" value="1" />
-																	<c:forEach var="rolelist" items="${rolelist}">
-																		<c:if
-																			test="${userlist.key==rolelist.ROL_ROLEID && right.RIG_RIGHTID==rolelist.ROL_RIGHTID}">
-																			<c:set var="salary" scope="page" value="2" />
-																		</c:if>
-																	</c:forEach>
-																	<c:choose>
-																		<c:when test="${salary==2}">
-																			<input type="checkbox" id="${right.RIG_RIGHTID}"
-																				name="${right.RIG_RIGHTID}" checked="checked" />
-																			<label for="${right.RIG_RIGHTID}">${right.RIG_DESC}</label>
-																			<br />
-																		</c:when>
-																		<c:otherwise>
-																			<input type="checkbox" id="${right.RIG_RIGHTID}"
-																				name="${right.RIG_RIGHTID}" />
-																			<label for="${right.RIG_RIGHTID}">${right.RIG_DESC}</label>
-																			<br />
-																		</c:otherwise>
-																	</c:choose>
-																</c:forEach></td>
-															<td>
-																<input type="submit" value="修改">																
-																<input type="hidden" name="userid" value="${userlist.key}">
-																<input type="hidden" name="mode" value="edit"></td>
-														</tr>
-													</table>
-												</form>
-											</c:forEach></td>
+										<th>紀錄編號</th>
+										<th>使用者</th>
+										<th>紀錄類型</th>
+										<th>紀錄說明</th>
+										<th>紀錄時間</th>
+										<th>紀錄者</th>
 									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="row" items="${select}">										
+										<tr>
+											<td>${row.LOG_NO}</td>
+											<td>${row.LOG_USERID}</td>
+											<td>${row.LOG_TYPE}</td>
+											<td>${row.LOG_DESC}</td>
+											<td>${row.LOG_UPDATETIME}</td>
+											<td>${row.LOG_UPDATEUSER}</td>											
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</c:if></td>
@@ -93,10 +85,9 @@
 		}
 		//alert(aryPara["mode"]);
 		$('#users-contain').hide();
-		
 		if (aryPara["mode"] != null && aryPara["mode"].toString() == "edit"
 				|| aryPara["mode"].toString() == "selectitem") {
-			
+
 			//alert(aryPara["mode"].toString());
 			$('#users-contain').show();
 			$('#users-contain').dialog({
@@ -104,7 +95,10 @@
 				modal : false
 			});
 		}
-	}	
+	}
+	$("#cancel").click(function() {
+		$('#users-contain').dialog("close");
+	});
 	$(function() {
 		var opt = {
 			"info" : false,
@@ -130,11 +124,29 @@
 		};
 		$('#main').button();
 		$('#dataprofile').button();
-		$('#userslist').DataTable(opt);	
+		$('#userslist').DataTable(opt);
+		$('#users-contain').hide();
+		if (aryPara["mode"] != null
+				&& (aryPara["mode"].toString() == "edit" || aryPara["mode"]
+						.toString() == "selectitem")) {
+			//alert("test");
+			$('#users-contain').show();
+			$('#users-contain').dialog({
+				open : function() {
+					// On open, hide the original submit button
+					$(this).find("[type=button]").click(function() {
+						$('#users-contain').dialog("close");
+					});
+				},
+				close : function() {
+					$('#users-contain').dialog("close");
+				}
+			});
+		}
 	});
 	
 	var message = '<%=request.getAttribute("message")%>';
-	if (message != null && message != ""&& message != "null")
+	if (message != null && message.trim() != "" && message.trim() != "null")
 		alert(message);
 </script>
 </html>

@@ -48,6 +48,14 @@
 	<bean id="roleDAOService" class="admin.model.RoleDAOService">
 		<constructor-arg ref="roleDAO"></constructor-arg>
 	</bean>
+	
+	
+	<bean id="syslogDAO" class="admin.model.dao.SyslogDAOjdbc">
+		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
+	<bean id="syslogDAOService" class="admin.model.SyslogDAOService">
+		<constructor-arg ref="syslogDAO"></constructor-arg>
+	</bean>
 	<!--[_______________structs2 追加部分____________________________] -->
 	<bean id="admin_Login_Action" class="admin.controller.Admin_Login_Action"
 		scope="prototype">
@@ -74,6 +82,12 @@
 	<bean id="right_list_Action" class="admin.controller.Role_right_Action"
 		scope="prototype">
 		<property name="rightDAOService" ref="rightDAOService"></property>
+	</bean>
+	
+	<bean id="Sylog_Action" class="admin.controller.Sylog_Action"
+		scope="prototype">
+		<property name="dataProfileDAOService" ref="dataProfileDAOService"></property>
+		<property name="syslogDAOService" ref="syslogDAOService"></property>
 	</bean>
 </beans>
 

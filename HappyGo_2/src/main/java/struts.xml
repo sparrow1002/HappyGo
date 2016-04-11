@@ -33,6 +33,12 @@
 			<result name="input" >/admin/RoleRightSetting.jsp</result>
 			<result name="success" >/admin/RoleRightSetting.jsp</result>
 		</action>
+		
+		<action name="sysloglist" class="admin.controller.Sylog_Action">
+			<!-- controller.Login_Action-->
+			<result name="input" >/admin/SysLog.jsp</result>
+			<result name="success" >/admin/SysLog.jsp</result>
+		</action>
 	</package>
 	<package name="dayuPackage2" namespace="/dayu" extends="struts-default">
 		

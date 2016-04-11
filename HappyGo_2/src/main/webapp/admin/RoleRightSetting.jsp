@@ -183,7 +183,7 @@
 	});
 	
 	var message = '<%=request.getAttribute("message")%>';
-	if (message != null && message != "")
+	if (message != null && message != ""&& message != "null")
 		alert(message);
 </script>
 </html>

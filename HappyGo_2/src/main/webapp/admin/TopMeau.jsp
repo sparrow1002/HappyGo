@@ -43,7 +43,7 @@
 				</ul></li>
 			<li><a href="">系統管理</a>
 				<ul>
-					<li><a onclick="">登入管理</a></li>
+					<li><a href='<c:url value="/dayuNameSpace/sysloglist.action?mode=select"/>'>登入管理</a></li>
 					<li><a href='<c:url value="/dayuNameSpace/maguserlist.action?mode=select"/>'>使用者設定</a></li>
 					<li><a href='<c:url value="/dayuNameSpace/rolelist.action?mode=select"/>'>角色權限設定</a></li>
 					<li><a href='<c:url value="/dayuNameSpace/rightlist.action?mode=select"/>'>權限項目設定</a></li>
