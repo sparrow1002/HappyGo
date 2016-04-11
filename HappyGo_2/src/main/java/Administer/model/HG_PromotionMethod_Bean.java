@@ -4,9 +4,9 @@ public class HG_PromotionMethod_Bean {
 	private int PTM_ID;
 	private String PTM_NAME;
 	private String PTM_DESC;
-	private int PTM_ATRID;
-	private int PTM_OPER; //代碼表
-	private int PTM_VALUE;
+	private String PTM_ATRID;
+	private String PTM_OPER; //代碼表
+	private String PTM_VALUE;
 	private int PTM_VARDATE;//日期加減值
 	private int PTM_PROJID;
 	private java.util.Date PTM_UPDATETIME;
@@ -30,22 +30,22 @@ public class HG_PromotionMethod_Bean {
 	public void setPTM_DESC(String pTM_DESC) {
 		PTM_DESC = pTM_DESC;
 	}
-	public int getPTM_ATRID() {
+	public String getPTM_ATRID() {
 		return PTM_ATRID;
 	}
-	public void setPTM_ATRID(int pTM_ATRID) {
+	public void setPTM_ATRID(String pTM_ATRID) {
 		PTM_ATRID = pTM_ATRID;
 	}
-	public int getPTM_OPER() {
+	public String getPTM_OPER() {
 		return PTM_OPER;
 	}
-	public void setPTM_OPER(int pTM_OPER) {
+	public void setPTM_OPER(String pTM_OPER) {
 		PTM_OPER = pTM_OPER;
 	}
-	public int getPTM_VALUE() {
+	public String getPTM_VALUE() {
 		return PTM_VALUE;
 	}
-	public void setPTM_VALUE(int pTM_VALUE) {
+	public void setPTM_VALUE(String pTM_VALUE) {
 		PTM_VALUE = pTM_VALUE;
 	}
 	public int getPTM_VARDATE() {

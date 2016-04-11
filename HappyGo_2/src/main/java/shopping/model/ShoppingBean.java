@@ -4,21 +4,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ShoppingBean implements Serializable{
-	private String tranId;
+	private Long tranId;
 	private int tranAmt;
 	private int disCount;
 	private String memberId;
 	private String status;
-	private String projId;
+	private int projId;
 	private String storeId;
+	private int overPoint;
+	private String tranDate;
 	
 	private Date updateTime;
 	private String updateUser;
 	
-	public String getTranId() {
+	public Long getTranId() {
 		return tranId;
 	}
-	public void setTranId(String tranId) {
+	public void setTranId(Long tranId) {
 		this.tranId = tranId;
 	}
 	public int getTranAmt() {
@@ -45,10 +47,10 @@ public class ShoppingBean implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getProjId() {
+	public int getProjId() {
 		return projId;
 	}
-	public void setProjId(String projId) {
+	public void setProjId(int projId) {
 		this.projId = projId;
 	}
 	public String getStoreId() {
@@ -56,6 +58,18 @@ public class ShoppingBean implements Serializable{
 	}
 	public void setStoreId(String storeId) {
 		this.storeId = storeId;
+	}
+	public int getOverPoint() {
+		return overPoint;
+	}
+	public void setOverPoint(int overPoint) {
+		this.overPoint = overPoint;
+	}
+	public String getTranDate() {
+		return tranDate;
+	}
+	public void setTranDate(String tranDate) {
+		this.tranDate = tranDate;
 	}
 	public Date getUpdateTime() {
 		return updateTime;
@@ -71,11 +85,13 @@ public class ShoppingBean implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "HG_ShoppingBean [tranId=" + tranId + ", tranAmt=" + tranAmt
+		return "ShoppingBean [tranId=" + tranId + ", tranAmt=" + tranAmt
 				+ ", disCount=" + disCount + ", memberId=" + memberId
 				+ ", status=" + status + ", projId=" + projId + ", storeId="
-				+ storeId + ", updateTime=" + updateTime + ", updateUser="
+				+ storeId + ", overPoint=" + overPoint + ", tranDate="
+				+ tranDate + ", updateTime=" + updateTime + ", updateUser="
 				+ updateUser + "]";
 	}
+
 
 }
