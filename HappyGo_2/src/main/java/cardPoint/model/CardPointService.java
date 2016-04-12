@@ -37,13 +37,16 @@ public class CardPointService {
 		
 		String sex = "A";
 		String value = "A";
-		System.out.println(sex.equals(value));
-		/*List<CardPointBean> cpb = service.selectPoint(memberId, dDate, status);
+		//System.out.println(sex.equals(value));
+		List<CardPointBean> cpb = service.selectPoint(memberId, dDate, status);
 		for(CardPointBean bean : cpb)
+			System.out.println(bean);
+		List<CardPointBean> cpb1 = service.unUsePoint(memberId);
+		for(CardPointBean bean : cpb1)
 			System.out.println(bean);
 		int totalPoint = service.totalPoint(memberId);
 		System.out.println("totalPoint= "+totalPoint);
-		System.out.println(service.LastPoint(memberId));*/
+		System.out.println(service.LastPoint(memberId));
 		//更改未使用點數狀態
 		/*boolean updateUsePoint = service.updateUsePoint(54, cpb, 2016041100000001L);
 		if(updateUsePoint){
@@ -63,6 +66,12 @@ public class CardPointService {
 	public List<CardPointBean> selectPoint(String memberId, String dDate, String status){
 		List<CardPointBean> result = new ArrayList<CardPointBean>();
 		result = pointDAO.selectPoint(memberId, dDate, status);
+		return result;
+	}
+	
+	public List<CardPointBean> unUsePoint(String memberId){
+		List<CardPointBean> result = new ArrayList<CardPointBean>();
+		result = pointDAO.selectPoint(memberId, today, unUse);
 		return result;
 	}
 	
