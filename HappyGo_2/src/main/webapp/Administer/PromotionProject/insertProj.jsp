@@ -40,7 +40,7 @@
 			align="center">
 			<tr style="border: 1px solid black">
 				<td style="border: 1px solid black">促銷方案活動名稱：<input type="text"
-					name="PTP_NAME"></td>
+					name="PTP_NAME"><span class="error">${error.pTP_NAME}</span></td>
 			</tr>
 			<tr>
 				<td style="border: 1px solid black">活動內容文字說明：<textarea rows="3"
@@ -58,13 +58,15 @@
 				</td>
 			<tr>
 				<td style="border: 1px solid black">固定給點 <input type="checkbox"
-					id="PTP_FIXPOINT">
+					id="PTP_FIXPOINT"><!-- 4/12與宗保討論，固定給點PTP_FIXPOINT後方給TEXT欄位輸入 -->
 				</td>
 			</tr>
 			<tr>
-				<td> 紅利條件：(大於等於)<input type="text" name="PTB_VALUE"
+				<td> 紅利一條件：(大於等於)<input type="text" name="PTB_VALUE"
 					value="請在此輸入金額">可獲得紅利： <input type="text"
 					name="PTB_POINT" value="請在此輸入點數">
+					<!-- 4/12與宗保討論：PTB_VALUE==PTB_VALUE -->
+					<!-- 4/12與宗保討論：PTB_POINT==PTB_POINT -->
 				</td>
 			</tr>
 			<tr>
@@ -76,15 +78,17 @@
 				<td><input type="button" id="btn" value="新增其它消費金額"></td>
 			</tr>
 			<tr>
-				<td style="border: 1px solid black">進階條件<input type="checkbox"
-					id="HAVE_PTM_ATRID"><select size=5 id="PTM_ATRID">
+				<td style="border: 1px solid black">紅利二條件<input type="checkbox"
+					id="HAVE_PTM_ATRID">
+				<select id="PTM_ATRID">
 						<option value="HG_Member">1_會員資料
-				</select> 進階條件屬性 <select size=5 id="PTM_ATRID">
+				</select>
+				紅利二條件屬性 <select id="PTM_ATRID">
 						<option value="MBR_SEX">1_會員性別
 						<option value="MBR_BIRTHDAY">2_會員生日
 						<option value="MBR_INTRODUCER">3_介紹人數
 				</select> <br> 屬性參數：<input type="text" name="PTM_VALUE" value="請在此輸入參數">可獲得紅利：<input
-					type="text" name="PTM_POINT" value="請在此輸入參數"> <br>
+					type="text" name="PTM_POINT" value="請在此輸入參數"> <br><!-- 4/12與宗保討論：PTM_POINT==PTP_FIXPOINT -->
 					生日(0=當日,1=當週 ,2=當月)性別(0=男,1=女)介紹人(介紹會員人數)
 				</td>
 			</tr>

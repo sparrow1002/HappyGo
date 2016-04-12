@@ -59,13 +59,6 @@ public class PromotionProject_Servlet extends HttpServlet {
 				else{
 					PTP_STATUS_ID = "1";
 				}
-//				if(!PTP_STATUS.equals("1")) {
-//					try {
-//					PTP_STATUS_ID = "0";
-//					} catch (NumberFormatException e) {
-//						e.printStackTrace();
-//					}
-//				}
 				
 				int id = 0;
 				if(PTP_PROJID!=null && PTP_PROJID.trim().length()!=0) {
@@ -90,16 +83,27 @@ public class PromotionProject_Servlet extends HttpServlet {
 					        }
 				
 				//驗證HTML Form資料
-				if("Insert".equals(promotionProject)) {
+				if("Update".equals(promotionProject)) {
+					if(PTP_PROJID==null || PTP_PROJID.trim().length()==0) {
+						error.put("pTP_PROJID", "請輸入活動編號以便於執行"+promotionProject);
+					}
+				}
+				
+				if("Insert".equals(promotionProject) || "Update".equals(promotionProject)) {
 					if(PTP_NAME==null || PTP_NAME.trim().length()==0) {
-						error.put("id", "請輸入活動名稱以便於執行"+PTP_NAME);
+						error.put("pTP_NAME", "請輸入活動名稱以便於執行"+promotionProject);
 					}
 				}
 				
 				if(error!=null && !error.isEmpty()) {
-					request.getRequestDispatcher(
-							"/Administer/PromotionProject/index.jsp").forward(request, response);
+					if(error.get("pTP_PROJID")!=null){
+						request.getRequestDispatcher(
+								"/Administer/PromotionProject/updateProj.jsp").forward(request, response);
+					}else{
+						request.getRequestDispatcher(
+								"/Administer/PromotionProject/insertProj.jsp").forward(request, response);
 					return;
+					}
 				}
 				
 				//呼叫Model
@@ -114,30 +118,21 @@ public class PromotionProject_Servlet extends HttpServlet {
 				
 				//根據Model執行結果顯示View
 				if("Select".equals(promotionProject)) {
-					System.out.println("Servlet_1_1");
 					List<HG_PromotionProject_Bean> result = projectservice.select(bean);
 					request.setAttribute("select", result);
 					request.getRequestDispatcher(
 							"/pages/display.jsp").forward(request, response);
-					System.out.println("Servlet_1_2");
 				} else if(promotionProject!=null && promotionProject.equals("Insert")) {
-					System.out.println("Servlet_2_1");
 					int result = 0;
 					result = projectservice.insert(bean);
-					System.out.println("Servlet_2_2");
 					if(result==0) {
-						System.out.println("Servlet_3_1");
 						error.put("action", "Insert fail");
-						System.out.println("Servlet_3_2");
 					} else {
-						System.out.println("Servlet_4_1");
 						request.setAttribute("insert", result);
-						System.out.println("Servlet_4_2");
 					}
 					request.getRequestDispatcher(
 							"/Administer/PromotionProject/index.jsp").forward(request, response);
 				} else if(promotionProject!=null && promotionProject.equals("Update")) {
-					System.out.println("Update");
 					int result = 0;
 					result = projectservice.update(bean);
 					if(result==0) {
