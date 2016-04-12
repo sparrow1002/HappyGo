@@ -26,6 +26,12 @@ public class HG_PromotionProject_Service {
 		}
 		return result;
 	}
+	
+	public List<HG_PromotionProject_Bean> selectToday(String today){
+		List<HG_PromotionProject_Bean> result;
+		result = PromotionProjectDao.selectToday(today);
+		return result;
+	}
 
 	// select有SELECT_BY_ID、SELECT_BETWEEN_TIME、SELECT_BY_NAME、SELECT_ALL
 

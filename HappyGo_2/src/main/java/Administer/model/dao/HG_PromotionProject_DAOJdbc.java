@@ -30,6 +30,8 @@ public class HG_PromotionProject_DAOJdbc {
 	
 	public static void main(String[] args) { //main方法測試
 		HG_PromotionProject_DAOJdbc dao = new HG_PromotionProject_DAOJdbc();
+		/*for(HG_PromotionProject_Bean bean:dao.selectToday("20160412"))
+			System.out.println(bean);*/
 		// List<HG_PromotionProject_Bean> beans = dao.select("%活%");				//測試模糊查詢，從活動名稱關鍵字找資料
 //		HG_PromotionProject_Bean beans =  dao.select(1);  				//測試從活動編號找活動
 //		List<HG_PromotionProject_Bean> beans = dao.selectAll(); 					//測試從活動編號找活動
@@ -49,6 +51,43 @@ public class HG_PromotionProject_DAOJdbc {
 	private static final String UPDATE = "update HG_PromotionProject set PTP_NAME=?, PTP_CREATEDATE=?, PTP_DELDATE=?, PTP_STATUS=?, PTP_DESC=?, PTP_FIXPOINT=?, PTP_UPDATETIME=getDate() where PTP_PROJID=?";
 	private static final String INSERT = "insert into HG_PromotionProject (PTP_NAME, PTP_CREATEDATE, PTP_DELDATE, PTP_STATUS, PTP_DESC, PTP_FIXPOINT, PTP_UPDATETIME) values (?, ?, ?, ?, ?, ?, getDate())";
 	
+	private static final String SELECT_TODAY = "select * from HG_PromotionProject where PTP_STATUS='1' and PTP_CREATEDATE<= ? and PTP_DELDATE>= ?";
+	public List<HG_PromotionProject_Bean> selectToday(String today) { //SELECT_BY_ID的方法
+		System.out.println("This is SELECT_TODAY");
+		List<HG_PromotionProject_Bean> result = null;
+		ResultSet rset = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			//conn = dataSource.getConnection();
+			//Web專用
+			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			stmt = conn.prepareStatement(SELECT_TODAY);	  //測試從活動編號找活動
+			stmt.setString(1, today);
+			stmt.setString(2, today);
+			rset = stmt.executeQuery();
+			result = new ArrayList<HG_PromotionProject_Bean>();
+			while (rset.next()) {
+				HG_PromotionProject_Bean bean = new HG_PromotionProject_Bean();
+				bean.setPTP_PROJID(rset.getInt("PTP_PROJID"));
+				bean.setPTP_NAME(rset.getString("PTP_NAME"));
+				bean.setPTP_CREATEDATE(rset.getString("PTP_CREATEDATE"));
+				bean.setPTP_DELDATE(rset.getString("PTP_DELDATE"));
+				bean.setPTP_STATUS(rset.getString("PTP_STATUS"));
+				bean.setPTP_DESC(rset.getString("PTP_DESC"));
+				bean.setPTP_COVER(rset.getBytes("PTP_COVER"));
+				bean.setPTP_FIXPOINT(rset.getInt("PTP_FIXPOINT"));
+				bean.setPTP_UPDATETIME(rset.getDate("PTP_UPDATETIME"));
+				bean.setPTP_UPDATEUSER(rset.getString("PTP_UPDATEUSER"));
+				result.add(bean);//記得把bean塞進result傳出去
+			}
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public HG_PromotionProject_Bean select(int PTP_PROJID) { //SELECT_BY_ID的方法
 		System.out.println("This is SELECT_BY_ID");
 		HG_PromotionProject_Bean result = null;
@@ -62,7 +101,8 @@ public class HG_PromotionProject_DAOJdbc {
 			stmt.setInt(1, PTP_PROJID);
 			//            (1, "%"+DT+"%");
 			rset = stmt.executeQuery();
-			if (rset.next()) {
+			result = new HG_PromotionProject_Bean();
+			while (rset.next()) {
 				result = new HG_PromotionProject_Bean();//必備
 				result.setPTP_PROJID(rset.getInt("PTP_PROJID"));
 				result.setPTP_NAME(rset.getString("PTP_NAME"));

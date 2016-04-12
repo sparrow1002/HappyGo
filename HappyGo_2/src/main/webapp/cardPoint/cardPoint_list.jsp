@@ -24,21 +24,12 @@
 <script type="text/javascript" language="javascript">
 	jQuery(document).ready(function(){
 
-		$.datepicker.regional[""].dateFormat = 'yy/mm/dd';
-        $.datepicker.setDefaults($.datepicker.regional['']);
+		//$.datepicker.regional[""].dateFormat = 'yy/mm/dd';
+        //$.datepicker.setDefaults($.datepicker.regional[""]);
                 
-		jQuery("table").dataTable(
+		jQuery('table').dataTable(
 						
-		).columnFilter({ sPlaceHolder: "head:before",
-            aoColumns: [
-                        { type: "date-range" },//失效日
-                        { type: "text" },//點數
-                        { type: "select", values:['已使用','未使用'] },//點數狀態
-                        { type: "text" },//交易編號
-                        { type: "date-range" }//交易日
-                        
-                        ]
-					});
+		);
 		
 	});
 </script>
@@ -49,69 +40,48 @@
 
 <body>
 	
-	<h1>尚有:"EL語法 總點數"點</h1>
-	<h4>您有 "EL語法 點數"點,將在"EL語法 失效日"過期</h4>
+	<h1>尚有:${totalPoint}點</h1>
+	<h4>您有 ${LastPoint.pointAdd}點,將在${LastPoint.dDate}過期</h4>
 	<table class="display">
 <!-- 	class="display"可以套用到dataTables的css樣式 -->
 <!-- 	class="display"可以套用到demo_table.css樣式 -->
 		<thead>
+<!-- 			<tr> -->
+<!-- 				<th >失效日</th> -->
+<!-- 				<th >點數</th> -->
+<!-- 				<th >點數狀態</th> -->
+<!-- 				<th >交易編號</th> -->
+<!-- 				<th >交易日</th> -->
+<!-- 			</tr> -->
 			<tr>
 				<th >失效日</th>
 				<th >點數</th>
-				<th >點數狀態</th>
-				<th >交易編號</th>
-				<th >交易日</th>
-			</tr>
-			<tr>
-				<th >失效日</th>
-				<th >點數</th>
-				<th >點數狀態</th>
-				<th >交易編號</th>
+<!-- 				<th >點數狀態</th> -->
+<!-- 				<th >交易編號</th> -->
 				<th >交易日</th>
 			</tr>
 		</thead>
 	<!-- ------------------------ -->	
 		<tbody>
+			<c:if test="${not empty point}">
+ 			<c:forEach var="row" items="${point}"> 
 			<tr>
-				<td>20160601</td>
-				<td>30</td>
-				<td>未使用</td>
-				<td>A123456789</td>
-				<td>2016/06/01</td>
-			</tr>
-			<tr>
-				<td>2016/06/01</td>
-				<td>100</td>
-				<td>已使用</td>
-				<td>AAAAAAAAAA</td>
-				<td>2016/06/01</td>
-			</tr>
-			<tr>
-				<td>2016/06/01</td>
-				<td>656</td>
-				<td>未使用</td>
-				<td>BBBBBBBBBB</td>
-				<td>2016/06/01</td>
-			</tr>
-<%--			
- 			<c:forEach var="row" items=""> 
-			<tr>
-				<td>2016/06/01</td>
-				<td>30</td>
-				<td>未使用</td>
-				<td>A123456789</td>
-				<td>2016/01/01</td>
+				<td>${row.dDate}</td>
+				<td>${row.pointAdd}</td>
+<%-- 				<td>${row.status}</td> --%>
+<%-- 				<td>${row.tranId}</td> --%>
+				<td>${row.tranDate}</td>
 			</tr>	
 			</c:forEach>
---%>
+			</c:if>
 		</tbody>
 	<!-- ------------------------ -->
 		<tfoot>
 			<tr>
 				<th >失效日</th>
 				<th >點數</th>
-				<th >點數狀態</th>
-				<th >交易編號</th>
+<!-- 				<th >點數狀態</th> -->
+<!-- 				<th >交易編號</th> -->
 				<th >交易日</th>
 			</tr>
 		</tfoot>
