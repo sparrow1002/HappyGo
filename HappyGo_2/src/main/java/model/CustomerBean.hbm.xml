@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated 2016/4/12 ?U?? 02:54:43 by Hibernate Tools 3.5.0.Final -->
 <hibernate-mapping>
-    <class name="model.CustomerBean" table="CUSTOMERBEAN">
+    <class name="model.CustomerBean" table="HG_Member">
         <id name="MBR_IDENTITY" type="java.lang.String">
             <column name="MBR_IDENTITY" />
             <generator class="assigned" />
@@ -47,7 +47,7 @@
         <property name="MBR_DELDATE" type="java.lang.String">
             <column name="MBR_DELDATE" />
         </property>
-        <property name="MBR_POINTS" type="java.lang.String">
+        <property name="MBR_POINTS" type="java.lang.Integer">
             <column name="MBR_POINTS" />
         </property>
         <property name="MBR_STATUS" type="java.lang.String">
