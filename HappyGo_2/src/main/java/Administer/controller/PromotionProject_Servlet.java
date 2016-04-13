@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Administer.model.HG_PromotionBonus_Bean;
 import Administer.model.HG_PromotionProject_Bean;
 import Administer.model.HG_PromotionProject_Service;
 
@@ -135,25 +136,32 @@ public class PromotionProject_Servlet extends HttpServlet {
 				}
 				
 				//呼叫Model
-				HG_PromotionProject_Bean bean = new HG_PromotionProject_Bean();
-				bean.setPTP_PROJID(id);
-				bean.setPTP_NAME(PTP_NAME);
-				bean.setPTP_DESC(PTP_DESC);
-				bean.setPTP_STATUS(PTP_STATUS_ID);
-				bean.setPTP_CREATEDATE(StartDate);
-				bean.setPTP_DELDATE(EndDate);
-				bean.setPTP_FIXPOINT(int_PTP_FIXPOINT);
-//				bean內共10個屬性，這邊設定了6個
+				HG_PromotionProject_Bean promprojbean = new HG_PromotionProject_Bean();
+				promprojbean.setPTP_PROJID(id);
+				promprojbean.setPTP_NAME(PTP_NAME);
+				promprojbean.setPTP_DESC(PTP_DESC);
+				promprojbean.setPTP_STATUS(PTP_STATUS_ID);
+				promprojbean.setPTP_CREATEDATE(StartDate);
+				promprojbean.setPTP_DELDATE(EndDate);
+				promprojbean.setPTP_FIXPOINT(int_PTP_FIXPOINT);
+//				HG_PromotionProject_Bean內共10個屬性，這邊設定了7個
+				
+				HG_PromotionBonus_Bean prombnsbean = new HG_PromotionBonus_Bean();
+				prombnsbean.setPTB_POINT(int_PTB_POINT);
+				prombnsbean.setPTB_VALUE(int_PTB_VALUE);
+				
+				
+				
 				
 				//根據Model執行結果顯示View
 				if("Select".equals(promotionProject)) {
-					List<HG_PromotionProject_Bean> result = projectservice.select(bean);
+					List<HG_PromotionProject_Bean> result = projectservice.select(promprojbean);
 					request.setAttribute("select", result);
 					request.getRequestDispatcher(
 							"/pages/display.jsp").forward(request, response);
 				} else if(promotionProject!=null && promotionProject.equals("Insert")) {
 					int result = 0;
-					result = projectservice.insert(bean);
+					result = projectservice.insert(promprojbean);
 					if(result==0) {
 						error.put("action", "Insert fail");
 					} else {
@@ -163,7 +171,7 @@ public class PromotionProject_Servlet extends HttpServlet {
 							"/Administer/PromotionProject/index.jsp").forward(request, response);
 				} else if(promotionProject!=null && promotionProject.equals("Update")) {
 					int result = 0;
-					result = projectservice.update(bean);
+					result = projectservice.update(promprojbean);
 					if(result==0) {
 						error.put("action", "Update fail");
 					} else {
