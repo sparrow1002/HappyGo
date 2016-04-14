@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import cardPoint.model.CardPointBean;
 import Administer.model.HG_PromotionBonus_Bean;
 import Administer.model.HG_PromotionBonus_DAO;
@@ -15,7 +20,7 @@ import Administer.model.HG_PromotionBonus_DAO;
 public class HG_PromotionBonus_DAOJdbc implements HG_PromotionBonus_DAO {
 	private static final String URL = "jdbc:sqlserver://localhost:1433;database=happygo";
 	private static final String USERNAME = "sa";
-	private static final String PASSWORD = "P@ssw0rd";
+	private static final String PASSWORD = "sa123456";
 	
 	public static void main(String[] args) {
 		int projId = 2;
@@ -37,6 +42,17 @@ public class HG_PromotionBonus_DAOJdbc implements HG_PromotionBonus_DAO {
 			System.out.println("insert error");*/
 		
 	}
+	
+	private DataSource dataSource;
+	
+	public HG_PromotionBonus_DAOJdbc() {
+		try {
+			Context ctx = new InitialContext();
+			dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/websource");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 
 	private static final String SELECT = "select * from HG_PromotionBonus where PTB_PROJID=?;";
 	public List<HG_PromotionBonus_Bean> select(int projId) {
@@ -45,6 +61,8 @@ public class HG_PromotionBonus_DAOJdbc implements HG_PromotionBonus_DAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
+			//conn = dataSource.getConnection();
+			//Web專用
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			pstmt = conn.prepareStatement(SELECT);
 			pstmt.setInt(1, projId);

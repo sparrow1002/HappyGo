@@ -280,7 +280,7 @@ public class HG_PromotionProject_DAOJdbc {
 	}
 	public int insert(HG_PromotionProject_Bean bean){ //insert方法
 		//傳入值可用bean，可單一屬性傳入String PTP_PROJID, String PTP_NAME, String PTP_CREATEDATE, String PTP_DELDATE, String PTP_STATUS, String PTP_DESC, byte[] PTP_COVER, int PTP_FIXPOINT, java.sql.Date PTP_UPDATETIME, String PTP_UPDATEUSER
-		System.out.println("This is INSERT");
+		System.out.println("This is HG_PromotionProject INSERT");
 		int insertAmount = 0;
 		ResultSet rset = null;
 		Connection conn = null;
@@ -290,7 +290,7 @@ public class HG_PromotionProject_DAOJdbc {
 //			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); 
 			stmt = conn.prepareStatement(INSERT);
 			if(bean!=null){
-				System.out.println("This is INSERT DAO");
+				System.out.println("This is HG_PromotionProject INSERT DAO");
 //			stmt.setString(1, bean.getPTP_PROJID());
 //				↑不用設，SQL會自動加號碼
 				
@@ -306,7 +306,7 @@ public class HG_PromotionProject_DAOJdbc {
 //			bean不用設PTM_UPDATETIME，SQL指令有下
 //			stmt.setString(9, bean.getPTP_UPDATEUSER());
 			insertAmount = stmt.executeUpdate();
-			System.out.println("This is INSERT DAO run end");
+			System.out.println("This is HG_PromotionProject INSERT DAO run end");
 			}else{
 				insertAmount=999;
 						}
