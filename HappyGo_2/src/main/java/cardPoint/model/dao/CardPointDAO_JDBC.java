@@ -195,8 +195,8 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 			+ "CPT_UPDATETIME = getdate(),"
 			+ "CPT_UPDATEUSER = ?"
 			+ " where CPT_TRANID = ?"
-			+ " and CPT_STATUS = ?";
-	public boolean update(String status , CardPointBean bean) {
+			+ " and CPT_POINTADD = ?";
+	public boolean update(CardPointBean bean) {
 		Connection conn =null;
 		PreparedStatement pstmt;
 		try {
@@ -211,7 +211,7 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 			pstmt.setLong(7, bean.getUseTranId());
 			pstmt.setString(8, bean.getUpdateUser());
 			pstmt.setLong(9,bean.getTranId());
-			pstmt.setString(10, status);
+			pstmt.setInt(10, bean.getPointAdd());
 			int i = pstmt.executeUpdate();
 			System.out.println("CardPointDAO_JDBC update i= "+i);
 			if(i>=1){

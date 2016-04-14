@@ -1,10 +1,13 @@
 package cardPoint.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+import org.hibernate.type.SortedMapType;
 
 import model.CustomerBean;
 import model.CustomerService;
@@ -42,20 +45,17 @@ public class CardPointService {
 		System.out.println(service.parseMM("15750324"));*/
 		String strValue = "03";
 		
-		String sex = "A";
-		String value = "A";
-		//System.out.println(sex.equals(value));
-		List<CardPointBean> cpb = service.selectPoint(memberId, dDate, status);
+		/*List<CardPointBean> cpb = service.selectPoint(memberId, dDate, status);
 		for(CardPointBean bean : cpb)
-			System.out.println(bean);
-		List<CardPointBean> cpb1 = service.unUsePoint(memberId);
+			System.out.println(bean);*/
+		/*List<CardPointBean> cpb1 = service.unUsePoint(memberId);
 		for(CardPointBean bean : cpb1)
-			System.out.println(bean);
-		int totalPoint = service.totalPoint(memberId);
-		System.out.println("totalPoint= "+totalPoint);
-		System.out.println(service.LastPoint(memberId));
+			System.out.println(bean);*/
+		/*int totalPoint = service.totalPoint(memberId);
+		System.out.println("totalPoint= "+totalPoint);*/
+		//System.out.println(service.LastPoint(memberId));
 		//更改未使用點數狀態
-		/*boolean updateUsePoint = service.updateUsePoint(54, cpb, 2016041100000001L);
+		/*boolean updateUsePoint = service.updateUsePoint(54, cpb, 2016051300000001L);
 		if(updateUsePoint){
 			System.out.println("updateUsePoint OK");
 		}else{
@@ -68,6 +68,15 @@ public class CardPointService {
 		}else{
 			System.out.println("cancelTran error");
 		}*/
+		
+		HG_PromotionProject_Bean proBean = new HG_PromotionProject_Bean();
+		proBean.setPTP_PROJID(4);
+		proBean.setPTP_CREATEDATE("20160301");
+		proBean.setPTP_DELDATE("20160401");
+		int cost = 100;
+		int point = 30;
+		//System.out.println(service.bonus(cost, point, proBean));
+		System.out.println(service.confirm(memberId, proBean));
 	}
 	
 	public List<CardPointBean> selectPoint(String memberId, String dDate, String status){
@@ -110,7 +119,7 @@ public class CardPointService {
 			bean.setStatus(used);
 			bean.setUseTranId(useTranId);
 			bean.setUpdateUser(updateUser);
-			boolean updateOk = pointDAO.update(unUse , bean);
+			boolean updateOk = pointDAO.update(bean);
 			System.out.println("CardPointService updateUsePoint updateOk:"+updateOk);
 			System.out.println("CardPointService updateUsePoint update:"+bean);
 			if(usePoint > 0){
@@ -164,7 +173,7 @@ public class CardPointService {
 		//update status
 		bean.setStatus(used);
 		bean.setUpdateUser(updateUser);
-		boolean updateOk = pointDAO.update(unUse , bean);
+		boolean updateOk = pointDAO.update(bean);
 		System.out.println("CardPointService cancelTran update:"+bean);
 		//insert new point
 		if (bean.getPointDre()>0 && updateOk) {
@@ -210,29 +219,64 @@ public class CardPointService {
 		}
 		return addPoint;
 	}
-	
-	public int bonus(int cost, int point, HG_PromotionProject_Bean proBean){
-		int bonus = 0;
-		List<HG_PromotionBonus_Bean> PBListBean = pbService.select(proBean.getPTP_PROJID());//dao ;use proBean.getId();
-		String model = PBListBean.get(0).getPTB_model();
-		switch (model) {
-			case "1":
-				bonus = bonusMod1(cost, PBListBean);
-				break;
-			case "2":
-				bonus = bonusMod2(point, PBListBean);
-				break;
-			default:
-				break;
+	//--------------------------------------
+	public int pointAdd(String memberId, int cost,List<HG_PromotionProject_Bean> proLisBean){
+		int point = 0;
+		
+		int useProjID ;
+		Map<Integer,Integer> returnMap = new TreeMap<Integer, Integer>();
+		
+		int originProBonus = 0;
+		for(HG_PromotionProject_Bean proBean:proLisBean){//取原本永久活動
+			if(proBean.getPTP_DELDATE()=="20991231"){
+				originProBonus = this.floorBonus(cost, pbService.select(proBean.getPTP_PROJID()) );
+			}
 		}
+		
+		Map<Integer,Integer> pointMap = new TreeMap<Integer, Integer>();
+		
+		for(HG_PromotionProject_Bean proBean:proLisBean){
+			int projId = proBean.getPTP_PROJID();
+			point = this.bonus(memberId, cost, originProBonus, proBean);
+			pointMap.put(projId, point);
+		}
+		
+		
+		for(int i=1; i<=pointMap.size() ; i++){
+			useProjID = pointMap.keySet();
+			point = pointMap.get(useProjID);
+		}
+		for(int key : pointMap.keySet()){
+			useProjID = key;
+			point = pointMap.get(key);
+		}
+		returnMap.put(useProjID, point);
+		
+			
+			
+		return point;
+	}
+	public int bonus(String memberId, int cost, int originProBonus, HG_PromotionProject_Bean proBean){
+		int bonus = 0;
+		List<HG_PromotionMethod_Bean> PMListBean = pmService.select(proBean.getPTP_PROJID());//dao
+		List<HG_PromotionBonus_Bean> PBListBean = pbService.select(proBean.getPTP_PROJID());//dao ;use proBean.getId();
+		
+		bonus = this.floorBonus(cost, PBListBean);
+		if(bonus==0){
+			bonus = originProBonus;
+		}
+		
+		bonus += this.confirmBonus(memberId, bonus, PMListBean);
+				
 		int fixPoint = proBean.getPTP_FIXPOINT();
+		System.out.println("CardPointService bonus() fixPoint:"+fixPoint);
 		if(fixPoint > 0){
 			bonus += fixPoint;
 		}
 		return bonus;
 	}
 	
-	public int bonusMod1(int cost, List<HG_PromotionBonus_Bean> PBListBean){
+	public int floorBonus(int cost, List<HG_PromotionBonus_Bean> PBListBean){
 		int bonus = 0;
 		for(HG_PromotionBonus_Bean bean:PBListBean){
 			if(cost >= bean.getPTB_VALUE() ){
@@ -243,110 +287,94 @@ public class CardPointService {
 		}
 		return bonus;
 	}
-	public int bonusMod2(int point, List<HG_PromotionBonus_Bean> PBListBean){
-		int time = PBListBean.get(0).getPTB_POINT();
-		int bonus = point*time - point;
-		return bonus;
-	}
-	
-	public boolean confirm(String memberId, HG_PromotionProject_Bean proBean){
-		CustomerBean memberBean = custService.login(memberId);//dao
-		List<HG_PromotionMethod_Bean> PMListBean = pmService.select(proBean.getPTP_PROJID());//dao
+	public int confirmBonus(String memberId, int bonus, List<HG_PromotionMethod_Bean> PMListBean){
 		for(HG_PromotionMethod_Bean proMBean:PMListBean){
-			String model = proMBean.getPTM_model();
-			switch (model) {
-				case "1":
-					if(!this.confirmMod1(memberBean, proMBean))
-						return false;
-					break;
-				case "2":
-					if(!this.confirmMod2(memberBean, proMBean))
-						return false;
-					break;
-				case "3":
-					if(!this.confirmMod3(memberBean, proMBean))
-						return false;
-					break;
-				case "4":
-					if(!this.confirmMod4(memberBean, proMBean))
-						return false;
-					break;
-				case "5":
-					if(!this.confirmMod5(memberBean, proMBean))
-						return false;
-					break;
-				case "6":
-					if(!this.confirmMod6(memberBean, proMBean))
-						return false;
-					break;
-				default:
-					break;
+			if(this.confirm(memberId, proMBean)){
+				String model = proMBean.getPTM_NAME();
+				
+				if(model == "1"){
+					bonus += proMBean.getPTM_VARDATE();
+				}else if(model == "2"){
+					bonus = bonus*proMBean.getPTM_VARDATE();
+				}
+				
 			}
 		}
+		
+		return bonus;
+	}
+	//------------------------------------------
+	public boolean confirm(String memberId, HG_PromotionMethod_Bean proMBean){
+		CustomerBean memberBean = custService.login(memberId);//dao
+		
+		String model = proMBean.getPTM_model();
+		switch (model) {
+			case "1":
+				if(!this.confirmMod1(memberBean, proMBean))
+					return false;
+				break;
+			case "2":
+				if(!this.confirmMod2(memberBean, proMBean))
+					return false;
+				break;
+			case "3":
+				if(!this.confirmMod3(memberBean, proMBean))
+					return false;
+				break;
+			default:
+				break;
+		}
+		
 		return true;
 	}
+	
 	public boolean confirmMod1(CustomerBean memberBean , HG_PromotionMethod_Bean proMBean){
-		String birthday = memberBean.getMBR_BIRTHDAY();
-		int birthMMdd = this.parseMMdd(birthday);
-		String strValue = proMBean.getPTM_VALUE();
-		int value = Integer.parseInt(strValue);
-		if(birthMMdd == value){
-			return true;
+		String birthday = memberBean.getMBR_BIRTHDAY();//生日mod
+		String value = proMBean.getPTM_VALUE();
+		System.out.println("CardPointService confirmMod1");
+		switch (value) {
+			case "1":
+				int birthMMdd = this.parseMMdd(birthday);
+				int todayMMdd = this.parseMMdd(today);
+				System.out.println("CardPointService confirmMod1 case1");
+				if(birthMMdd == todayMMdd){
+					return true;
+				}
+				break;
+			case "2":
+				int birthMM = this.parseMM(birthday);
+				int todayMM = this.parseMM(today);
+				System.out.println("CardPointService confirmMod1 case2");
+				if( birthMM == todayMM){
+					return true;
+				}
+				break;
+			default:
+				break;
 		}
 		return false;
 	}
+	
 	public boolean confirmMod2(CustomerBean memberBean , HG_PromotionMethod_Bean proMBean){
+		String sex = memberBean.getMBR_SEX();//男女mod
+		String value = proMBean.getPTM_VALUE();
+		System.out.println("CardPointService confirmMod2");
+		if(sex==value){
+			return true;
+		}
 		return false;
 	}
 	public boolean confirmMod3(CustomerBean memberBean , HG_PromotionMethod_Bean proMBean){
-		String birthday = memberBean.getMBR_BIRTHDAY();
-		int birthMMdd = this.parseMM(birthday);
-		String strValue = proMBean.getPTM_VALUE();
-		int value = Integer.parseInt(strValue);
-		if(birthMMdd == value){
-			return true;
-		}
-		return false;
-	}
-	public boolean confirmMod4(CustomerBean memberBean , HG_PromotionMethod_Bean proMBean){
-		String sex = memberBean.getMBR_SEX();
-		String value = proMBean.getPTM_VALUE();
-		if(sex.equals(value)){
-			return true;
-		}
-		return false;
-	}
-	public boolean confirmMod5(CustomerBean memberBean , HG_PromotionMethod_Bean proMBean){
-		String memberId = memberBean.getMBR_MEMBERID();
+		String memberId = memberBean.getMBR_MEMBERID();//介紹人mod
 		int num = 0;//推薦數 目前寫死還沒寫
-		String strOper = proMBean.getPTM_OPER();
+		//String strOper = proMBean.getPTM_OPER();
 		String strValue = proMBean.getPTM_VALUE();
 		int value = Integer.parseInt(strValue);
-		if(strOper.equals(">")){
-			if(num > value)
-				return true;
-		}
-		if(strOper.equals("<")){
-			if(num < value)
-				return true;
-		}
-		if(strOper.equals("=")){
-			if(num == value)
-				return true;
-		}
-		if(strOper.equals(">=")){
-			if(num >= value)
-				return true;
-		}
-		if(strOper.equals("<=")){
-			if(num <= value)
-				return true;
+		System.out.println("CardPointService confirmMod3");
+		if(num == value){
+			return true;
 		}
 		return false;
 	}
-	public boolean confirmMod6(CustomerBean memberBean , HG_PromotionMethod_Bean proMBean){
-		return false;
-	}
-	
-	
+		
 }

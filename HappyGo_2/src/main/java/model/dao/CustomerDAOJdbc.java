@@ -18,7 +18,7 @@ import model.CustomerDAO;
 public class CustomerDAOJdbc implements CustomerDAO {
 	private static final String URL = "jdbc:sqlserver://localhost:1433;database=HAPPYGO";
 	private static final String USERNAME = "sa";
-	private static final String PASSWORD = "sa123456";
+	private static final String PASSWORD = "P@ssw0rd";
 	
 	private DataSource dataSource;
 //	public CustomerDAOJdbc() {
@@ -57,8 +57,22 @@ public class CustomerDAOJdbc implements CustomerDAO {
 				result.setMBR_MEMBERID(rset.getString("MBR_MEMBERID"));
 				result.setMBR_NAME(rset.getString("MBR_NAME"));
 				result.setMBR_PWD(rset.getString("MBR_PWD"));
-				result.setMBR_EMAIL(rset.getString("MBR_EMAIL"));
+				result.setMBR_SEX(rset.getString("MBR_SEX"));
+				result.setMBR_BIRTHDAY(rset.getString("MBR_BIRTHDAY"));
+				result.setMBR_IDENTITY(rset.getString("MBR_IDENTITY"));
+				result.setMBR_POST(rset.getString("MBR_POST"));
+				result.setMBR_ARRDESS(rset.getString("MBR_ARRDESS"));
+				result.setMBR_MEMBERID(rset.getString("MBR_MARRIED"));
 				result.setMBR_MOBIL(rset.getString("MBR_MOBIL"));
+				result.setMBR_PHONE(rset.getString("MBR_PHONE"));
+				result.setMBR_EMAIL(rset.getString("MBR_EMAIL"));
+				result.setMBR_CREATEDATE(rset.getString("MBR_CREATEDATE"));
+				result.setMBR_DELDATE(rset.getString("MBR_DELDATE"));
+				result.setMBR_POINTS(rset.getInt("MBR_POINTS"));
+				result.setMBR_STATUS(rset.getString("MBR_STATUS"));
+				result.setMBR_INTRODUCER(rset.getString("MBR_INTRODUCER"));
+				result.setMBR_UPDATETIME(rset.getDate("MBR_UPDATETIME"));
+				result.setMBR_UPDATEUSER(rset.getString("MBR_UPDATEUSER"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -88,8 +102,27 @@ public class CustomerDAOJdbc implements CustomerDAO {
 		return result;
 	}
 	
-	private static final String UPDATE = 
-			"update HG_Member set MBR_MOBIL=?, MBR_EMAIL=?, MBR_NAME=?, MBR_PWD=? where MBR_MEMBERID=?";
+	private static final String UPDATE = "update HG_Member set "
+			+ "MBR_NAME=?,"/*1*/
+			+ "MBR_PWD=?, "/*2*/
+			+ "MBR_SEX=?, "/*3*/
+			+ "MBR_BIRTHDAY=?, "/*4*/
+			+ "MBR_IDENTITY=?, "/*5*/
+			+ "MBR_POST=?, "/*6*/
+			+ "MBR_ARRDESS=?, "/*7*/
+			+ "MBR_MARRIED=?, "/*8*/
+			+ "MBR_MOBIL=?, "/*9*/
+			+ "MBR_PHONE=?, "/*10*/
+			+ "MBR_EMAIL=?, "/*11*/
+			+ "MBR_CREATEDATE=?, "/*12*/
+			+ "MBR_DELDATE=?, "/*13*/
+			+ "MBR_POINTS=?, "/*14*/
+			+ "MBR_STATUS=?, "/*15*/
+			+ "MBR_INTRODUCER=?, "/*16*/
+			+ "MBR_UPDATETIME=getdate(),"
+			+ "MBR_UPDATEUSER=?, "/*17*/
+
+			+ "where MBR_MEMBERID=?";/*18*/
 	@Override
 	public CustomerBean update(String MBR_MEMBERID, String MBR_NAME, 
 			                   String MBR_PWD, String MBR_MOBIL, String MBR_EMAIL) 
@@ -100,11 +133,11 @@ public class CustomerDAOJdbc implements CustomerDAO {
 			Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 //			Connection conn = dataSource.getConnection();
 			PreparedStatement stmt = conn.prepareStatement(UPDATE);) {
-			stmt.setString(5, MBR_MEMBERID);
-			stmt.setString(2, MBR_EMAIL);
-			stmt.setString(3, MBR_NAME);
-			stmt.setString(4, MBR_PWD);
-			stmt.setString(1, MBR_MOBIL);
+			stmt.setString(18, MBR_MEMBERID);
+			stmt.setString(11, MBR_EMAIL);
+			stmt.setString(1, MBR_NAME);
+			stmt.setString(2, MBR_PWD);
+			stmt.setString(9, MBR_MOBIL);
 
 			int i = stmt.executeUpdate();
 			if(i>0) {
@@ -118,10 +151,27 @@ public class CustomerDAOJdbc implements CustomerDAO {
 
 	
 	private static final String INSERT = 
-			"insert into HG_Member (MBR_MEMBERID, MBR_NAME, MBR_PWD, MBR_SEX, MBR_BIRTHDAY, " + 
-			"MBR_IDENTITY, MBR_POST, MBR_ARRDESS, MBR_MARRIED, MBR_MOBIL, MBR_PHONE, MBR_EMAIL, " + 
-			"MBR_CREATEDATE, MBR_DELDATE, MBR_POINTS, MBR_STATUS, MBR_INTRODUCER, MBR_UPDATETIME, MBR_UPDATEUSER)" +
-			"values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			"insert into HG_Member "
+			+ "(MBR_MEMBERID, "/*1*/
+			+ "MBR_NAME, "/*2*/
+			+ "MBR_PWD, "/*3*/
+			+ "MBR_SEX, "/*4*/
+			+ "MBR_BIRTHDAY, "/*5*/ 
+			+ "MBR_IDENTITY, "/*6*/
+			+ "MBR_POST, "/*7*/
+			+ "MBR_ARRDESS, "/*8*/
+			+ "MBR_MARRIED, "/*9*/
+			+ "MBR_MOBIL, "/*10*/
+			+ "MBR_PHONE, "/*11*/
+			+ "MBR_EMAIL, "/*12*/ 
+			+ "MBR_CREATEDATE, "/*13*/
+			+ "MBR_DELDATE, "/*14*/
+			+ "MBR_POINTS, "/*15*/
+			+ "MBR_STATUS, "/*16*/
+			+ "MBR_INTRODUCER, "/*17*/
+			+ "MBR_UPDATETIME, "
+			+ "MBR_UPDATEUSER)" /*18*/
+			+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, getdate(), ?)";
 	@Override
 	public boolean insert(String MBR_MEMBERID, String MBR_NAME,
 			String MBR_PWD, String MBR_MOBIL, String MBR_EMAIL) {
@@ -146,11 +196,11 @@ public class CustomerDAOJdbc implements CustomerDAO {
 				stmt.setString(12, MBR_EMAIL);
 				stmt.setString(13, null);
 				stmt.setString(14, null);
-				stmt.setString(15, null);
+				stmt.setInt(15, 0);
 				stmt.setString(16, null);
 				stmt.setString(17, null);
+				
 				stmt.setString(18, null);
-				stmt.setString(19, null);
 				
 				i = stmt.executeUpdate();
 			} catch (SQLException e) {
