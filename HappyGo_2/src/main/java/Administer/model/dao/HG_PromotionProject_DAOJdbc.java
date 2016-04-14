@@ -13,6 +13,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import Administer.controller.PromotionProject_Servlet;
 import Administer.model.HG_PromotionProject_Bean;
 
 public class HG_PromotionProject_DAOJdbc {
@@ -44,7 +45,10 @@ public class HG_PromotionProject_DAOJdbc {
 	private static final String PASSWORD = "sa123456";
 	
 	private static final String SELECT_BY_ID = "select * from HG_PromotionProject where PTP_PROJID=?";
-	private static final String SELECT_BETWEEN_TIME = "select * from HG_PromotionProject where PTP_CREATEDATE <=? and PTP_DELDATE >=?";
+	private static final String SELECT_BETWEEN_TIME = "select * from HG_PromotionProject  "
+			+ "where (PTP_CREATEDATE <= ? and PTP_DELDATE >= ?)   "
+			+ "or  (PTP_CREATEDATE between ? and ?)  "
+			+ "or  (PTP_DELDATE between ? and ?)";
 	private static final String SELECT_BY_NAME = "select * from HG_PromotionProject where PTP_NAME like ?";
 	private static final String SELECT_ALL = "select * from HG_PromotionProject";
 
@@ -181,8 +185,13 @@ public class HG_PromotionProject_DAOJdbc {
 //			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			conn = dataSource.getConnection();
 			stmt = conn.prepareStatement(SELECT_BETWEEN_TIME);
+			//雖然有六個問號，但其實是用兩個值下去查詢
 			stmt.setString(1, PTP_CREATEDATE);
 			stmt.setString(2, PTP_DELDATE);
+			stmt.setString(3, PTP_CREATEDATE);
+			stmt.setString(4, PTP_DELDATE);
+			stmt.setString(5, PTP_CREATEDATE);
+			stmt.setString(6, PTP_DELDATE);
 			rset = stmt.executeQuery();
 			result = new ArrayList<HG_PromotionProject_Bean>();
 			while (rset.next()) {

@@ -24,20 +24,22 @@ public class PromotionProject_Servlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//先做單一table，暫時只先處理HG_PromotionProject的欄位資料
-		
+		System.out.println("PromotionProject_Servlet Servlet_doGet");
 		//接收HTML Form資料
 		//HG_PromotionProject的欄位資料
-		System.out.println("Servlet");
 				String PTP_PROJID = request.getParameter("PTP_PROJID");
 				String PTP_NAME = request.getParameter("PTP_NAME");
 				String PTP_DESC = request.getParameter("PTP_DESC");
 				String PTP_STATUS = request.getParameter("PTP_STATUS");
 				String PTP_CREATEDATE = request.getParameter("PTP_CREATEDATE");
 				String PTP_DELDATE = request.getParameter("PTP_DELDATE");
+				String PTP_FOREVER = request.getParameter("PTP_FOREVER");
+				String str_PTP_FIXPOINT = request.getParameter("PTP_FIXPOINT");
 				
-				String PTB_VALUE = request.getParameter("PTB_VALUE");
-				String PTB_POINT = request.getParameter("PTB_POINT");
+				
+		//HG_PromotionBonus的欄位資料	
+				String str_PTB_VALUE = request.getParameter("PTB_VALUE");
+				String str_PTB_POINT = request.getParameter("PTB_POINT");
 				
 				String PTM_VALUE = request.getParameter("PTM_VALUE");
 				String PTM_POINT = request.getParameter("PTM_POINT");
@@ -47,9 +49,18 @@ public class PromotionProject_Servlet extends HttpServlet {
 				
 				String promotionProject = request.getParameter("promotionProject");
 				
-				//轉換HTML Form資料，確認欄位是整數，日期是數字組成的字串
+				//轉換HTML Form資料
 				Map<String, String> error = new HashMap<String, String>();
 				request.setAttribute("error", error);
+				
+				//轉換HG_PromotionBonus的欄位資料
+				int int_PTB_VALUE = 0;
+				int int_PTB_POINT = 0;
+				int_PTB_VALUE = Integer.parseInt(str_PTB_VALUE.trim());
+				int_PTB_POINT = Integer.parseInt(str_PTB_POINT.trim());
+				
+				
+				//轉換HG_PromotionProject的欄位資料
 							
 //				活動狀態開啟，有勾=1，沒勾=0的處理
 				String PTP_STATUS_ID = "1";
@@ -59,21 +70,26 @@ public class PromotionProject_Servlet extends HttpServlet {
 				else{
 					PTP_STATUS_ID = "1";
 				}
-//				if(!PTP_STATUS.equals("1")) {
-//					try {
-//					PTP_STATUS_ID = "0";
-//					} catch (NumberFormatException e) {
-//						e.printStackTrace();
-//					}
-//				}
 				
+				//好像哪裡怪怪der~?
 				int id = 0;
 				if(PTP_PROJID!=null && PTP_PROJID.trim().length()!=0) {
 					try {
 						id = Integer.parseInt(PTP_PROJID.trim());
 					} catch (NumberFormatException e) {
 						e.printStackTrace();
-						error.put("id", "Id必須是整數");
+						error.put("pTP_PROJID", "活動編號必須是整數");
+					}
+				}
+				
+				//將PTP_FIXPOINT從String轉int且驗證
+				int int_PTP_FIXPOINT = 0;
+				if(str_PTP_FIXPOINT!=null && str_PTP_FIXPOINT.trim().length()!=0) {
+					try {
+						int_PTP_FIXPOINT = Integer.parseInt(str_PTP_FIXPOINT.trim());
+					} catch (NumberFormatException e) {
+						e.printStackTrace();
+						error.put("pTP_FIXPOINT", "紅利點數必須是整數");
 					}
 				}
 				
@@ -88,18 +104,34 @@ public class PromotionProject_Servlet extends HttpServlet {
 				for (String d : aArray2) {
 					EndDate = EndDate +d;
 					        }
-				
+				//活動時間(永久)有勾選，給一個很久的時間2001~2099年
+				if(PTP_FOREVER!=null){
+					StartDate = "20010101";
+					EndDate = "20991231";
+				}
+					
 				//驗證HTML Form資料
-				if("Insert".equals(promotionProject)) {
+				if("Update".equals(promotionProject)) {
+					if(PTP_PROJID==null || PTP_PROJID.trim().length()==0) {
+						error.put("pTP_PROJID", "請輸入活動編號以便於執行"+promotionProject);
+					}
+				}
+				
+				if("Insert".equals(promotionProject) || "Update".equals(promotionProject)) {
 					if(PTP_NAME==null || PTP_NAME.trim().length()==0) {
-						error.put("id", "請輸入活動名稱以便於執行"+PTP_NAME);
+						error.put("pTP_NAME", "請輸入活動名稱以便於執行"+promotionProject);
 					}
 				}
 				
 				if(error!=null && !error.isEmpty()) {
-					request.getRequestDispatcher(
-							"/Administer/PromotionProject/index.jsp").forward(request, response);
+					if(error.get("pTP_PROJID")!=null){
+						request.getRequestDispatcher(
+								"/Administer/PromotionProject/updateProj.jsp").forward(request, response);
+					}else{
+						request.getRequestDispatcher(
+								"/Administer/PromotionProject/insertProj.jsp").forward(request, response);
 					return;
+					}
 				}
 				
 				//呼叫Model
@@ -110,34 +142,26 @@ public class PromotionProject_Servlet extends HttpServlet {
 				bean.setPTP_STATUS(PTP_STATUS_ID);
 				bean.setPTP_CREATEDATE(StartDate);
 				bean.setPTP_DELDATE(EndDate);
-//				bean內共10個屬性，這邊設定了5個
+				bean.setPTP_FIXPOINT(int_PTP_FIXPOINT);
+//				bean內共10個屬性，這邊設定了6個
 				
 				//根據Model執行結果顯示View
 				if("Select".equals(promotionProject)) {
-					System.out.println("Servlet_1_1");
 					List<HG_PromotionProject_Bean> result = projectservice.select(bean);
 					request.setAttribute("select", result);
 					request.getRequestDispatcher(
 							"/pages/display.jsp").forward(request, response);
-					System.out.println("Servlet_1_2");
 				} else if(promotionProject!=null && promotionProject.equals("Insert")) {
-					System.out.println("Servlet_2_1");
 					int result = 0;
 					result = projectservice.insert(bean);
-					System.out.println("Servlet_2_2");
 					if(result==0) {
-						System.out.println("Servlet_3_1");
 						error.put("action", "Insert fail");
-						System.out.println("Servlet_3_2");
 					} else {
-						System.out.println("Servlet_4_1");
 						request.setAttribute("insert", result);
-						System.out.println("Servlet_4_2");
 					}
 					request.getRequestDispatcher(
 							"/Administer/PromotionProject/index.jsp").forward(request, response);
 				} else if(promotionProject!=null && promotionProject.equals("Update")) {
-					System.out.println("Update");
 					int result = 0;
 					result = projectservice.update(bean);
 					if(result==0) {
