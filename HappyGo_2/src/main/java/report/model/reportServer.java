@@ -41,6 +41,7 @@ public class reportServer extends HttpServlet {
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String store = request.getParameter("store");
+    	String id = request.getParameter("id");
     	reportDAOjdbc re = new reportDAOjdbc(dataSource);
     	BuildPDF bp = new BuildPDF();
     	ViewPDF vp = new ViewPDF();
@@ -48,14 +49,11 @@ public class reportServer extends HttpServlet {
     	Collection<Map<String, ?>> list = new ArrayList<Map<String, ?>>();
     	if(request.getParameter("store")==null || request.getParameter("store").trim().length()==0){
     		store = null;
-    	}else{
-    		if(!re.checkStore(store)){
-    			request.getRequestDispatcher(
-    					"/report/report.jsp").forward(request, response);
-    			return;
-    		}
     	}
-    	list = re.select(request.getParameter("id"),request.getParameter("day1"),request.getParameter("day2"),store);
+    	if(request.getParameter("id")==null || request.getParameter("id").trim().length()==0){
+    		id=null;
+    	}
+    	list = re.select(id,request.getParameter("day1"),request.getParameter("day2"),store);
     	bp.PDFBuid(list);
     	result = vp.PDFView(request,response);
 	}

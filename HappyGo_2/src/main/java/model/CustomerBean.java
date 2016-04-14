@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Date;
 import java.util.Arrays;
 
 public class CustomerBean {
@@ -17,10 +18,10 @@ public class CustomerBean {
 	private String MBR_EMAIL;		//	MBR_EMAIL	    varchar(40),	--2016-03-04
 	private String MBR_CREATEDATE;	//	MBR_CREATEDATE	char(8),	--2016-03-05	
 	private String MBR_DELDATE;		//	MBR_DELDATE	    char(8),	--2016-03-05
-	private String MBR_POINTS;		//	MBR_POINTS	    numeric(10),
+	private int MBR_POINTS;		//	MBR_POINTS	    numeric(10),
 	private String MBR_STATUS;		//	MBR_STATUS	    char(1),
 	private String MBR_INTRODUCER;	//	MBR_INTRODUCER	nvarchar(10),		--2016-03-04
-	private String MBR_UPDATETIME;	//	MBR_UPDATETIME	datetime,	--yyyy/MM/dd hh:mm:ss
+	private Date MBR_UPDATETIME;	//	MBR_UPDATETIME	datetime,	--yyyy/MM/dd hh:mm:ss
 	private String MBR_UPDATEUSER;	//	MBR_UPDATEUSER	varchar(10) 
 	public String getMBR_MEMBERID() {
 		return MBR_MEMBERID;
@@ -106,10 +107,10 @@ public class CustomerBean {
 	public void setMBR_DELDATE(String mBR_DELDATE) {
 		MBR_DELDATE = mBR_DELDATE;
 	}
-	public String getMBR_POINTS() {
+	public int getMBR_POINTS() {
 		return MBR_POINTS;
 	}
-	public void setMBR_POINTS(String mBR_POINTS) {
+	public void setMBR_POINTS(int mBR_POINTS) {
 		MBR_POINTS = mBR_POINTS;
 	}
 	public String getMBR_STATUS() {
@@ -124,10 +125,10 @@ public class CustomerBean {
 	public void setMBR_INTRODUCER(String mBR_INTRODUCER) {
 		MBR_INTRODUCER = mBR_INTRODUCER;
 	}
-	public String getMBR_UPDATETIME() {
+	public Date getMBR_UPDATETIME() {
 		return MBR_UPDATETIME;
 	}
-	public void setMBR_UPDATETIME(String mBR_UPDATETIME) {
+	public void setMBR_UPDATETIME(Date mBR_UPDATETIME) {
 		MBR_UPDATETIME = mBR_UPDATETIME;
 	}
 	public String getMBR_UPDATEUSER() {
