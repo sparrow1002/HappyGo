@@ -259,12 +259,12 @@ public class CardPointService {
 		int point = 0;
 		Map<Integer,Integer> returnMap = new TreeMap<Integer, Integer>();
 		
-		int originProBonus = 0;
-		for(HG_PromotionProject_Bean proBean:proListBean){//取原本永久活動
+		int originProBonus = 10;
+		/*for(HG_PromotionProject_Bean proBean:proListBean){//取原本永久活動
 			if(proBean.getPTP_DELDATE()=="20991231"){
 				originProBonus = this.floorBonus(cost, pbService.select(proBean.getPTP_PROJID()) );
 			}
-		}
+		}*/
 		
 		int max_point=0, max_projId = 0;
 		for(HG_PromotionProject_Bean proBean:proListBean){
