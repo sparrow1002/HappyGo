@@ -59,7 +59,7 @@
 				</td>
 			</tr>
 			<tr>
-				<!-- 0413需寫入TABLE_HG_PromotionBonus -->
+				<!-- 0413需寫入TABLE_HG_PromotionBonus PTB_VALUE跟PTB_POINT需要如何同時輸入多筆，還需確認-->
 				<td> 方式二：消費金額(大於等於)<input type="text" name="PTB_VALUE"
 					value="0">
 					可獲得紅利： <input type="text"	name="PTB_POINT" value="0">
@@ -126,18 +126,15 @@
 			</tr>
 		</table>
 	</form>
-	
-	
-	
 	<hr />
-
+	<h3><span class="error">${error.action}</span></h3>
 	<script>
 		//新增其他消費金額
 		//set the default value
 		var txtId = 1;
 		  //add input block in showBlock
 		  $("#btn").click(function () {
-		      $("#showBlock").append('<div id="div' + txtId + '">紅利條件：(大於等於) <input type="text" name="PTB_VALUE" value="請在此輸入金額"/>可獲得紅利： <input type="text" name="PTB_POINT" value="請在此輸入點數"><input type="button" value="刪除" onclick="deltxt('+txtId+')"></div>');
+		      $("#showBlock").append('<div id="div' + txtId + '">消費金額(大於等於) <input type="text" name="PTB_VALUE" value="0"/>可獲得紅利： <input type="text" name="PTB_POINT" value="請在此輸入點數"><input type="button" value="刪除" onclick="deltxt('+txtId+')"></div>');
 		      txtId++;
 		  });
 		  //remove div

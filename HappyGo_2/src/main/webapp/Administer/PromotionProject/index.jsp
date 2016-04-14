@@ -12,5 +12,14 @@
 <input type=button value="新增活動方案" onclick="location.href='<c:url value="/Administer/PromotionProject/insertProj.jsp" />'">
 <input type=button value="查詢活動方案" onclick="location.href='<c:url value="/Administer/PromotionProject/selectProj.jsp" />'">
 <input type=button value="修改活動方案" onclick="location.href='<c:url value="/Administer/PromotionProject/updateProj.jsp" />'">
+
+<c:if test="${not empty insert}">
+<h3>Insert PromotionProject Success</h3>
+</c:if>
+
+<c:if test="${not empty update}">
+<h3>Update PromotionProject Success</h3>
+</c:if>
+
 </body>
 </html>
