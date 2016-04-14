@@ -38,6 +38,7 @@ public class HG_PromotionProject_DAOJdbc {
 //		List<HG_PromotionProject_Bean> beans = dao.selectAll(); 					//測試從活動編號找活動
 //		List<HG_PromotionProject_Bean> beans = dao.select("20160401", "20160601");  //測試從活動時間找活動
 //		System.out.println(beans);
+		System.out.println("selectforever" + dao.selectforever());
 	}
 
 	private static final String URL = "jdbc:sqlserver://localhost:1433;database=happygo";
@@ -67,6 +68,8 @@ public class HG_PromotionProject_DAOJdbc {
 			" from HG_PromotionProject"+
 			" join HG_PProjectStore on  PTP_PROJID = PPS_PROJID"+
 			" where PPS_STATUS='1'and PTP_STATUS='1' and PPS_STOREID = ? and PTP_CREATEDATE<= ? and PTP_DELDATE>= ?";
+	
+	private static final String SELECT_FOREVER="select * from HG_PromotionProject where PTP_CREATEDATE='20010101'and PTP_DELDATE='20991231'";
 	
 	public List<HG_PromotionProject_Bean> selectToday(String today,String storeId) { //SELECT_BY_ID的方法
 		System.out.println("This is SELECT_TODAY");
@@ -264,6 +267,47 @@ public class HG_PromotionProject_DAOJdbc {
 				bean.setPTP_UPDATEUSER(rset.getString("PTP_UPDATEUSER")+"\n");
 				result.add(bean);//記得把bean放進result傳出去
 				System.out.println("This is selectAll DAO4");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if(conn!=null){
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}	
+		}
+		return result;	
+	}
+	public List<HG_PromotionProject_Bean> selectforever(){ //找永久活動的方法
+		System.out.println("This is HG_PromotionProject_DAOJdbc SELECT_FOREVER");
+		List<HG_PromotionProject_Bean> result = null;
+		ResultSet rset = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		try {
+			System.out.println("This is HG_PromotionProject_DAOJdbc selectAll DAO start");
+//			conn = dataSource.getConnection(); //Web專用
+			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); //SE JDBC測試用
+			stmt = conn.prepareStatement(SELECT_FOREVER);	  //找永久活動
+			rset = stmt.executeQuery();
+			result = new ArrayList<HG_PromotionProject_Bean>();
+			while (rset.next()) {
+				HG_PromotionProject_Bean bean = new HG_PromotionProject_Bean();
+				bean.setPTP_PROJID(rset.getInt("PTP_PROJID"));
+				bean.setPTP_NAME(rset.getString("PTP_NAME"));
+				bean.setPTP_CREATEDATE(rset.getString("PTP_CREATEDATE"));
+				bean.setPTP_DELDATE(rset.getString("PTP_DELDATE"));
+				bean.setPTP_STATUS(rset.getString("PTP_STATUS"));
+				bean.setPTP_DESC(rset.getString("PTP_DESC"));
+				bean.setPTP_COVER(rset.getBytes("PTP_COVER"));
+				bean.setPTP_FIXPOINT(rset.getInt("PTP_FIXPOINT"));
+				bean.setPTP_UPDATETIME(rset.getDate("PTP_UPDATETIME"));
+				bean.setPTP_UPDATEUSER(rset.getString("PTP_UPDATEUSER"));
+				result.add(bean);//記得把bean放進result傳出去
+				System.out.println("This is HG_PromotionProject_DAOJdbc selectAll DAO end");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
