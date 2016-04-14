@@ -1,111 +1,78 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-
-<link href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-​
-<script>
-$(function() {	
-	$("#today").datepicker({
-		dateFormat: "yymmdd"
-	});	
-	$("#today").datepicker("setDate", new Date());
-	
-    $( "#datepicker" ).datepicker({
-    	dateFormat: "yy/mm/dd"
-    }).val();
-  });  
-</script>
-<script type="text/javascript">
-   $(document).ready(function(){
-      $("#today").prop('readonly', true);
-   });
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ContractStore</title>
+<title>特約店</title>
 </head>
+<script src="../jquery/jquery-2.1.4.min.js"></script>
+<script src="../jquery/jquery-ui.js"></script>
+<script src="../jquery/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="../jquery/jquery.dataTables.min.css" />
+
+<script>
+	$(document).ready(function() {
+		$('#myTable').DataTable();
+	});
+</script>
 <body>
-<form action="<c:url value="/conStore/contractStore.controller"/>" method="get">
-<table>
-	<tr>
-		<td>StoreID : </td>
-		<td><input type="text" name="storeid" value="${param.cos_storeid}" ></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Name : </td>
-		<td><input type="text" name="name" value="${param.cos_name}"></td>
-		<td></td>
-	</tr>
 
-	<tr>
-		<td>PassWord : </td>
-		<td><input type="text" name="pwd" value="${param.cos_pwd}"></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Taxcode : </td>
-		<td><input type="text" name="taxcode" value="${param.cos_taxcode}"></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Address : </td>
-		<td><input type="text" name="address" value="${param.cos_address}"></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Status : </td>
-		<td><input type="text" name="status" value="${param.cos_status}"></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Phone : </td>
-		<td><input type="text" name="phone" value="${param.cos_phone}"></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Contact : </td>
-		<td><input type="text" name="contact" value="${param.cos_contact}"></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Createtime : </td>
-		<td><input type="text" id="today"  name="createtime" value="${param.cos_createtime}" ></td>
-		<td>日曆</td>
-	</tr>
-	<tr>
-		<td>Deletime : </td>
-		<td><input type="text" id="datepicker"  name="deletime" value="${param.cos_deletime}"></td>
-		<td>日曆</td>
-	</tr>
-	<tr>
-		<td>Updatetime : </td>
-		<td><input type="text" name="updatetime" value="${param.cos_updatetime}" ></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Updateuser : </td>
-		<td><input type="text" name="Updateuser" value="${param.cos_updateuser}"></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>
-			<input type="submit" name="prodaction" value="Insert">
-			<input type="submit" name="prodaction" value="Update">
-		</td>
-		<td>
-			<input type="submit" name="prodaction" value="Delete">
-			<input type="submit" name="prodaction" value="Select">
-			<input type="button" value="Clear" onclick="clearForm()">
-		</td>
-	</tr>	
-</table>
-</form>
+	<%@ page import="conStore.model.*"%>
+	<%@ page import="java.util.List"%>
+	<%@ page import="javax.servlet.*"%>
+	<%
+		ContractStoreBean cb = (ContractStoreBean) session.getAttribute("LoginOK");
 
+		ContractStoreService contractStoreService = new ContractStoreService();
+		List<ContractStoreBean> result = contractStoreService.select(cb);
+	%>
+	
+	<h2>您好!${LoginOK.cos_name}</h2>
+	<form action="<c:url value="/conStore/contractStore.controller"/>" method="get">
+		<table id="myTable">
+			<thead>
+				<tr>
+					<th>特店代號</th>
+					<th>特店名稱</th>
+					<th>特店密碼</th>
+					<th>統一編號</th>
+					<th>特店地址</th>
+					<th>特店狀態</th>
+					<th>連絡電話</th>
+					<th>聯絡人</th>
+					<th>特店生效日</th>
+					<th>特店失效日</th>
+					<th>異動日期</th>
+					<th>異動者</th>
+					<th></th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<c:forEach var="row" items="<%=result%>">
+					<tr>
+						<td>${row.cos_storeid}</td>
+						<td>${row.cos_name}</td>
+						<td>${row.cos_pwd}</td>
+						<td>${row.cos_taxcode}</td>
+						<td>${row.cos_address}</td>
+						<td>${row.cos_status}</td>
+						<td>${row.cos_phone}</td>
+						<td>${row.cos_contact}</td>
+						<td>${row.cos_createtime}</td>
+						<td>${row.cos_deletime}</td>
+						<td>${row.cos_updatetime}</td>
+						<td>${row.cos_updateuser}</td>
+
+						<td><input type="button" name="prodaction" value="修改"
+							onclick="location.href='<c:url value="/conStore/contractStore.controller?storeid=${row.cos_storeid}&prodaction=修改"/>'"></td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</form>
 </body>
 </html>
