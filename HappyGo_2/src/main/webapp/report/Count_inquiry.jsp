@@ -5,10 +5,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" type="text/css" href="../css/main.css">
+<link rel="stylesheet" type="text/css" href="/HappyGo_2/css/main.css">
 <script type="text/javascript" src="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
-<script src="../jquery/jquery-ui.js" type="text/javascript"></script>
-<script src="../jquery/dataTable/columnFilter/jquery.dataTables.columnFilter.js" type="text/javascript" language="javascript"></script>
+<script src="/HappyGo_2/jquery/jquery-ui.js" type="text/javascript"></script>
+<script src="/HappyGo_2/jquery/dataTable/columnFilter/jquery.dataTables.columnFilter.js" type="text/javascript" language="javascript"></script>
 <script type="text/javascript" language="javascript">
 	jQuery(document).ready(function() {
 		jQuery("#report_table").dataTable(
@@ -16,13 +16,17 @@
 		);
 
 	});
+	
+	function open(){
+		document.getElementsByName("form").target="_blank";
+	}
 </script>
 
 <title>點數交易查詢</title>
 </head>
 <body>
 	<div>
-		<form action="../reportServer" method="post">
+		<form action="/HappyGo_2/reportServer" name="form" method="post"  >
 			<TABLE>
 				<TR>
 					<TH colspan='2' bgcolor='#d4edec'><label>點數交易查詢</label></TH>
@@ -47,9 +51,9 @@
 						value="2014-01-13"></TD>
 				</TR>
 				<TR>
-					<TD colspan='2' bgcolor='#d4edec' align="center"><input
-						type="submit" name="prodaction" value="查詢" /><input type="submit"
-						name="prodaction" value="產生PDF" target="_blank" /></TD>
+					<TD colspan='2' bgcolor='#d4edec' align="center">
+					<input type="submit" name="prodaction" value="查詢" />
+					<input type="submit" name="prodaction" value="產生PDF"/></TD>
 				</TR>
 			</TABLE>
 		</form>
@@ -118,6 +122,7 @@
 						<td>${row.CPT_POINTADD}</td>
 						<td>${row.CPT_POINTDRE}</td>
 						<td>${row.SOP_overPoint}</td>
+						<td>取消交易</td>
 					</tr>
 				</c:forEach>
 			</tbody>

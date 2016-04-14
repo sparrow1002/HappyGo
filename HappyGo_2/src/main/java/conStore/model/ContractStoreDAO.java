@@ -17,5 +17,5 @@ public interface ContractStoreDAO {
 	
 	
 	public abstract boolean delete(String storeId);
-	
+		
 }
