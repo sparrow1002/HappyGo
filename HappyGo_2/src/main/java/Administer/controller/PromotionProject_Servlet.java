@@ -43,9 +43,26 @@ public class PromotionProject_Servlet extends HttpServlet {
 				String PTP_FOREVER = request.getParameter("PTP_FOREVER");
 				String str_PTP_FIXPOINT = request.getParameter("PTP_FIXPOINT");
 	
-		//HG_PromotionBonus的欄位資料	
-				String str_PTB_VALUE = request.getParameter("PTB_VALUE");
-				String str_PTB_POINT = request.getParameter("PTB_POINT");
+		//HG_PromotionBonus的欄位資料，由於可能會有1~多筆，必須用while迴圈+陣列處理
+				int j=0;
+				while(request.getParameter("PTB_VALUE"+j)!=null){
+					j++;
+				}
+				int str_PTB_VALUE[] = new int[j];
+				int str_PTB_POINT[] = new int[j];
+				int i =0;
+				while(request.getParameter("PTB_VALUE"+i)!=null){
+					str_PTB_VALUE[i]=Integer.parseInt(request.getParameter("PTB_VALUE"+i));
+					str_PTB_POINT[i]=Integer.parseInt(request.getParameter("PTB_POINT"+i));
+					i++;
+				}
+//				上面這段等於下面這段，且有幾筆value就會在servlet內new幾筆str_PTB_VALUE，不會造成空值傳入DB
+//				String str_PTB_VALUE1 = request.getParameter("PTB_VALUE1");
+//				String str_PTB_POINT1 = request.getParameter("PTB_POINT1");
+//				String str_PTB_VALUE2 = request.getParameter("PTB_VALUE2");
+//				String str_PTB_POINT2 = request.getParameter("PTB_POINT2");
+//				String str_PTB_VALUE3 = request.getParameter("PTB_VALUE3");
+//				String str_PTB_POINT3 = request.getParameter("PTB_POINT3");
 				
 		//HG_PromotionMethod的欄位資料
 				String PTM_model = request.getParameter("PTM_model");
@@ -70,10 +87,10 @@ public class PromotionProject_Servlet extends HttpServlet {
 				int_PTM_VARDATE = Integer.parseInt(str_PTM_VARDATE.trim());
 				
 				//轉換HG_PromotionBonus的欄位資料
-				int int_PTB_VALUE = 0;
-				int int_PTB_POINT = 0;
-				int_PTB_VALUE = Integer.parseInt(str_PTB_VALUE.trim());
-				int_PTB_POINT = Integer.parseInt(str_PTB_POINT.trim());
+//				int int_PTB_VALUE = 0;
+//				int int_PTB_POINT = 0;
+//				int_PTB_VALUE = Integer.parseInt(str_PTB_VALUE.trim());
+//				int_PTB_POINT = Integer.parseInt(str_PTB_POINT.trim());
 				
 				//轉換HG_PromotionProject的欄位資料
 							
@@ -161,12 +178,15 @@ public class PromotionProject_Servlet extends HttpServlet {
 				promprojbean.setPTP_FIXPOINT(int_PTP_FIXPOINT);
 				
 				//HG_PromotionBonus_Bean
-				HG_PromotionBonus_Bean prombnsbean = new HG_PromotionBonus_Bean();
-				prombnsbean.setPTB_POINT(int_PTB_POINT);
-				prombnsbean.setPTB_VALUE(int_PTB_VALUE);
+				//以下代表有1個value就放1個bean，bean必須new在for迴圈內，才不會被後面的value取代，配合listbean可一次insert多筆
+				//有點像是bean1.setValue(value1),bean2.setValue(value2),bean3.setValue(value3),
 				List<HG_PromotionBonus_Bean> prombnsbeanlist = new ArrayList<>();
+				for(i=0; i<j;i++){
+				HG_PromotionBonus_Bean prombnsbean = new HG_PromotionBonus_Bean();
+				prombnsbean.setPTB_POINT(str_PTB_POINT[i]);
+				prombnsbean.setPTB_VALUE(str_PTB_VALUE[i]);	
 				prombnsbeanlist.add(prombnsbean);
-				
+				}
 				//HG_PromotionMethod_Bean
 				HG_PromotionMethod_Bean prommtbean = new HG_PromotionMethod_Bean();		
 				prommtbean.setPTM_model(PTM_model);
