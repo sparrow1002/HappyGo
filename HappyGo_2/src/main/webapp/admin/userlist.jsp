@@ -24,8 +24,7 @@
 							<input type="text" name="ADM_ID" value=""> <input
 								type="hidden" name="mode" value="select"> <input
 								type="submit" value="查詢"><input type="button"
-												onclick="showfrom('insert','');"
-												value="新增">
+								onclick="showfrom('insert','');" value="新增">
 						</form>
 					</th>
 				</tr>
@@ -116,10 +115,10 @@
 							</select></td>
 						</tr>
 						<tr>
-							<td colspan="2" align="center"><input name="formSubmit"
-								type="submit" value="儲存" /> <input id="cancel" value="返回"
-								type="button"> <input id="mode" name="mode" value="update"
-								type="hidden"></td>
+							<td colspan="2" align="center"><input id="formSubmit"
+								name="formSubmit" type="submit" value="儲存" /> <input
+								id="cancel" value="返回" type="button"> <input id="mode"
+								name="mode" value="update" type="hidden"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -136,11 +135,16 @@ if(mode=='selectitem' || mode=='update'){
 		$('#ADM_PWD').val($('#ADM_PWD_'+index).text());
 		$('#ADM_NAME').val($('#ADM_NAME_'+index).text());
 		$('#ADM_ROLEID option[value='+ $("#ADM_ROLEID__"+index).val().trim() +']').attr('selected', true);
+		if(mode=='selectitem')
+		$("#formSubmit").css('display','none'); 
+		else
+			$("#formSubmit").css('display','inherit'); 
 }else{
 	$('#ADM_ID').val('');
 	$('#ADM_PWD').val('');
 	$('#ADM_NAME').val('');
 	$('#ADM_ROLEID option[index=1]').attr('selected', true);
+	$("#formSubmit").css('display','inherit'); 
 }
 	
 	$('#mode').val(mode);
@@ -230,7 +234,7 @@ if(mode=='selectitem' || mode=='update'){
 		}
 	});
 	
-	var message = '<%=request.getAttribute("message")%>';
+	var message = '<%=request.getAttribute("message")%>	';
 	if (message != null && message.trim() != "" && message.trim() != "null")
 		alert(message);
 </script>
