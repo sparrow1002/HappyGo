@@ -1,5 +1,6 @@
 package report.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,7 +42,8 @@ public class reportServer_store extends HttpServlet {
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //    	String store = request.getParameter("username");
-    	
+    	File reportFile = new
+    			File(this.getServletContext().getRealPath("/report/jasper/HappyGo2.jasper")); 
     	String store = "1022000001";
     	String prodaction = request.getParameter("reportstore_prodaction");
     	String id = request.getParameter("reportstore_id");
@@ -61,7 +63,7 @@ public class reportServer_store extends HttpServlet {
     	if("產生PDF".equals(prodaction)){
     	list1 = re.select_store(id,day1,day2,store);
     	System.out.println(".................");
-    	bp.PDFBuid_store(list1);
+    	bp.PDFBuid_store(list1,reportFile.getPath());
     	result = vp.PDFView_store(request,response);
     	}else if("查詢".equals(prodaction)){
     		

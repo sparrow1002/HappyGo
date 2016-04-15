@@ -1,5 +1,6 @@
 package report.model;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,15 +11,15 @@ import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRHtmlExporter;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 
 public class BuildPDF {
-	private static final String jsFile = "C:/jasper/HappyGo.jasper";
+	
+//	private static final String jsFile = "C:/jasper/HappyGo.jasper";
 	private static final String outFilePdf = "C:/jasper/HappyGo.pdf";
 	private static final String outFileHtml = "C:/jasper/HappyGo.html";
 
-	static void PDFBuid(Collection<Map<String, ?>> list) {
+	static void PDFBuid(Collection<Map<String, ?>> list,String jsFile) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		JRMapCollectionDataSource dataSource05 = new JRMapCollectionDataSource(list);
 		JasperPrint print;
@@ -40,11 +41,12 @@ public class BuildPDF {
 		}
 	}
 	
-	private static final String jsFile_store = "C:/jasper/HappyGo2.jasper";
+
+//	private static final String jsFile_store = "C:/jasper/HappyGo2.jasper";
 	private static final String outFilePdf_store = "C:/jasper/HappyGo2.pdf";
 	private static final String outFileHtml_store = "C:/jasper/HappyGo2.html";
 	
-	static void PDFBuid_store(Collection<Map<String, ?>> list) {
+	static void PDFBuid_store(Collection<Map<String, ?>> list,String jsFile_store) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
 		JRMapCollectionDataSource dataSource05 = new JRMapCollectionDataSource(list);
 		JasperPrint print;

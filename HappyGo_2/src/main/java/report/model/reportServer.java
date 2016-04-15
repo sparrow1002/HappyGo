@@ -1,5 +1,6 @@
 package report.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,6 +41,8 @@ public class reportServer extends HttpServlet {
     
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	File reportFile = new
+    			File(this.getServletContext().getRealPath("/report/jasper/HappyGo.jasper")); 
     	String prodaction = request.getParameter("report_prodaction");
     	String store = request.getParameter("report_store");
     	String id = request.getParameter("report_id");
@@ -61,7 +64,7 @@ public class reportServer extends HttpServlet {
     	}
     	if("產生PDF".equals(prodaction)){
     	list = re.select(id,day1,day2,store);
-    	bp.PDFBuid(list);
+    	bp.PDFBuid(list,reportFile.getPath());
     	result = vp.PDFView(request,response);
     	}else if("查詢".equals(prodaction)){
     		List<reportDAOBean> result_bean = re.select_bean(id,day1,day2,store);
