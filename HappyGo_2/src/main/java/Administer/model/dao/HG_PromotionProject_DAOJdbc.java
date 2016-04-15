@@ -43,7 +43,7 @@ public class HG_PromotionProject_DAOJdbc {
 
 	private static final String URL = "jdbc:sqlserver://localhost:1433;database=happygo";
 	private static final String USERNAME = "sa";
-	private static final String PASSWORD = "P@ssw0rd";
+	private static final String PASSWORD = "sa123456";
 	
 	private static final String SELECT_BY_ID = "select * from HG_PromotionProject where PTP_PROJID=?";
 	private static final String SELECT_BETWEEN_TIME = "select * from HG_PromotionProject  "
