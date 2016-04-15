@@ -55,7 +55,7 @@
 		<div id="users-contain" class="ui-widget">
 			<form name="myForm" id="myForm"
 				action='<c:url value="/dayuNameSpace/rightlist.action"/>'	method="get">
-				<h1>使用者資料</h1>
+				<h1>權限資料</h1>
 				<table id="users" class="t2">
 					<thead>
 						<tr>
