@@ -22,12 +22,10 @@ public class SelectPromotionProject_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private HG_PromotionProject_Service PMOPJservice = new HG_PromotionProject_Service();
        
-	//先做單一table，暫時只先處理HG_PromotionProject的欄位資料
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println("SelectPromotionProject_Servlet start");
 		//接收HTML Form資料
-		System.out.println("接收HTML Form資料");
 		String PTP_PROJID = request.getParameter("PTP_PROJID");
 		String PTP_NAME = request.getParameter("PTP_NAME");
 		String PTP_CREATEDATE = request.getParameter("PTP_CREATEDATE");
@@ -36,7 +34,6 @@ public class SelectPromotionProject_Servlet extends HttpServlet {
 		String promotionProject = request.getParameter("promotionProject");
 		
 		//轉換HTML Form資料，確認欄位是整數，轉換日期資料格式
-		System.out.println("轉換HTML Form資料");
 		Map<String, String> error = new HashMap<String, String>();
 		request.setAttribute("error", error);
 	
