@@ -111,12 +111,14 @@ public class Dataprofile_list_Action extends ActionSupport implements
 		// }
 
 		DataProfileDAOBean bean = new DataProfileDAOBean();
-
+		System.out.println("(1)"+DAP_GROUP+","+DAP_ID+","+DAP_VALUE+","+DAP_DESC);
 		bean.setDAP_GROUP(DAP_GROUP);
 		bean.setDAP_ID(DAP_ID);
 		System.out.println("DAP_ID:" + DAP_ID);
 		bean.setDAP_VALUE(DAP_VALUE);
 		bean.setDAP_DESC(DAP_DESC);
+		
+		bean.setDAP_UPDATEUSER(sessionMap.get("adminuser").toString());
 		return bean;
 	}
 
@@ -128,20 +130,20 @@ public class Dataprofile_list_Action extends ActionSupport implements
 
 		// System.out.println("mode:" + mode);
 		if ("select".equals(mode)) {
-//			List<DataProfileDAOBean> result;
-//			System.out.println("DAP_GROUP:" + DAP_GROUP);
-//			if (DAP_GROUP != null && !DAP_GROUP.equals(""))
-//				result = dataProfileDAOService.select(bean);
-//			else
-//				result = dataProfileDAOService.select(null);
-//			if (result == null) {
-//				System.out.println("select fail");
-//				this.addFieldError("action", "Insert fail");
-//			} else {
-//				System.out.println("select ok");
-//				req.setAttribute("select", result);
-//				return Action.SUCCESS;
-//			}
+			List<DataProfileDAOBean> result;
+			System.out.println("DAP_GROUP:" + DAP_GROUP);
+			if (DAP_GROUP != null && !DAP_GROUP.equals(""))
+				result = dataProfileDAOService.select(bean);
+			else
+				result = dataProfileDAOService.select(null);
+			if (result == null) {
+				System.out.println("select fail");
+				this.addFieldError("action", "Insert fail");
+			} else {
+				System.out.println("select ok");
+				req.setAttribute("select", result);
+				return Action.SUCCESS;
+			}
 		} else if ("selectitem".equals(mode)) {
 			DataProfileDAOBean result;
 			List<DataProfileDAOBean> results;
@@ -161,23 +163,25 @@ public class Dataprofile_list_Action extends ActionSupport implements
 			System.out.println(bean);
 			req.setAttribute("newitem", bean);		
 		} else if ("insert".equals(mode)) {
+			
 			DataProfileDAOBean result = dataProfileDAOService.insert(bean);
+			System.out.println(bean.getDAP_GROUP()+","+bean.getDAP_ID()+","+bean.getDAP_VALUE()+","+bean.getDAP_DESC());
 			if (result == null) {
-				System.out.println("insert fail");
+				req.setAttribute("message", "資料新增失敗!!");
 				this.addFieldError("action", "Insert fail");
 			} else {
-				System.out.println("insert ok");
+				req.setAttribute("message", "資料新增成功!!");
 				req.setAttribute("insert", result);
 			}
 		}
 		else if ("update".equals(mode)) {
 			DataProfileDAOBean result = dataProfileDAOService.update(bean);
 			if (result == null) {
-				System.out.println("insert fail");
+				System.out.println("update fail");
 				this.addFieldError("action", "Insert fail");
 				req.setAttribute("message", "資料更新失敗!!");
 			} else {
-				System.out.println("insert ok");
+				System.out.println("update ok");
 				req.setAttribute("message", "資料更新成功!!");
 			}
 		}

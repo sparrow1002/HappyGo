@@ -151,7 +151,8 @@ public class AdminUserDAOjdbc implements AdminUserDAO {
 			// conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			conn = datasource.getConnection();
 			pst = conn.prepareStatement(UPDATE);
-
+System.out.println("jdbc:"+bean.getADM_PWD()+","+bean.getADM_NAME()+","+
+			bean.getADM_ROLEID()+","+bean.getADM_UPDATEUSER()+","+bean.getADM_ID()+",");
 			pst.setString(1, bean.getADM_PWD());
 			pst.setString(2, bean.getADM_NAME());
 			pst.setString(3, bean.getADM_ROLEID());
@@ -183,7 +184,7 @@ public class AdminUserDAOjdbc implements AdminUserDAO {
 		return null;
 	}
 
-	private static final String INSERT = "INSERT INTO HG_AdminUser (ADM_ID,ADM_PWD,ADM_NAME,ADM_ROLEID,ADM_UPDATETIME,ADM_UPDATEUSER)  VALUES  (?,?,?,?,?,getdate(),?)";
+	private static final String INSERT = "INSERT INTO HG_AdminUser (ADM_ID,ADM_PWD,ADM_NAME,ADM_ROLEID,ADM_UPDATETIME,ADM_UPDATEUSER)  VALUES  (?,?,?,?,getdate(),?)";
 
 	@Override
 	public AdminUserDAObean insert(AdminUserDAObean bean) {

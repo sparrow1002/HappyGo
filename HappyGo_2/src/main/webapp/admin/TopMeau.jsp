@@ -18,44 +18,30 @@
 	href="../jquery/jquery.dataTables.min.css" />
 <body>
 	<div align="center">
-		<ul id="menus">
-			<li><a href="">會員資料管理</a>
-				<ul>
-					<li><a onclick="">會員資料維護</a></li>
-					<li><a onclick="">新增會員資料</a></li>
-				</ul></li>
-			<li><a href="">特店資料管理</a>
-				<ul>
-					<li><a onclick="">特店申請核准</a></li>
-					<li><a onclick="">特店資料維護</a></li>
-					<li><a onclick="">新增特店資料</a></li>
-				</ul></li>
-			<li><a href="">促銷活動管理</a>
-				<ul>
-					<li><a onclick="">促銷活動查詢</a></li>
-					<li><a onclick="">新增促銷活動</a></li>
-				</ul></li>
-			<li><a href="">報表查詢</a>
-				<ul>
-					<li><a onclick="">會員點數查詢</a></li>
-					<li><a onclick="">特店點數查詢</a></li>
-					<li><a onclick="">點數交易處理查詢</a></li>
-				</ul></li>
-			<li><a href="">系統管理</a>
-				<ul>
-					<li><a href='<c:url value="/dayuNameSpace/sysloglist.action?mode=select"/>'>登入管理</a></li>
-					<li><a href='<c:url value="/dayuNameSpace/maguserlist.action?mode=select"/>'>使用者設定</a></li>
-					<li><a href='<c:url value="/dayuNameSpace/rolelist.action?mode=select"/>'>角色權限設定</a></li>
-					<li><a href='<c:url value="/dayuNameSpace/rightlist.action?mode=select"/>'>權限項目設定</a></li>
-					<li><a href='<c:url value="/dayuNameSpace/dataprofilelist.action?mode=select"/>'>資料設定</a></li>
-
-				</ul></li>
-			<li><a href="../index.jsp">回首頁</a></li>
-		</ul>
+		<c:if test="${sessionScope.adminuserright != null}">
+			<ul id="menus">
+				<c:forEach var="right" items="${sessionScope.adminuserright}"
+					varStatus="varStatus">
+					<li><a href="">${right.key}</a>
+						<ul>
+							<c:forEach var="rightitem" items="${right.value}">
+								<li><a href='<c:url value="${rightitem.value}"/>'>${rightitem.key}</a></li>
+							</c:forEach>
+						</ul></li>
+				</c:forEach>
+				<li><a href="../index.jsp">回首頁</a></li>
+			</ul>
+		</c:if>
 	</div>
-	<br/>&nbsp;
 	<div>
-	<br/>&nbsp;
+		<table style="background-color: #F75000;">
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
 	</div>
 </body>
 </html>

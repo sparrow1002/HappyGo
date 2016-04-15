@@ -11,6 +11,9 @@ public class reportDAOBean {
 	private BigDecimal CPT_POINTADD;
 	private BigDecimal CPT_POINTDRE;
 	private int SOP_overPoint;
+	private long SOP_TRANID;
+	private String SOP_STATUS;
+	private String transation;
 	public String getSOP_MEMBERID() {
 		return SOP_MEMBERID;
 	}
@@ -58,6 +61,24 @@ public class reportDAOBean {
 	}
 	public void setSOP_overPoint(int sOP_overPoint) {
 		SOP_overPoint = sOP_overPoint;
+	}
+	public long getSOP_TRANID() {
+		return SOP_TRANID;
+	}
+	public void setSOP_TRANID(long sOP_TRANID) {
+		SOP_TRANID = sOP_TRANID;
+	}
+	public String getTransation() {
+		return transation;
+	}
+	public void setTransation(String transation) {
+		this.transation = transation;
+	}
+	public String getSOP_STATUS() {
+		return SOP_STATUS;
+	}
+	public void setSOP_STATUS(String sOP_STATUS) {
+		SOP_STATUS = sOP_STATUS;
 	}
 	
 	

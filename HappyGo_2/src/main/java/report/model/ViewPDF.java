@@ -15,7 +15,23 @@ public class ViewPDF {
 		response.setContentType("application/pdf");
 		InputStream is;
 		try {
-			is = new FileInputStream(new File("C:/EEIT_JSP_Software/JDBCDriver/HappyGo.pdf"));
+			is = new FileInputStream(new File("C:/jasper/HappyGo.pdf"));
+			OutputStream os = response.getOutputStream();
+			writeBytes(is, os);
+			return true;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	static boolean PDFView_store(HttpServletRequest request, HttpServletResponse response){
+		response.setContentType("application/pdf");
+		InputStream is;
+		try {
+			is = new FileInputStream(new File("C:/jasper/HappyGo2.pdf"));
 			OutputStream os = response.getOutputStream();
 			writeBytes(is, os);
 			return true;

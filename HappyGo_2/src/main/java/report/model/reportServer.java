@@ -1,5 +1,6 @@
 package report.model;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,32 +41,34 @@ public class reportServer extends HttpServlet {
     
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String prodaction = request.getParameter("prodaction");
-    	String store = request.getParameter("store");
-    	String id = request.getParameter("id");
+    	File reportFile = new
+    			File(this.getServletContext().getRealPath("/report/jasper/HappyGo.jasper")); 
+    	String prodaction = request.getParameter("report_prodaction");
+    	String store = request.getParameter("report_store");
+    	String id = request.getParameter("report_id");
     	String day[];
-    	day=request.getParameter("day1").split("-");
+    	day=request.getParameter("report_day1").split("-");
     	String day1 = day[0]+day[1]+day[2];
-    	day=request.getParameter("day2").split("-");
+    	day=request.getParameter("report_day2").split("-");
     	String day2 = day[0]+day[1]+day[2];
     	reportDAOjdbc re = new reportDAOjdbc(dataSource);
     	BuildPDF bp = new BuildPDF();
     	ViewPDF vp = new ViewPDF();
     	boolean result;
     	Collection<Map<String, ?>> list = new ArrayList<Map<String, ?>>();
-    	if(request.getParameter("store")==null || request.getParameter("store").trim().length()==0){
+    	if(request.getParameter("report_store")==null || request.getParameter("report_store").trim().length()==0){
     		store = null;
     	}
-    	if(request.getParameter("id")==null || request.getParameter("id").trim().length()==0){
+    	if(request.getParameter("report_id")==null || request.getParameter("report_id").trim().length()==0){
     		id=null;
     	}
     	if("產生PDF".equals(prodaction)){
     	list = re.select(id,day1,day2,store);
-    	bp.PDFBuid(list);
+    	bp.PDFBuid(list,reportFile.getPath());
     	result = vp.PDFView(request,response);
     	}else if("查詢".equals(prodaction)){
     		List<reportDAOBean> result_bean = re.select_bean(id,day1,day2,store);
-			request.setAttribute("select", result_bean);
+			request.setAttribute("report_select", result_bean);
 			request.getRequestDispatcher(
 					"/report/Count_inquiry.jsp").forward(request, response);
     	}
