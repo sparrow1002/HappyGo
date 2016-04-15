@@ -15,7 +15,7 @@ public class ViewPDF {
 		response.setContentType("application/pdf");
 		InputStream is;
 		try {
-			is = new FileInputStream(new File("C:/EEIT_JSP_Software/JDBCDriver/HappyGo.pdf"));
+			is = new FileInputStream(new File("C:/jasper/HappyGo.pdf"));
 			OutputStream os = response.getOutputStream();
 			writeBytes(is, os);
 			return true;
@@ -31,7 +31,7 @@ public class ViewPDF {
 		response.setContentType("application/pdf");
 		InputStream is;
 		try {
-			is = new FileInputStream(new File("C:/EEIT_JSP_Software/JDBCDriver/HappyGo2.pdf"));
+			is = new FileInputStream(new File("C:/jasper/HappyGo2.pdf"));
 			OutputStream os = response.getOutputStream();
 			writeBytes(is, os);
 			return true;

@@ -14,9 +14,9 @@ import net.sf.jasperreports.engine.export.JRHtmlExporter;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 
 public class BuildPDF {
-	private static final String jsFile = "C:/EEIT_JSP_Software/JDBCDriver/HappyGo.jasper";
-	private static final String outFilePdf = "C:/EEIT_JSP_Software/JDBCDriver/HappyGo.pdf";
-	private static final String outFileHtml = "C:/EEIT_JSP_Software/JDBCDriver/HappyGo.html";
+	private static final String jsFile = "C:/jasper/HappyGo.jasper";
+	private static final String outFilePdf = "C:/jasper/HappyGo.pdf";
+	private static final String outFileHtml = "C:/jasper/HappyGo.html";
 
 	static void PDFBuid(Collection<Map<String, ?>> list) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
@@ -24,16 +24,15 @@ public class BuildPDF {
 		JasperPrint print;
 		try {
 			print = JasperFillManager.fillReport(jsFile, parameters, dataSource05);
-
 			JRExporter exporterPdf = new JRPdfExporter();
 			exporterPdf.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFilePdf);
 			exporterPdf.setParameter(JRExporterParameter.JASPER_PRINT, print);
 			exporterPdf.exportReport();
 
-			JRExporter exporterHtml = new JRHtmlExporter();
-			exporterHtml.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFileHtml);
-			exporterHtml.setParameter(JRExporterParameter.JASPER_PRINT, print);
-			exporterHtml.exportReport();
+//			JRExporter exporterHtml = new JRHtmlExporter();
+//			exporterHtml.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFileHtml);
+//			exporterHtml.setParameter(JRExporterParameter.JASPER_PRINT, print);
+//			exporterHtml.exportReport();
 
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
@@ -41,9 +40,9 @@ public class BuildPDF {
 		}
 	}
 	
-	private static final String jsFile_store = "C:/EEIT_JSP_Software/JDBCDriver/HappyGo2.jasper";
-	private static final String outFilePdf_store = "C:/EEIT_JSP_Software/JDBCDriver/HappyGo2.pdf";
-	private static final String outFileHtml_store = "C:/EEIT_JSP_Software/JDBCDriver/HappyGo2.html";
+	private static final String jsFile_store = "C:/jasper/HappyGo2.jasper";
+	private static final String outFilePdf_store = "C:/jasper/HappyGo2.pdf";
+	private static final String outFileHtml_store = "C:/jasper/HappyGo2.html";
 	
 	static void PDFBuid_store(Collection<Map<String, ?>> list) {
 		Map<String, Object> parameters = new HashMap<String, Object>();
@@ -57,10 +56,10 @@ public class BuildPDF {
 			exporterPdf.setParameter(JRExporterParameter.JASPER_PRINT, print);
 			exporterPdf.exportReport();
 
-			JRExporter exporterHtml = new JRHtmlExporter();
-			exporterHtml.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFileHtml_store);
-			exporterHtml.setParameter(JRExporterParameter.JASPER_PRINT, print);
-			exporterHtml.exportReport();
+//			JRExporter exporterHtml = new JRHtmlExporter();
+//			exporterHtml.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFileHtml_store);
+//			exporterHtml.setParameter(JRExporterParameter.JASPER_PRINT, print);
+//			exporterHtml.exportReport();
 
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
