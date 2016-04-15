@@ -143,7 +143,7 @@ public class PromotionProject_Servlet extends HttpServlet {
 				}
 					
 				//驗證HTML Form資料
-				if("Update".equals(promotionProject)) {
+				if("Insert".equals(promotionProject) || "Update".equals(promotionProject)) {
 					if(PTP_PROJID==null || PTP_PROJID.trim().length()==0) {
 						error.put("pTP_PROJID", "請輸入活動編號以便於執行"+promotionProject);
 					}
@@ -184,7 +184,8 @@ public class PromotionProject_Servlet extends HttpServlet {
 				for(i=0; i<j;i++){
 				HG_PromotionBonus_Bean prombnsbean = new HG_PromotionBonus_Bean();
 				prombnsbean.setPTB_POINT(str_PTB_POINT[i]);
-				prombnsbean.setPTB_VALUE(str_PTB_VALUE[i]);	
+				prombnsbean.setPTB_VALUE(str_PTB_VALUE[i]);
+				prombnsbean.setPTB_PROJID(id);
 				prombnsbeanlist.add(prombnsbean);
 				}
 				//HG_PromotionMethod_Bean
@@ -193,6 +194,7 @@ public class PromotionProject_Servlet extends HttpServlet {
 				prommtbean.setPTM_NAME(PTM_NAME);
 				prommtbean.setPTM_VALUE(PTM_VALUE);
 				prommtbean.setPTM_VARDATE(int_PTM_VARDATE);
+				prommtbean.setPTM_PROJID(id);
 				List<HG_PromotionMethod_Bean> prommtbeanlist = new ArrayList<>();
 				prommtbeanlist.add(prommtbean);
 				
@@ -215,7 +217,7 @@ public class PromotionProject_Servlet extends HttpServlet {
 						request.setAttribute("insert", proj_result);
 					}
 					request.getRequestDispatcher(
-							"/Administer/PromotionProject/index.jsp").forward(request, response);
+							"/Administer/PromotionProject/projChoiceStore.jsp").forward(request, response);
 				} else if(promotionProject!=null && promotionProject.equals("Update")) {
 					int proj_result = 0;
 					int projbns_result = 0;

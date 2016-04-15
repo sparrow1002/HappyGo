@@ -54,7 +54,7 @@ public class HG_PromotionProject_DAOJdbc {
 	private static final String SELECT_ALL = "select * from HG_PromotionProject";
 
 	private static final String UPDATE = "update HG_PromotionProject set PTP_NAME=?, PTP_CREATEDATE=?, PTP_DELDATE=?, PTP_STATUS=?, PTP_DESC=?, PTP_FIXPOINT=?, PTP_UPDATETIME=getDate() where PTP_PROJID=?";
-	private static final String INSERT = "insert into HG_PromotionProject (PTP_NAME, PTP_CREATEDATE, PTP_DELDATE, PTP_STATUS, PTP_DESC, PTP_FIXPOINT, PTP_UPDATETIME) values (?, ?, ?, ?, ?, ?, getDate())";
+	private static final String INSERT = "insert into HG_PromotionProject (PTP_PROJID, PTP_NAME, PTP_CREATEDATE, PTP_DELDATE, PTP_STATUS, PTP_DESC, PTP_FIXPOINT, PTP_UPDATETIME) values (?, ?, ?, ?, ?, ?, ?, getDate())";
 	
 	private static final String SELECT_TODAY1="select PTP_PROJID,PTP_NAME,PTP_CREATEDATE,PTP_DELDATE,PTP_STATUS,PTP_DESC,PTP_COVER,PTP_FIXPOINT,PTP_UPDATETIME,PTP_UPDATEUSER"+ 
 			" from HG_PromotionProject"+
@@ -339,13 +339,14 @@ public class HG_PromotionProject_DAOJdbc {
 //				↑不用設，SQL會自動加號碼
 				
 //PTP_NAME, PTP_CREATEDATE, PTP_DELDATE, PTP_STATUS, PTP_DESC, PTP_FIXPOINT, PTP_UPDATETIME, PTP_UPDATEUSER) values (?, ?, ?, ?, ?, ?, getDate(), ?
-			stmt.setString(1, bean.getPTP_NAME());
-			stmt.setString(2, bean.getPTP_CREATEDATE());
-			stmt.setString(3, bean.getPTP_DELDATE());
-			stmt.setString(4, bean.getPTP_STATUS());
-			stmt.setString(5, bean.getPTP_DESC());
+			stmt.setInt(1, bean.getPTP_PROJID());
+			stmt.setString(2, bean.getPTP_NAME());
+			stmt.setString(3, bean.getPTP_CREATEDATE());
+			stmt.setString(4, bean.getPTP_DELDATE());
+			stmt.setString(5, bean.getPTP_STATUS());
+			stmt.setString(6, bean.getPTP_DESC());
 //			stmt.setBytes(6, bean.getPTP_COVER()); //圖片
-			stmt.setInt(6, bean.getPTP_FIXPOINT());
+			stmt.setInt(7, bean.getPTP_FIXPOINT());
 //			stmt.setDate(9, bean.getPTP_UPDATETIME());
 //			bean不用設PTM_UPDATETIME，SQL指令有下
 //			stmt.setString(9, bean.getPTP_UPDATEUSER());

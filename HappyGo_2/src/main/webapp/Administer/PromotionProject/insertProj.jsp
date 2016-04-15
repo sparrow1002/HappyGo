@@ -31,6 +31,10 @@
 		<table height="600px" width="1200px" style="border: 1px solid black"
 			align="center">
 			<tr style="border: 1px solid black">
+				<td style="border: 1px solid black">促銷方案活動編號：<input type="text"
+					name="PTP_PROJID" value=""><span class="error">${error.pTP_PROJID}</span></td>
+			</tr>
+			<tr style="border: 1px solid black">
 				<td style="border: 1px solid black">促銷方案活動名稱：<input type="text"
 					name="PTP_NAME"><span class="error">${error.pTP_NAME}</span></td>
 			</tr>
