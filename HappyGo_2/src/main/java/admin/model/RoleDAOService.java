@@ -17,7 +17,7 @@ public class RoleDAOService {
 	}
 	
 	public List<RoleDAOBean> selectall() {
-		List<RoleDAOBean> result=null;		
+		List<RoleDAOBean> result = null;
 		result = roleDAO.select();
 		return result;
 	}

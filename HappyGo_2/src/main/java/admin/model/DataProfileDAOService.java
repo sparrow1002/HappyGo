@@ -13,9 +13,9 @@ public class DataProfileDAOService {
 	private DataProfileDAO dataProfileDAO;
 
 	public DataProfileDAOService() {
-		
+
 	}
-	
+
 	public DataProfileDAOService(DataProfileDAO dataProfileDAO) {
 		this.dataProfileDAO = dataProfileDAO;
 	}
@@ -61,9 +61,9 @@ public class DataProfileDAOService {
 		}
 		return result;
 	}
-	
+
 	public DataProfileDAOBean selectitems(DataProfileDAOBean bean) {
-		DataProfileDAOBean result= null;
+		DataProfileDAOBean result = null;
 		if (bean != null && bean.getDAP_GROUP() != "") {
 			System.out.println("AdminUserDAObean select :"
 					+ bean.getDAP_GROUP());
@@ -90,8 +90,10 @@ public class DataProfileDAOService {
 	public DataProfileDAOBean insert(DataProfileDAOBean bean) {
 		DataProfileDAOBean result = null;
 		if (bean != null) {
+			System.out.println("service insert to go!!");
 			result = dataProfileDAO.insert(bean);
-		}
+		} else
+			System.out.println("service insert not go!!");
 		return result;
 	}
 

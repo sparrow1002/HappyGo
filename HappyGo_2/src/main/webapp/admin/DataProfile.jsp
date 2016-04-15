@@ -7,9 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+input {
+	width: 100px;
+}
+</style>
 <body>
 	<c:import url="/admin/TopMeau.jsp" />
-	<div style="width: 800px; height: 600px;">
+	<div class="demo">
 		<table style="background-color: #F0E68C;">
 			<thead>
 				<tr>
@@ -17,7 +22,7 @@
 				</tr>
 				<tr>
 					<th align="right" style="width: 100px;"><label>代碼群組</label></th>
-					<th align="left">
+					<th align="left" style="width: 280px;">
 						<form
 							action='<c:url value="/dayuNameSpace/dataprofilelist.action"/>'
 							method="get">
@@ -25,18 +30,20 @@
 								type="hidden" name="mode" value="select"> <input
 								type="submit" value="查詢">
 						</form>
+
+					</th>
+					<th align="left">
 						<form
 							action='<c:url value="/dayuNameSpace/dataprofilelist.action"/>'
 							method="get">
-							<input type="hidden" name="mode" value="newitem"> <input
-								type="submit" value="新增項目">
+							<input type="button" onclick="showfrom('insert','');" value="新增">
 						</form>
 					</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td colspan="2"><c:if test="${not empty select}">
+					<td colspan="3"><c:if test="${not empty select}">
 							<table id="userslist" class="t2">
 								<thead>
 									<tr>
@@ -50,15 +57,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="row" items="${select}">
-										<c:url value="/dayuNameSpace/dataprofilelist.action"
-											var="path_select" scope="page">
-											<c:param name="DAP_GROUP" value="${row.DAP_GROUP}" />
-											<c:param name="DAP_ID" value="${row.DAP_ID}" />
-											<c:param name="DAP_VALUE" value="${row.DAP_VALUE}" />
-											<c:param name="DAP_DESC" value="${row.DAP_DESC}" />
-											<c:param name="mode" value="selectitem" />
-										</c:url>
+									<c:forEach var="row" items="${select}" varStatus="varStatus">
 										<c:url value="/dayuNameSpace/dataprofilelist.action"
 											var="path_edit" scope="page">
 											<c:param name="DAP_GROUP" value="${row.DAP_GROUP}" />
@@ -68,73 +67,43 @@
 											<c:param name="mode" value="edit" />
 										</c:url>
 										<tr>
-											<td><a href="${path_select}">${row.DAP_GROUP}</a></td>
-											<td>${row.DAP_ID}</td>
-											<td>${row.DAP_VALUE}</td>
-											<td>${row.DAP_DESC}</td>
-											<td>${row.DAP_UPDATEUSER}</td>
-											<td>${row.DAP_UPDATETIME}</td>
-											<td><button
-													onclick="window.location.href='${path_edit}'">修改</button></td>
+											<td><input id="DAP_GROUP__${varStatus.count}"
+												name="DAP_GROUP" type="text" value="${row.DAP_GROUP}"
+												style="display: none"> <lable
+													id="DAP_GROUP_${varStatus.count}" name="DAP_GROUP">${row.DAP_GROUP}</lable></td>
+											<td><input id="DAP_ID__${ varStatus.count}" type="text"
+												value="${row.DAP_ID}" style="display: none"> <lable
+													id="DAP_ID_${varStatus.count}" name="DAP_ID">${row.DAP_ID}</lable></td>
+											<td><input id="DAP_VALUE__${ varStatus.count}"
+												type="text" value="${row.DAP_VALUE}" style="display: none">
+												<lable id="DAP_VALUE_${varStatus.count}" name="DAP_VALUE">${row.DAP_VALUE}</lable></td>
+											<td><input id="DAP_DESC__${ varStatus.count}"
+												type="text" value="${row.DAP_DESC}" style="display: none">
+												<lable id="DAP_DESC_${varStatus.count}" name="DAP_DESC">${row.DAP_DESC}</lable></td>
+											<td><input id="DAP_UPDATEUSER__${ varStatus.count}"
+												type="text" value="${row.DAP_UPDATEUSER}"
+												style="display: none"> <lable
+													id="DAP_UPDATEUSER_${varStatus.count}" name="DAP_GROUP">${row.DAP_UPDATEUSER}</lable></td>
+											<td><input id="DAP_UPDATETIME__${ varStatus.count}"
+												type="text" value="${row.DAP_UPDATETIME}"
+												style="display: none"> <lable
+													id="DAP_UPDATETIME_${varStatus.count}" name="DAP_GROUP">${row.DAP_UPDATETIME}</lable></td>
+											<td><input type="button"
+												onclick="showfrom('update','${varStatus.count}');"
+												value="修改"></td>
 										</tr>
 									</c:forEach>
 								</tbody>
 							</table>
 						</c:if></td>
 				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
 			</tbody>
 		</table>
-
 		<div id="users-contain" class="ui-widget">
-			<c:if test="${not empty edit}">
-				<form name="myForm" id="myForm"
-					action='<c:url value="/dayuNameSpace/dataprofilelist.action?mode=update"/>'
-					method="get">
-					<h1>代碼項目</h1>
-					<table id="users" class="t2">
-						<thead>
-							<tr>
-								<th>項目</th>
-								<th>內容</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>代碼群組</td>
-								<td><input id="DAP_GROUP" name="DAP_GROUP" type="text"
-									value=${edit.DAP_GROUP}></td>
-							</tr>
-							<tr>
-								<td>代碼編號</td>
-								<td><input id="DAP_ID" name="DAP_ID" type="text"
-									value=${edit.DAP_ID}></td>
-							</tr>
-							<tr>
-								<td>代碼文字</td>
-								<td><input id="DAP_VALUE" name="DAP_VALUE" type="text"
-									value=${edit.DAP_VALUE}></td>
-							</tr>
-							<tr>
-								<td>代碼描述</td>
-								<td><input id="DAP_DESC" name="DAP_DESC" type="text"
-									value=${edit.DAP_DESC}></td>
-							</tr>
-							<tr>
-								<td colspan="2">								
-									<input name="formSubmit" type="submit"	value="儲存" /> 
-									<input id="cancel" value="取消" type="button">
-									<input name="mode" type="hidden" value="update" /> 
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
-			</c:if>
-			<c:if test="${not empty selectitem}">
+			<form name="myForm" id="myForm"
+				action='<c:url value="/dayuNameSpace/dataprofilelist.action?mode=update"/>'
+				method="get">
+				<h1>代碼項目</h1>
 				<table id="users" class="t2">
 					<thead>
 						<tr>
@@ -145,76 +114,54 @@
 					<tbody>
 						<tr>
 							<td>代碼群組</td>
-							<td>${selectitem.DAP_GROUP}</td>
+							<td><input id="DAP_GROUP" name="DAP_GROUP" type="text"></td>
 						</tr>
 						<tr>
 							<td>代碼編號</td>
-							<td>${selectitem.DAP_ID}</td>
+							<td><input id="DAP_ID" name="DAP_ID" type="text"></td>
 						</tr>
 						<tr>
 							<td>代碼文字</td>
-							<td>${selectitem.DAP_VALUE}</td>
+							<td><input id="DAP_VALUE" name="DAP_VALUE" type="text"></td>
 						</tr>
 						<tr>
 							<td>代碼描述</td>
-							<td>${selectitem.DAP_DESC}</td>
+							<td><input id="DAP_DESC" name="DAP_DESC" type="text"></td>
 						</tr>
 						<tr>
-							<td colspan="2" align="center"><input id="cancel" value="確認"
-								type="button"></td>
+							<td colspan="2"><input name="formSubmit" type="submit"
+								value="儲存" /> <input id="cancel" value="取消" type="button">
+								<input  id="mode" name="mode" type="hidden" value="update" /></td>
 						</tr>
 					</tbody>
 				</table>
-			</c:if>
-			<c:if test="${not empty newitem}">
-				<form name="myForm" id="myForm"
-					action='<c:url value="/dayuNameSpace/dataprofilelist.action"/>'
-					method="get">
-					<h1>代碼項目</h1>
-					<table id="users" class="t2">
-						<thead>
-							<tr>
-								<th>項目</th>
-								<th>內容</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>代碼群組</td>
-								<td><input id="DAP_GROUP" name="DAP_GROUP" type="text"
-									value=${newitem.DAP_GROUP}></td>
-							</tr>
-							<tr>
-								<td>代碼編號</td>
-								<td><input id="DAP_ID" name="DAP_ID" type="text"
-									value=${newitem.DAP_ID}></td>
-							</tr>
-							<tr>
-								<td>代碼文字</td>
-								<td><input id="DAP_VALUE" name="DAP_VALUE" type="text"
-									value=${newitem.DAP_VALUE}></td>
-							</tr>
-							<tr>
-								<td>代碼描述</td>
-								<td><input id="DAP_DESC" name="DAP_DESC" type="text"
-									value=${newitem.DAP_DESC}></td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<input name="formSubmit" type="submit"	value="儲存" /> 
-									<input id="cancel" value="取消" type="button">
-									<input name="mode" type="hidden" value="insert" /> 
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
-			</c:if>
-
+			</form>
 		</div>
 	</div>
+	<c:import url="/admin/FootBar.jsp" />
 </body>
-<script>
+<script>	
+	function showfrom(mode,index) {
+		if(index!='')
+		{			
+			$('#DAP_GROUP').val($('#DAP_GROUP__'+index).val());
+			$('#DAP_ID').val($('#DAP_ID__'+index).val());
+			$('#DAP_VALUE').val($('#DAP_VALUE__'+index).val());
+			$('#DAP_DESC').val($('#DAP_DESC__'+index).val());
+		}else{
+			$('#DAP_GROUP').val('');
+			$('#DAP_ID').val('');
+			$('#DAP_VALUE').val('');
+			$('#DAP_DESC').val('');			
+		}
+		$('#mode').val(mode);
+		$('#users-contain').show();
+		$('#users-contain').dialog({
+			autoOpen : true,
+			modal : false
+		});
+	}
+	
 	var strUrl = location.search;
 	var getPara, ParaVal;
 	var aryPara = [];
@@ -295,9 +242,7 @@
 				}
 			});
 		}
-	});
-	
-	
+	});	
 
 	var message = '<%=request.getAttribute("message")%>';
 	if (message != null && message.trim() != "" && message.trim() != "null")

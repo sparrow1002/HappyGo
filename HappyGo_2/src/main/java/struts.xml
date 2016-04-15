@@ -39,9 +39,14 @@
 			<result name="input" >/admin/SysLog.jsp</result>
 			<result name="success" >/admin/SysLog.jsp</result>
 		</action>
-	</package>
-	<package name="dayuPackage2" namespace="/dayu" extends="struts-default">
 		
+		<action name="cardinfolist" class="common.controller.CardInfo_Action">
+			<!-- controller.Login_Action-->
+			<result name="input" >/About.jsp</result>
+			<result name="success" >/About.jsp</result>
+		</action>
+	</package>
+	<package name="dayuPackage2" namespace="/dayu" extends="struts-default">		
 		<action name="maguserlist" class="admin.controller.Admin_list_Servlet">
 			<!-- controller.Login_Action-->
 			<result name="input" >/admin/userlist.jsp</result>

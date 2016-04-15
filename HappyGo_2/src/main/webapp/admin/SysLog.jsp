@@ -9,7 +9,7 @@
 </head>
 <body>
 	<c:import url="/admin/TopMeau.jsp" />
-	<div style="width: 800px; height: 600px;">
+	<div class="demo">
 		<table style="background-color: #F0E68C;">
 			<thead>
 				<tr>
@@ -63,6 +63,7 @@
 			</tbody>
 		</table>
 	</div>
+	<c:import url="/admin/FootBar.jsp" />
 </body>
 <script>
 	var strUrl = location.search;

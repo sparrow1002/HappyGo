@@ -116,8 +116,8 @@ public class DataProfileDAOjdbc implements DataProfileDAO {
 			result = new ArrayList<DataProfileDAOBean>();
 			while (rs.next()) {
 				DataProfileDAOBean bean = new DataProfileDAOBean();
-				bean.setDAP_GROUP(rs.getString("DAP_GROUP"));
-				bean.setDAP_ID(rs.getString("DAP_ID"));
+				bean.setDAP_GROUP(rs.getString("DAP_GROUP").trim());
+				bean.setDAP_ID(rs.getString("DAP_ID").trim());
 				bean.setDAP_DESC(rs.getString("DAP_DESC"));
 				bean.setDAP_VALUE(rs.getString("DAP_VALUE"));
 				bean.setDAP_UPDATETIME(rs.getDate("DAP_UPDATETIME"));
@@ -220,8 +220,8 @@ public class DataProfileDAOjdbc implements DataProfileDAO {
 			result = new ArrayList<DataProfileDAOBean>();
 			while (rs.next()) {
 				DataProfileDAOBean bean = new DataProfileDAOBean();
-				bean.setDAP_GROUP(rs.getString("DAP_GROUP"));
-				bean.setDAP_ID(rs.getString("DAP_ID"));
+				bean.setDAP_GROUP(rs.getString("DAP_GROUP").trim());
+				bean.setDAP_ID(rs.getString("DAP_ID").trim());
 				bean.setDAP_DESC(rs.getString("DAP_DESC"));
 				bean.setDAP_VALUE(rs.getString("DAP_VALUE"));
 				bean.setDAP_UPDATETIME(rs.getDate("DAP_UPDATETIME"));
@@ -269,13 +269,15 @@ public class DataProfileDAOjdbc implements DataProfileDAO {
 		try {
 			conn = datasource.getConnection();
 			pst = conn.prepareStatement(UPDATE);
-			
+			System.out.println(bean.getDAP_GROUP()+","+bean.getDAP_ID()+","+bean.getDAP_VALUE()+","+bean.getDAP_DESC()+","+bean.getDAP_UPDATEUSER());
+			System.out.println(UPDATE);
 			pst.setString(1, bean.getDAP_VALUE());
 			pst.setString(2, bean.getDAP_DESC());
 			pst.setString(3, bean.getDAP_UPDATEUSER());
 			pst.setString(4, bean.getDAP_GROUP());
 			pst.setString(5, bean.getDAP_ID());
 			int i = pst.executeUpdate();
+			System.out.println(i);
 			if (i == 1) {
 				return bean;
 			}
@@ -311,7 +313,7 @@ public class DataProfileDAOjdbc implements DataProfileDAO {
 			// conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			conn = datasource.getConnection();
 			pst = conn.prepareStatement(INSERT);
-			// DAP_GROUP,DAP_ID,DAP_VALUE,DAP_DESC,DAP_UPDATEUSER
+			
 			if (bean != null) {
 				pst.setString(1, bean.getDAP_GROUP());
 				pst.setString(2, bean.getDAP_ID());
@@ -362,8 +364,8 @@ public class DataProfileDAOjdbc implements DataProfileDAO {
 			if (rs.next()) {
 
 				result = new DataProfileDAOBean();
-				result.setDAP_GROUP(rs.getString("DAP_GROUP"));
-				result.setDAP_ID(rs.getString("DAP_ID"));
+				result.setDAP_GROUP(rs.getString("DAP_GROUP").trim());
+				result.setDAP_ID(rs.getString("DAP_ID").trim());
 				result.setDAP_DESC(rs.getString("DAP_DESC"));
 				result.setDAP_VALUE(rs.getString("DAP_VALUE"));
 				result.setDAP_UPDATETIME(rs.getDate("DAP_UPDATETIME"));

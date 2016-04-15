@@ -10,5 +10,13 @@
 </head>
 <body>
 	<c:import url="/admin/TopMeau.jsp" />
+	<div class="demo">
+		<table>
+			<tr>
+				<td><img  width="900px" src="../img/bk.jpg"></td>
+			</tr>
+		</table>
+	</div>
+	<c:import url="/admin/FootBar.jsp" />
 </body>
 </html>

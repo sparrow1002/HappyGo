@@ -119,14 +119,14 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 		// this.addFieldError("expire", "Expire敹���");
 		// }
 		// }
-
+		
 		AdminUserDAObean bean = new AdminUserDAObean();
 		System.out.println("ADM_ID");
 		bean.setADM_ID(ADM_ID);
-		bean.setADM_NAME("");
-		bean.setADM_PWD("");
-		bean.setADM_ROLEID("");
-		bean.setADM_UPDATEUSER("");
+		bean.setADM_NAME(ADM_NAME);
+		bean.setADM_PWD(ADM_PWD);
+		bean.setADM_ROLEID(ADM_ROLEID);
+		bean.setADM_UPDATEUSER(sessionMap.get("adminuser").toString());
 		return bean;
 	}
 
@@ -153,6 +153,12 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 				System.out.println("select fail");
 				this.addFieldError("action", "Insert fail");
 			} else {
+//				DataProfileDAOBean dbean	=new DataProfileDAOBean();
+//				for(AdminUserDAObean beanitem:result){
+//					dbean.setDAP_GROUP("ROLEID");
+//					dbean.setDAP_ID(beanitem.getADM_ROLEID());
+//					beanitem.setADM_ROLEID(dataProfileDAOService.selectitem(dbean));
+//				}
 				System.out.println("select ok");
 				req.setAttribute("select", result);
 				return Action.SUCCESS;
@@ -175,33 +181,31 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 				return Action.SUCCESS;
 			}
 		} else if ("insert".equals(mode)) {
-
 			AdminUserDAObean result = adminUserDAOService.insert(bean);
-			if (result == null) {
+			if (bean == null) {
 				System.out.println("insert fail");
-				this.addFieldError("action", "Insert fail");
+				this.addFieldError("action", "insert fail");
+				req.setAttribute("message", "insert fail");
 			} else {
-				System.out.println("insert ok");
-				req.setAttribute("insert", result);
-				return Action.INPUT;
+				req.setAttribute("message", "insert ok");				
 			}
-		} else if ("edit".equals(mode)) {
-			bean.setADM_ID(ADM_ID);
-			List<AdminUserDAObean> result;
-			if (ADM_ID != null && ADM_ID.trim() != "")
-				result = adminUserDAOService.select(bean);
-			else
-				result = adminUserDAOService.select(null);
-			if (result == null) {
+			List<AdminUserDAObean> results;
+			results = adminUserDAOService.select(null);
+			req.setAttribute("select", results);
+		} else if ("update".equals(mode)) {
+			System.out.println("action:"+bean.getADM_PWD()+","+bean.getADM_NAME()+","+
+					bean.getADM_ROLEID()+","+bean.getADM_UPDATEUSER()+","+bean.getADM_ID()+",");
+			bean = adminUserDAOService.update(bean);			
+			if (bean == null) {
 				System.out.println("update fail");
 				this.addFieldError("action", "update fail");
+				req.setAttribute("message", "update fail");
 			} else {
-				req.setAttribute("select", result);
-				result = adminUserDAOService.select(bean);
-				req.setAttribute("edit", result.get(0));
-				System.out.println("edit ok:" + result.size());
-				return Action.SUCCESS;
+				req.setAttribute("message", "update ok");				
 			}
+			List<AdminUserDAObean> result;
+			result = adminUserDAOService.select(null);
+			req.setAttribute("select", result);
 		}
 		System.out.println("final");
 		return Action.INPUT;
