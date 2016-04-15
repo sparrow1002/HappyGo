@@ -57,7 +57,7 @@
 						type="submit" name="report_prodaction" value="產生PDF" /></TD>
 				</TR>
 			</TABLE>
-			<c:if test="${not empty report_select}">
+			<c:if test="${not empty report_select}" >
 				<table id="report_table">
 					<thead>
 						<tr>
