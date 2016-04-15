@@ -14,6 +14,6 @@ public interface CardPointDAO {
 	//取消交易
 	public abstract CardPointBean selectByTran(long tranId);
 	
-	public abstract boolean update(String status , CardPointBean bean);
+	public abstract boolean update(CardPointBean bean);
 	public abstract boolean insert(CardPointBean bean);
 }

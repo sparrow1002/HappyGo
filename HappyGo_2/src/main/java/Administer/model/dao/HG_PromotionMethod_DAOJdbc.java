@@ -1,82 +1,130 @@
 package Administer.model.dao;
 
-public class HG_PromotionMethod_DAOJdbc {
-	private int PTM_ID;
-	private String PTM_NAME;
-	private String PTM_DESC;
-	private int PTM_ATRID;
-	private int PTM_OPER; //代碼表
-	private int PTM_VALUE;
-	private int PTM_VARDATE;//日期加減值
-	private int PTM_PROJID;
-	private java.util.Date PTM_UPDATETIME;
-	private int PTM_UPDATEUSER;
-	// 10個屬性
-	public int getPTM_ID() {
-		return PTM_ID;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import Administer.model.HG_PromotionBonus_Bean;
+import Administer.model.HG_PromotionMethod_Bean;
+import Administer.model.HG_PromotionMethod_DAO;
+
+public class HG_PromotionMethod_DAOJdbc implements HG_PromotionMethod_DAO {
+	private static final String URL = "jdbc:sqlserver://localhost:1433;database=happygo";
+	private static final String USERNAME = "sa";
+	private static final String PASSWORD = "sa123456";
+	
+	public static void main(String[] args) {
+		int projId = 2;
+		HG_PromotionMethod_DAOJdbc dao = new HG_PromotionMethod_DAOJdbc();
+		
+		/*for(HG_PromotionMethod_Bean bean:dao.select(projId))
+			System.out.println(bean);*/
+		HG_PromotionMethod_Bean bean = new HG_PromotionMethod_Bean();
+		bean.setPTM_NAME("煊");
+		bean.setPTM_DESC("煊");
+		bean.setPTM_model("1");
+		bean.setPTM_OPER(">");
+		bean.setPTM_VALUE("1");
+		bean.setPTM_VARDATE(20);
+		bean.setPTM_PROJID(1);
+		bean.setPTM_UPDATEUSER("jdbc01");
+		System.out.println(dao.insert(bean));
 	}
-	public void setPTM_ID(int pTM_ID) {
-		PTM_ID = pTM_ID;
+
+	private static final String SELECT = "select * from HG_PromotionMethod where PTM_PROJID=?";
+	public List<HG_PromotionMethod_Bean> select(int projId) {
+		List<HG_PromotionMethod_Bean> result = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			pstmt = conn.prepareStatement(SELECT);
+			pstmt.setInt(1, projId);
+			rset = pstmt.executeQuery();
+			result = new ArrayList<HG_PromotionMethod_Bean>();
+			while(rset.next()){
+				HG_PromotionMethod_Bean bean = new HG_PromotionMethod_Bean();
+				bean.setPTM_ID(rset.getInt("PTM_ID"));
+				bean.setPTM_DESC(rset.getString("PTM_DESC"));
+				bean.setPTM_model(rset.getString("PTM_model"));
+				bean.setPTM_NAME(rset.getString("PTM_NAME"));
+				bean.setPTM_OPER(rset.getString("PTM_OPER"));
+				bean.setPTM_PROJID(rset.getInt("PTM_PROJID"));
+				bean.setPTM_VALUE(rset.getString("PTM_VALUE"));
+				bean.setPTM_VARDATE(rset.getInt("PTM_VARDATE"));
+				bean.setPTM_UPDATETIME(rset.getDate("PTM_UPDATETIME"));
+				bean.setPTM_UPDATEUSER(rset.getString("PTM_UPDATEUSER"));
+				result.add(bean);
+			}
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
-	public String getPTM_NAME() {
-		return PTM_NAME;
+
+	private static final String UPDATE = "update HG_PromotionMethod set "
+			+ "PTM_NAME=?,"
+			+ "PTM_DESC=?,"
+			+ "PTM_model=?,"
+			+ "PTM_OPER=?,"
+			+ "PTM_VALUE=?,"
+			+ "PTM_VARDATE=?,"
+			+ "PTM_PROJID=?,"
+			+ "PTM_UPDATETIME=getdate(),"
+			+ "PTM_UPDATEUSER=?"
+			+ "where PTM_ID=?";
+	public int update(HG_PromotionMethod_Bean bean) {
+		int i = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			pstmt = conn.prepareStatement(UPDATE);
+			pstmt.setString(1, bean.getPTM_NAME());
+			pstmt.setString(2, bean.getPTM_DESC());
+			pstmt.setString(3, bean.getPTM_model());
+			pstmt.setString(4, bean.getPTM_OPER());
+			pstmt.setString(5, bean.getPTM_VALUE());
+			pstmt.setInt(6, bean.getPTM_VARDATE());
+			pstmt.setInt(7, bean.getPTM_PROJID());
+			pstmt.setString(8, bean.getPTM_UPDATEUSER());
+			pstmt.setInt(9, bean.getPTM_ID());
+			i = pstmt.executeUpdate();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
 	}
-	public void setPTM_NAME(String pTM_NAME) {
-		PTM_NAME = pTM_NAME;
-	}
-	public String getPTM_DESC() {
-		return PTM_DESC;
-	}
-	public void setPTM_DESC(String pTM_DESC) {
-		PTM_DESC = pTM_DESC;
-	}
-	public int getPTM_ATRID() {
-		return PTM_ATRID;
-	}
-	public void setPTM_ATRID(int pTM_ATRID) {
-		PTM_ATRID = pTM_ATRID;
-	}
-	public int getPTM_OPER() {
-		return PTM_OPER;
-	}
-	public void setPTM_OPER(int pTM_OPER) {
-		PTM_OPER = pTM_OPER;
-	}
-	public int getPTM_VALUE() {
-		return PTM_VALUE;
-	}
-	public void setPTM_VALUE(int pTM_VALUE) {
-		PTM_VALUE = pTM_VALUE;
-	}
-	public int getPTM_VARDATE() {
-		return PTM_VARDATE;
-	}
-	public void setPTM_VARDATE(int pTM_VARDATE) {
-		PTM_VARDATE = pTM_VARDATE;
-	}
-	public int getPTM_PROJID() {
-		return PTM_PROJID;
-	}
-	public void setPTM_PROJID(int pTM_PROJID) {
-		PTM_PROJID = pTM_PROJID;
-	}
-	public java.util.Date getPTM_UPDATETIME() {
-		return PTM_UPDATETIME;
-	}
-	public void setPTM_UPDATETIME(java.util.Date pTM_UPDATETIME) {
-		PTM_UPDATETIME = pTM_UPDATETIME;
-	}
-	public int getPTM_UPDATEUSER() {
-		return PTM_UPDATEUSER;
-	}
-	public void setPTM_UPDATEUSER(int pTM_UPDATEUSER) {
-		PTM_UPDATEUSER = pTM_UPDATEUSER;
-	}
-	@Override
-	public String toString() {
-		return "HG_PromotionMethod_Bean [PTM_ID=" + PTM_ID + ", PTM_NAME=" + PTM_NAME + ", PTM_DESC=" + PTM_DESC
-				+ ", PTM_ATRID=" + PTM_ATRID + ", PTM_OPER=" + PTM_OPER + ", PTM_VALUE=" + PTM_VALUE + ", PTM_VARDATE="
-				+ PTM_VARDATE + ", PTM_PROJID=" + PTM_PROJID + ", PTM_UPDATETIME=" + PTM_UPDATETIME
-				+ ", PTM_UPDATEUSER=" + PTM_UPDATEUSER + "]";
+
+	private static final String INSERT = "insert into HG_PromotionMethod values"
+			+ " (?,?,?,?,?,?,?,getdate(),?);";
+	public int insert(HG_PromotionMethod_Bean bean) {
+		int i = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			pstmt = conn.prepareStatement(INSERT);
+			pstmt.setString(1, bean.getPTM_NAME());
+			pstmt.setString(2, bean.getPTM_DESC());
+			pstmt.setString(3, bean.getPTM_model());
+			pstmt.setString(4, bean.getPTM_OPER());
+			pstmt.setString(5, bean.getPTM_VALUE());
+			pstmt.setInt(6, bean.getPTM_VARDATE());
+			pstmt.setInt(7, bean.getPTM_PROJID());
+			pstmt.setString(8, bean.getPTM_UPDATEUSER());
+			i = pstmt.executeUpdate();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
 	}
 }

@@ -1,60 +1,146 @@
 package Administer.model.dao;
 
-public class HG_PromotionBonus_DAOJdbc {
-	private int PTB_ID;
-	private int PTB_OPER; //代碼表
-	private int PTB_VALUE;
-	private int PTB_POINT;
-	private int PTB_PROJID;
-	private java.util.Date PTB_UPDATETIME;
-	private int PTB_UPDATEUSER;
-	// 7個屬性
-	public int getPTB_ID() {
-		return PTB_ID;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import cardPoint.model.CardPointBean;
+import Administer.model.HG_PromotionBonus_Bean;
+import Administer.model.HG_PromotionBonus_DAO;
+
+public class HG_PromotionBonus_DAOJdbc implements HG_PromotionBonus_DAO {
+	private static final String URL = "jdbc:sqlserver://localhost:1433;database=happygo";
+	private static final String USERNAME = "sa";
+	private static final String PASSWORD = "sa123456";
+	
+	public static void main(String[] args) {
+		int projId = 2;
+		HG_PromotionBonus_DAOJdbc dao = new HG_PromotionBonus_DAOJdbc();
+		
+		for(HG_PromotionBonus_Bean bean:dao.select(projId))
+			System.out.println(bean);
+		/*HG_PromotionBonus_Bean bean = new HG_PromotionBonus_Bean();
+		bean.setPTB_ID(4);
+		bean.setPTB_model("b");
+		bean.setPTB_OPER("");
+		bean.setPTB_POINT(15);
+		bean.setPTB_PROJID(3);
+		bean.setPTB_VALUE(100);
+		bean.setPTB_UPDATEUSER("jdbc01");
+		if(dao.insert(bean))
+			System.out.println("insert ok");
+		else
+			System.out.println("insert error");*/
+		
 	}
-	public void setPTB_ID(int pTB_ID) {
-		PTB_ID = pTB_ID;
+	
+	private DataSource dataSource;
+	
+	public HG_PromotionBonus_DAOJdbc() {
+		try {
+			Context ctx = new InitialContext();
+			dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/websource");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 	}
-	public int getPTB_OPER() {
-		return PTB_OPER;
+
+	private static final String SELECT = "select * from HG_PromotionBonus where PTB_PROJID=?;";
+	public List<HG_PromotionBonus_Bean> select(int projId) {
+		List<HG_PromotionBonus_Bean> result = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			//conn = dataSource.getConnection();
+			//Web專用
+			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			pstmt = conn.prepareStatement(SELECT);
+			pstmt.setInt(1, projId);
+			rset = pstmt.executeQuery();
+			result = new ArrayList<HG_PromotionBonus_Bean>();
+			while(rset.next()){
+				HG_PromotionBonus_Bean bean = new HG_PromotionBonus_Bean();
+				bean.setPTB_ID(rset.getInt("PTB_ID"));
+				bean.setPTB_model(rset.getString("PTB_model"));
+				bean.setPTB_OPER(rset.getString("PTB_OPER"));
+				bean.setPTB_POINT(rset.getInt("PTB_POINT"));
+				bean.setPTB_PROJID(rset.getInt("PTB_PROJID"));
+				bean.setPTB_VALUE(rset.getInt("PTB_VALUE"));
+				bean.setPTB_UPDATETIME(rset.getDate("PTB_UPDATETIME"));
+				bean.setPTB_UPDATEUSER(rset.getString("PTB_UPDATEUSER"));
+				result.add(bean);
+			}
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
-	public void setPTB_OPER(int pTB_OPER) {
-		PTB_OPER = pTB_OPER;
+
+	private static final String UPDATE = "update HG_PromotionBonus set "
+			+ "PTB_OPER=?,"
+			+ "PTB_VALUE=?,"
+			+ "PTB_POINT=?,"
+			+ "PTB_PROJID=?,"
+			+ "PTB_model=?,"
+			+ "PTB_UPDATETIME=GETDATE(),"
+			+ "PTB_UPDATEUSER=? "
+			+ "where PTB_ID=?;";
+	public int update(HG_PromotionBonus_Bean bean) {
+		int i = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			pstmt = conn.prepareStatement(UPDATE);
+			pstmt.setString(1, bean.getPTB_OPER());
+			pstmt.setInt(2, bean.getPTB_VALUE());
+			pstmt.setInt(3, bean.getPTB_POINT());
+			pstmt.setInt(4, bean.getPTB_PROJID());
+			pstmt.setString(5, bean.getPTB_model());
+			pstmt.setString(6, bean.getPTB_UPDATEUSER());
+			pstmt.setInt(7, bean.getPTB_ID());
+			i = pstmt.executeUpdate();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
 	}
-	public int getPTB_VALUE() {
-		return PTB_VALUE;
+
+	private static final String INSERT = "insert into HG_PromotionBonus values (?,?,?,?,?,getdate(),?)";
+	public int insert(HG_PromotionBonus_Bean bean) {
+		int i = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			pstmt = conn.prepareStatement(INSERT);
+			pstmt.setString(1, bean.getPTB_OPER());
+			pstmt.setInt(2, bean.getPTB_VALUE());
+			pstmt.setInt(3, bean.getPTB_POINT());
+			pstmt.setInt(4, bean.getPTB_PROJID());
+			pstmt.setString(5, bean.getPTB_model());
+			pstmt.setString(6, bean.getPTB_UPDATEUSER());
+			i = pstmt.executeUpdate();
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
 	}
-	public void setPTB_VALUE(int pTB_VALUE) {
-		PTB_VALUE = pTB_VALUE;
-	}
-	public int getPTB_POINT() {
-		return PTB_POINT;
-	}
-	public void setPTB_POINT(int pTB_POINT) {
-		PTB_POINT = pTB_POINT;
-	}
-	public int getPTB_PROJID() {
-		return PTB_PROJID;
-	}
-	public void setPTB_PROJID(int pTB_PROJID) {
-		PTB_PROJID = pTB_PROJID;
-	}
-	public java.util.Date getPTB_UPDATETIME() {
-		return PTB_UPDATETIME;
-	}
-	public void setPTB_UPDATETIME(java.util.Date pTB_UPDATETIME) {
-		PTB_UPDATETIME = pTB_UPDATETIME;
-	}
-	public int getPTB_UPDATEUSER() {
-		return PTB_UPDATEUSER;
-	}
-	public void setPTB_UPDATEUSER(int pTB_UPDATEUSER) {
-		PTB_UPDATEUSER = pTB_UPDATEUSER;
-	}
-	@Override
-	public String toString() {
-		return "HG_PromotionBonus_Bean [PTB_ID=" + PTB_ID + ", PTB_OPER=" + PTB_OPER + ", PTB_VALUE=" + PTB_VALUE
-				+ ", PTB_POINT=" + PTB_POINT + ", PTB_PROJID=" + PTB_PROJID + ", PTB_UPDATETIME=" + PTB_UPDATETIME
-				+ ", PTB_UPDATEUSER=" + PTB_UPDATEUSER + "]";
-	}
+
+	
+
 }

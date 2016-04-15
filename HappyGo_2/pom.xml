@@ -22,6 +22,12 @@
 	</repositories>
 
 	<dependencies>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>	
+	
 		<!--4/11 jasperreport&pdf -->
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>

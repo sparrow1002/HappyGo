@@ -4,13 +4,13 @@ public class HG_PromotionMethod_Bean {
 	private int PTM_ID;
 	private String PTM_NAME;
 	private String PTM_DESC;
-	private String PTM_ATRID;
+	private String PTM_model;
 	private String PTM_OPER; //代碼表
 	private String PTM_VALUE;
 	private int PTM_VARDATE;//日期加減值
 	private int PTM_PROJID;
 	private java.util.Date PTM_UPDATETIME;
-	private int PTM_UPDATEUSER;
+	private String PTM_UPDATEUSER;
 	// 10個屬性
 	public int getPTM_ID() {
 		return PTM_ID;
@@ -30,11 +30,11 @@ public class HG_PromotionMethod_Bean {
 	public void setPTM_DESC(String pTM_DESC) {
 		PTM_DESC = pTM_DESC;
 	}
-	public String getPTM_ATRID() {
-		return PTM_ATRID;
+	public String getPTM_model() {
+		return PTM_model;
 	}
-	public void setPTM_ATRID(String pTM_ATRID) {
-		PTM_ATRID = pTM_ATRID;
+	public void setPTM_model(String pTM_model) {
+		PTM_model = pTM_model;
 	}
 	public String getPTM_OPER() {
 		return PTM_OPER;
@@ -66,17 +66,20 @@ public class HG_PromotionMethod_Bean {
 	public void setPTM_UPDATETIME(java.util.Date pTM_UPDATETIME) {
 		PTM_UPDATETIME = pTM_UPDATETIME;
 	}
-	public int getPTM_UPDATEUSER() {
+	public String getPTM_UPDATEUSER() {
 		return PTM_UPDATEUSER;
 	}
-	public void setPTM_UPDATEUSER(int pTM_UPDATEUSER) {
+	public void setPTM_UPDATEUSER(String pTM_UPDATEUSER) {
 		PTM_UPDATEUSER = pTM_UPDATEUSER;
 	}
 	@Override
 	public String toString() {
-		return "HG_PromotionMethod_Bean [PTM_ID=" + PTM_ID + ", PTM_NAME=" + PTM_NAME + ", PTM_DESC=" + PTM_DESC
-				+ ", PTM_ATRID=" + PTM_ATRID + ", PTM_OPER=" + PTM_OPER + ", PTM_VALUE=" + PTM_VALUE + ", PTM_VARDATE="
-				+ PTM_VARDATE + ", PTM_PROJID=" + PTM_PROJID + ", PTM_UPDATETIME=" + PTM_UPDATETIME
+		return "HG_PromotionMethod_Bean [PTM_ID=" + PTM_ID + ", PTM_NAME="
+				+ PTM_NAME + ", PTM_DESC=" + PTM_DESC + ", PTM_model="
+				+ PTM_model + ", PTM_OPER=" + PTM_OPER + ", PTM_VALUE="
+				+ PTM_VALUE + ", PTM_VARDATE=" + PTM_VARDATE + ", PTM_PROJID="
+				+ PTM_PROJID + ", PTM_UPDATETIME=" + PTM_UPDATETIME
 				+ ", PTM_UPDATEUSER=" + PTM_UPDATEUSER + "]";
 	}
+		
 }
