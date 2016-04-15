@@ -2,7 +2,7 @@ package report.model;
 
 import java.math.BigDecimal;
 
-public class reportDAOBean {
+public class reportDAOBean_store {
 	private String SOP_MEMBERID;
 	private String COS_NAME;
 	private String CPT_TRANDATE;
@@ -10,10 +10,7 @@ public class reportDAOBean {
 	private BigDecimal SOP_DISCOUNT;
 	private BigDecimal CPT_POINTADD;
 	private BigDecimal CPT_POINTDRE;
-	private int SOP_overPoint;
-	private long SOP_TRANID;
-	private String SOP_STATUS;
-	private String transation;
+	private String SOP_PROJID;
 	public String getSOP_MEMBERID() {
 		return SOP_MEMBERID;
 	}
@@ -56,32 +53,12 @@ public class reportDAOBean {
 	public void setCPT_POINTDRE(BigDecimal cPT_POINTDRE) {
 		CPT_POINTDRE = cPT_POINTDRE;
 	}
-	public int getSOP_overPoint() {
-		return SOP_overPoint;
+	public String getSOP_PROJID() {
+		return SOP_PROJID;
 	}
-	public void setSOP_overPoint(int sOP_overPoint) {
-		SOP_overPoint = sOP_overPoint;
-	}
-	public long getSOP_TRANID() {
-		return SOP_TRANID;
-	}
-	public void setSOP_TRANID(long sOP_TRANID) {
-		SOP_TRANID = sOP_TRANID;
-	}
-	public String getTransation() {
-		return transation;
-	}
-	public void setTransation(String transation) {
-		this.transation = transation;
-	}
-	public String getSOP_STATUS() {
-		return SOP_STATUS;
-	}
-	public void setSOP_STATUS(String sOP_STATUS) {
-		SOP_STATUS = sOP_STATUS;
+	public void setSOP_PROJID(String sOP_PROJID) {
+		SOP_PROJID = sOP_PROJID;
 	}
 	
-	
-
 	
 }

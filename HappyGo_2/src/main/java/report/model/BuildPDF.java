@@ -40,4 +40,31 @@ public class BuildPDF {
 			e.printStackTrace();
 		}
 	}
+	
+	private static final String jsFile_store = "C:/EEIT_JSP_Software/JDBCDriver/HappyGo2.jasper";
+	private static final String outFilePdf_store = "C:/EEIT_JSP_Software/JDBCDriver/HappyGo2.pdf";
+	private static final String outFileHtml_store = "C:/EEIT_JSP_Software/JDBCDriver/HappyGo2.html";
+	
+	static void PDFBuid_store(Collection<Map<String, ?>> list) {
+		Map<String, Object> parameters = new HashMap<String, Object>();
+		JRMapCollectionDataSource dataSource05 = new JRMapCollectionDataSource(list);
+		JasperPrint print;
+		try {
+			print = JasperFillManager.fillReport(jsFile_store, parameters, dataSource05);
+
+			JRExporter exporterPdf = new JRPdfExporter();
+			exporterPdf.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFilePdf_store);
+			exporterPdf.setParameter(JRExporterParameter.JASPER_PRINT, print);
+			exporterPdf.exportReport();
+
+			JRExporter exporterHtml = new JRHtmlExporter();
+			exporterHtml.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFileHtml_store);
+			exporterHtml.setParameter(JRExporterParameter.JASPER_PRINT, print);
+			exporterHtml.exportReport();
+
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

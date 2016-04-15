@@ -27,6 +27,22 @@ public class ViewPDF {
 		return false;
 	}
 	
+	static boolean PDFView_store(HttpServletRequest request, HttpServletResponse response){
+		response.setContentType("application/pdf");
+		InputStream is;
+		try {
+			is = new FileInputStream(new File("C:/EEIT_JSP_Software/JDBCDriver/HappyGo2.pdf"));
+			OutputStream os = response.getOutputStream();
+			writeBytes(is, os);
+			return true;
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 	static void writeBytes(InputStream in, OutputStream out) throws IOException {
 		byte[] buffer = new byte[1024];
 		int length = -1;

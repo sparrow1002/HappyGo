@@ -18,11 +18,11 @@ import javax.sql.DataSource;
 
 import report.model.dao.reportDAOjdbc;
 
-@WebServlet("/reportServer")
-public class reportServer extends HttpServlet {
+@WebServlet("/reportServer_store")
+public class reportServer_store extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static DataSource dataSource;
-	public reportServer() {
+	public reportServer_store() {
 		try {
 			Context ctx = new InitialContext();
 			dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/websource");
@@ -34,40 +34,41 @@ public class reportServer extends HttpServlet {
     
     @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+    	doPost(request, response);
 	}
     
     
     @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	String prodaction = request.getParameter("report_prodaction");
-    	String store = request.getParameter("report_store");
-    	String id = request.getParameter("report_id");
-    	String day[];
-    	day=request.getParameter("report_day1").split("-");
-    	String day1 = day[0]+day[1]+day[2];
-    	day=request.getParameter("report_day2").split("-");
-    	String day2 = day[0]+day[1]+day[2];
+//    	String store = request.getParameter("username");
+    	
+    	String store = "1022000001";
+    	String prodaction = request.getParameter("reportstore_prodaction");
+    	String id = request.getParameter("reportstore_id");
+    	String day01[];
+    	day01 = request.getParameter("reportstore_day1").split("-");
+    	String day1 = day01[0]+day01[1]+day01[2];
+    	day01 = request.getParameter("reportstore_day2").split("-");
+    	String day2 = day01[0]+day01[1]+day01[2];
     	reportDAOjdbc re = new reportDAOjdbc(dataSource);
     	BuildPDF bp = new BuildPDF();
     	ViewPDF vp = new ViewPDF();
     	boolean result;
-    	Collection<Map<String, ?>> list = new ArrayList<Map<String, ?>>();
-    	if(request.getParameter("report_store")==null || request.getParameter("report_store").trim().length()==0){
-    		store = null;
-    	}
-    	if(request.getParameter("report_id")==null || request.getParameter("report_id").trim().length()==0){
+    	Collection<Map<String, ?>> list1 = new ArrayList<Map<String, ?>>();
+    	if(request.getParameter("reportstore_id")==null || request.getParameter("reportstore_id").trim().length()==0){
     		id=null;
     	}
     	if("產生PDF".equals(prodaction)){
-    	list = re.select(id,day1,day2,store);
-    	bp.PDFBuid(list);
-    	result = vp.PDFView(request,response);
+    	list1 = re.select_store(id,day1,day2,store);
+    	System.out.println(".................");
+    	bp.PDFBuid_store(list1);
+    	result = vp.PDFView_store(request,response);
     	}else if("查詢".equals(prodaction)){
-    		List<reportDAOBean> result_bean = re.select_bean(id,day1,day2,store);
-			request.setAttribute("report_select", result_bean);
+    		
+    		List<reportDAOBean_store> result_bean = re.select_store_bean(id,day1,day2,store);
+			request.setAttribute("reportstore_select", result_bean);
 			request.getRequestDispatcher(
-					"/report/Count_inquiry.jsp").forward(request, response);
+					"/report/Special_shops.jsp").forward(request, response);
     	}
 	}
 
