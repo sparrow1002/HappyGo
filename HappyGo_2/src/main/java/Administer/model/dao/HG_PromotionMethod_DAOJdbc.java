@@ -15,7 +15,7 @@ import Administer.model.HG_PromotionMethod_DAO;
 public class HG_PromotionMethod_DAOJdbc implements HG_PromotionMethod_DAO {
 	private static final String URL = "jdbc:sqlserver://localhost:1433;database=happygo";
 	private static final String USERNAME = "sa";
-	private static final String PASSWORD = "P@ssw0rd";
+	private static final String PASSWORD = "sa123456";
 	
 	public static void main(String[] args) {
 		int projId = 2;
