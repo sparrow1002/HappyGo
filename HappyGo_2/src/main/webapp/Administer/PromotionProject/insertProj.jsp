@@ -25,6 +25,7 @@
 </script>
 </head>
 <body>
+<h1>第一步：請設定促銷活動</h1>
 	<form
 		action="<c:url value="/PromotionProject/PromotionProject.controller" />"
 		method="get">

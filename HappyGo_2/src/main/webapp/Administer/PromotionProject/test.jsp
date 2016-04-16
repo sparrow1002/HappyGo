@@ -43,6 +43,7 @@
   function deltxt(id) {
       $("#div"+id).remove();
   }
+
 </script> 
 </body>
 </html>

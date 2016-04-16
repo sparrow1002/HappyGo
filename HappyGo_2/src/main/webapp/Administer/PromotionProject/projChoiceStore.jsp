@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>特約店</title>
+<title>新增方案</title>
 </head>
 <script src="../jquery/jquery-2.1.4.min.js"></script>
 <script src="../jquery/jquery-ui.js"></script>
@@ -19,7 +19,7 @@
 	});
 </script>
 <body>
-
+<h1>第二步：請設定促銷店家</h1>
 <c:if test="${not empty insert}">
 <h3>Insert PromotionProject Success</h3>
 </c:if>
@@ -37,13 +37,15 @@
 		List<ContractStoreBean> result = dao.select();
 
 	%>
-	<h1>${param.PTP_PROJID}</h1>
-	<h2>促銷ID的response/sessin 傳過來(servlet)</h2>
+	<h1>促銷活動編號：${param.PTP_PROJID}</h1>
+	<!-- 1.促銷ID的response/sessin 2.往後丟給servlet, service, dao) -->
 	
+	<form action="<c:url value="/PromotionProject/PromotionStore.controller" />" method="get">
 		<table id="myTable">
 			<thead>
 				<tr>
 					<th></th>
+					<th>是否參與</th>
 					<th>特店代號</th>
 					<th>特店名稱</th>
 					<th>特店密碼</th>
@@ -61,9 +63,11 @@
 			</thead>
 
 			<tbody>
-				<c:forEach var="row" items="<%=result%>">
+						<td><inpute type="text" value="${param.PTP_PROJID}" name="PTP_PROJID" readonly="value"></inpute></td>
+				<c:forEach var="row" items="<%=result%>" varStatus="loop">
 					<tr>
-						<td><input type="checkbox" /></td>
+						<td><input type="checkbox" name="${row.cos_storeid}" value="1"/></td>
+						<td>id:"${(loop.index)+1}"</td>
 						<td>${row.cos_storeid}</td>
 						<td>${row.cos_name}</td>
 						<td>${row.cos_pwd}</td>
@@ -76,13 +80,15 @@
 						<td>${row.cos_deletime}</td>
 						<td>${row.cos_updatetime}</td>
 						<td>${row.cos_updateuser}</td>
-
 						<td><input type="button" name="prodaction" value="修改"
 							onclick="location.href='<c:url value="/conStore/contractStore.controller?storeid=${row.cos_storeid}&prodaction=修改"/>'"></td>
 					</tr>
 				</c:forEach>
 			</tbody>
+			<tr>
+				<td align="center"><input type="submit" name="proChoiceStore" value="Insert"></td>
+			</tr>
 		</table>
-	
+</form>
 </body>
 </html>
