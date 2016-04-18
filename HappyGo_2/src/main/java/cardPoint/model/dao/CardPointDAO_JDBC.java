@@ -39,20 +39,20 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 		String status = "1";
 		
 		CardPointBean bean =new CardPointBean();
-		bean.setTranId(201604110005L);
+		bean.setTranId("201604110005");
 		bean.setdDate("20161204");
 		bean.setPointAdd(10);
 		//bean.setPointDre(0);
 		bean.setTranDate("20160404");
 		bean.setMemberId("jdbc01");
 		bean.setStatus("1");
-		bean.setUseTranId(0);
+		bean.setUseTranId("0");
 		bean.setUpdateUser("tra01");
 		
 		for(CardPointBean testbean : dao.selectPoint(memberId, dDate, status))
 			System.out.println(testbean);
 		System.out.println(dao.selectLastPoint(memberId, dDate, status));
-		System.out.println(dao.selectByTran(201604110001L));	
+		System.out.println(dao.selectByTran("201604110001"));	
 		/*if(dao.insert(bean)){
 			System.out.println("insert ok");
 		}else{
@@ -88,14 +88,14 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 			result = new ArrayList<CardPointBean>();
 			while(rset.next()){
 				CardPointBean bean = new CardPointBean();
-				bean.setTranId(rset.getLong("CPT_TRANID"));
+				bean.setTranId(rset.getString("CPT_TRANID"));
 				bean.setdDate(rset.getString("CPT_DDATE"));
 				bean.setPointAdd(rset.getInt("CPT_POINTADD"));
 				bean.setPointDre(rset.getInt("CPT_POINTDRE"));
 				bean.setTranDate(rset.getString("CPT_TRANDATE"));
 				bean.setMemberId(rset.getString("CPT_MEMBERID"));
 				bean.setStatus(rset.getString("CPT_STATUS"));
-				bean.setUseTranId(rset.getLong("CPT_USETRANID"));
+				bean.setUseTranId(rset.getString("CPT_USETRANID"));
 				bean.setUpdateTime(rset.getTimestamp("CPT_UPDATETIME"));
 				bean.setUpdateUser(rset.getString("CPT_UPDATEUSER"));
 				result.add(bean);
@@ -126,14 +126,14 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 			rset = pstmt.executeQuery();
 			if(rset.next()){
 				CardPointBean bean = new CardPointBean();
-				bean.setTranId(rset.getLong("CPT_TRANID"));
+				bean.setTranId(rset.getString("CPT_TRANID"));
 				bean.setdDate(rset.getString("CPT_DDATE"));
 				bean.setPointAdd(rset.getInt("CPT_POINTADD"));
 				bean.setPointDre(rset.getInt("CPT_POINTDRE"));
 				bean.setTranDate(rset.getString("CPT_TRANDATE"));
 				bean.setMemberId(rset.getString("CPT_MEMBERID"));
 				bean.setStatus(rset.getString("CPT_STATUS"));
-				bean.setUseTranId(rset.getLong("CPT_USETRANID"));
+				bean.setUseTranId(rset.getString("CPT_USETRANID"));
 				bean.setUpdateTime(rset.getTimestamp("CPT_UPDATETIME"));
 				bean.setUpdateUser(rset.getString("CPT_UPDATEUSER"));
 				result = bean;
@@ -146,7 +146,7 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 	}
 
 	private static final String SELECTBYTRAN = "select * from HG_CardPoint where CPT_TRANID = ?";
-	public CardPointBean selectByTran(long tranId) {
+	public CardPointBean selectByTran(String tranId) {
 		CardPointBean result = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -155,18 +155,18 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SELECTBYTRAN);
-			pstmt.setLong(1, tranId);
+			pstmt.setString(1, tranId);
 			rset = pstmt.executeQuery();
 			if(rset.next()){
 				CardPointBean bean = new CardPointBean();
-				bean.setTranId(rset.getLong("CPT_TRANID"));
+				bean.setTranId(rset.getString("CPT_TRANID"));
 				bean.setdDate(rset.getString("CPT_DDATE"));
 				bean.setPointAdd(rset.getInt("CPT_POINTADD"));
 				bean.setPointDre(rset.getInt("CPT_POINTDRE"));
 				bean.setTranDate(rset.getString("CPT_TRANDATE"));
 				bean.setMemberId(rset.getString("CPT_MEMBERID"));
 				bean.setStatus(rset.getString("CPT_STATUS"));
-				bean.setUseTranId(rset.getLong("CPT_USETRANID"));
+				bean.setUseTranId(rset.getString("CPT_USETRANID"));
 				bean.setUpdateTime(rset.getTimestamp("CPT_UPDATETIME"));
 				bean.setUpdateUser(rset.getString("CPT_UPDATEUSER"));
 				result = bean;
@@ -203,9 +203,9 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 			pstmt.setString(4, bean.getTranDate());
 			pstmt.setString(5, bean.getMemberId());
 			pstmt.setString(6, bean.getStatus());
-			pstmt.setLong(7, bean.getUseTranId());
+			pstmt.setString(7, bean.getUseTranId());
 			pstmt.setString(8, bean.getUpdateUser());
-			pstmt.setLong(9,bean.getTranId());
+			pstmt.setString(9,bean.getTranId());
 			pstmt.setInt(10, bean.getPointAdd());
 			int i = pstmt.executeUpdate();
 			System.out.println("CardPointDAO_JDBC update i= "+i);
@@ -227,14 +227,14 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(INSERT);
-			pstmt.setLong(1,bean.getTranId());
+			pstmt.setString(1,bean.getTranId());
 			pstmt.setString(2, bean.getdDate());
 			pstmt.setInt(3, bean.getPointAdd());
 			pstmt.setInt(4, bean.getPointDre());
 			pstmt.setString(5, bean.getTranDate());
 			pstmt.setString(6, bean.getMemberId());
 			pstmt.setString(7, bean.getStatus());
-			pstmt.setLong(8, bean.getUseTranId());
+			pstmt.setString(8, bean.getUseTranId());
 			pstmt.setString(9, bean.getUpdateUser());
 			int i = pstmt.executeUpdate();
 			conn.close();

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ShoppingBean implements Serializable{
-	private Long tranId;
+	private String tranId;
 	private int tranAmt;
 	private int disCount;
 	private String memberId;
@@ -17,10 +17,10 @@ public class ShoppingBean implements Serializable{
 	private Date updateTime;
 	private String updateUser;
 	
-	public Long getTranId() {
+	public String getTranId() {
 		return tranId;
 	}
-	public void setTranId(Long tranId) {
+	public void setTranId(String tranId) {
 		this.tranId = tranId;
 	}
 	public int getTranAmt() {

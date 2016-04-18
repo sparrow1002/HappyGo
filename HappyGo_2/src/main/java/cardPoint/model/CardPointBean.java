@@ -4,23 +4,23 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 public class CardPointBean implements Serializable{
-	private long tranId;
+	private String tranId;
 	private String dDate;
 	private int pointAdd;
 	private int pointDre;
 	private String tranDate;
 	private String memberId;
 	private String status;
-	private long useTranId;
+	private String useTranId;
 
 	private Timestamp updateTime;
 	private String updateUser;
 	
 	
-	public long getTranId() {
+	public String getTranId() {
 		return tranId;
 	}
-	public void setTranId(long tranId) {
+	public void setTranId(String tranId) {
 		this.tranId = tranId;
 	}
 	public String getdDate() {
@@ -59,10 +59,10 @@ public class CardPointBean implements Serializable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public long getUseTranId() {
+	public String getUseTranId() {
 		return useTranId;
 	}
-	public void setUseTranId(long useTranId) {
+	public void setUseTranId(String useTranId) {
 		this.useTranId = useTranId;
 	}
 	public Timestamp getUpdateTime() {
