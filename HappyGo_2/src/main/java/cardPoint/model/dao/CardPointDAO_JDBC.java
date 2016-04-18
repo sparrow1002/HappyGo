@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import cardPoint.model.CardPointBean;
 import cardPoint.model.CardPointDAO;
 
@@ -15,6 +20,16 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 	private static final String URL = "jdbc:sqlserver://localhost:1433;database=happygo";
 	private static final String USERNAME = "sa";
 	private static final String PASSWORD = "P@ssw0rd";
+	
+	private DataSource dataSource;
+	public CardPointDAO_JDBC() {
+		try {
+			Context ctx = new InitialContext();
+			dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/websource");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public static void main(String[] args) {
 		CardPointDAO_JDBC dao = new CardPointDAO_JDBC();
@@ -63,6 +78,7 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 		ResultSet rset = null;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SELECTPIONT);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, dDate);
@@ -84,20 +100,10 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 				bean.setUpdateUser(rset.getString("CPT_UPDATEUSER"));
 				result.add(bean);
 			}
-			
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally{
-			if(conn != null){
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		
+		} 
 		return result;
 	}
 	
@@ -112,6 +118,7 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 		ResultSet rset;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SELECTLASTPOINT);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, dDate);
@@ -131,16 +138,9 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 				bean.setUpdateUser(rset.getString("CPT_UPDATEUSER"));
 				result = bean;
 			}
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally{
-			if(conn!=null){
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 		return result;
 	}
@@ -153,6 +153,7 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 		ResultSet rset = null ;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SELECTBYTRAN);
 			pstmt.setLong(1, tranId);
 			rset = pstmt.executeQuery();
@@ -170,17 +171,10 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 				bean.setUpdateUser(rset.getString("CPT_UPDATEUSER"));
 				result = bean;
 			}
+			conn.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally{
-			if(conn!=null){
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		} 
 		return result;
 	}
 
@@ -201,6 +195,7 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 		PreparedStatement pstmt;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(UPDATE);
 			pstmt.setString(1, bean.getdDate());
 			pstmt.setInt(2, bean.getPointAdd());
@@ -214,23 +209,13 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 			pstmt.setInt(10, bean.getPointAdd());
 			int i = pstmt.executeUpdate();
 			System.out.println("CardPointDAO_JDBC update i= "+i);
+			conn.close();
 			if(i>=1){
 				return true;
-			}else{
-				return false;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally{
-			if(conn!=null){
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
+		} 		
 		return false;
 	}
 
@@ -240,6 +225,7 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 		PreparedStatement pstmt = null;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(INSERT);
 			pstmt.setLong(1,bean.getTranId());
 			pstmt.setString(2, bean.getdDate());
@@ -250,19 +236,14 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 			pstmt.setString(7, bean.getStatus());
 			pstmt.setLong(8, bean.getUseTranId());
 			pstmt.setString(9, bean.getUpdateUser());
-			pstmt.executeUpdate();
-			return true;
+			int i = pstmt.executeUpdate();
+			conn.close();
+			if(i>=1){
+				return true;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally{
-			if(conn!=null){
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		} 
 		return false;
 	}
 	

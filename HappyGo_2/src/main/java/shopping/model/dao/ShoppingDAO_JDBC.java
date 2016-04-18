@@ -7,6 +7,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import shopping.model.ShoppingBean;
 import shopping.model.ShoppingDAO;
 
@@ -15,6 +20,15 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 	private static final String USERNAME = "sa";
 	private static final String PASSWORD = "P@ssw0rd";
 	
+	private DataSource dataSource;
+	public ShoppingDAO_JDBC() {
+		try {
+			Context ctx = new InitialContext();
+			dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/websource");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	public static void main(String[] args) {
 		ShoppingDAO_JDBC dao = new ShoppingDAO_JDBC();
 		Long tranId = 123456789012345678L;
@@ -61,6 +75,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		ResultSet rset = null;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SELECTBYTRAN);
 			pstmt.setLong(1, tranId);
 			rset = pstmt.executeQuery();
@@ -95,6 +110,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		ResultSet rset = null;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SELECTBYMEMBER);
 			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
@@ -130,6 +146,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		ResultSet rset = null;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(STORE);
 			pstmt.setString(1, storeId);
 			rset = pstmt.executeQuery();
@@ -165,6 +182,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		ResultSet rset = null;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(PROJ);
 			pstmt.setInt(1, projId);
 			rset = pstmt.executeQuery();
@@ -200,6 +218,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		ResultSet rset = null;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(DATE);
 			pstmt.setString(1, begin);
 			pstmt.setString(2, end);
@@ -239,15 +258,17 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		PreparedStatement pstmt =null;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(UPDATE);
 			pstmt.setString(1, status);
 			pstmt.setString(2,bean.getUpdateUser());
 			pstmt.setLong(3, bean.getTranId());
 			int i = pstmt.executeUpdate();
+			conn.close();
 			if(i>0){
 				result = true;
 			}
-			conn.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -261,6 +282,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		PreparedStatement pstmt =null;
 		try {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(INSERT);
 			pstmt.setLong(1, bean.getTranId());
 			pstmt.setInt(2, bean.getTranAmt());
@@ -273,10 +295,10 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 			pstmt.setString(9, bean.getTranDate());
 			pstmt.setString(10, bean.getUpdateUser());
 			int i = pstmt.executeUpdate();
+			conn.close();
 			if(i>0){
 				result = true;
-			}
-			conn.close();
+			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -37,9 +37,11 @@ public class CardPointService {
 	private String today = dayDevice.getToday();//今天yyyymmdd
 	private String unUse = "1";//HG_DataProfile 未使用
 	private String used = "0";//HG_DataProfile 已使用
-	private String cancelTran = "0";
+	private String tranOkStatus = "1";
+	private String cancelTranStatus = "0";
 	private String updateUser = "lib0405";//目前寫死 還沒寫
 	private int lifeDay = 30;//dDate=today+lifeDay 目前寫死 should select from HG_DataProfile	
+	private int exchangePoint = 10;//目前寫死 還沒寫 HG_DataProfile 點數換現金比例
 	
 	public static void main(String[] args) {
 		CardPointService service = new CardPointService();
@@ -135,6 +137,11 @@ public class CardPointService {
 		return pointDAO.selectLastPoint(memberId, today, unUse);
 	}
 	
+	public int calculateDiscount(int point){
+		int discount = point/exchangePoint;
+		return discount;
+	}
+	
 	public boolean updateUsePoint(int usePoint, List<CardPointBean> listBean, long useTranId){
 		CardPointBean bean = new CardPointBean();
 		CardPointBean newBean = new CardPointBean();
@@ -180,19 +187,77 @@ public class CardPointService {
 		return false;
 	}
 	
-	public boolean ddddddddd(String memberId, int totalCost, int discount, long tranId, String storeId){
-		if( this.totalPoint(memberId) >= discount ){
+	public APIReturnBean transactionAPI(APIIntoBean apiIntoBean){
+		String tranId = apiIntoBean.getTranId();//SOP_TRANID
+		String memberId = apiIntoBean.getMemberId();
+		String storeId = apiIntoBean.getStoreId();//SOP_STOREID
+		int usePoint = apiIntoBean.getUsePoint();//CPT_POINTDRE
+		int cost = apiIntoBean.getCost();//SOP_TRANAMT
+		int discount = this.calculateDiscount(usePoint);//SOP_DISCOUNT
+		
+		int totalPoint = this.totalPoint(memberId);
+		
+		APIReturnBean apiReturnBean = new APIReturnBean();
+		
+		
+		if( totalPoint >= usePoint ){
+			List<HG_PromotionProject_Bean> proListBean = proService.selectToday(today,storeId);
+			PointAddBean pointAddBean = this.pointAdd(memberId, cost, proListBean);
+			int projId = pointAddBean.getProjId();//SOP_PROJID
+			int pointAdd = pointAddBean.getPointAdd();//CPT_POINTADD
+			int overPoint = totalPoint - usePoint;//SOP_overPoint
 			
-		
-		
-		
-		
-			this.selectPoint(memberId, today, unUse);
-		
-			int cost = this.calculateCost(totalCost, discount);
-			return true;
+			ShoppingBean shopBean = new ShoppingBean();
+			shopBean.setTranId(tranId);
+			shopBean.setTranAmt(cost);
+			shopBean.setDisCount(discount);
+			shopBean.setMemberId(memberId);
+			shopBean.setStatus(tranOkStatus);
+			shopBean.setProjId(projId);
+			shopBean.setStoreId(storeId);
+			shopBean.setOverPoint(overPoint);
+			shopBean.setTranDate(today);
+			shopBean.setUpdateUser(updateUser);
+			boolean shopInsertResult = shoppingDAO.insert(shopBean);
+			if(!shopInsertResult){
+				apiReturnBean.setResult(false);
+				apiReturnBean.setOverPoint(totalPoint);
+				return apiReturnBean;
+			}
+			String dDate = today + lifeDay;
+			CardPointBean pointBean = new CardPointBean();
+			pointBean.setTranId(tranId);
+			pointBean.setdDate(dDate);
+			pointBean.setPointAdd(pointAdd);
+			pointBean.setPointDre(usePoint);
+			pointBean.setTranDate(today);
+			pointBean.setMemberId(memberId);
+			pointBean.setStatus(unUse);
+			//useTranId
+			pointBean.setUpdateUser(updateUser);
+			boolean pointInsertResult = pointDAO.insert(pointBean);
+			if(!pointInsertResult){
+				apiReturnBean.setResult(false);
+				apiReturnBean.setOverPoint(totalPoint);
+				return apiReturnBean;
+			}
+			
+			List<CardPointBean> pointListBean = this.selectPoint(memberId, today, unUse);
+			boolean updateUsePointResult= this.updateUsePoint(usePoint, pointListBean, tranId);
+			if(!updateUsePointResult){
+				apiReturnBean.setResult(false);
+				apiReturnBean.setOverPoint(totalPoint);
+				return apiReturnBean;
+			}
+			
+			apiReturnBean.setOverPoint(overPoint);
+			apiReturnBean.setResult(true);
+			
+			return apiReturnBean;
 		}else{
-			return false;
+			apiReturnBean.setResult(false);
+			apiReturnBean.setOverPoint(totalPoint);
+			return apiReturnBean;
 		}
 	}
 	
@@ -201,7 +266,7 @@ public class CardPointService {
 		ShoppingBean shopBean = new ShoppingBean();
 		shopBean.setTranId(tranId);
 		shopBean.setUpdateUser(updateUser);
-		boolean shopUpdateOk = shoppingDAO.update(cancelTran, shopBean);
+		boolean shopUpdateOk = shoppingDAO.update(cancelTranStatus, shopBean);
 		
 		//----------HG_CardPoint--------
 		CardPointBean bean = new CardPointBean();
@@ -214,7 +279,7 @@ public class CardPointService {
 		System.out.println("CardPointService cancelTran update:"+bean);
 		//insert new point
 		if (bean.getPointDre()>0 && pointUpdateOk) {
-			newBean.setTranId(Long.parseLong(today));//目前暫訂
+			newBean.setTranId(tranId);
 			newBean.setdDate(dayDevice.calculateAfterDate(today,this.lifeDay));
 			newBean.setPointAdd(bean.getPointDre());
 			newBean.setTranDate(today);
@@ -241,10 +306,7 @@ public class CardPointService {
 		return MM;
 	}
 	//=================================================
-	public int calculateCost(int totalCost, int discount){
-		int cost = totalCost - discount;
-		return cost;
-	}
+	
 //	public int calculateAddPoint(int cost){
 //		int addPoint=0;
 //		int floorHeight = 100;//HG_DataProfile
@@ -258,9 +320,10 @@ public class CardPointService {
 //	}
 	//--------------------------------------
 	
-	public Map<Integer,Integer> pointAdd(String memberId, int cost,List<HG_PromotionProject_Bean> proListBean){
+	public PointAddBean pointAdd(String memberId, int cost,List<HG_PromotionProject_Bean> proListBean){
 		int point = 0;
-		Map<Integer,Integer> returnMap = new TreeMap<Integer, Integer>();
+		//Map<Integer,Integer> returnMap = new TreeMap<Integer, Integer>();
+		PointAddBean pointAddbean = new PointAddBean(); 
 		
 		int originProBonus = 0;
 		List<HG_PromotionProject_Bean> proForeverListBean = projDAO.selectforever();
@@ -282,8 +345,9 @@ public class CardPointService {
 				max_projId = projId;
 			}
 		}
-		returnMap.put(max_projId, max_point);
-		return returnMap;
+		pointAddbean.setProjId(max_projId);
+		pointAddbean.setPointAdd(max_point);
+		return pointAddbean;
 	}
 	
 	public int bonus(String memberId, int cost, int originProBonus, HG_PromotionProject_Bean proBean){
