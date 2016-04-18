@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface PProjectStoreDAO {
 	
-	public abstract List<PProjectStoreBean> insert(List<PProjectStoreBean> bean);
+	public abstract int[] insert(List<PProjectStoreBean> bean);
 	
 }

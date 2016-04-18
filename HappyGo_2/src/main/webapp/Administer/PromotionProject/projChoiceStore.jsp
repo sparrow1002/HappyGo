@@ -63,11 +63,14 @@
 			</thead>
 
 			<tbody>
-						<td><inpute type="text" value="${param.PTP_PROJID}" name="PTP_PROJID" readonly="value"></inpute></td>
+						
 				<c:forEach var="row" items="<%=result%>" varStatus="loop">
 					<tr>
-						<td><input type="checkbox" name="cos_storeid"+"${(loop.index)+1}" value="${row.cos_storeid}"/></td>
-						<td>id:"${(loop.index)+1}"</td>
+						<td><input type="hidden" value="${param.PTP_PROJID}" name="PTP_PROJID"></inpute></td>
+						<!-- 目前跳著勾選店面會有問題 -->
+						<td><input type="checkbox" name="cos_storeid${(loop.index)}" value="${row.cos_storeid}"/></td>
+						<td>${(loop.index)+1}</td>
+						<td><input type="hidden" value="${(loop.index)+1}" name="member"></inpute></td>
 						<td>${row.cos_storeid}</td>
 						<td>${row.cos_name}</td>
 						<td>${row.cos_pwd}</td>
