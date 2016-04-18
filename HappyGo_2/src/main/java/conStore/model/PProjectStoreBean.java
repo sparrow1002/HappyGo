@@ -1,7 +1,7 @@
 package conStore.model;
 
 public class PProjectStoreBean {
-	private String pps_projid;	//varchar(10) not null,
+	private int pps_projid;	//varchar(10) not null,
 	private String pps_storgpid;	//varchar(10) not null,
 	private String pps_storeid;	//varchar(10) not null,
 	private java.util.Date pps_updatetime;	//datetime NOT NULL DEFAULT GETDATE(),
@@ -15,10 +15,10 @@ public class PProjectStoreBean {
 				+ ", pps_updateuser=" + pps_updateuser + "]";
 	}
 	
-	public String getPps_projid() {
+	public int getPps_projid() {
 		return pps_projid;
 	}
-	public void setPps_projid(String pps_projid) {
+	public void setPps_projid(int pps_projid) {
 		this.pps_projid = pps_projid;
 	}
 	public String getPps_storgpid() {
