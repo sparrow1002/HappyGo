@@ -1,5 +1,9 @@
 package conStore.model;
 
-public class PProjectStoreDAO {
+import java.util.List;
 
+public interface PProjectStoreDAO {
+	
+	public abstract List<PProjectStoreBean> insert(List<PProjectStoreBean> bean);
+	
 }
