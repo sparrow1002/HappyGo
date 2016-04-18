@@ -122,10 +122,10 @@ public class MemberServlet extends HttpServlet {
 		bean.setMBR_EMAIL(MBR_EMAIL);
 		bean.setMBR_CREATEDATE(MBR_CREATEDATE);
 		bean.setMBR_DELDATE(MBR_DELDATE);
-		bean.setMBR_POINTS(MBR_POINTS);
+		bean.setMBR_POINTS(100);
 		bean.setMBR_STATUS(MBR_STATUS);
 		bean.setMBR_INTRODUCER(MBR_INTRODUCER);
-		bean.setMBR_UPDATETIME(MBR_UPDATETIME);
+		bean.setMBR_UPDATETIME(null);
 		bean.setMBR_UPDATEUSER(MBR_UPDATEUSER);		
 
 		if(prodaction!=null && prodaction.equals("建立帳號")) {
