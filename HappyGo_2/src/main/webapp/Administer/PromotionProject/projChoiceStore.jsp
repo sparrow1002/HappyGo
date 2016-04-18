@@ -66,7 +66,7 @@
 						<td><inpute type="text" value="${param.PTP_PROJID}" name="PTP_PROJID" readonly="value"></inpute></td>
 				<c:forEach var="row" items="<%=result%>" varStatus="loop">
 					<tr>
-						<td><input type="checkbox" name="${row.cos_storeid}" value="1"/></td>
+						<td><input type="checkbox" name="cos_storeid"+"${(loop.index)+1}" value="${row.cos_storeid}"/></td>
 						<td>id:"${(loop.index)+1}"</td>
 						<td>${row.cos_storeid}</td>
 						<td>${row.cos_name}</td>
@@ -90,5 +90,7 @@
 			</tr>
 		</table>
 </form>
+<h2>${error.noStore}</h2>
+<h2>${error.action}</h2>
 </body>
 </html>
