@@ -22,14 +22,6 @@
 			dateFormat: "yy/mm/dd"
 		});
 	});
-
-	function doNewOtherParameter() {
-		//新增其他消費金額
-	}
-	function showSecondConditionProperty() {
-		//if checkbox id=HAVE_PTM_ATRID有被勾選
-		//show條件二屬性PTM_ATRID
-	}
 </script>
 </head>
 <body>
@@ -40,35 +32,41 @@
 			align="center">
 			<tr style="border: 1px solid black">
 				<td style="border: 1px solid black">促銷方案活動編號：<input type="text"
-					name="PTP_PROJID"><span class="error">${error.pTP_PROJID}</span></td>
+					name="PTP_PROJID" value="${param.PTP_PROJID}"><span class="error">${error.pTP_PROJID}</span></td>
 			</tr>
 			<tr style="border: 1px solid black">
 				<td style="border: 1px solid black">促銷方案活動名稱：<input type="text"
-					name="PTP_NAME"><span class="error">${error.pTP_NAME}</span></td>
+					name="PTP_NAME" value="${param.PTP_NAME}"><span class="error">${error.pTP_NAME}</span></td>
 			</tr>
 			<tr>
 				<td style="border: 1px solid black">活動內容文字說明：<textarea rows="3"
-						cols="50" name="PTP_DESC">請在此輸入活動內容文字說明，最多200個字。</textarea></td>
+						cols="50" name="PTP_DESC"></textarea></td>
 			</tr>
 			<tr>
 				<td style="border: 1px solid black">活動狀態(開啟) <input
 					type="checkbox" checked="checked" name="PTP_STATUS" value="1">
 			</tr>
 			<tr>
-				<td style="border: 1px solid black">活動時間(永久) <input
-					type="checkbox" name="PTP_FOREVER"> <br> 促銷活動生效日期： <input
-					type="text" name="PTP_CREATEDATE" id="PTP_CREATEDATE"> <br>
-					促銷活動結束日期： <input type="text" name="PTP_DELDATE" id="PTP_DELDATE">
+				<!-- 需要在Servlet接PTP_FOREVER值且在Service設定一個超久的活動時間，有勾value="1" 沒勾value=null -->
+				<td style="border: 1px solid black">
+				活動時間(永久) <input type="checkbox" name="PTP_FOREVER" value="1"> 
+				<br> 
+				促銷活動生效日期： <input type="text" name="PTP_CREATEDATE" id="PTP_CREATEDATE" value="${param.PTP_CREATEDATE}">
+				<br>
+				促銷活動結束日期： <input type="text" name="PTP_DELDATE" id="PTP_DELDATE" value="${param.PTP_DELDATE}">
 				</td>
 			<tr>
-				<td style="border: 1px solid black">固定給點 <input type="checkbox"
-					id="PTP_FIXPOINT">
+				<!-- 4/12與宗保討論，固定給點PTP_FIXPOINT後方給TEXT欄位輸入，需寫入TABLE_HG_PromotionProject -->
+				<td style="border: 1px solid black">
+				方式一：只要消費即可獲得紅利 <input type="text"
+					 value="0" name="PTP_FIXPOINT"><span class="error">${error.pTP_FIXPOINT}</span>
 				</td>
 			</tr>
 			<tr>
-				<td> 紅利條件：(大於等於)<input type="text" name="PTB_VALUE"
-					value="請在此輸入金額">可獲得紅利： <input type="text"
-					name="PTB_POINT" value="請在此輸入點數">
+				<!-- 0413需寫入TABLE_HG_PromotionBonus PTB_VALUE跟PTB_POINT需要如何同時輸入多筆，還需確認-->
+				<td> 方式二：消費金額(大於等於)<input type="text" name="PTB_VALUE0"
+					value="0">
+					可獲得紅利： <input type="text"	name="PTB_POINT0" value="0">
 				</td>
 			</tr>
 			<tr>
@@ -80,16 +78,29 @@
 				<td><input type="button" id="btn" value="新增其它消費金額"></td>
 			</tr>
 			<tr>
-				<td style="border: 1px solid black">進階條件<input type="checkbox"
-					id="HAVE_PTM_ATRID"><select size=5 id="PTM_ATRID">
-						<option value="HG_Member">1_會員資料
-				</select> 進階條件屬性 <select size=5 id="PTM_ATRID">
-						<option value="MBR_SEX">1_會員性別
-						<option value="MBR_BIRTHDAY">2_會員生日
-						<option value="MBR_INTRODUCER">3_介紹人數
-				</select> <br> 屬性參數：<input type="text" name="PTM_VALUE" value="請在此輸入參數">可獲得紅利：<input
-					type="text" name="PTM_POINT" value="請在此輸入參數"> <br>
-					生日(0=當日,1=當週 ,2=當月)性別(0=男,1=女)介紹人(介紹會員人數)
+				<!-- 4/13與宗保討論：PTM_model需要寫入TABLE_HG_PromotionMethod -->
+				<td style="border: 1px solid black">
+				方式三：
+				<br>
+				只要消費時滿足以下條件
+				<br>
+				會員屬性 <select id="PTM_model">
+						<option value="1">1_會員性別
+						<option value="2">2_會員生日
+						<option value="3">3_介紹人數
+				</select>
+				<br>
+				<!-- 4/13與宗保討論：PTM_VALUE需要寫入TABLE_HG_PromotionMethod -->
+				屬性參數：<input type="text" name="PTM_VALUE" value="請輸入參數"> <br>
+					生日(1=當日,2=當月)性別(0=女,1=男)介紹人(介紹會員人數)
+					<br>
+					<br>
+				<!-- 0413與宗保討論，PTM_NAME需寫入至Table_HG_PromotionMethod -->
+					<select name="PTM_NAME">
+						<option value="1">可獲得紅利：</option>
+						<option value="2">可獲得X倍紅利：</option>
+					</select>
+					<input type="text" name="PTM_VARDATE" value="0">
 				</td>
 			</tr>
 			<tr>
@@ -119,23 +130,21 @@
 			</tr>
 		</table>
 	</form>
-	
-	
-	
 	<hr />
-
+	<h3><span class="error">${error.action}</span></h3>
 	<script>
 		//新增其他消費金額
 		//set the default value
 		var txtId = 1;
 		  //add input block in showBlock
 		  $("#btn").click(function () {
-		      $("#showBlock").append('<div id="div' + txtId + '">紅利條件：(大於等於) <input type="text" name="PTB_VALUE" value="請在此輸入金額"/>可獲得紅利： <input type="text" name="PTB_POINT" value="請在此輸入點數"><input type="button" value="刪除" onclick="deltxt('+txtId+')"></div>');
+		      $("#showBlock").append('<div id="div' + txtId + '">消費金額(大於等於) <input type="text" name="PTB_VALUE'+txtId+'" value="0"/>可獲得紅利： <input type="text" name="PTB_POINT'+txtId+'" value="請在此輸入點數"><input type="button" value="刪除" onclick="deltxt('+txtId+')"></div>');
 		      txtId++;
 		  });
 		  //remove div
 		  function deltxt(id) {
 		      $("#div"+id).remove();
+		      txtId--;
 		  }
 	</script>
 </body>

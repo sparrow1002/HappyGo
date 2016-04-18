@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,16 +9,16 @@
 </head>
 <body>
 	<c:import url="/admin/TopMeau.jsp" />
-	<div style="width: 800px; height: 600px;">
+	<div class="demo">
 		<table style="background-color: #F0E68C;">
 			<thead>
 				<tr>
-					<th colspan="2">後台系統使用者管理</th>
+					<th>後台系統使用者管理</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td colspan="2"><c:if test="${not empty userlist}">
+					<td><c:if test="${not empty userlist}">
 							<table id="userslist" class="t2">
 								<tbody>
 									<tr>
@@ -25,7 +26,7 @@
 												<form
 													action='<c:url value="/dayuNameSpace/rolelist.action?mode=select"/>'
 													method="get">
-													<table>
+													<table style="width: 870PX;">
 														<tr>
 															<td style="width: 100px">${userlist.value}</td>
 															<td><c:forEach var="right" items="${right}">
@@ -51,9 +52,8 @@
 																		</c:otherwise>
 																	</c:choose>
 																</c:forEach></td>
-															<td>
-																<input type="submit" value="修改">																
-																<input type="hidden" name="userid" value="${userlist.key}">
+															<td><input type="submit" value="修改"> <input
+																type="hidden" name="userid" value="${userlist.key}">
 																<input type="hidden" name="mode" value="edit"></td>
 														</tr>
 													</table>
@@ -64,13 +64,10 @@
 							</table>
 						</c:if></td>
 				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
 			</tbody>
 		</table>
 	</div>
+	<c:import url="/admin/FootBar.jsp" />
 </body>
 <script>
 	var strUrl = location.search;
@@ -134,7 +131,7 @@
 	});
 	
 	var message = '<%=request.getAttribute("message")%>';
-	if (message != null && message != ""&& message != "null")
+	if (message != null && message != "" && message != "null")
 		alert(message);
 </script>
 </html>

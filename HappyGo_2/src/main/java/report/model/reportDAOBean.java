@@ -1,12 +1,19 @@
 package report.model;
 
+import java.math.BigDecimal;
+
 public class reportDAOBean {
 	private String SOP_MEMBERID;
 	private String COS_NAME;
-	private int SOP_TRANAMT;
-	private int SOP_DISCOUNT;
-	private int CPT_POINTADD;
-	private int CPT_POINTDRE;
+	private String CPT_TRANDATE;
+	private BigDecimal SOP_TRANAMT;
+	private BigDecimal SOP_DISCOUNT;
+	private BigDecimal CPT_POINTADD;
+	private BigDecimal CPT_POINTDRE;
+	private int SOP_overPoint;
+	private long SOP_TRANID;
+	private String SOP_STATUS;
+	private String transation;
 	public String getSOP_MEMBERID() {
 		return SOP_MEMBERID;
 	}
@@ -19,30 +26,62 @@ public class reportDAOBean {
 	public void setCOS_NAME(String cOS_NAME) {
 		COS_NAME = cOS_NAME;
 	}
-	public int getSOP_TRANAMT() {
+	public String getCPT_TRANDATE() {
+		return CPT_TRANDATE;
+	}
+	public void setCPT_TRANDATE(String cPT_TRANDATE) {
+		CPT_TRANDATE = cPT_TRANDATE;
+	}
+	public BigDecimal getSOP_TRANAMT() {
 		return SOP_TRANAMT;
 	}
-	public void setSOP_TRANAMT(int sOP_TRANAMT) {
+	public void setSOP_TRANAMT(BigDecimal sOP_TRANAMT) {
 		SOP_TRANAMT = sOP_TRANAMT;
 	}
-	public int getSOP_DISCOUNT() {
+	public BigDecimal getSOP_DISCOUNT() {
 		return SOP_DISCOUNT;
 	}
-	public void setSOP_DISCOUNT(int sOP_DISCOUNT) {
+	public void setSOP_DISCOUNT(BigDecimal sOP_DISCOUNT) {
 		SOP_DISCOUNT = sOP_DISCOUNT;
 	}
-	public int getCPT_POINTADD() {
+	public BigDecimal getCPT_POINTADD() {
 		return CPT_POINTADD;
 	}
-	public void setCPT_POINTADD(int cPT_POINTADD) {
+	public void setCPT_POINTADD(BigDecimal cPT_POINTADD) {
 		CPT_POINTADD = cPT_POINTADD;
 	}
-	public int getCPT_POINTDRE() {
+	public BigDecimal getCPT_POINTDRE() {
 		return CPT_POINTDRE;
 	}
-	public void setCPT_POINTDRE(int cPT_POINTDRE) {
+	public void setCPT_POINTDRE(BigDecimal cPT_POINTDRE) {
 		CPT_POINTDRE = cPT_POINTDRE;
 	}
+	public int getSOP_overPoint() {
+		return SOP_overPoint;
+	}
+	public void setSOP_overPoint(int sOP_overPoint) {
+		SOP_overPoint = sOP_overPoint;
+	}
+	public long getSOP_TRANID() {
+		return SOP_TRANID;
+	}
+	public void setSOP_TRANID(long sOP_TRANID) {
+		SOP_TRANID = sOP_TRANID;
+	}
+	public String getTransation() {
+		return transation;
+	}
+	public void setTransation(String transation) {
+		this.transation = transation;
+	}
+	public String getSOP_STATUS() {
+		return SOP_STATUS;
+	}
+	public void setSOP_STATUS(String sOP_STATUS) {
+		SOP_STATUS = sOP_STATUS;
+	}
+	
+	
 
 	
 }

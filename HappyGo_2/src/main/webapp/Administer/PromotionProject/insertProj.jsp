@@ -25,11 +25,16 @@
 </script>
 </head>
 <body>
+<h1>第一步：請設定促銷活動</h1>
 	<form
 		action="<c:url value="/PromotionProject/PromotionProject.controller" />"
 		method="get">
 		<table height="600px" width="1200px" style="border: 1px solid black"
 			align="center">
+			<tr style="border: 1px solid black">
+				<td style="border: 1px solid black">促銷方案活動編號：<input type="text"
+					name="PTP_PROJID" value=""><span class="error">${error.pTP_PROJID}</span></td>
+			</tr>
 			<tr style="border: 1px solid black">
 				<td style="border: 1px solid black">促銷方案活動名稱：<input type="text"
 					name="PTP_NAME"><span class="error">${error.pTP_NAME}</span></td>
@@ -59,10 +64,10 @@
 				</td>
 			</tr>
 			<tr>
-				<!-- 0413需寫入TABLE_HG_PromotionBonus -->
-				<td> 方式二：消費金額(大於等於)<input type="text" name="PTB_VALUE"
+				<!-- 0413需寫入TABLE_HG_PromotionBonus PTB_VALUE跟PTB_POINT需要如何同時輸入多筆，還需確認-->
+				<td> 方式二：消費金額(大於等於)<input type="text" name="PTB_VALUE0"
 					value="0">
-					可獲得紅利： <input type="text"	name="PTB_POINT" value="0">
+					可獲得紅利： <input type="text"	name="PTB_POINT0" value="0">
 				</td>
 			</tr>
 			<tr>
@@ -87,7 +92,7 @@
 				</select>
 				<br>
 				<!-- 4/13與宗保討論：PTM_VALUE需要寫入TABLE_HG_PromotionMethod -->
-				屬性參數：<input type="text" name="PTM_VALUE" value="請在此輸入參數"> <br>
+				屬性參數：<input type="text" name="PTM_VALUE" value="請輸入參數"> <br>
 					生日(1=當日,2=當月)性別(0=女,1=男)介紹人(介紹會員人數)
 					<br>
 					<br>
@@ -96,7 +101,7 @@
 						<option value="1">可獲得紅利：</option>
 						<option value="2">可獲得X倍紅利：</option>
 					</select>
-					<input type="text" name="PTM_VARDATE" value="請在此輸入參數">
+					<input type="text" name="PTM_VARDATE" value="0">
 				</td>
 			</tr>
 			<tr>
@@ -126,23 +131,21 @@
 			</tr>
 		</table>
 	</form>
-	
-	
-	
 	<hr />
-
+	<h3><span class="error">${error.action}</span></h3>
 	<script>
 		//新增其他消費金額
 		//set the default value
 		var txtId = 1;
 		  //add input block in showBlock
 		  $("#btn").click(function () {
-		      $("#showBlock").append('<div id="div' + txtId + '">紅利條件：(大於等於) <input type="text" name="PTB_VALUE" value="請在此輸入金額"/>可獲得紅利： <input type="text" name="PTB_POINT" value="請在此輸入點數"><input type="button" value="刪除" onclick="deltxt('+txtId+')"></div>');
+		      $("#showBlock").append('<div id="div' + txtId + '">消費金額(大於等於) <input type="text" name="PTB_VALUE'+txtId+'" value="0"/>可獲得紅利： <input type="text" name="PTB_POINT'+txtId+'" value="請在此輸入點數"><input type="button" value="刪除" onclick="deltxt('+txtId+')"></div>');
 		      txtId++;
 		  });
 		  //remove div
 		  function deltxt(id) {
 		      $("#div"+id).remove();
+		      txtId--;
 		  }
 	</script>
 </body>

@@ -90,7 +90,7 @@ public class ContractStoreDAOJdbc implements ContractStoreDAO {
 		return result;	
 	}
 	
-	private static final String SELECT_ALL = "select * from HG_ContractStore"; 
+	private static final String SELECT_ALL = "select * from HG_ContractStore where COS_STOREID != 'admin' and COS_STATUS !='2'"; 
 	@Override
 	public List<ContractStoreBean> select() {
 		List<ContractStoreBean> result = null;
@@ -113,8 +113,7 @@ public class ContractStoreDAOJdbc implements ContractStoreDAO {
 				bean.setCos_contact(rset.getString("cos_contact"));
 				bean.setCos_createtime(rset.getString("cos_createtime"));
 				bean.setCos_deletime(rset.getString("cos_deletime"));
-				bean.setCos_deletime(rset.getString("cos_updatetime"));
-				//result.setCos_updatetime(rset.getString("cos_updatetime"));
+				bean.setCos_updatetime(rset.getString("cos_updatetime"));
 				bean.setCos_updateuser(rset.getString("cos_updateuser"));
 				result.add(bean);
 			}

@@ -27,9 +27,9 @@ public class HG_PromotionProject_Service {
 		return result;
 	}
 	
-	public List<HG_PromotionProject_Bean> selectToday(String today){
+	public List<HG_PromotionProject_Bean> selectToday(String today,String storeId){
 		List<HG_PromotionProject_Bean> result;
-		result = PromotionProjectDao.selectToday(today);
+		result = PromotionProjectDao.selectToday(today,storeId);
 		return result;
 	}
 
