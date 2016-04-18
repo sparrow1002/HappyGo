@@ -1,4 +1,4 @@
-package cardPoint.model;
+package API;
 
 public class APIIntoBean {
 	private String memberId;

@@ -1,0 +1,3 @@
+/API
+	/points
+			?memberId=		----totalPoint()----

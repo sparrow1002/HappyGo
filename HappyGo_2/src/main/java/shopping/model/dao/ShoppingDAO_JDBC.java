@@ -31,7 +31,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 	}
 	public static void main(String[] args) {
 		ShoppingDAO_JDBC dao = new ShoppingDAO_JDBC();
-		Long tranId = 123456789012345678L;
+		String tranId = "123456789012345678";
 		String memberId = "mb01";
 		String storeId = "cos123"; 
 		int projId = 123;
@@ -81,7 +81,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 			rset = pstmt.executeQuery();
 			if(rset.next()){
 				ShoppingBean bean = new ShoppingBean();
-				bean.setTranId(rset.getLong("SOP_TRANID"));
+				bean.setTranId(rset.getString("SOP_TRANID"));
 				bean.setTranAmt(rset.getInt("SOP_TRANAMT"));
 				bean.setDisCount(rset.getInt("SOP_DISCOUNT"));
 				bean.setMemberId(rset.getString("SOP_MEMBERID"));
@@ -118,7 +118,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 			result = new ArrayList<ShoppingBean>();
 			while(rset.next()){
 				ShoppingBean bean = new ShoppingBean();
-				bean.setTranId(rset.getLong("SOP_TRANID"));
+				bean.setTranId(rset.getString("SOP_TRANID"));
 				bean.setTranAmt(rset.getInt("SOP_TRANAMT"));
 				bean.setDisCount(rset.getInt("SOP_DISCOUNT"));
 				bean.setMemberId(rset.getString("SOP_MEMBERID"));
@@ -154,7 +154,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 			result = new ArrayList<ShoppingBean>();
 			while(rset.next()){
 				ShoppingBean bean = new ShoppingBean();
-				bean.setTranId(rset.getLong("SOP_TRANID"));
+				bean.setTranId(rset.getString("SOP_TRANID"));
 				bean.setTranAmt(rset.getInt("SOP_TRANAMT"));
 				bean.setDisCount(rset.getInt("SOP_DISCOUNT"));
 				bean.setMemberId(rset.getString("SOP_MEMBERID"));
@@ -190,7 +190,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 			result = new ArrayList<ShoppingBean>();
 			while(rset.next()){
 				ShoppingBean bean = new ShoppingBean();
-				bean.setTranId(rset.getLong("SOP_TRANID"));
+				bean.setTranId(rset.getString("SOP_TRANID"));
 				bean.setTranAmt(rset.getInt("SOP_TRANAMT"));
 				bean.setDisCount(rset.getInt("SOP_DISCOUNT"));
 				bean.setMemberId(rset.getString("SOP_MEMBERID"));
@@ -227,7 +227,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 			result = new ArrayList<ShoppingBean>();
 			while(rset.next()){
 				ShoppingBean bean = new ShoppingBean();
-				bean.setTranId(rset.getLong("SOP_TRANID"));
+				bean.setTranId(rset.getString("SOP_TRANID"));
 				bean.setTranAmt(rset.getInt("SOP_TRANAMT"));
 				bean.setDisCount(rset.getInt("SOP_DISCOUNT"));
 				bean.setMemberId(rset.getString("SOP_MEMBERID"));
@@ -262,7 +262,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 			pstmt = conn.prepareStatement(UPDATE);
 			pstmt.setString(1, status);
 			pstmt.setString(2,bean.getUpdateUser());
-			pstmt.setLong(3, bean.getTranId());
+			pstmt.setString(3, bean.getTranId());
 			int i = pstmt.executeUpdate();
 			conn.close();
 			if(i>0){
@@ -284,7 +284,7 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			//conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(INSERT);
-			pstmt.setLong(1, bean.getTranId());
+			pstmt.setString(1, bean.getTranId());
 			pstmt.setInt(2, bean.getTranAmt());
 			pstmt.setInt(3, bean.getDisCount());
 			pstmt.setString(4, bean.getMemberId());

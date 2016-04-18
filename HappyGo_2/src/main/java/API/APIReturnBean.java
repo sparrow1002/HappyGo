@@ -1,4 +1,4 @@
-package cardPoint.model;
+package API;
 
 public class APIReturnBean {
 	private int overPoint;

@@ -12,7 +12,7 @@ public interface CardPointDAO {
 	/*查詢個人即將失效點數*/ 
 	public abstract CardPointBean selectLastPoint(String memberId,String dDate,String status);
 	//取消交易
-	public abstract CardPointBean selectByTran(long tranId);
+	public abstract CardPointBean selectByTran(String tranId);
 	
 	public abstract boolean update(CardPointBean bean);
 	public abstract boolean insert(CardPointBean bean);

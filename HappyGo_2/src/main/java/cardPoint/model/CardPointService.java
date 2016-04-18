@@ -7,6 +7,13 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+
 import org.hibernate.type.SortedMapType;
 
 import shopping.model.ShoppingBean;
@@ -15,6 +22,8 @@ import shopping.model.dao.ShoppingDAO_JDBC;
 import model.CustomerBean;
 import model.CustomerService;
 import AAA000.DayDevice;
+import API.APIIntoBean;
+import API.APIReturnBean;
 import Administer.model.HG_PromotionBonus_Bean;
 import Administer.model.HG_PromotionBonus_Service;
 import Administer.model.HG_PromotionMethod_Bean;
@@ -24,6 +33,7 @@ import Administer.model.HG_PromotionProject_Service;
 import Administer.model.dao.HG_PromotionProject_DAOJdbc;
 import cardPoint.model.dao.CardPointDAO_JDBC;
 
+@Path("/points")
 public class CardPointService {
 	private CardPointDAO pointDAO = new CardPointDAO_JDBC();
 	private ShoppingDAO shoppingDAO = new ShoppingDAO_JDBC();
@@ -57,7 +67,7 @@ public class CardPointService {
 		System.out.println(service.parseMM("15750324"));*/
 		String strValue = "03";
 		String sex = "1";
-		System.out.println(sex.equals(status));
+		//System.out.println(sex.equals(status));
 		
 		/*List<CardPointBean> cpb = service.selectPoint(memberId, dDate, status);
 		for(CardPointBean bean : cpb)
@@ -65,8 +75,8 @@ public class CardPointService {
 		/*List<CardPointBean> cpb1 = service.unUsePoint(memberId);
 		for(CardPointBean bean : cpb1)
 			System.out.println(bean);*/
-		/*int totalPoint = service.totalPoint(memberId);
-		System.out.println("totalPoint= "+totalPoint);*/
+		int totalPoint = service.totalPoint(memberId);
+		System.out.println("totalPoint= "+totalPoint);
 		//System.out.println(service.LastPoint(memberId));
 		//更改未使用點數狀態
 		/*boolean updateUsePoint = service.updateUsePoint(54, cpb, 2016051300000001L);
@@ -82,9 +92,9 @@ public class CardPointService {
 		}else{
 			System.out.println("cancelTran error");
 		}*/
-		List<HG_PromotionProject_Bean> proListBean = proService.selectToday(today,storeId);
+		/*List<HG_PromotionProject_Bean> proListBean = proService.selectToday(today,storeId);
 		HG_PromotionProject_Bean proBean = proListBean.get(0);
-		System.out.println(proBean);
+		System.out.println(proBean);*/
 //		HG_PromotionProject_Bean proBean = new HG_PromotionProject_Bean();
 //		proBean.setPTP_PROJID(4);
 //		proBean.setPTP_FIXPOINT(10);
@@ -93,9 +103,9 @@ public class CardPointService {
 		int cost = 500;
 		int point = 30;
 		//System.out.println(service.bonus(cost, point, proBean));
-		int projId = proBean.getPTP_PROJID();
+		/*int projId = proBean.getPTP_PROJID();
 		HG_PromotionMethod_Bean proMBean = pmService.select(projId).get(0);
-		System.out.println(service.confirm(memberId, proMBean));
+		System.out.println(service.confirm(memberId, proMBean));*/
 		System.out.println("----------------------");
 		
 		/*List<HG_PromotionMethod_Bean> PMListBean = new ArrayList<HG_PromotionMethod_Bean>();
@@ -110,7 +120,7 @@ public class CardPointService {
 		
 		//System.out.println(service.bonus(memberId, cost, 10, proBean));
 		
-		System.out.println(service.pointAdd(memberId, cost, proListBean));
+		//System.out.println(service.pointAdd(memberId, cost, proListBean));
 	}
 	
 	public List<CardPointBean> selectPoint(String memberId, String dDate, String status){
@@ -125,7 +135,10 @@ public class CardPointService {
 		return result;
 	}
 	
-	public int totalPoint(String memberId){
+	@GET
+	@Path("/{id}")
+	@Produces("text/plain")
+	public int totalPoint(@PathParam("id") String memberId){
 		int point = 0;
 		for(CardPointBean bean : this.selectPoint(memberId, today, unUse)){
 			point = point + bean.getPointAdd();
@@ -142,7 +155,7 @@ public class CardPointService {
 		return discount;
 	}
 	
-	public boolean updateUsePoint(int usePoint, List<CardPointBean> listBean, long useTranId){
+	public boolean updateUsePoint(int usePoint, List<CardPointBean> listBean, String useTranId){
 		CardPointBean bean = new CardPointBean();
 		CardPointBean newBean = new CardPointBean();
 		int size = listBean.size();
@@ -261,7 +274,7 @@ public class CardPointService {
 		}
 	}
 	
-	public boolean cancelTran(long tranId){
+	public boolean cancelTran(String tranId){
 		//-------update HG_Shopping's SOP_STATUS------
 		ShoppingBean shopBean = new ShoppingBean();
 		shopBean.setTranId(tranId);
