@@ -50,7 +50,6 @@ public class projChoiceStore_Servlet extends HttpServlet {
 				bean.setPps_storeid(cos_storeid[i]);
 				beanlists.add(bean);
 				System.out.println(i);
-				i++;
 			}
 		}
 		

@@ -8,6 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import Administer.model.HG_PromotionBonus_Bean;
 import Administer.model.HG_PromotionMethod_Bean;
 import Administer.model.HG_PromotionMethod_DAO;
@@ -16,6 +21,16 @@ public class HG_PromotionMethod_DAOJdbc implements HG_PromotionMethod_DAO {
 	private static final String URL = "jdbc:sqlserver://localhost:1433;database=happygo";
 	private static final String USERNAME = "sa";
 	private static final String PASSWORD = "sa123456";
+	
+	private DataSource dataSource;
+	public HG_PromotionMethod_DAOJdbc() {
+		try {
+			Context ctx = new InitialContext();
+			dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/websource");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	public static void main(String[] args) {
 		int projId = 2;
@@ -110,7 +125,10 @@ public class HG_PromotionMethod_DAOJdbc implements HG_PromotionMethod_DAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
+			//jndi
+			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//jdbc
 			pstmt = conn.prepareStatement(INSERT);
 			pstmt.setString(1, bean.getPTM_NAME());
 			pstmt.setString(2, bean.getPTM_DESC());

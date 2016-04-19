@@ -12,17 +12,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import Administer.model.HG_PromotionProject_Bean;
 import Administer.model.HG_PromotionProject_Service;
+import Administer.model.dao.Test;
 
 @WebServlet(
 		urlPatterns={"/PromotionProject/selectPromotionProject.controller"}
 )
 public class SelectPromotionProject_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private HG_PromotionProject_Service PMOPJservice = new HG_PromotionProject_Service();
-       
+	//private HG_PromotionProject_Service PMOPJservice = new HG_PromotionProject_Service();
+    //改由用第32行Spring處理
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	    //用Spring new Service物件
+		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+		HG_PromotionProject_Service PMOPJservice = (HG_PromotionProject_Service) context.getBean("HG_PromotionProject_Service");
+		
+   
 		
 		System.out.println("SelectPromotionProject_Servlet start");
 		//接收HTML Form資料

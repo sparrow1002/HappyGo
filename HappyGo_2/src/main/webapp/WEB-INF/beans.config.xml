@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
 
 
@@ -14,6 +15,11 @@
 		<property name="url" value="jdbc:sqlserver://localhost:1433;database=java"></property> 
 		<property name="username" value="sa"></property> <property name="password" 
 		value="Abc1234"></property> </bean> -->
+		
+	<!--[_______________以下為士均使用Spring部分____________________________] -->
+	<context:annotation-config></context:annotation-config>
+	<context:component-scan base-package="Administer"></context:component-scan>
+	<!--[_______________以上為士均使用Spring部分____________________________] -->
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/websource"></property>
 	</bean>
