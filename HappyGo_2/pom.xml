@@ -22,13 +22,13 @@
 	</repositories>
 
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
 			<version>1.4</version>
 		</dependency>
-		
+
 		<!-- 4/18add RESTful Web Service -->
 		<dependency>
 			<groupId>org.glassfish.jersey.containers</groupId>
@@ -45,13 +45,13 @@
 			<artifactId>jersey-media-json-jackson</artifactId>
 			<version>2.22.2</version>
 		</dependency>
-	
-	
+
+
 		<!--4/11 jasperreport&pdf -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>sqljdbc</artifactId>
-			<version>42</version>			
+			<version>42</version>
 		</dependency>
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
@@ -77,7 +77,7 @@
 			<version>1.4.01</version>
 		</dependency>
 		<!-- END -->
-	
+
 		<!-- 2016/3/31 DAYU ADD BEGIN -->
 		<!-- AOP -->
 		<dependency>
@@ -86,13 +86,9 @@
 			<version>1.8.9</version>
 		</dependency>
 		<!-- 2016/3/31 DAYU ADD END -->
-		<!-- JDBC 
-		<dependency>
-			<groupId>com.microsoft.sqlserver.jdbc</groupId>
-			<artifactId>sqljdbc</artifactId>
-			<version>42</version>
-			<scope>runtime</scope>
-		</dependency>-->
+		<!-- JDBC <dependency> <groupId>com.microsoft.sqlserver.jdbc</groupId> 
+			<artifactId>sqljdbc</artifactId> <version>42</version> <scope>runtime</scope> 
+			</dependency> -->
 		<!-- struts2 2.3.4 -->
 		<dependency>
 			<groupId>org.apache.struts</groupId>
@@ -167,8 +163,7 @@
 			<version>1.0.4</version>
 		</dependency>
 
-		<!-- <c:> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" 
-			%> -->
+		<!-- <c:> <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> -->
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
@@ -218,8 +213,8 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
-			
-						<plugin>
+
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
 				<configuration>

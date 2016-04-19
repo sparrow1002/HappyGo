@@ -16,5 +16,6 @@
         <property name="hibernate.show_sql">true</property>
                 
         <mapping resource="admin/model/AdminUserDAObean.hbm.xml" />
+        <mapping class="admin.model.RoleDAOBean" />
     </session-factory>
 </hibernate-configuration>

@@ -11,13 +11,12 @@
 </head>
 <body>
 	<c:import url="/common/TopMeau.jsp" />
-
 	<div id="content" >
 		<div class="cycle-slideshow">
-			<img src="img/ad1.jpg"> <img src="img/ad2.jpg"> <img
-				src="img/ad3.jpg"> <img src="img/ad4.jpg"> <img
-				src="img/ad5.jpg"> <img src="img/ad6.jpg"> <img
-				src="img/ad7.jpg"> <img src="img/ad8.jpg">
+			<img src="img/ad1.jpg"> <img src="img/ad2.jpg"> 
+			<img src="img/ad3.jpg"> <img src="img/ad4.jpg"> 
+			<img src="img/ad5.jpg"> <img src="img/ad6.jpg"> 
+			<img src="img/ad7.jpg"> <img src="img/ad8.jpg">
 		</div>
 	</div>
 	<c:import url="/common/FootBar.jsp" />

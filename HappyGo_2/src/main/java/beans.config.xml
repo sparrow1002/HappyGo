@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
 
 
-	 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+	<!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
 		<property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"></property> 
-		<property name="url" value="jdbc:sqlserver://localhost:1433;database=happygo"></property> 
+		<property name="url" value="jdbc:sqlserver://localhost:1433;database=java"></property> 
 		<property name="username" value="sa"></property> <property name="password" 
-		value="sa123456"></property> </bean> 
-	<!--<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		value="Abc1234"></property> </bean> -->
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName" value="java:comp/env/jdbc/websource"></property>
-	</bean>-->
-	
-	
-	<bean id="sessionFactory" destroy-method="destroy"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+	</bean>
+
+	<bean id="sessionFactory" destroy-method="destroy"	class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
 	</bean>
@@ -44,24 +44,37 @@
 		<constructor-arg ref="rightDAO"></constructor-arg>
 	</bean>
 
-	<bean id="roleDAO" class="admin.model.dao.RoleDAOjdbc">
+	<!-- <bean id="roleDAO" class="admin.model.dao.RoleDAOjdbc">
 		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean>-->
+	
+	<bean id="roleDAO" class="admin.model.dao.RoleDAOhibernate">
+		<constructor-arg ref="dataSource"></constructor-arg>
+		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="roleDAOService" class="admin.model.RoleDAOService">
 		<constructor-arg ref="roleDAO"></constructor-arg>
 	</bean>
-	
-	
+
 	<bean id="syslogDAO" class="admin.model.dao.SyslogDAOjdbc">
 		<constructor-arg ref="dataSource"></constructor-arg>
 	</bean>
 	<bean id="syslogDAOService" class="admin.model.SyslogDAOService">
 		<constructor-arg ref="syslogDAO"></constructor-arg>
 	</bean>
+	
+	<bean id="cardInfoDAO" class="common.model.dao.CardInfoDAOjdbc">
+		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
+	<bean id="cardInfoDAOService" class="common.model.CardInfoDAOService">
+		<constructor-arg ref="cardInfoDAO"></constructor-arg>
+	</bean>
 	<!--[_______________structs2 追加部分____________________________] -->
 	<bean id="admin_Login_Action" class="admin.controller.Admin_Login_Action"
 		scope="prototype">
 		<property name="adminUserDAOService" ref="adminUserDAOService"></property>
+		<property name="roleDAOService" ref="roleDAOService"></property>
+		<property name="rightDAOService" ref="rightDAOService"></property>
 	</bean>
 	<bean id="admin_userlist_Action" class="admin.controller.Admin_list_Action"
 		scope="prototype">
@@ -85,10 +98,16 @@
 		scope="prototype">
 		<property name="rightDAOService" ref="rightDAOService"></property>
 	</bean>
-	
+
 	<bean id="Sylog_Action" class="admin.controller.Sylog_Action"
 		scope="prototype">
 		<property name="dataProfileDAOService" ref="dataProfileDAOService"></property>
 		<property name="syslogDAOService" ref="syslogDAOService"></property>
 	</bean>
+
+	<bean id="CardInfo_Action" class="common.controller.CardInfo_Action"
+		scope="prototype">
+		<property name="cardInfoDAOService" ref="cardInfoDAOService"></property>
+	</bean>
+	
 </beans>

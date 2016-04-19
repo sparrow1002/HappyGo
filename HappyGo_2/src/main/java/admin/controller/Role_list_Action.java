@@ -95,7 +95,7 @@ public class Role_list_Action extends ActionSupport implements SessionAware {
 					beanitem = new RoleDAOBean();
 					beanitem.setROL_ROLEID(user);
 					beanitem.setROL_RIGHTID(bean.getRIG_RIGHTID());
-					beanitem.setROL_UPDATEUSER("dayu");
+					beanitem.setROL_UPDATEUSER(sessionMap.get("adminuser").toString());
 					newbean.add(beanitem);
 				}
 			}
