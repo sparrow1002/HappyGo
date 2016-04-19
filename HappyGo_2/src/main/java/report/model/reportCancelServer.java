@@ -20,7 +20,7 @@ public class reportCancelServer extends HttpServlet {
 		doPost(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Long cancel = Long.parseLong(request.getParameter("report_cancel"));
+		String cancel = request.getParameter("report_cancel");
 		CardPointService cpService = new CardPointService();
 		boolean result = cpService.cancelTran(cancel);
 		request.getRequestDispatcher(

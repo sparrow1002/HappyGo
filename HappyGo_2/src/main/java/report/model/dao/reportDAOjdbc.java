@@ -216,7 +216,7 @@ public class reportDAOjdbc {
 				bean.setCPT_POINTADD(rs.getBigDecimal("CPT_POINTADD"));
 				bean.setCPT_POINTDRE(rs.getBigDecimal("CPT_POINTDRE"));
 				bean.setSOP_overPoint(rs.getInt("SOP_overPoint"));
-				bean.setSOP_TRANID(rs.getLong("SOP_TRANID"));
+				bean.setSOP_TRANID(rs.getString("SOP_TRANID"));
 				bean.setSOP_STATUS(rs.getString("SOP_STATUS"));
 				if (rs.getString("SOP_STATUS").equals("0")) {
 					if (rs.getString("CPT_STATUS").equals("0")) {

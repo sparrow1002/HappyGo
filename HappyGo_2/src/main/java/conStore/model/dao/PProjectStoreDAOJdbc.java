@@ -24,12 +24,12 @@ public class PProjectStoreDAOJdbc implements PProjectStoreDAO{
 	
 	private DataSource dataSource;
 	public PProjectStoreDAOJdbc() {
-/*		try {
+		try {
 			Context ctx = new InitialContext();
 			dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/websource");
 		} catch (NamingException e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 	public static void main(String[] args){	
 		PProjectStoreDAO dao = new PProjectStoreDAOJdbc();
@@ -55,11 +55,11 @@ public class PProjectStoreDAOJdbc implements PProjectStoreDAO{
 									   + "PPS_STOREID, PPS_UPDATEUSER)"
 									   + "values (?,?,?,?)";
 	@Override
-	public List<PProjectStoreBean> insert(List<PProjectStoreBean> beans) {
-		List<PProjectStoreBean> result = null;
+	public int[] insert(List<PProjectStoreBean> beans) {
+		int i[] = null;
 		try(
-			Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-//			Connection conn = dataSource.getConnection();	
+//			Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			Connection conn = dataSource.getConnection();	
 				PreparedStatement stmt = conn.prepareStatement(INSERT);	
 				){
 			for (PProjectStoreBean bean: beans) {
@@ -70,10 +70,10 @@ public class PProjectStoreDAOJdbc implements PProjectStoreDAO{
 				stmt.setString(4, bean.getPps_updateuser());
 				stmt.addBatch();
 			}
-			stmt.executeBatch();
+			i = stmt.executeBatch();
 			}		
 		catch(SQLException e){e.printStackTrace();}
-		return result;
+		return i;
 	}
 	
 	
