@@ -22,26 +22,26 @@ public class HG_PromotionBonus_DAOJdbc implements HG_PromotionBonus_DAO {
 	private static final String USERNAME = "sa";
 	private static final String PASSWORD = "sa123456";
 	
-	public static void main(String[] args) {
-		int projId = 2;
-		HG_PromotionBonus_DAOJdbc dao = new HG_PromotionBonus_DAOJdbc();
-		
-		for(HG_PromotionBonus_Bean bean:dao.select(projId))
-			System.out.println(bean);
-		/*HG_PromotionBonus_Bean bean = new HG_PromotionBonus_Bean();
-		bean.setPTB_ID(4);
-		bean.setPTB_model("b");
-		bean.setPTB_OPER("");
-		bean.setPTB_POINT(15);
-		bean.setPTB_PROJID(3);
-		bean.setPTB_VALUE(100);
-		bean.setPTB_UPDATEUSER("jdbc01");
-		if(dao.insert(bean))
-			System.out.println("insert ok");
-		else
-			System.out.println("insert error");*/
-		
-	}
+//	public static void main(String[] args) {
+//		int projId = 2;
+//		HG_PromotionBonus_DAOJdbc dao = new HG_PromotionBonus_DAOJdbc();
+//		
+//		for(HG_PromotionBonus_Bean bean:dao.select(projId))
+//			System.out.println(bean);
+//		HG_PromotionBonus_Bean bean = new HG_PromotionBonus_Bean();
+//		bean.setPTB_ID(4);
+//		bean.setPTB_model("b");
+//		bean.setPTB_OPER("");
+//		bean.setPTB_POINT(15);
+//		bean.setPTB_PROJID(3);
+//		bean.setPTB_VALUE(100);
+//		bean.setPTB_UPDATEUSER("jdbc01");
+//		if(dao.insert(bean))
+//			System.out.println("insert ok");
+//		else
+//			System.out.println("insert error");
+//		
+//	}
 	
 	private DataSource dataSource;
 	
@@ -119,13 +119,20 @@ public class HG_PromotionBonus_DAOJdbc implements HG_PromotionBonus_DAO {
 		return i;
 	}
 
-	private static final String INSERT = "insert into HG_PromotionBonus values (?,?,?,?,?,getdate(),?)";
+
+//	private static final String INSERT = "insert into HG_PromotionBonus (PTB_OPER, PTB_VALUE, PTB_POINT, PTB_PROJID, "
+//										+ "PTB_model, PTB_UPDATETIME, PTB_UPDATEUSER, PTB_ID) "
+//										+ "values (?,?,?,?,?,getdate(),?,?)";
+	private static final String INSERT = "insert into HG_PromotionBonus (PTB_OPER, PTB_VALUE, PTB_POINT, PTB_PROJID, "
+			+ "PTB_model, PTB_UPDATETIME, PTB_UPDATEUSER) "
+			+ "values (?,?,?,?,?,getdate(),?)";
 	public int insert(HG_PromotionBonus_Bean bean) {
 		int i = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+//			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(INSERT);
 			pstmt.setString(1, bean.getPTB_OPER());
 			pstmt.setInt(2, bean.getPTB_VALUE());
@@ -133,6 +140,7 @@ public class HG_PromotionBonus_DAOJdbc implements HG_PromotionBonus_DAO {
 			pstmt.setInt(4, bean.getPTB_PROJID());
 			pstmt.setString(5, bean.getPTB_model());
 			pstmt.setString(6, bean.getPTB_UPDATEUSER());
+//			pstmt.setInt(7, bean.getPTB_ID());
 			i = pstmt.executeUpdate();
 			conn.close();
 		} catch (SQLException e) {

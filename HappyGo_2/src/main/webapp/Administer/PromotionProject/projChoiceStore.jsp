@@ -18,6 +18,13 @@
 		$('#myTable').DataTable();
 	});
 </script>
+<style> 
+input[type=text] { 
+    width: 20px; 
+    display: block; 
+    border:0; 
+} 
+</style>
 <body>
 <h1>第二步：請設定促銷店家</h1>
 <c:if test="${not empty insert}">
@@ -56,8 +63,6 @@
 					<th>聯絡人</th>
 					<th>特店生效日</th>
 					<th>特店失效日</th>
-					<th>異動日期</th>
-					<th>異動者</th>
 					<th></th>
 				</tr>
 			</thead>
@@ -66,11 +71,9 @@
 						
 				<c:forEach var="row" items="<%=result%>" varStatus="loop">
 					<tr>
-						<td><input type="hidden" value="${param.PTP_PROJID}" name="PTP_PROJID"></inpute></td>
+						<td> <input type="text" value="${(loop.index)+1}" name="member" readonly/></td>
 						<!-- 目前跳著勾選店面會有問題 -->
 						<td><input type="checkbox" name="cos_storeid${(loop.index)}" value="${row.cos_storeid}"/></td>
-						<td>${(loop.index)+1}</td>
-						<td><input type="hidden" value="${(loop.index)+1}" name="member"></inpute></td>
 						<td>${row.cos_storeid}</td>
 						<td>${row.cos_name}</td>
 						<td>${row.cos_pwd}</td>
@@ -81,10 +84,7 @@
 						<td>${row.cos_contact}</td>
 						<td>${row.cos_createtime}</td>
 						<td>${row.cos_deletime}</td>
-						<td>${row.cos_updatetime}</td>
-						<td>${row.cos_updateuser}</td>
-						<td><input type="button" name="prodaction" value="修改"
-							onclick="location.href='<c:url value="/conStore/contractStore.controller?storeid=${row.cos_storeid}&prodaction=修改"/>'"></td>
+						<td><input type="hidden" value="${param.PTP_PROJID}" name="PTP_PROJID"></inpute></td>
 					</tr>
 				</c:forEach>
 			</tbody>
