@@ -5,6 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 
+
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 
 import admin.model.AdminUserDAOService;
@@ -82,6 +87,15 @@ public class Admin_Login_Action extends ActionSupport implements SessionAware {
 
 	@Override
 	public String execute() throws Exception {
+		System.out.println("LOGIN ACTION");
+		HttpServletRequest req = ServletActionContext.getRequest();
+		String mode = req.getParameter("mode");
+		System.out.println("mpde:"+mode);
+		if(mode!=null && mode.equals("quit")){
+			sessionMap.clear();
+			System.out.println("QUIT");
+			return "dayu";
+		}
 		if(sessionMap.containsKey("adminuser") && sessionMap.containsKey("adminuserright"))
 			return Action.SUCCESS;
 		System.out.println("Admin_Login_Action Exception");

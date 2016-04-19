@@ -9,6 +9,9 @@
 		<action name="weblogin" class="admin.controller.Admin_Login_Action">
 			<!-- controller.Login_Action-->
 			<result name="input" >/secure/login_admin.jsp</result>
+			<result name="dayu" type="redirect">
+				<param name="location">/index.jsp</param >
+				</result>
 			<result name="success" type="redirect">
 				<param name="location">/admin/main_mag.jsp</param >
 			</result>

@@ -29,7 +29,7 @@
 							</c:forEach>
 						</ul></li>
 				</c:forEach>
-				<li><a href="../index.jsp">回首頁</a></li>
+				<li><a href="<c:url value="/dayuNameSpace/weblogin.action?mode=quit" />">回首頁</a></li>
 			</ul>
 		</c:if>
 	</div>
