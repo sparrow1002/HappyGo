@@ -3,12 +3,20 @@ package Administer.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import Administer.model.dao.HG_PromotionProject_DAOJdbc;
 
+@Component(value="HG_PromotionProject_Service")
 public class HG_PromotionProject_Service {
 
 	private HG_PromotionProject_DAOJdbc PromotionProjectDao = new HG_PromotionProject_DAOJdbc();
-
+	
 	public int insert(HG_PromotionProject_Bean bean) {
 		// 活動編號可在寫入資料庫時由資料庫新增或由這邊加入，前提是bean必須在這邊包裝
 		int result = 0;

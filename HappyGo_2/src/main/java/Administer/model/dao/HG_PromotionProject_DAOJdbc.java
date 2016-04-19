@@ -13,9 +13,12 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.stereotype.Component;
+
 import Administer.controller.PromotionProject_Servlet;
 import Administer.model.HG_PromotionProject_Bean;
 
+//@Component(value="pmtProjDAO")
 public class HG_PromotionProject_DAOJdbc {
 
 	private DataSource dataSource;
