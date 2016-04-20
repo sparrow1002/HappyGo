@@ -19,7 +19,7 @@ import cardPoint.model.CardPointDAO;
 public class CardPointDAO_JDBC implements CardPointDAO {
 	private static final String URL = "jdbc:sqlserver://localhost:1433;database=happygo";
 	private static final String USERNAME = "sa";
-	private static final String PASSWORD = "P@ssw0rd";
+	private static final String PASSWORD = "sa123456";
 	
 	private DataSource dataSource;
 	public CardPointDAO_JDBC() {
@@ -77,8 +77,8 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			//conn = dataSource.getConnection();
+			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SELECTPIONT);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, dDate);
@@ -117,8 +117,8 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 		PreparedStatement pstmt;
 		ResultSet rset;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			//conn = dataSource.getConnection();
+			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SELECTLASTPOINT);
 			pstmt.setString(1, memberId);
 			pstmt.setString(2, dDate);
@@ -152,8 +152,8 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null ;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			//conn = dataSource.getConnection();
+			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SELECTBYTRAN);
 			pstmt.setString(1, tranId);
 			rset = pstmt.executeQuery();
@@ -179,34 +179,36 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 	}
 
 	private static final String UPDATE = "update HG_CardPoint set "
-			+ "CPT_DDATE = ?,"
-			+ "CPT_POINTADD = ?,"
-			+ "CPT_POINTDRE = ?,"
-			+ "CPT_TRANDATE = ?,"
-			+ "CPT_MEMBERID = ?,"
+			//+ "CPT_DDATE = ?,"
+			//+ "CPT_POINTADD = ?,"
+			//+ "CPT_POINTDRE = ?,"
+			//+ "CPT_TRANDATE = ?,"
+			//+ "CPT_MEMBERID = ?,"
 			+ "CPT_STATUS = ?,"
 			+ "CPT_USETRANID = ?,"
 			+ "CPT_UPDATETIME = getdate(),"
 			+ "CPT_UPDATEUSER = ?"
 			+ " where CPT_TRANID = ?"
-			+ " and CPT_POINTADD = ?";
+			+ " and CPT_POINTADD = ?"
+			+ " and CPT_POINTDRE = ?,";
 	public boolean update(CardPointBean bean) {
 		Connection conn =null;
 		PreparedStatement pstmt;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			//conn = dataSource.getConnection();
+			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(UPDATE);
-			pstmt.setString(1, bean.getdDate());
-			pstmt.setInt(2, bean.getPointAdd());
-			pstmt.setInt(3, bean.getPointDre());
-			pstmt.setString(4, bean.getTranDate());
-			pstmt.setString(5, bean.getMemberId());
-			pstmt.setString(6, bean.getStatus());
-			pstmt.setString(7, bean.getUseTranId());
-			pstmt.setString(8, bean.getUpdateUser());
-			pstmt.setString(9,bean.getTranId());
-			pstmt.setInt(10, bean.getPointAdd());
+			//pstmt.setString(1, bean.getdDate());
+			//pstmt.setInt(2, bean.getPointAdd());
+			//pstmt.setInt(3, bean.getPointDre());
+			//pstmt.setString(4, bean.getTranDate());
+			//pstmt.setString(5, bean.getMemberId());
+			pstmt.setString(1, bean.getStatus());
+			pstmt.setString(2, bean.getUseTranId());
+			pstmt.setString(3, bean.getUpdateUser());
+			pstmt.setString(4,bean.getTranId());
+			pstmt.setInt(5, bean.getPointAdd());
+			pstmt.setInt(6, bean.getPointDre());
 			int i = pstmt.executeUpdate();
 			System.out.println("CardPointDAO_JDBC update i= "+i);
 			conn.close();
@@ -224,8 +226,8 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			//conn = dataSource.getConnection();
+			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(INSERT);
 			pstmt.setString(1,bean.getTranId());
 			pstmt.setString(2, bean.getdDate());
