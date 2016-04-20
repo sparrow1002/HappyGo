@@ -29,22 +29,34 @@
 		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
 	</bean>
 
-	<bean id="adminUserDAO" class="admin.model.dao.AdminUserDAOjdbc">
+	<!-- <bean id="adminUserDAO" class="admin.model.dao.AdminUserDAOjdbc">
 		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean> -->
+	<bean id="adminUserDAO" class="admin.model.dao.AdminUserDAOhibernate">
+		<constructor-arg ref="dataSource"></constructor-arg>
+		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="adminUserDAOService" class="admin.model.AdminUserDAOService">
 		<constructor-arg ref="adminUserDAO"></constructor-arg>
 	</bean>
 
-	<bean id="dataProfileDAO" class="admin.model.dao.DataProfileDAOjdbc">
+	<!-- <bean id="dataProfileDAO" class="admin.model.dao.DataProfileDAOjdbc">
 		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean> -->
+	<bean id="dataProfileDAO" class="admin.model.dao.DataProfileDAOhibernate">
+		<constructor-arg ref="dataSource"></constructor-arg>
+		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="dataProfileDAOService" class="admin.model.DataProfileDAOService">
 		<constructor-arg ref="dataProfileDAO"></constructor-arg>
 	</bean>
 
-	<bean id="rightDAO" class="admin.model.dao.RightDAOjdbc">
+	<!-- <bean id="rightDAO" class="admin.model.dao.RightDAOjdbc">
 		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean> -->
+	<bean id="rightDAO" class="admin.model.dao.RightDAOhibernate">
+		<constructor-arg ref="dataSource"></constructor-arg>
+		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="rightDAOService" class="admin.model.RightDAOService">
 		<constructor-arg ref="rightDAO"></constructor-arg>

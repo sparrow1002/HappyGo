@@ -15,7 +15,11 @@
         <property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
         <property name="hibernate.show_sql">true</property>
                 
-        <mapping resource="admin/model/AdminUserDAObean.hbm.xml" />
+
         <mapping class="admin.model.RoleDAOBean" />
+        <mapping class="admin.model.RightDAOBean" />
+        <mapping class="admin.model.AdminUserDAObean" />
+        <mapping class="admin.model.DataProfileDAOBean" />
+        <mapping class="admin.model.SyslogDAOBean" />
     </session-factory>
 </hibernate-configuration>

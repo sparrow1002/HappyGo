@@ -84,8 +84,7 @@ public class RoleDAOhibernate implements RoleDAO {
 	}
 	public RoleDAOhibernate(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
-	}
-	
+	}	
 
 	public Session getSession() {
 		return sessionFactory.getCurrentSession();

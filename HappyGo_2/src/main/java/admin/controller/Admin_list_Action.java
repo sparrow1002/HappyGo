@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -127,6 +128,7 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 		bean.setADM_PWD(ADM_PWD);
 		bean.setADM_ROLEID(ADM_ROLEID);
 		bean.setADM_UPDATEUSER(sessionMap.get("adminuser").toString());
+		bean.setADM_UPDATETIME(new java.util.Date());
 		return bean;
 	}
 

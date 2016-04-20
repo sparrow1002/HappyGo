@@ -46,7 +46,7 @@ public class SyslogDAOjdbc implements SyslogDAO {
 			result = new ArrayList<SyslogDAOBean>();
 			while (rs.next()) {
 				SyslogDAOBean bean = new SyslogDAOBean();
-				bean.setLOG_NO(rs.getString("LOG_NO"));
+				bean.setLOG_NO(rs.getInt("LOG_NO"));
 				bean.setLOG_TYPE(rs.getString("LOG_TYPE"));
 				bean.setLOG_DESC(rs.getString("LOG_DESC"));
 				bean.setLOG_USERID(rs.getString("LOG_USERID"));
@@ -101,7 +101,7 @@ public class SyslogDAOjdbc implements SyslogDAO {
 			result = new ArrayList<SyslogDAOBean>();
 			while (rs.next()) {
 				SyslogDAOBean bean = new SyslogDAOBean();
-				bean.setLOG_NO(rs.getString("LOG_NO"));
+				bean.setLOG_NO(rs.getInt("LOG_NO"));
 				bean.setLOG_TYPE(rs.getString("LOG_TYPE"));
 				bean.setLOG_DESC(rs.getString("LOG_DESC"));
 				bean.setLOG_USERID(rs.getString("LOG_USERID"));
@@ -135,7 +135,7 @@ public class SyslogDAOjdbc implements SyslogDAO {
 		return result;
 	}
 	
-	private static final String INSERT = "INSERT INTO HG_SysLog (LOG_NO,LOG_USERID,LOG_TYPE,LOG_DESC,LOG_UPDATETIME,LOG_UPDATEUSER) VALUES (?,?,?,?,getdate(),?)";
+	private static final String INSERT = "INSERT INTO HG_SysLog (LOG_USERID,LOG_TYPE,LOG_DESC,LOG_UPDATETIME,LOG_UPDATEUSER) VALUES (?,?,?,getdate(),?)";
 
 	
 	/* (non-Javadoc)
@@ -152,11 +152,11 @@ public class SyslogDAOjdbc implements SyslogDAO {
 			pst = conn.prepareStatement(INSERT);
 			// DAP_GROUP,DAP_ID,DAP_VALUE,DAP_DESC,DAP_UPDATEUSER
 			if (bean != null) {
-				pst.setString(1, bean.getLOG_NO());
-				pst.setString(2, bean.getLOG_USERID());
-				pst.setString(3, bean.getLOG_TYPE());
-				pst.setString(4, bean.getLOG_DESC());
-				pst.setString(5, bean.getLOG_UPDATEUSER());				
+				//pst.getInt(1, bean.getLOG_NO());
+				pst.setString(1, bean.getLOG_USERID());
+				pst.setString(2, bean.getLOG_TYPE());
+				pst.setString(3, bean.getLOG_DESC());
+				pst.setString(4, bean.getLOG_UPDATEUSER());				
 				
 				int i = pst.executeUpdate();
 				if (i == 1) {
