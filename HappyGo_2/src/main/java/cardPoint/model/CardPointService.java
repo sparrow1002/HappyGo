@@ -34,7 +34,7 @@ import Administer.model.HG_PromotionProject_Service;
 import Administer.model.dao.HG_PromotionProject_DAOJdbc;
 import cardPoint.model.dao.CardPointDAO_JDBC;
 
-@Path("/pointsAPI")
+@Path("/points")
 public class CardPointService {
 	private CardPointDAO pointDAO = new CardPointDAO_JDBC();
 	private ShoppingDAO shoppingDAO = new ShoppingDAO_JDBC();

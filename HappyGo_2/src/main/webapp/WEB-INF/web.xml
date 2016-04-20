@@ -40,19 +40,4 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   
-  <!-- RESTeasy Web Service -->
-  <servlet>
-  	<servlet-name>RESTeasy</servlet-name>
-  	<servlet-class>
-  		org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher
-  	</servlet-class>
-  	<init-param>
-  		<param-name>javax.ws.rs.Application</param-name>
-  		<param-value>API.RESTConfig</param-value>
-  	</init-param>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>RESTeasy</servlet-name>
-  	<url-pattern>/pointsAPI/*</url-pattern>
-  </servlet-mapping>
 </web-app>
