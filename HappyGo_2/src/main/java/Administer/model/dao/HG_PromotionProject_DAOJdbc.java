@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 
 import org.springframework.stereotype.Component;
 
+import AAA000.DayDevice;
 import Administer.controller.PromotionProject_Servlet;
 import Administer.model.HG_PromotionProject_Bean;
 
@@ -129,8 +130,13 @@ public class HG_PromotionProject_DAOJdbc {
 				result = new HG_PromotionProject_Bean();//必備
 				result.setPTP_PROJID(rset.getInt("PTP_PROJID"));
 				result.setPTP_NAME(rset.getString("PTP_NAME"));
-				result.setPTP_CREATEDATE(rset.getString("PTP_CREATEDATE"));
-				result.setPTP_DELDATE(rset.getString("PTP_DELDATE"));
+				//處理日期轉換
+				DayDevice day = new DayDevice();
+				String createdate = day.parse_DBtoWeb(rset.getString("PTP_CREATEDATE"));
+				result.setPTP_CREATEDATE(createdate);
+				//處理日期轉換
+				String deldate = day.parse_DBtoWeb(rset.getString("PTP_DELDATE"));
+				result.setPTP_DELDATE(deldate);
 				result.setPTP_STATUS(rset.getString("PTP_STATUS"));
 				result.setPTP_DESC(rset.getString("PTP_DESC"));
 				result.setPTP_COVER(rset.getBytes("PTP_COVER"));
@@ -170,8 +176,12 @@ public class HG_PromotionProject_DAOJdbc {
 				HG_PromotionProject_Bean bean = new HG_PromotionProject_Bean();
 				bean.setPTP_PROJID(rset.getInt("PTP_PROJID"));
 				bean.setPTP_NAME(rset.getString("PTP_NAME"));
-				bean.setPTP_CREATEDATE(rset.getString("PTP_CREATEDATE"));
-				bean.setPTP_DELDATE(rset.getString("PTP_DELDATE"));
+				//處理日期轉換
+				DayDevice day = new DayDevice();
+				String createdate = day.parse_DBtoWeb(rset.getString("PTP_CREATEDATE"));
+				String deldate = day.parse_DBtoWeb(rset.getString("PTP_DELDATE"));
+				bean.setPTP_CREATEDATE(createdate);
+				bean.setPTP_DELDATE(deldate);
 				bean.setPTP_STATUS(rset.getString("PTP_STATUS"));
 				bean.setPTP_DESC(rset.getString("PTP_DESC"));
 				bean.setPTP_COVER(rset.getBytes("PTP_COVER"));
@@ -217,8 +227,12 @@ public class HG_PromotionProject_DAOJdbc {
 				HG_PromotionProject_Bean bean = new HG_PromotionProject_Bean();
 				bean.setPTP_PROJID(rset.getInt("PTP_PROJID"));
 				bean.setPTP_NAME(rset.getString("PTP_NAME"));
-				bean.setPTP_CREATEDATE(rset.getString("PTP_CREATEDATE"));
-				bean.setPTP_DELDATE(rset.getString("PTP_DELDATE"));
+				//處理日期轉換
+				DayDevice day = new DayDevice();
+				String createdate = day.parse_DBtoWeb(rset.getString("PTP_CREATEDATE"));
+				String deldate = day.parse_DBtoWeb(rset.getString("PTP_DELDATE"));
+				bean.setPTP_CREATEDATE(createdate);
+				bean.setPTP_DELDATE(deldate);
 				bean.setPTP_STATUS(rset.getString("PTP_STATUS"));
 				bean.setPTP_DESC(rset.getString("PTP_DESC"));
 				bean.setPTP_COVER(rset.getBytes("PTP_COVER"));
@@ -260,8 +274,12 @@ public class HG_PromotionProject_DAOJdbc {
 				HG_PromotionProject_Bean bean = new HG_PromotionProject_Bean();
 				bean.setPTP_PROJID(rset.getInt("PTP_PROJID"));
 				bean.setPTP_NAME(rset.getString("PTP_NAME"));
-				bean.setPTP_CREATEDATE(rset.getString("PTP_CREATEDATE"));
-				bean.setPTP_DELDATE(rset.getString("PTP_DELDATE"));
+				//處理日期轉換
+				DayDevice day = new DayDevice();
+				String createdate = day.parse_DBtoWeb(rset.getString("PTP_CREATEDATE"));
+				String deldate = day.parse_DBtoWeb(rset.getString("PTP_DELDATE"));
+				bean.setPTP_CREATEDATE(createdate);
+				bean.setPTP_DELDATE(deldate);
 				bean.setPTP_STATUS(rset.getString("PTP_STATUS"));
 				bean.setPTP_DESC(rset.getString("PTP_DESC"));
 				bean.setPTP_COVER(rset.getBytes("PTP_COVER"));
