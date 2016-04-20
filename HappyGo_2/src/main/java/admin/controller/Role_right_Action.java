@@ -62,6 +62,7 @@ public class Role_right_Action extends ActionSupport implements SessionAware {
 			bean.setRIG_RIGHTID(RIG_RIGHTID);
 			bean.setRIG_DESC(RIG_DESC);
 			bean.setRIG_FUNTION(RIG_FUNTION);
+			bean.setRIG_UPDATETIME(new java.util.Date());
 			bean.setRIG_UPDATEUSER(sessionMap.get("adminuser").toString());
 			bean = rightDAOService.update(bean);
 			if (bean != null)

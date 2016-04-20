@@ -1,5 +1,6 @@
 package admin.controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -117,7 +118,7 @@ public class Dataprofile_list_Action extends ActionSupport implements
 		System.out.println("DAP_ID:" + DAP_ID);
 		bean.setDAP_VALUE(DAP_VALUE);
 		bean.setDAP_DESC(DAP_DESC);
-		
+		bean.setDAP_UPDATETIME(new java.util.Date());
 		bean.setDAP_UPDATEUSER(sessionMap.get("adminuser").toString());
 		return bean;
 	}
