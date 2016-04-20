@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -33,7 +34,7 @@ import Administer.model.HG_PromotionProject_Service;
 import Administer.model.dao.HG_PromotionProject_DAOJdbc;
 import cardPoint.model.dao.CardPointDAO_JDBC;
 
-@Path("/points")
+@Path("/pointsAPI")
 public class CardPointService {
 	private CardPointDAO pointDAO = new CardPointDAO_JDBC();
 	private ShoppingDAO shoppingDAO = new ShoppingDAO_JDBC();
@@ -55,7 +56,7 @@ public class CardPointService {
 	
 	public static void main(String[] args) {
 		CardPointService service = new CardPointService();
-		String memberId = "jdbc01";
+		String memberId = "mb01";
 		String today = service.today;
 		String dDate = today;
 		//String dDate = "20161113";
@@ -135,10 +136,9 @@ public class CardPointService {
 		return result;
 	}
 	
-	@GET
-	@Path("/{id}")
+	@POST
 	@Produces("text/plain")
-	public int totalPoint(@PathParam("id") String memberId){
+	public int totalPoint(@QueryParam("memberId") String memberId){
 		int point = 0;
 		for(CardPointBean bean : this.selectPoint(memberId, today, unUse)){
 			point = point + bean.getPointAdd();
@@ -150,7 +150,10 @@ public class CardPointService {
 		return pointDAO.selectLastPoint(memberId, today, unUse);
 	}
 	
-	public int calculateDiscount(int point){
+	@GET
+	@Path("/{point}")
+	@Produces("text/plain")
+	public int calculateDiscount(@PathParam("point") int point){
 		int discount = point/exchangePoint;
 		return discount;
 	}
@@ -200,6 +203,9 @@ public class CardPointService {
 		return false;
 	}
 	
+	@POST
+	@Consumes({"application/xml","application/json"})
+	@Produces({"application/xml","application/json"})
 	public APIReturnBean transactionAPI(APIIntoBean apiIntoBean){
 		String tranId = apiIntoBean.getTranId();//SOP_TRANID
 		String memberId = apiIntoBean.getMemberId();
