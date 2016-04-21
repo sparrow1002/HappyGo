@@ -136,8 +136,8 @@ public class PromotionProject_Servlet extends HttpServlet {
 				}
 				
 				//日期將yyyy/MM/dd調整為yyyyMMdd
-				String StartDate="0";
-				String EndDate="0";
+				String StartDate="";
+				String EndDate="";
 				if(PTP_CREATEDATE!=null && PTP_DELDATE!=null){
 				String[] aArray1 = PTP_CREATEDATE.split("/");
 				for (String d : aArray1) {
@@ -158,7 +158,7 @@ public class PromotionProject_Servlet extends HttpServlet {
 				//目前判斷無效T.T
 				System.out.println("time check start");
 				System.out.println(StartDate);
-				if(StartDate=="0" || EndDate=="0"){
+				if(StartDate=="" || EndDate==""){
 					System.out.println("time catch");
 					error.put("PTP_CREATEDATE", "請選擇活動時間");
 					error.put("PTP_DELDATE", "請選擇活動時間");
@@ -219,6 +219,7 @@ public class PromotionProject_Servlet extends HttpServlet {
 				prombnsbeanlist.add(prombnsbean);
 				}
 				//HG_PromotionMethod_Bean
+				System.out.println("PTM_model="+PTM_model);
 				HG_PromotionMethod_Bean prommtbean = new HG_PromotionMethod_Bean();		
 				prommtbean.setPTM_model(PTM_model);
 				prommtbean.setPTM_NAME(PTM_NAME);

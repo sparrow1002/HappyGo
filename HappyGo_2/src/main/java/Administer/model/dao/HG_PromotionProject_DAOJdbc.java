@@ -33,8 +33,8 @@ public class HG_PromotionProject_DAOJdbc {
 		}
 	}
 	
-	public static void main(String[] args) { //main方法測試
-		HG_PromotionProject_DAOJdbc dao = new HG_PromotionProject_DAOJdbc();
+//	public static void main(String[] args) { //main方法測試
+//		HG_PromotionProject_DAOJdbc dao = new HG_PromotionProject_DAOJdbc();
 		/*for(HG_PromotionProject_Bean bean:dao.selectToday("20160412","00000005"))
 			System.out.println(bean);*/
 		// List<HG_PromotionProject_Bean> beans = dao.select("%活%");				//測試模糊查詢，從活動名稱關鍵字找資料
@@ -42,9 +42,10 @@ public class HG_PromotionProject_DAOJdbc {
 //		List<HG_PromotionProject_Bean> beans = dao.selectAll(); 					//測試從活動編號找活動
 //		List<HG_PromotionProject_Bean> beans = dao.select("20160401", "20160601");  //測試從活動時間找活動
 //		System.out.println(beans);
-		System.out.println("selectforever" + dao.selectforever());
-	}
+//		System.out.println("selectforever" + dao.selectforever());
+//	}
 
+	//活動時間為null時，會select失敗_20160421
 	private static final String URL = "jdbc:sqlserver://localhost:1433;database=happygo";
 	private static final String USERNAME = "sa";
 	private static final String PASSWORD = "sa123456";
@@ -345,7 +346,7 @@ public class HG_PromotionProject_DAOJdbc {
 	}
 	public int insert(HG_PromotionProject_Bean bean){ //insert方法
 		//傳入值可用bean，可單一屬性傳入String PTP_PROJID, String PTP_NAME, String PTP_CREATEDATE, String PTP_DELDATE, String PTP_STATUS, String PTP_DESC, byte[] PTP_COVER, int PTP_FIXPOINT, java.sql.Date PTP_UPDATETIME, String PTP_UPDATEUSER
-		System.out.println("This is HG_PromotionProject INSERT");
+		System.out.println("HG_PromotionProject_DAOJdbc insert start");
 		int insertAmount = 0;
 		ResultSet rset = null;
 		Connection conn = null;
@@ -372,13 +373,14 @@ public class HG_PromotionProject_DAOJdbc {
 //			bean不用設PTM_UPDATETIME，SQL指令有下
 //			stmt.setString(9, bean.getPTP_UPDATEUSER());
 			insertAmount = stmt.executeUpdate();
-			System.out.println("This is HG_PromotionProject INSERT DAO run end");
 			}else{
 				insertAmount=999;
 						}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		System.out.println("HG_PromotionProject_DAOJdbc insert end");
+		System.out.println("HG_PromotionProject_DAOJdbc insert end insertAmount="+insertAmount);
 		return insertAmount;
 	}
 	public int update(HG_PromotionProject_Bean bean){

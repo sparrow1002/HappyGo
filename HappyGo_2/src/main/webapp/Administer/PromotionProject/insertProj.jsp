@@ -95,7 +95,7 @@
 				<br>
 				只要消費時滿足以下條件
 				<br>
-				會員屬性 <select id="PTM_model" >
+				會員屬性 <select name="PTM_model" >
 						<option value="0">選擇屬性
 						<option value="1">1_會員性別
 						<option value="2">2_會員生日

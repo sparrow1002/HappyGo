@@ -24,12 +24,12 @@ public class PProjectStoreDAOJdbc implements PProjectStoreDAO{
 	
 	private DataSource dataSource;
 	public PProjectStoreDAOJdbc() {
-/*		try {
+		try {
 			Context ctx = new InitialContext();
 			dataSource = (DataSource) ctx.lookup("java:comp/env/jdbc/websource");
 		} catch (NamingException e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 	public static void main(String[] args){	
 		PProjectStoreDAO dao = new PProjectStoreDAOJdbc();
@@ -62,8 +62,7 @@ public class PProjectStoreDAOJdbc implements PProjectStoreDAO{
 	Connection conn = dataSource.getConnection();	
 	PreparedStatement stmt = conn.prepareStatement(INSERT);	
 	){ 
-	for (PProjectStoreBean bean: beans) { 
-
+	for (PProjectStoreBean bean: beans) {
 	stmt.setInt(1, bean.getPps_projid()); 
 	stmt.setString(2, bean.getPps_storgpid()); 
 	stmt.setString(3, bean.getPps_storeid()); 
