@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/HappyGo_2/css/main.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>新增方案</title>
 <link rel="stylesheet"
@@ -22,9 +23,18 @@
 			dateFormat: "yy/mm/dd"
 		});
 	});
+	
+	function clearForm() {
+		var inputs = document.getElementsByTagName("textarea");
+		for(var i=0; i<inputs.length; i++) {
+				inputs[i].value="";
+		}
+	}
 </script>
 </head>
 <body>
+<div id="allpage">
+	<c:import url="/admin/TopMeau.jsp" />
 <h1>第一步：請設定促銷活動</h1>
 	<form
 		action="<c:url value="/PromotionProject/PromotionProject.controller" />"
@@ -41,7 +51,7 @@
 			</tr>
 			<tr>
 				<td style="border: 1px solid black">活動內容文字說明：<textarea rows="3"
-						cols="50" name="PTP_DESC">請在此輸入活動內容文字說明，最多200個字。</textarea></td>
+						cols="50" name="PTP_DESC" onfocus="clearForm()">請在此輸入活動內容文字說明，最多200個字。</textarea></td>
 			</tr>
 			<tr>
 				<td style="border: 1px solid black">活動狀態(開啟) <input
@@ -148,5 +158,7 @@
 		      txtId--;
 		  }
 	</script>
+	<c:import url="/admin/FootBar.jsp" />
+</div>
 </body>
 </html>

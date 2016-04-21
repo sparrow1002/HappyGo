@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/HappyGo_2/css/main.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>查詢方案</title>
 <link rel="stylesheet"
@@ -25,6 +26,8 @@
 </script>
 </head>
 <body>
+<div id="allpage">
+	<c:import url="/admin/TopMeau.jsp" />
 	<form
 		action="<c:url value="/PromotionProject/selectPromotionProject.controller" />"
 		method="get">
@@ -62,5 +65,7 @@
 			</tr>
 		</table>
 	</form>
+	<c:import url="/admin/FootBar.jsp" />
+</div>
 </body>
 </html>
