@@ -1,7 +1,6 @@
 package conStore.model.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import AAA000.DayDevice;
 import conStore.model.ContractStoreBean;
 import conStore.model.ContractStoreDAO;
 
@@ -47,7 +47,7 @@ public class ContractStoreDAOJdbc implements ContractStoreDAO {
 		dao.select("03");
 		System.out.println(bean);
 	}
-	
+	DayDevice day = new DayDevice();	
 	private static final String SELECT_BY_ID = "select * from HG_ContractStore where COS_STOREID=?";
 	@Override
 	public ContractStoreBean select(String storeId) {
@@ -71,8 +71,16 @@ public class ContractStoreDAOJdbc implements ContractStoreDAO {
 				result.setCos_status(rset.getString("cos_status"));
 				result.setCos_phone(rset.getString("cos_phone"));
 				result.setCos_contact(rset.getString("cos_contact"));
-				result.setCos_createtime(rset.getString("cos_createtime"));
-				result.setCos_deletime(rset.getString("cos_deletime"));
+				if(rset.getString("cos_createtime") == null){
+					result.setCos_createtime("");
+				}else{
+				result.setCos_createtime(day.parse_DBtoWeb(rset.getString("cos_createtime")));
+				}
+				if(rset.getString("cos_deletime")==null){
+					result.setCos_deletime("");
+				}else{
+				result.setCos_deletime(day.parse_DBtoWeb(rset.getString("cos_deletime")));
+				}			
 				result.setCos_updatetime(rset.getString("cos_updatetime"));
 				result.setCos_updateuser(rset.getString("cos_updateuser"));
 			}
@@ -111,8 +119,8 @@ public class ContractStoreDAOJdbc implements ContractStoreDAO {
 				bean.setCos_status(rset.getString("cos_status"));
 				bean.setCos_phone(rset.getString("cos_phone"));
 				bean.setCos_contact(rset.getString("cos_contact"));
-				bean.setCos_createtime(rset.getString("cos_createtime"));
-				bean.setCos_deletime(rset.getString("cos_deletime"));
+				bean.setCos_createtime(day.parse_DBtoWeb(rset.getString("cos_createtime")));						
+				bean.setCos_deletime(day.parse_DBtoWeb(rset.getString("cos_deletime")));
 				bean.setCos_updatetime(rset.getString("cos_updatetime"));
 				bean.setCos_updateuser(rset.getString("cos_updateuser"));
 				result.add(bean);
@@ -124,9 +132,9 @@ public class ContractStoreDAOJdbc implements ContractStoreDAO {
 	}
 	
 	private static final String INSERT = "insert into HG_ContractStore (COS_STOREID, COS_NAME, COS_PWD, COS_TAXCODE,"+
-										 " COS_ADDRESS, COS_STATUS, COS_PHONE, COS_CONTACT, COS_CREATETIME,"+
+										 " COS_ADDRESS, COS_PHONE, COS_CONTACT, COS_CREATETIME,"+
 										 " COS_DELETIME, COS_UPDATEUSER)"+ 
-										 "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+										 "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	@Override
 	public ContractStoreBean insert(ContractStoreBean bean) {
 		ContractStoreBean result = null;
@@ -141,12 +149,12 @@ public class ContractStoreDAOJdbc implements ContractStoreDAO {
 				stmt.setString(3, bean.getCos_pwd());
 				stmt.setString(4, bean.getCos_taxcode());
 				stmt.setString(5, bean.getCos_address());
-				stmt.setString(6, bean.getCos_status());
-				stmt.setString(7, bean.getCos_phone());
-				stmt.setString(8, bean.getCos_contact());
-				stmt.setString(9, bean.getCos_createtime());
-				stmt.setString(10, bean.getCos_deletime());
-				stmt.setString(11, bean.getCos_updateuser());
+				//stmt.setString(6, bean.getCos_status());
+				stmt.setString(6, bean.getCos_phone());
+				stmt.setString(7, bean.getCos_contact());
+				stmt.setString(8, bean.getCos_createtime());
+				stmt.setString(9, bean.getCos_deletime());
+				stmt.setString(10, bean.getCos_updateuser());
 				int i = stmt.executeUpdate();
 				if(i == 1){
 					result =bean;
@@ -196,8 +204,7 @@ public class ContractStoreDAOJdbc implements ContractStoreDAO {
 //			Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			Connection conn = dataSource.getConnection();	
 			PreparedStatement stmt = conn.prepareStatement(UPDATE);
-				){	
-			
+				){				
 			stmt.setString(1, bean.getCos_name());
 			stmt.setString(2, bean.getCos_pwd());
 			stmt.setString(3, bean.getCos_taxcode());
@@ -205,8 +212,10 @@ public class ContractStoreDAOJdbc implements ContractStoreDAO {
 			stmt.setString(5, bean.getCos_status());
 			stmt.setString(6, bean.getCos_phone());
 			stmt.setString(7, bean.getCos_contact());
-			stmt.setString(8, bean.getCos_createtime());
-			stmt.setString(9, bean.getCos_deletime());
+			
+			stmt.setString(8, day.parse_WebtoDB(bean.getCos_createtime()));
+			
+			stmt.setString(9, day.parse_WebtoDB(bean.getCos_deletime()));
 			stmt.setString(10, bean.getCos_updatetime());
 			stmt.setString(11, bean.getCos_updateuser());
 			stmt.setString(12, bean.getCos_storeid());
