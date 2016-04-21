@@ -52,7 +52,7 @@ public class PromotionProject_Servlet extends HttpServlet {
 				String PTP_DELDATE = request.getParameter("PTP_DELDATE");
 				String PTP_FOREVER = request.getParameter("PTP_FOREVER");
 				String str_PTP_FIXPOINT = request.getParameter("PTP_FIXPOINT");
-	
+				System.out.println(PTP_FOREVER+"PTP_FOREVER----------------");
 		//HG_PromotionBonus的欄位資料，由於可能會有1~多筆，必須用while迴圈+陣列處理
 				int j=0;
 				while(request.getParameter("PTB_VALUE"+j)!=null){
@@ -82,8 +82,8 @@ public class PromotionProject_Servlet extends HttpServlet {
 				
 		//HG_特約店的欄位資料
 				
-				String PPS_STORGPID = request.getParameter("PPS_STORGPID");
-				String PPS_STOREID = request.getParameter("PPS_STOREID");
+//				String PPS_STORGPID = request.getParameter("PPS_STORGPID");
+//				String PPS_STOREID = request.getParameter("PPS_STOREID");
 				
 		//submit buttom(insert or update)
 				String promotionProject = request.getParameter("promotionProject");
@@ -136,21 +136,34 @@ public class PromotionProject_Servlet extends HttpServlet {
 				}
 				
 				//日期將yyyy/MM/dd調整為yyyyMMdd
-				String StartDate = "";
+				String StartDate="0";
+				String EndDate="0";
+				if(PTP_CREATEDATE!=null && PTP_DELDATE!=null){
 				String[] aArray1 = PTP_CREATEDATE.split("/");
 				for (String d : aArray1) {
 					StartDate = StartDate +d;
 					        }
-				String EndDate ="";
 				String[] aArray2 = PTP_DELDATE.split("/");
 				for (String d : aArray2) {
 					EndDate = EndDate +d;
 					        }
+				}
 				//活動時間(永久)有勾選，給一個很久的時間2001~2099年
 				if(PTP_FOREVER!=null){
 					StartDate = "20010101";
 					EndDate = "20991231";
 				}
+				
+				//必須選擇生效+結束日期，或是勾選"永久"
+				//目前判斷無效T.T
+				System.out.println("time check start");
+				System.out.println(StartDate);
+				if(StartDate=="0" || EndDate=="0"){
+					System.out.println("time catch");
+					error.put("PTP_CREATEDATE", "請選擇活動時間");
+					error.put("PTP_DELDATE", "請選擇活動時間");
+				}
+				System.out.println("time check end");
 					
 				//驗證HTML Form資料
 				if("Insert".equals(promotionProject) || "Update".equals(promotionProject)) {
@@ -165,10 +178,17 @@ public class PromotionProject_Servlet extends HttpServlet {
 					}
 				}
 				
+				if("Insert".equals(promotionProject)) {
+					if(StartDate==null || EndDate==null) {
+						error.put("PTP_CREATEDATE", "請選擇活動時間以便於執行"+promotionProject);
+						error.put("PTP_DELDATE", "請選擇活動時間以便於執行"+promotionProject);
+					}
+				}
+				
 				if(error!=null && !error.isEmpty()) {
 					if(error.get("pTP_PROJID")!=null){
 						request.getRequestDispatcher(
-								"/Administer/PromotionProject/updateProj.jsp").forward(request, response);
+								"/Administer/PromotionProject/insertProj.jsp").forward(request, response);
 					}else{
 						request.getRequestDispatcher(
 								"/Administer/PromotionProject/insertProj.jsp").forward(request, response);

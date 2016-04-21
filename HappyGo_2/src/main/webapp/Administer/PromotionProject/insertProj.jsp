@@ -62,9 +62,9 @@
 				<td style="border: 1px solid black">
 				活動時間(永久) <input type="checkbox" name="PTP_FOREVER" value="1"> 
 				<br> 
-				促銷活動生效日期： <input type="text" name="PTP_CREATEDATE" id="PTP_CREATEDATE">
+				促銷活動生效日期： <input type="text" name="PTP_CREATEDATE" id="PTP_CREATEDATE"><span class="error">${error.PTP_CREATEDATE}</span>
 				<br>
-				促銷活動結束日期： <input type="text" name="PTP_DELDATE" id="PTP_DELDATE">
+				促銷活動結束日期： <input type="text" name="PTP_DELDATE" id="PTP_DELDATE"><span class="error">${error.PTP_DELDATE}</span>
 				</td>
 			<tr>
 				<!-- 4/12與宗保討論，固定給點PTP_FIXPOINT後方給TEXT欄位輸入，需寫入TABLE_HG_PromotionProject -->
@@ -95,7 +95,8 @@
 				<br>
 				只要消費時滿足以下條件
 				<br>
-				會員屬性 <select id="PTM_model">
+				會員屬性 <select id="PTM_model" >
+						<option value="0">選擇屬性
 						<option value="1">1_會員性別
 						<option value="2">2_會員生日
 						<option value="3">3_介紹人數
