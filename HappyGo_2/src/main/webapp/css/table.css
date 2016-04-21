@@ -1,5 +1,5 @@
 @CHARSET "UTF-8";
-table {
+.jtable table {
 	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
 	font-size: 12px;
 	margin: 45px;
@@ -10,7 +10,7 @@ table {
 	left: 50px; 
 }
 
-th {
+.jtable th {
 	font-size: 13px;
 	font-weight: normal;
 	padding: 8px;
@@ -20,7 +20,7 @@ th {
 	color: #039;
 }
 
-td {
+.jtable td {
 	padding: 8px;
 	background: #e8edff; 
 	border-bottom: 1px solid #fff;
@@ -28,7 +28,7 @@ td {
 	border-top: 1px solid transparent;
 }
 
-tr:hover td {
+.jtable tr:hover td {
 	background: #d0dafd;
 	color: #339;
 }
