@@ -17,7 +17,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import Administer.model.HG_PromotionProject_Bean;
 import Administer.model.HG_PromotionProject_Service;
-import Administer.model.dao.Test;
 
 @WebServlet(
 		urlPatterns={"/PromotionProject/selectPromotionProject.controller"}

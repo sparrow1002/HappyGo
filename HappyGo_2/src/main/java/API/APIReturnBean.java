@@ -1,5 +1,8 @@
 package API;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class APIReturnBean {
 	private int overPoint;
 	private boolean result;

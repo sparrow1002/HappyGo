@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
+
 import Administer.model.HG_PromotionBonus_Bean;
 import Administer.model.HG_PromotionBonus_Service;
 import Administer.model.HG_PromotionMethod_Bean;
@@ -25,11 +28,18 @@ import Administer.model.HG_PromotionProject_Service;
 )
 public class PromotionProject_Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private HG_PromotionProject_Service projectservice = new HG_PromotionProject_Service();
-    private HG_PromotionBonus_Service prombnsservice = new HG_PromotionBonus_Service();
+	
+	//private HG_PromotionProject_Service projectservice = new HG_PromotionProject_Service();
+	//由第41行Spring接管，要先new，再由Spring getBean
+	private HG_PromotionProject_Service projectservice;
+
+	private HG_PromotionBonus_Service prombnsservice = new HG_PromotionBonus_Service();
     private HG_PromotionMethod_Service prommthservice = new HG_PromotionMethod_Service();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
+		HG_PromotionProject_Service projectservice = (HG_PromotionProject_Service) context.getBean("HG_PromotionProject_Service");
 		
 		System.out.println("PromotionProject_Servlet Servlet_doGet");
 		//接收HTML Form資料

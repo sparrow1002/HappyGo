@@ -10,6 +10,7 @@
 </style>
 </head>
 <body>
+<div id="allpage">
 	<c:import url="/common/TopMeau.jsp" />
 	<div id="content" >
 		<div class="cycle-slideshow">
@@ -20,6 +21,7 @@
 		</div>
 	</div>
 	<c:import url="/common/FootBar.jsp" />
+</div>
 </body>
 <script src="js/jquery.cycle2.js"></script>
 <link rel="stylesheet" href="base/jquery-ui-1.9.2.custom.min.css">

@@ -8,6 +8,7 @@
 <title>ROLE SETTING</title>
 </head>
 <body>
+<div id="allpage">
 	<c:import url="/admin/TopMeau.jsp" />
 	<div class="demo">
 		<table style="background-color: #F0E68C;">
@@ -68,6 +69,7 @@
 		</table>
 	</div>
 	<c:import url="/admin/FootBar.jsp" />
+	</div>
 </body>
 <script>
 	var strUrl = location.search;

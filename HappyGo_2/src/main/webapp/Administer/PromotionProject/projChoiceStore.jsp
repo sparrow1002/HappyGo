@@ -4,6 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/HappyGo_2/css/main.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>新增方案</title>
 </head>
@@ -26,6 +27,8 @@ input[type=text] {
 } 
 </style>
 <body>
+<div id="allpage">
+	<c:import url="/admin/TopMeau.jsp" />
 <h1>第二步：請設定促銷店家</h1>
 <c:if test="${not empty insert}">
 <h3>Insert PromotionProject Success</h3>
@@ -95,5 +98,7 @@ input[type=text] {
 </form>
 <h2>${error.noStore}</h2>
 <h2>${error.action}</h2>
+	<c:import url="/admin/FootBar.jsp" />
+</div>
 </body>
 </html>
