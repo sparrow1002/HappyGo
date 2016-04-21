@@ -23,7 +23,7 @@
 		</nav>
 	</div>
 	<div>
-		<table style="background-color: #F75000; width: 950px">
+		<table style="background-color: #F75000; width: 946px" id="maintable">
 			<tr>
 				<td>&nbsp;</td>
 			</tr>

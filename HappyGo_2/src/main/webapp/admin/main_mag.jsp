@@ -9,6 +9,7 @@
 
 </head>
 <body>
+<div id="allpage">
 	<c:import url="/admin/TopMeau.jsp" />
 	<div class="demo">
 		<table>
@@ -18,5 +19,6 @@
 		</table>
 	</div>
 	<c:import url="/admin/FootBar.jsp" />
+</div>
 </body>
 </html>

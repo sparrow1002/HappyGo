@@ -58,10 +58,9 @@ div.showCode {
 
 .ui-tabs-panel p {
 	margin-top: 0em;
-	
 }
 
-.ui-tabs-panel pre.showCode span {	
+.ui-tabs-panel pre.showCode span {
 	margin-left: 6em;
 }
 
@@ -77,7 +76,7 @@ div.showCode {
 
 #tabs-left {
 	position: relative;
-	padding-left: 3.9em;
+ 	padding-left: 3.9em; 
 }
 
 #tabs-left .ui-tabs-nav {
@@ -136,90 +135,94 @@ div.showCode {
 }
 </style>
 <body>
-	<c:import url="/common/TopMeau.jsp" />
-	<div id="tabs-left" class="demo" >
-		<ul>
-			<li><a href="#tabs-1">關於HappGo</a></li>
-			<li><a href="#tabs-2">相關影片</a></li>
-			<li><a href="#tabs-3">HappGo卡種</a></li>
-		</ul>
-		<div id="tabs-3" style="height: 550px; overflow-y: scroll;">
-			<table>
-				<tbody>
-					<tr>
-						<td><c:if test="${not empty select}">
-								<table id="userslist" class="t2" style="width: 550px;">
-									<tbody>
-										<tr>
-											<c:forEach var="row" items="${select}" varStatus="varStatus">
-												<c:url value="/photo.view" var="path_img" scope="page">
-													<c:param name="photoid" value="${row.CDI_CardID}" />
-													<c:param name="mode" value="selectitem" />
-												</c:url>
-												<td>
-													<input id="${row.CDI_CardID}_0"	value="${row.CDI_CardName}" type="hidden"> 
-													<input id="${row.CDI_CardID}_1" value="${row.CDI_CardInfo}"	type="hidden"> 
-													<input id="${row.CDI_CardID}_2"	value="${row.CDI_CardName}" type="hidden">
-													<img id="${row.CDI_CardID}" src="${path_img}" alt="photoid"	height="100" width="160" onclick='showfrom(this);' /></td>
-													<c:if test="${ varStatus.count % 3 == 0 }">
-										</tr>
-										<tr>
-											</c:if>
-											</c:forEach>
-									</tbody>
-								</table>
-							</c:if></td>
-					</tr>
-				</tbody>
-			</table>
-			<div id="users-contain">
-				<table id="users" style="width: 550px; height: 300px"  class="t2">
-					<thead>
-						<tr>
-							<th>項目</th>
-							<th>內容</th>
-						</tr>
-					</thead>
+	<div id="allpage">
+		<c:import url="/common/TopMeau.jsp" />
+		<div id="tabs-left" class="demo">
+			<ul>
+				<li><a href="#tabs-1">關於HappGo</a></li>
+				<li><a href="#tabs-2">相關影片</a></li>
+				<li><a href="#tabs-3">HappGo卡種</a></li>
+			</ul>
+			<div id="tabs-3" style="height: 550px; overflow-y: scroll;">
+				<table>
 					<tbody>
 						<tr>
-							<td><img src="" id="selectimg" alt="photoid" height="200"
-								width="320" /></td>
-							<td rowspan="2" valign="top"><label id="CDI_CardInfo"></label></td>
-
-						</tr>
-						<tr>
-							<td align="center"><label id="CDI_CardName"></label></td>
-						</tr>
-						<tr>
-							<td colspan="2" align="center"><input id="cancel" value="確認"
-								type="button"></td>
+							<td><c:if test="${not empty select}">
+									<table id="userslist" class="t2" style="width: 550px;">
+										<tbody>
+											<tr>
+												<c:forEach var="row" items="${select}" varStatus="varStatus">
+													<c:url value="/photo.view" var="path_img" scope="page">
+														<c:param name="photoid" value="${row.CDI_CardID}" />
+														<c:param name="mode" value="selectitem" />
+													</c:url>
+													<td><input id="${row.CDI_CardID}_0"
+														value="${row.CDI_CardName}" type="hidden"> <input
+														id="${row.CDI_CardID}_1" value="${row.CDI_CardInfo}"
+														type="hidden"> <input id="${row.CDI_CardID}_2"
+														value="${row.CDI_CardName}" type="hidden"> <img
+														id="${row.CDI_CardID}" src="${path_img}" alt="photoid"
+														height="100" width="160" onclick='showfrom(this);' /></td>
+													<c:if test="${ varStatus.count % 3 == 0 }">
+											</tr>
+											<tr>
+												</c:if>
+												</c:forEach>
+										</tbody>
+									</table>
+								</c:if></td>
 						</tr>
 					</tbody>
 				</table>
+				<div id="users-contain">
+					<table id="users" style="width: 550px; height: 300px" class="t2">
+						<thead>
+							<tr>
+								<th>項目</th>
+								<th>內容</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><img src="" id="selectimg" alt="photoid" height="200"
+									width="320" /></td>
+								<td rowspan="2" valign="top"><label id="CDI_CardInfo"></label></td>
+
+							</tr>
+							<tr>
+								<td align="center"><label id="CDI_CardName"></label></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center"><input id="cancel"
+									value="確認" type="button"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="tabs-1">
+				<p>HAPPY GO為你帶來「每天一點點‧快樂多一點」的生活體驗！擁有HAPPY
+					GO卡，讓你每一天都輕鬆享受集點樂趣，從早到晚、不管平日或假日，自己一個人或與朋友在一起，都可使用點數兌換帶來不同的消費感動，讓我們來看看大家是怎麼善用他的HAPPY
+					GO卡吧！</p>
+				<img width="700" height="520" alt="" src="../img/daily_about.png">
+			</div>
+			<div id="tabs-2">
+				<p>擁有HAPPY GO卡，讓你成為聰明購物家！HAPPY
+					GO卡為國內首張聯合集點卡，只要在特約商店消費，皆可集點，並可使用累積點數獲得不同優惠或折抵消費，更可做公益，讓您消費購物的時刻快樂多一點，每分每秒充滿愉悅！
+				</p>
+				<object width="700" height="520">
+					<param name="movie"
+						value="http://www.youtube.com/v/TA1fDnelcM4?fs=1&amp;hl=zh_TW"></param>
+					<param name="allowFullScreen" value="true"></param>
+					<param name="allowscriptaccess" value="always"></param>
+					<embed src="http://www.youtube.com/v/TA1fDnelcM4?fs=1&amp;hl=zh_TW"
+						type="application/x-shockwave-flash" allowscriptaccess="always"
+						allowfullscreen="true" width="700" height="520"></embed>
+				</object>
 			</div>
 		</div>
-		<div id="tabs-1">
-			<p>HAPPY GO為你帶來「每天一點點‧快樂多一點」的生活體驗！擁有HAPPY
-				GO卡，讓你每一天都輕鬆享受集點樂趣，從早到晚、不管平日或假日，自己一個人或與朋友在一起，都可使用點數兌換帶來不同的消費感動，讓我們來看看大家是怎麼善用他的HAPPY
-				GO卡吧！</p>
-			<img width="700" height="520" alt="" src="../img/daily_about.png">
-		</div>
-		<div id="tabs-2">
-			<p>擁有HAPPY GO卡，讓你成為聰明購物家！HAPPY
-				GO卡為國內首張聯合集點卡，只要在特約商店消費，皆可集點，並可使用累積點數獲得不同優惠或折抵消費，更可做公益，讓您消費購物的時刻快樂多一點，每分每秒充滿愉悅！
-			</p>
-			<object width="700" height="520">
-				<param name="movie"
-					value="http://www.youtube.com/v/TA1fDnelcM4?fs=1&amp;hl=zh_TW"></param>
-				<param name="allowFullScreen" value="true"></param>
-				<param name="allowscriptaccess" value="always"></param>
-				<embed src="http://www.youtube.com/v/TA1fDnelcM4?fs=1&amp;hl=zh_TW"
-					type="application/x-shockwave-flash" allowscriptaccess="always"
-					allowfullscreen="true" width="700" height="520"></embed>
-			</object>
-		</div>
+		<c:import url="/common/FootBar.jsp" />
 	</div>
-	<c:import url="/common/FootBar.jsp" />
 </body>
 <script>
 	function showfrom(object) {
