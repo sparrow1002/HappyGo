@@ -26,7 +26,7 @@
 </script>
 </head>
 <body>
-<div id="allpage">
+<div id="allpage" style="background-color:#FFDDAA">
 	<c:import url="/admin/TopMeau.jsp" />
 	<form
 		action="<c:url value="/PromotionProject/PromotionProject.controller" />"

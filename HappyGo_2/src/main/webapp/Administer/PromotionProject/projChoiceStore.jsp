@@ -27,15 +27,15 @@ input[type=text] {
 } 
 </style>
 <body>
-<div id="allpage">
+<div id="allpage" style="background-color:#FFDDAA">
 	<c:import url="/admin/TopMeau.jsp" />
 <h1>第二步：請設定促銷店家</h1>
 <c:if test="${not empty insert}">
-<h3>Insert PromotionProject Success</h3>
+<h2>insert第一步設定成功</h2>
 </c:if>
 
 <c:if test="${not empty update}">
-<h3>Update PromotionProject Success</h3>
+<h2>update第一步設定成功</h2>
 </c:if>
 
 	<%@ page import="conStore.model.*"%>
@@ -47,7 +47,7 @@ input[type=text] {
 		List<ContractStoreBean> result = dao.select();
 
 	%>
-	<h1>促銷活動編號：${param.PTP_PROJID}</h1>
+	<h2>促銷活動編號：${param.PTP_PROJID}</h2>
 	<!-- 1.促銷ID的response/sessin 2.往後丟給servlet, service, dao) -->
 	
 	<form action="<c:url value="/PromotionProject/PromotionStore.controller" />" method="get">
@@ -58,7 +58,7 @@ input[type=text] {
 					<th>是否參與</th>
 					<th>特店代號</th>
 					<th>特店名稱</th>
-					<th>特店密碼</th>
+<!-- 					<th>特店密碼</th> -->
 					<th>統一編號</th>
 					<th>特店地址</th>
 					<th>特店狀態</th>
@@ -79,7 +79,7 @@ input[type=text] {
 						<td><input type="checkbox" name="cos_storeid${(loop.index)}" value="${row.cos_storeid}"/></td>
 						<td>${row.cos_storeid}</td>
 						<td>${row.cos_name}</td>
-						<td>${row.cos_pwd}</td>
+<%-- 						<td>${row.cos_pwd}</td> --%>
 						<td>${row.cos_taxcode}</td>
 						<td>${row.cos_address}</td>
 						<td>${row.cos_status}</td>

@@ -10,12 +10,12 @@
 <title>查詢結果</title>
 </head>
 <body>
-<div id="allpage">
+<div id="allpage" style="background-color:#FFDDAA">
 	<c:import url="/admin/TopMeau.jsp" />
 <h3>查詢結果</h3>
 
 <c:if test="${not empty select}">
-<table>
+<table class="jtable">
 	<thead>
 		<tr>
 		<th>PTP_PROJID</th>

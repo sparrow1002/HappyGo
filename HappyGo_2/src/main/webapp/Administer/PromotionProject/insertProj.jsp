@@ -33,7 +33,7 @@
 </script>
 </head>
 <body>
-<div id="allpage">
+<div id="allpage" style="background-color:#FFDDAA">
 	<c:import url="/admin/TopMeau.jsp" />
 <h1>第一步：請設定促銷活動</h1>
 	<form
@@ -114,22 +114,22 @@
 					<input type="text" name="PTM_VARDATE" value="0">
 				</td>
 			</tr>
-			<tr>
-				<td style="border: 1px solid black">促銷特店群組<input type="checkbox" name="PPS_STORGPID"
-					value="noneGroup">無
-				<input type="checkbox" name="PPS_STORGPID"
-					value="SOGOGroup">SOGO集團
-				<input type="checkbox" name="PPS_STORGPID"
-					value="FarEastGroup">遠東集團
-				<!--	後續優化，自動生成選項	-->
-				<br>
-				促銷特約店家
-				<input type="checkbox" name="PPS_STOREID" value="noneGroup">阿嬤的古早味
-				<input type="checkbox" name="PPS_STOREID" value="SOGOZhongxiao">SOGO忠孝館
-				<input type="checkbox" name="PPS_STOREID" value="FarEastBanqiao">板橋大遠百
-				<!--	後續優化，自動生成選項	-->
-				</td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td style="border: 1px solid black">促銷特店群組<input type="checkbox" name="PPS_STORGPID" -->
+<!-- 					value="noneGroup">無 -->
+<!-- 				<input type="checkbox" name="PPS_STORGPID" -->
+<!-- 					value="SOGOGroup">SOGO集團 -->
+<!-- 				<input type="checkbox" name="PPS_STORGPID" -->
+<!-- 					value="FarEastGroup">遠東集團 -->
+<!-- 					後續優化，自動生成選項	 -->
+<!-- 				<br> -->
+<!-- 				促銷特約店家 -->
+<!-- 				<input type="checkbox" name="PPS_STOREID" value="noneGroup">阿嬤的古早味 -->
+<!-- 				<input type="checkbox" name="PPS_STOREID" value="SOGOZhongxiao">SOGO忠孝館 -->
+<!-- 				<input type="checkbox" name="PPS_STOREID" value="FarEastBanqiao">板橋大遠百 -->
+<!-- 					後續優化，自動生成選項	 -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
 			<tr>
 				<td align="center"><input type="submit" name="promotionProject"
 					value="Insert"></td>

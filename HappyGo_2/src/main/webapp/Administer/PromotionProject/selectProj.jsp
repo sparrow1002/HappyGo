@@ -26,12 +26,12 @@
 </script>
 </head>
 <body>
-<div id="allpage">
+<div id="allpage" style="background-color:#FFDDAA">
 	<c:import url="/admin/TopMeau.jsp" />
 	<form
 		action="<c:url value="/PromotionProject/selectPromotionProject.controller" />"
 		method="get">
-		<table height="600px" width="1200px" style="border: 1px solid black"
+		<table height="300px" width="1200px" style="border: 1px solid black"
 			align="center">
 			<tr>
 				<td>查詢、修改活動方案</td>
@@ -44,7 +44,7 @@
 				<span class="error">${error.id}</span></td>
 			</tr>
 			<tr>
-				<td>請在此活動名稱關鍵字：<input type="text" name="PTP_NAME"></td>
+				<td>請在此輸入活動名稱關鍵字：<input type="text" name="PTP_NAME"></td>
 			</tr>
 			<tr>
 				<td><select>
@@ -55,12 +55,13 @@
 				結束日期：<input type="text" name="PTP_DELDATE" id="PTP_DELDATE" value=""></td>
 			</tr>
 			<tr>
-				<td align="center"><input type="submit" name="promotionProject" value="select">
+				<td align="center">
+					<input type="submit" name="promotionProject" value="select">
 				</td>
 			</tr>
 			<tr>
-				<td align="center"><input type="button" value="Back"
-				onclick="location.href='<c:url value="/Administer/PromotionProject/index.jsp" />'">
+				<td align="center">
+					<input type="button" value="Back" onclick="location.href='<c:url value="/Administer/PromotionProject/index.jsp" />'">
 				</td>
 			</tr>
 		</table>
