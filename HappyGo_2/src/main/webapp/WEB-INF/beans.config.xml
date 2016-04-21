@@ -74,8 +74,12 @@
 		<constructor-arg ref="roleDAO"></constructor-arg>
 	</bean>
 
-	<bean id="syslogDAO" class="admin.model.dao.SyslogDAOjdbc">
+	<!-- <bean id="syslogDAO" class="admin.model.dao.SyslogDAOjdbc">
 		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean> -->
+	<bean id="syslogDAO" class="admin.model.dao.SyslogDAOhibernate">
+		<constructor-arg ref="dataSource"></constructor-arg>
+		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 	<bean id="syslogDAOService" class="admin.model.SyslogDAOService">
 		<constructor-arg ref="syslogDAO"></constructor-arg>
@@ -93,16 +97,19 @@
 		<property name="adminUserDAOService" ref="adminUserDAOService"></property>
 		<property name="roleDAOService" ref="roleDAOService"></property>
 		<property name="rightDAOService" ref="rightDAOService"></property>
+		<property name="syslogDAOService" ref="syslogDAOService"></property>
 	</bean>
 	<bean id="admin_userlist_Action" class="admin.controller.Admin_list_Action"
 		scope="prototype">
 		<property name="adminUserDAOService" ref="adminUserDAOService"></property>
 		<property name="dataProfileDAOService" ref="dataProfileDAOService"></property>
+		<property name="syslogDAOService" ref="syslogDAOService"></property>
 	</bean>
 
 	<bean id="admin_dataprofile_Action" class="admin.controller.Dataprofile_list_Action"
 		scope="prototype">
 		<property name="dataProfileDAOService" ref="dataProfileDAOService"></property>
+		<property name="syslogDAOService" ref="syslogDAOService"></property>
 	</bean>
 
 	<bean id="role_list_Action" class="admin.controller.Role_list_Action"
@@ -110,11 +117,13 @@
 		<property name="dataProfileDAOService" ref="dataProfileDAOService"></property>
 		<property name="rightDAOService" ref="rightDAOService"></property>
 		<property name="roleDAOService" ref="roleDAOService"></property>
+		<property name="syslogDAOService" ref="syslogDAOService"></property>
 	</bean>
 
 	<bean id="right_list_Action" class="admin.controller.Role_right_Action"
 		scope="prototype">
 		<property name="rightDAOService" ref="rightDAOService"></property>
+		<property name="syslogDAOService" ref="syslogDAOService"></property>
 	</bean>
 
 	<bean id="Sylog_Action" class="admin.controller.Sylog_Action"

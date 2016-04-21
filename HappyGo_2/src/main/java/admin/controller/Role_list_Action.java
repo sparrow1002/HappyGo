@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +16,8 @@ import admin.model.RightDAOBean;
 import admin.model.RightDAOService;
 import admin.model.RoleDAOBean;
 import admin.model.RoleDAOService;
+import admin.model.SyslogDAOBean;
+import admin.model.SyslogDAOService;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
@@ -38,7 +41,10 @@ public class Role_list_Action extends ActionSupport implements SessionAware {
 			DataProfileDAOService dataProfileDAOService) {
 		this.dataProfileDAOService = dataProfileDAOService;
 	}
-
+	private SyslogDAOService syslogDAOService;
+	public void setSyslogDAOService(SyslogDAOService syslogDAOService) {
+		this.syslogDAOService = syslogDAOService;
+	}
 	public void setRightDAOService(RightDAOService rightDAOService) {
 		this.rightDAOService = rightDAOService;
 	}
@@ -96,13 +102,22 @@ public class Role_list_Action extends ActionSupport implements SessionAware {
 					beanitem.setROL_ROLEID(user);
 					beanitem.setROL_RIGHTID(bean.getRIG_RIGHTID());
 					beanitem.setROL_UPDATEUSER(sessionMap.get("adminuser").toString());
+					beanitem.setROL_UPDATETIME(new java.util.Date());
 					newbean.add(beanitem);
 				}
 			}
 			System.out.println("edit ready to insert!!");
 			System.out.println(newbean);
 			if (newbean != null && newbean.size() > 0) {
-				
+				//==========LOG=================//
+				SyslogDAOBean lognean=new SyslogDAOBean();
+				lognean.setLOG_TYPE("RR01");
+				lognean.setLOG_USERID(sessionMap.get("adminuser").toString());
+				lognean.setLOG_UPDATEUSER(sessionMap.get("adminuser").toString());
+				lognean.setLOG_DESC("更新角色權限資料:"+user);
+				lognean.setLOG_UPDATETIME(new java.util.Date());
+				syslogDAOService.insert(lognean);
+				//==========LOG=================//
 				if (roleDAOService.insert(newbean)) {
 					System.out.println("to insert");
 					if (result == null) {
@@ -128,7 +143,6 @@ public class Role_list_Action extends ActionSupport implements SessionAware {
 					req.setAttribute("message", "權限更新失敗!!");
 				}
 			}
-
 			return Action.SUCCESS;
 		}
 		System.out.println("final");

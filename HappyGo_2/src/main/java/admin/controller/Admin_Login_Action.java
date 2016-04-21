@@ -15,6 +15,8 @@ import admin.model.RightDAOBean;
 import admin.model.RightDAOService;
 import admin.model.RoleDAOBean;
 import admin.model.RoleDAOService;
+import admin.model.SyslogDAOBean;
+import admin.model.SyslogDAOService;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
@@ -52,7 +54,10 @@ public class Admin_Login_Action extends ActionSupport implements SessionAware {
 	public void setRoleDAOService(RoleDAOService roleDAOService) {
 		this.roleDAOService = roleDAOService;
 	}
-
+	private SyslogDAOService syslogDAOService;
+	public void setSyslogDAOService(SyslogDAOService syslogDAOService) {
+		this.syslogDAOService = syslogDAOService;
+	}
 	private RightDAOService rightDAOService;
 
 	public void setRightDAOService(RightDAOService rightDAOService) {
@@ -111,6 +116,13 @@ public class Admin_Login_Action extends ActionSupport implements SessionAware {
 					password);
 			if (bean == null) {
 				this.addFieldError("errormsg", "登入失敗!!ID/PWD");
+				SyslogDAOBean lognean=new SyslogDAOBean();
+				lognean.setLOG_TYPE("LN01");
+				lognean.setLOG_USERID(username);
+				lognean.setLOG_UPDATEUSER(username);
+				lognean.setLOG_DESC("登入失敗!!");
+				lognean.setLOG_UPDATETIME(new java.util.Date());
+				syslogDAOService.insert(lognean);
 				return Action.INPUT;
 			} else {
 				sessionMap.put("adminuser", username);
@@ -154,6 +166,13 @@ public class Admin_Login_Action extends ActionSupport implements SessionAware {
 
 					}
 				}
+				SyslogDAOBean lognean=new SyslogDAOBean();
+				lognean.setLOG_TYPE("LN01");
+				lognean.setLOG_USERID(username);
+				lognean.setLOG_UPDATEUSER(username);
+				lognean.setLOG_DESC("登入系統!!");
+				lognean.setLOG_UPDATETIME(new java.util.Date());
+				syslogDAOService.insert(lognean);
 				right.put(sGroupName, rightitem);
 				sessionMap.put("adminuserright", right);
 				System.out.println(right);
