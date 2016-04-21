@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import conStore.model.ContractStoreBean;
 import conStore.model.ContractStoreService;
@@ -36,6 +37,11 @@ public class modify extends HttpServlet {
 			String updateuser = request.getParameter("Updateuser");
 			String prodaction = request.getParameter("prodaction");
 			
+			ContractStoreBean beanuser = new ContractStoreBean();
+			HttpSession session = request.getSession();
+			beanuser = (ContractStoreBean)session.getAttribute("storeLoginOK");
+			System.out.println(updateuser = beanuser.getCos_storeid());
+			
 			ContractStoreBean bean = new ContractStoreBean();
 			bean.setCos_storeid(storeid);
 			bean.setCos_name(name);
@@ -57,7 +63,7 @@ public class modify extends HttpServlet {
 				} else{
 					request.setAttribute("update", result);
 				}
-				request.getRequestDispatcher("/conStore/test.jsp").forward(request, response);
+				request.getRequestDispatcher("/conStore/contractStore.jsp").forward(request, response);
 			}
 
 		}

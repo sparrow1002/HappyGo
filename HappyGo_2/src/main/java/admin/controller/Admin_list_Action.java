@@ -14,6 +14,8 @@ import admin.model.AdminUserDAOService;
 import admin.model.AdminUserDAObean;
 import admin.model.DataProfileDAOBean;
 import admin.model.DataProfileDAOService;
+import admin.model.SyslogDAOBean;
+import admin.model.SyslogDAOService;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
@@ -75,7 +77,10 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 			DataProfileDAOService dataProfileDAOService) {
 		this.dataProfileDAOService = dataProfileDAOService;
 	}
-
+	private SyslogDAOService syslogDAOService;
+	public void setSyslogDAOService(SyslogDAOService syslogDAOService) {
+		this.syslogDAOService = syslogDAOService;
+	}
 	private SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 	private AdminUserDAObean checkkeyin() {
@@ -194,6 +199,15 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 			List<AdminUserDAObean> results;
 			results = adminUserDAOService.select(null);
 			req.setAttribute("select", results);
+			//==========LOG=================//
+			SyslogDAOBean lognean=new SyslogDAOBean();
+			lognean.setLOG_TYPE("MN01");
+			lognean.setLOG_USERID(sessionMap.get("adminuser").toString());
+			lognean.setLOG_UPDATEUSER(sessionMap.get("adminuser").toString());
+			lognean.setLOG_DESC("新增使用者資料:"+bean.toString());
+			lognean.setLOG_UPDATETIME(new java.util.Date());
+			syslogDAOService.insert(lognean);
+			//==========LOG=================//
 		} else if ("update".equals(mode)) {
 			System.out.println("action:"+bean.getADM_PWD()+","+bean.getADM_NAME()+","+
 					bean.getADM_ROLEID()+","+bean.getADM_UPDATEUSER()+","+bean.getADM_ID()+",");
@@ -208,9 +222,17 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 			List<AdminUserDAObean> result;
 			result = adminUserDAOService.select(null);
 			req.setAttribute("select", result);
+			//==========LOG=================//
+			SyslogDAOBean lognean=new SyslogDAOBean();
+			lognean.setLOG_TYPE("MN02");
+			lognean.setLOG_USERID(bean.getADM_UPDATEUSER());
+			lognean.setLOG_UPDATEUSER(bean.getADM_UPDATEUSER());
+			lognean.setLOG_DESC("修改使用者資料:"+bean.toString());
+			lognean.setLOG_UPDATETIME(new java.util.Date());
+			syslogDAOService.insert(lognean);
+			//==========LOG=================//
 		}
 		System.out.println("final");
 		return Action.INPUT;
 	}
-
 }

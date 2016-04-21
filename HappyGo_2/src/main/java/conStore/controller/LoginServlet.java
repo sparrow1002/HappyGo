@@ -55,13 +55,25 @@ public class LoginServlet extends HttpServlet {
 			error.put("password", "登入失敗，請再次輸入ID/PWD");
 			request.getRequestDispatcher("/conStore/login.jsp").forward(request,
 					response);
-		} else {
+		}else if("3".equals(bean.getCos_status())){//管理者登入頁面
 			HttpSession session = request.getSession();
-			session.setAttribute("LoginOK", bean);
+			session.setAttribute("storeLoginOK", bean);
 			//System.out.println(session.setAttribute("user", bean));
 			String path = request.getContextPath();
 			response.sendRedirect(path+"/conStore/contractStore.jsp");
-					
+		} 
+		else if("2".equals(bean.getCos_status())){//群組主管頁面
+			HttpSession session = request.getSession();
+			session.setAttribute("storeLoginOK", bean);
+			//System.out.println(session.setAttribute("user", bean));
+			String path = request.getContextPath();
+			response.sendRedirect(path+"/conStore/contractStore.jsp");					
+		}else{//各特店頁面
+			HttpSession session = request.getSession();
+			session.setAttribute("storeLoginOK", bean);
+			//System.out.println(session.setAttribute("user", bean));
+			String path = request.getContextPath();
+			response.sendRedirect(path+"/conStore/singlecontractStore.jsp");	
 		}
 	}
 

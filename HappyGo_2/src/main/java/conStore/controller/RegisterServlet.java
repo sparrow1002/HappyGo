@@ -1,35 +1,30 @@
 package conStore.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import conStore.model.ContractStoreBean;
 import conStore.model.ContractStoreService;
 
-@WebServlet(		  
-		urlPatterns={"/conStore/contractStore.controller"}
-		)
-public class ContractStoreServlet extends HttpServlet {
+@WebServlet(urlPatterns = { "/conStore/register.controller" })
+public class RegisterServlet extends HttpServlet {
 	private ContractStoreService contractStoreService = new ContractStoreService();
+	
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		ContractStoreBean cb = (ContractStoreBean)session.getAttribute("storeLoginOK");
-		
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+			
 		String storeid = request.getParameter("storeid");
 		String name = request.getParameter("name");
 		String pwd = request.getParameter("pwd");
 		String taxcode = request.getParameter("taxcode");
 		String address = request.getParameter("address");
-		String status = request.getParameter("status");
+//		String status = request.getParameter("status");
 		String phone = request.getParameter("phone");
 		String contact = request.getParameter("contact");
 		String createtime = request.getParameter("createtime");
@@ -44,7 +39,7 @@ public class ContractStoreServlet extends HttpServlet {
 		bean.setCos_pwd(pwd);
 		bean.setCos_taxcode(taxcode);
 		bean.setCos_address(address);
-		bean.setCos_status(status);
+		//bean.setCos_status(status);
 		bean.setCos_phone(phone);
 		bean.setCos_contact(contact);
 		bean.setCos_createtime(createtime);
@@ -52,18 +47,17 @@ public class ContractStoreServlet extends HttpServlet {
 		bean.setCos_updatetime(updatetime);
 		bean.setCos_updateuser(updateuser);
 		
-
-		
-		if("修改".equals(prodaction)){
-			List<ContractStoreBean> result = contractStoreService.select(bean);
-			request.setAttribute("select", result);
-			request.getRequestDispatcher("/conStore/modify.jsp").forward(request, response);
-		}else if("登出".equals(prodaction)){
-			session.removeAttribute("storeLoginOK");
-			String path = request.getContextPath();
-			response.sendRedirect(path+"/conStore/login.jsp");
+		if(prodaction!=null && prodaction.equals("註冊")) {
+			ContractStoreBean result = contractStoreService.insert(bean);
+			if(result==null) {
+				//error.put("action", "Insert fail");
+			} else {
+				request.setAttribute("insert", result);
+			}
+			request.getRequestDispatcher(
+					"/conStore/login.jsp").forward(request, response);
 		}
-
+		
 	}
 
 	@Override
@@ -71,5 +65,5 @@ public class ContractStoreServlet extends HttpServlet {
 			throws ServletException, IOException {
 		this.doGet(req, resp);
 	}
-	
+
 }

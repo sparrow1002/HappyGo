@@ -22,6 +22,7 @@ div.showCode {
 	width: 600px;
 	height: 700px;
 	margin: 10px 0;
+
 }
 
 .ui-tabs {
@@ -53,11 +54,12 @@ div.showCode {
 .ui-tabs .ui-tabs-panel {
 	background: transparent;
 	border-width: 0px;
-	margin-left: 8em;
+	margin-left: 10em;
 }
 
 .ui-tabs-panel p {
 	margin-top: 0em;
+	width: 93%;
 }
 
 .ui-tabs-panel pre.showCode span {
@@ -76,12 +78,12 @@ div.showCode {
 
 #tabs-left {
 	position: relative;
- 	padding-left: 3.9em; 
+ 	padding-left: 2.9em; 
 }
 
 #tabs-left .ui-tabs-nav {
 	position: absolute;
-	left: 0em;
+	left: 0.8em;
 	top: 0.25em;
 	bottom: 0.25em;
 	width: 11em;
@@ -109,6 +111,8 @@ div.showCode {
 	width: 100%;
 	text-align: right;
 	color: #c575a5;
+	text-align: center;
+	
 }
 
 #tabs-left .ui-tabs-panel {
@@ -144,11 +148,11 @@ div.showCode {
 				<li><a href="#tabs-3">HappGo卡種</a></li>
 			</ul>
 			<div id="tabs-3" style="height: 550px; overflow-y: scroll;">
-				<table>
+				<table style="width: 570px;">
 					<tbody>
 						<tr>
 							<td><c:if test="${not empty select}">
-									<table id="userslist" class="t2" style="width: 550px;">
+									<table id="userslist" class="t2" style="width: 550px;margin: 0px auto;">
 										<tbody>
 											<tr>
 												<c:forEach var="row" items="${select}" varStatus="varStatus">
@@ -204,20 +208,20 @@ div.showCode {
 				<p>HAPPY GO為你帶來「每天一點點‧快樂多一點」的生活體驗！擁有HAPPY
 					GO卡，讓你每一天都輕鬆享受集點樂趣，從早到晚、不管平日或假日，自己一個人或與朋友在一起，都可使用點數兌換帶來不同的消費感動，讓我們來看看大家是怎麼善用他的HAPPY
 					GO卡吧！</p>
-				<img width="700" height="520" alt="" src="../img/daily_about.png">
+				<img width="700" height="520" alt="" src="../img/daily_about.png" style="margin-bottom: 1.25em;">
 			</div>
 			<div id="tabs-2">
 				<p>擁有HAPPY GO卡，讓你成為聰明購物家！HAPPY
 					GO卡為國內首張聯合集點卡，只要在特約商店消費，皆可集點，並可使用累積點數獲得不同優惠或折抵消費，更可做公益，讓您消費購物的時刻快樂多一點，每分每秒充滿愉悅！
 				</p>
-				<object width="700" height="520">
+				<object width="700" height="520" style="margin-bottom: 1.25em;">
 					<param name="movie"
 						value="http://www.youtube.com/v/TA1fDnelcM4?fs=1&amp;hl=zh_TW"></param>
 					<param name="allowFullScreen" value="true"></param>
 					<param name="allowscriptaccess" value="always"></param>
 					<embed src="http://www.youtube.com/v/TA1fDnelcM4?fs=1&amp;hl=zh_TW"
 						type="application/x-shockwave-flash" allowscriptaccess="always"
-						allowfullscreen="true" width="700" height="520"></embed>
+						allowfullscreen="true" width="700" height="520" style="margin-bottom: 1.25em;"></embed>
 				</object>
 			</div>
 		</div>

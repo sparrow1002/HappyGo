@@ -34,7 +34,7 @@
 		</c:if>
 	</div>
 	<div>
-		<table style="background-color: #F75000;">
+		<table style="background-color: #F75000;width:900px;">
 			<tr>
 				<td>&nbsp;</td>
 			</tr>

@@ -9,6 +9,7 @@
 </head>
 <body>
 <h1>註冊</h1>
+<form action="<c:url value="/conStore/register.controller" />" method="get">
 <table>
 	<tr>
 		<td>特店代號 : </td>
@@ -36,11 +37,11 @@
 		<td><input type="text" name="address" value=""></td>
 		<td></td>
 	</tr>
-	<tr>
+<!-- 	<tr>
 		<td>特店狀態 : </td>
 		<td><input type="text" name="status" value=""></td>
 		<td></td>
-	</tr>
+	</tr> -->
 	<tr>
 		<td>連絡電話 : </td>
 		<td><input type="text" name="phone" value=""></td>
@@ -54,12 +55,12 @@
 	<tr>
 		<td>特店生效日 : </td>
 		<td><input type="text" id="today"  name="createtime" value="" ></td>
-		<td>日曆</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>特店失效日 : </td>
 		<td><input type="text" id="datepicker"  name="deletime" value=""></td>
-		<td>日曆</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>異動日期 : </td>
@@ -73,9 +74,10 @@
 	</tr>
 	<tr>
 		<td>		
-			<input type="submit" name="prodaction" value="insert">
+			<input type="submit" name="prodaction" value="註冊">
 		</td>		
 	</tr>	
 </table>
+</form>
 </body>
 </html>
