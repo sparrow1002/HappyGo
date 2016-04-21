@@ -4,11 +4,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/HappyGo_2/css/main.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="../css/table.css" />
 <title>查詢結果</title>
 </head>
 <body>
+<div id="allpage">
+	<c:import url="/admin/TopMeau.jsp" />
 <h3>查詢結果</h3>
 
 <c:if test="${not empty select}">
@@ -47,6 +50,7 @@
 </c:if>
 <h3><a href="<c:url value="/Administer/PromotionProject/selectProj.jsp" />">Back</a></h3>
 
-
+	<c:import url="/admin/FootBar.jsp" />
+</div>
 </body>
 </html>
