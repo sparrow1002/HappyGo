@@ -2,7 +2,10 @@ package admin.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -18,7 +21,8 @@ public class SyslogDAOBean {
 	private String LOG_UPDATEUSER;
 	
 	@Id
-	@Column(name = "LOG_NO")	
+	@Column(name = "LOG_NO")		
+	@GeneratedValue(strategy = GenerationType.IDENTITY)      //2.再用@GeneratedValue的generator屬性指定要用哪個generator //【strategy的GenerationType, 有四種值: AUTO, IDENTITY, SEQUENCE, TABLE】 
 	public Integer getLOG_NO() {
 		return LOG_NO;
 	}

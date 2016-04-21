@@ -11,6 +11,8 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import admin.model.DataProfileDAOBean;
 import admin.model.DataProfileDAOService;
+import admin.model.SyslogDAOBean;
+import admin.model.SyslogDAOService;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
@@ -67,7 +69,10 @@ public class Dataprofile_list_Action extends ActionSupport implements
 			DataProfileDAOService dataProfileDAOService) {
 		this.dataProfileDAOService = dataProfileDAOService;
 	}
-
+	private SyslogDAOService syslogDAOService;
+	public void setSyslogDAOService(SyslogDAOService syslogDAOService) {
+		this.syslogDAOService = syslogDAOService;
+	}
 	private DataProfileDAOBean checkkeyin() {
 		// int iID = 0;
 		// if (id != null && id.trim().length() != 0) {
@@ -145,6 +150,15 @@ public class Dataprofile_list_Action extends ActionSupport implements
 				req.setAttribute("select", result);
 				return Action.SUCCESS;
 			}
+			//==========LOG=================//
+			SyslogDAOBean lognean=new SyslogDAOBean();
+			lognean.setLOG_TYPE("DP01");
+			lognean.setLOG_USERID(sessionMap.get("adminuser").toString());
+			lognean.setLOG_UPDATEUSER(sessionMap.get("adminuser").toString());
+			lognean.setLOG_DESC("檢視代碼資料");
+			lognean.setLOG_UPDATETIME(new java.util.Date());
+			syslogDAOService.insert(lognean);
+			//==========LOG=================//
 		} else if ("selectitem".equals(mode)) {
 			DataProfileDAOBean result;
 			List<DataProfileDAOBean> results;
@@ -164,7 +178,15 @@ public class Dataprofile_list_Action extends ActionSupport implements
 			System.out.println(bean);
 			req.setAttribute("newitem", bean);		
 		} else if ("insert".equals(mode)) {
-			
+			//==========LOG=================//
+			SyslogDAOBean lognean=new SyslogDAOBean();
+			lognean.setLOG_TYPE("DP02");
+			lognean.setLOG_USERID(sessionMap.get("adminuser").toString());
+			lognean.setLOG_UPDATEUSER(sessionMap.get("adminuser").toString());
+			lognean.setLOG_DESC("更新代碼資料:"+bean.getDAP_GROUP()+"_"+bean.getDAP_ID()+"_"+bean.getDAP_VALUE());
+			lognean.setLOG_UPDATETIME(new java.util.Date());
+			syslogDAOService.insert(lognean);
+			//==========LOG=================//
 			DataProfileDAOBean result = dataProfileDAOService.insert(bean);
 			System.out.println(bean.getDAP_GROUP()+","+bean.getDAP_ID()+","+bean.getDAP_VALUE()+","+bean.getDAP_DESC());
 			if (result == null) {

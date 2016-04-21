@@ -119,12 +119,17 @@ public class RoleDAOhibernate implements RoleDAO {
 
 	@Override
 	public boolean insert(List<RoleDAOBean> beans) {
+		System.out.println("RoleDAOBean insert");
+		this.getSession().getTransaction().commit();
+		this.getSession().beginTransaction();
 		if (beans != null) {
 			for (RoleDAOBean bean : beans) {
-				this.getSession().save(bean);
+				System.out.println("bean ROLEID:"+bean.getROL_ROLEID()+",RIGHTID:"+bean.getROL_RIGHTID());
+				this.getSession().saveOrUpdate(bean);
 			}
 			return true;
 		}
+		this.getSession().getTransaction().commit();
 		return false;
 	}
 }

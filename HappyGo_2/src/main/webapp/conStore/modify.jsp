@@ -60,7 +60,16 @@
 	</tr>
 	<tr>
 		<td>Status : </td>
-		<td><input type="text" name="status" value="${row.cos_status}"></td>
+		<td>
+			<c:if test="${row.cos_status=='1'}">
+				<input type="radio" name="status" value="1" checked="checked">有效
+	 		    <input type="radio" name="status" value="0">無效
+			</c:if> 
+			<c:if test="${row.cos_status=='0'}">			
+				<input type="radio" name="status" value="1">有效
+			 	<input type="radio" name="status" value="0" checked="checked">無效		
+			</c:if> 	
+		</td>
 		<td></td>
 	</tr>
 	<tr>

@@ -10,6 +10,8 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import admin.model.RightDAOBean;
 import admin.model.RightDAOService;
+import admin.model.SyslogDAOBean;
+import admin.model.SyslogDAOService;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionSupport;
@@ -32,7 +34,10 @@ public class Role_right_Action extends ActionSupport implements SessionAware {
 	public void setRIG_FUNTION(String rIG_FUNTION) {
 		RIG_FUNTION = rIG_FUNTION;
 	}
-
+	private SyslogDAOService syslogDAOService;
+	public void setSyslogDAOService(SyslogDAOService syslogDAOService) {
+		this.syslogDAOService = syslogDAOService;
+	}
 	@Override
 	public void setSession(Map<String, Object> sessionMap) {
 		this.sessionMap = sessionMap;
@@ -65,6 +70,14 @@ public class Role_right_Action extends ActionSupport implements SessionAware {
 			bean.setRIG_UPDATETIME(new java.util.Date());
 			bean.setRIG_UPDATEUSER(sessionMap.get("adminuser").toString());
 			bean = rightDAOService.update(bean);
+			//==========LOG=================//
+			SyslogDAOBean lognean=new SyslogDAOBean();
+			lognean.setLOG_TYPE("RR01");
+			lognean.setLOG_USERID(sessionMap.get("adminuser").toString());
+			lognean.setLOG_UPDATEUSER(sessionMap.get("adminuser").toString());
+			lognean.setLOG_DESC("更新權限對應功能資料:"+bean.toString());
+			lognean.setLOG_UPDATETIME(new java.util.Date());
+			syslogDAOService.insert(lognean);
 			if (bean != null)
 				req.setAttribute("message", "資料更新完成");
 			else
