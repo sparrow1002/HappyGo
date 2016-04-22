@@ -58,11 +58,12 @@ public class CustomerDAOJdbc implements CustomerDAO {
 				result.setMBR_NAME(rset.getString("MBR_NAME"));
 				result.setMBR_PWD(rset.getString("MBR_PWD"));
 				result.setMBR_SEX(rset.getString("MBR_SEX"));
+				
+				
 				result.setMBR_BIRTHDAY(rset.getString("MBR_BIRTHDAY"));
 				result.setMBR_IDENTITY(rset.getString("MBR_IDENTITY"));
 				result.setMBR_POST(rset.getString("MBR_POST"));
 				result.setMBR_ARRDESS(rset.getString("MBR_ARRDESS"));
-				result.setMBR_MEMBERID(rset.getString("MBR_MARRIED"));
 				result.setMBR_MOBIL(rset.getString("MBR_MOBIL"));
 				result.setMBR_PHONE(rset.getString("MBR_PHONE"));
 				result.setMBR_EMAIL(rset.getString("MBR_EMAIL"));
