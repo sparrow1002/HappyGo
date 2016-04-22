@@ -52,7 +52,6 @@ public class PromotionProject_Servlet extends HttpServlet {
 				String PTP_DELDATE = request.getParameter("PTP_DELDATE");
 				String PTP_FOREVER = request.getParameter("PTP_FOREVER");
 				String str_PTP_FIXPOINT = request.getParameter("PTP_FIXPOINT");
-				System.out.println(PTP_FOREVER+"PTP_FOREVER----------------");
 		//HG_PromotionBonus的欄位資料，由於可能會有1~多筆，必須用while迴圈+陣列處理
 				int j=0;
 				while(request.getParameter("PTB_VALUE"+j)!=null){
@@ -94,8 +93,13 @@ public class PromotionProject_Servlet extends HttpServlet {
 				
 				//轉換HG_PromotionBonus的欄位資料
 				int int_PTM_VARDATE = 0;
-				int_PTM_VARDATE = Integer.parseInt(str_PTM_VARDATE.trim());
-				
+				if(str_PTM_VARDATE!=null && str_PTM_VARDATE.trim().length()!=0) {
+					try {
+							int_PTM_VARDATE = Integer.parseInt(str_PTM_VARDATE.trim());
+					}catch (NumberFormatException e) {
+						error.put("PTM_VARDATE", "PTM_VARDATE未填");
+					}
+				}
 				//轉換HG_PromotionBonus的欄位資料
 //				int int_PTB_VALUE = 0;
 //				int int_PTB_POINT = 0;

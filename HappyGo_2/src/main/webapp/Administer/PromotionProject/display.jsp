@@ -12,19 +12,19 @@
 <body>
 <div id="allpage" style="background-color:#FFDDAA">
 	<c:import url="/admin/TopMeau.jsp" />
-<h3>查詢結果</h3>
+<h2>活動查詢結果</h2>
 
 <c:if test="${not empty select}">
-<table class="jtable">
+<table class="jtable" >
 	<thead>
 		<tr>
-		<th>PTP_PROJID</th>
-		<th>PTP_NAME</th>
-		<th>PTP_DESC</th>
-		<th>PTP_CREATEDATE</th>
-		<th>PTP_DELDATE</th>
-		<th>PTP_STATUS</th>
-		<th>ACTION</th>
+		<th>編號</th>
+		<th>名稱</th>
+		<th>說明</th>
+		<th>開始時間</th>
+		<th>結束時間</th>
+		<th>狀態</th>
+		<th></th>
 		</tr>
 	</thead>
 <tbody>
@@ -44,10 +44,11 @@
 		<td>${row.PTP_DESC}</td>
 		<td>${row.PTP_CREATEDATE}</td>
 		<td>${row.PTP_DELDATE}</td>
-		<td>${row.PTP_STATUS}</td>
-<%-- 			<td><c:if test="${row.PTP_STATUS==0}">關</c:if> --%>
-<%-- 				<c:if test="${row.PTP_STATUS==1}">開</c:if></td> --%>
-		<td><a href="${path}">修改</a></td>
+<%-- 		<td>${row.PTP_STATUS}</td> --%>
+			<td><c:if test="${row.PTP_STATUS==0}">close</c:if>
+				<c:if test="${row.PTP_STATUS==1}">open</c:if></td>
+<%-- 		<td><a href="${path}">修改</a></td> --%>
+			<td><input type=button value="修改" onclick="location.href='${path}'"></td>
 	</tr>
 	</c:forEach>
 	</tbody>
