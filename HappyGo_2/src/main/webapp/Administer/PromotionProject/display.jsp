@@ -45,6 +45,8 @@
 		<td>${row.PTP_CREATEDATE}</td>
 		<td>${row.PTP_DELDATE}</td>
 		<td>${row.PTP_STATUS}</td>
+<%-- 			<td><c:if test="${row.PTP_STATUS==0}">關</c:if> --%>
+<%-- 				<c:if test="${row.PTP_STATUS==1}">開</c:if></td> --%>
 		<td><a href="${path}">修改</a></td>
 	</tr>
 	</c:forEach>
