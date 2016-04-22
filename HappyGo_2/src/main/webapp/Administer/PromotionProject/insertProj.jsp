@@ -25,10 +25,11 @@
 	});
 	
 	function clearForm() {
-		var inputs = document.getElementsByTagName("textarea");
-		for(var i=0; i<inputs.length; i++) {
-				inputs[i].value="";
-		}
+// 		暫時關閉
+// 		var inputs = document.getElementsByTagName("textarea");
+// 		for(var i=0; i<inputs.length; i++) {
+// 				inputs[i].value="";
+// 		}
 	}
 </script>
 </head>

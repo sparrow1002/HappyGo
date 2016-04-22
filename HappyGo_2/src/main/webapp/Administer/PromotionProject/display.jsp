@@ -20,6 +20,7 @@
 		<tr>
 		<th>PTP_PROJID</th>
 		<th>PTP_NAME</th>
+		<th>PTP_DESC</th>
 		<th>PTP_CREATEDATE</th>
 		<th>PTP_DELDATE</th>
 		<th>PTP_STATUS</th>
@@ -31,6 +32,7 @@
 		<c:url value="/Administer/PromotionProject/updateProj.jsp" var="path" scope="page">
 			<c:param name="PTP_PROJID" value="${row.PTP_PROJID}" />
 			<c:param name="PTP_NAME" value="${row.PTP_NAME}" />
+			<c:param name="PTP_DESC" value="${row.PTP_DESC}" />
 			<c:param name="PTP_CREATEDATE" value="${row.PTP_CREATEDATE}" />
 			<c:param name="PTP_DELDATE" value="${row.PTP_DELDATE}" />
 			<c:param name="PTP_STATUS" value="${row.PTP_STATUS}" />
@@ -39,6 +41,7 @@
 	<tr>
 		<td>${row.PTP_PROJID}</td>
 		<td>${row.PTP_NAME}</td>
+		<td>${row.PTP_DESC}</td>
 		<td>${row.PTP_CREATEDATE}</td>
 		<td>${row.PTP_DELDATE}</td>
 		<td>${row.PTP_STATUS}</td>

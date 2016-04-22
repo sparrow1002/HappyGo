@@ -31,7 +31,7 @@
 	<form
 		action="<c:url value="/PromotionProject/PromotionProject.controller" />"
 		method="get">
-		<table height="600px" width="1200px" style="border: 1px solid black"
+		<table height="400px" width="600px" style="border: 1px solid black"
 			align="center">
 			<tr style="border: 1px solid black">
 				<td style="border: 1px solid black">促銷方案活動編號：<input type="text"
@@ -43,7 +43,7 @@
 			</tr>
 			<tr>
 				<td style="border: 1px solid black">活動內容文字說明：<textarea rows="3"
-						cols="50" name="PTP_DESC"></textarea></td>
+						cols="50" name="PTP_DESC">${param.PTP_DESC}</textarea></td>
 			</tr>
 			<tr>
 				<td style="border: 1px solid black">活動狀態(開啟) <input
@@ -58,55 +58,55 @@
 				<br>
 				促銷活動結束日期： <input type="text" name="PTP_DELDATE" id="PTP_DELDATE" value="${param.PTP_DELDATE}">
 				</td>
-			<tr>
-				<!-- 4/12與宗保討論，固定給點PTP_FIXPOINT後方給TEXT欄位輸入，需寫入TABLE_HG_PromotionProject -->
-				<td style="border: 1px solid black">
-				方式一：只要消費即可獲得紅利 <input type="text"
-					 value="0" name="PTP_FIXPOINT"><span class="error">${error.pTP_FIXPOINT}</span>
-				</td>
-			</tr>
-			<tr>
-				<!-- 0413需寫入TABLE_HG_PromotionBonus PTB_VALUE跟PTB_POINT需要如何同時輸入多筆，還需確認-->
-				<td> 方式二：消費金額(大於等於)<input type="text" name="PTB_VALUE0"
-					value="0">
-					可獲得紅利： <input type="text"	name="PTB_POINT0" value="0">
-				</td>
-			</tr>
-			<tr>
-				<!-- click the button to add new item 新增其他消費金額-->
-				<td><div id="showBlock"></div></td>
-			</tr>
-			<tr>
-				<!-- click the button to add new item 新增其他消費金額-->
-				<td><input type="button" id="btn" value="新增其它消費金額"></td>
-			</tr>
-			<tr>
-				<!-- 4/13與宗保討論：PTM_model需要寫入TABLE_HG_PromotionMethod -->
-				<td style="border: 1px solid black">
-				方式三：
-				<br>
-				只要消費時滿足以下條件
-				<br>
-				會員屬性 <select name="PTM_model">
-						<option value="0">選擇屬性
-						<option value="1">1_會員性別
-						<option value="2">2_會員生日
-						<option value="3">3_介紹人數
-				</select>
-				<br>
-				<!-- 4/13與宗保討論：PTM_VALUE需要寫入TABLE_HG_PromotionMethod -->
-				屬性參數：<input type="text" name="PTM_VALUE" value="請輸入參數"> <br>
-					生日(1=當日,2=當月)性別(0=女,1=男)介紹人(介紹會員人數)
-					<br>
-					<br>
-				<!-- 0413與宗保討論，PTM_NAME需寫入至Table_HG_PromotionMethod -->
-					<select name="PTM_NAME">
-						<option value="1">可獲得紅利：</option>
-						<option value="2">可獲得X倍紅利：</option>
-					</select>
-					<input type="text" name="PTM_VARDATE" value="0">
-				</td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				4/12與宗保討論，固定給點PTP_FIXPOINT後方給TEXT欄位輸入，需寫入TABLE_HG_PromotionProject -->
+<!-- 				<td style="border: 1px solid black"> -->
+<!-- 				方式一：只要消費即可獲得紅利 <input type="text" -->
+<%-- 					 value="0" name="PTP_FIXPOINT"><span class="error">${error.pTP_FIXPOINT}</span> --%>
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				0413需寫入TABLE_HG_PromotionBonus PTB_VALUE跟PTB_POINT需要如何同時輸入多筆，還需確認 -->
+<!-- 				<td> 方式二：消費金額(大於等於)<input type="text" name="PTB_VALUE0" -->
+<!-- 					value="0"> -->
+<!-- 					可獲得紅利： <input type="text"	name="PTB_POINT0" value="0"> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				click the button to add new item 新增其他消費金額 -->
+<!-- 				<td><div id="showBlock"></div></td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				click the button to add new item 新增其他消費金額 -->
+<!-- 				<td><input type="button" id="btn" value="新增其它消費金額"></td> -->
+<!-- 			</tr> -->
+<!-- 			<tr> -->
+<!-- 				4/13與宗保討論：PTM_model需要寫入TABLE_HG_PromotionMethod -->
+<!-- 				<td style="border: 1px solid black"> -->
+<!-- 				方式三： -->
+<!-- 				<br> -->
+<!-- 				只要消費時滿足以下條件 -->
+<!-- 				<br> -->
+<!-- 				會員屬性 <select name="PTM_model"> -->
+<!-- 						<option value="0">選擇屬性 -->
+<!-- 						<option value="1">1_會員性別 -->
+<!-- 						<option value="2">2_會員生日 -->
+<!-- 						<option value="3">3_介紹人數 -->
+<!-- 				</select> -->
+<!-- 				<br> -->
+<!-- 				4/13與宗保討論：PTM_VALUE需要寫入TABLE_HG_PromotionMethod -->
+<!-- 				屬性參數：<input type="text" name="PTM_VALUE" value="請輸入參數"> <br> -->
+<!-- 					生日(1=當日,2=當月)性別(0=女,1=男)介紹人(介紹會員人數) -->
+<!-- 					<br> -->
+<!-- 					<br> -->
+<!-- 				0413與宗保討論，PTM_NAME需寫入至Table_HG_PromotionMethod -->
+<!-- 					<select name="PTM_NAME"> -->
+<!-- 						<option value="1">可獲得紅利：</option> -->
+<!-- 						<option value="2">可獲得X倍紅利：</option> -->
+<!-- 					</select> -->
+<!-- 					<input type="text" name="PTM_VARDATE" value="0"> -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
 <!-- 			<tr> -->
 <!-- 				<td style="border: 1px solid black">促銷特店群組<input type="checkbox" name="PPS_STORGPID" -->
 <!-- 					value="noneGroup">無 -->
