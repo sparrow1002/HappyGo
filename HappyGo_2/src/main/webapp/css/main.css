@@ -229,6 +229,7 @@ table.t2 {
 #menus li {
 	margin: 0;
 	padding: 0;
+	width:148.9px;
 	float: left;
 	border-right: 1px solid #999;
 }
@@ -241,13 +242,13 @@ table.t2 {
 }
 
 #menus li ul {
-	margin: 0 auto;
+	margin:0 auto;
 	padding: 15px 0;
 	list-style: none;
 	float: left;
 	position: absolute;
-	left: 510px;
-	width: 900px;
+/* 	left: 510px; */
+	width: 150px;
 	color: #886600;
 	background: #f0b7a1; /* Old browsers */
 	background: -moz-linear-gradient(top, #f0b7a1 0%, #910433 50%, #a50101 51%, #bf6e4e 100%); /* FF3.6-15 */
@@ -259,10 +260,15 @@ table.t2 {
 	filter: alpha(opacity=40) \9; /* IE8 */
 	filter: Alpha(opacity=50);/* 只支持IE6、7、8、9 */
 	*zoom: 1; /* 激活IE6、7的haslayout属性，让它读懂Alpha */
+	z-index: 2;
 }
 
 #menus li ul li {
-	border-right: 1px solid #fff;
+	width:100%;
+	height:30px;
+	padding-top:5px;
+	padding-bottom:5px;
+	border-bottom: 1px solid #fff;
 }
 
 #menus li ul li a {

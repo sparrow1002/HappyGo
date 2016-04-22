@@ -8,62 +8,64 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:import url="/admin/TopMeau.jsp" />
-	<div class="demo">
-		<table style="background-color: #F0E68C;">
-			<thead>
-				<tr>
-					<th colspan="2">後台系統紀錄檢視</th>
-				</tr>
-				<tr>
-					<th align="right" style="width: 100px;"><label>使用者ID</label></th>
-					<th align="left">
-						<form action='<c:url value="/dayuNameSpace/sysloglist.action"/>'
-							method="get">
-							<input type="text" name="LOG_USERID" value=""> <input
-								type="hidden" name="mode" value="selectitem"> <input
-								type="submit" value="查詢">
-						</form>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td colspan="2"><c:if test="${not empty select}">
-							<table id="userslist" class="t2">
-								<thead>
-									<tr>
-										<th>紀錄編號</th>
-										<th>使用者</th>
-										<th>紀錄類型</th>
-										<th>紀錄說明</th>
-										<th>紀錄時間</th>
-										<th>紀錄者</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="row" items="${select}">										
+	<div id="allpage">
+		<c:import url="/admin/TopMeau.jsp" />
+		<div class="demo">
+			<table style="background-color: #F0E68C;">
+				<thead>
+					<tr>
+						<th colspan="2">後台系統紀錄檢視</th>
+					</tr>
+					<tr>
+						<th align="right" style="width: 100px;"><label>使用者ID</label></th>
+						<th align="left">
+							<form action='<c:url value="/dayuNameSpace/sysloglist.action"/>'
+								method="get">
+								<input type="text" name="LOG_USERID" value=""> <input
+									type="hidden" name="mode" value="selectitem"> <input
+									type="submit" value="查詢">
+							</form>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="2"><c:if test="${not empty select}">
+								<table id="userslist" class="t2">
+									<thead>
 										<tr>
-											<td>${row.LOG_NO}</td>
-											<td>${row.LOG_USERID}</td>
-											<td>${row.LOG_TYPE}</td>
-											<td>${row.LOG_DESC}</td>
-											<td>${row.LOG_UPDATETIME}</td>
-											<td>${row.LOG_UPDATEUSER}</td>											
+											<th>紀錄編號</th>
+											<th>使用者</th>
+											<th>紀錄類型</th>
+											<th>紀錄說明</th>
+											<th>紀錄時間</th>
+											<th>紀錄者</th>
 										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</c:if></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+									</thead>
+									<tbody>
+										<c:forEach var="row" items="${select}">
+											<tr>
+												<td>${row.LOG_NO}</td>
+												<td>${row.LOG_USERID}</td>
+												<td>${row.LOG_TYPE}</td>
+												<td>${row.LOG_DESC}</td>
+												<td>${row.LOG_UPDATETIME}</td>
+												<td>${row.LOG_UPDATEUSER}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</c:if></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<c:import url="/admin/FootBar.jsp" />
 	</div>
-	<c:import url="/admin/FootBar.jsp" />
 </body>
 <script>
 	var strUrl = location.search;
@@ -146,7 +148,8 @@
 		}
 	});
 	
-	var message = '<%=request.getAttribute("message")%>';
+	var message = '<%=request.getAttribute("message")%>
+	';
 	if (message != null && message.trim() != "" && message.trim() != "null")
 		alert(message);
 </script>

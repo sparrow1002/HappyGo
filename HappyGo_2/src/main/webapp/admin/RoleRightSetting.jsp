@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div id="allpage">
 	<c:import url="/admin/TopMeau.jsp" />
 	<div class="demo">
 		<table style="background-color: #F0E68C;">
@@ -93,6 +94,7 @@
 		</div>
 	</div>
 	<c:import url="/admin/FootBar.jsp" />
+	</div>
 </body>
 <script>
 function showfrom(mode,index) {
