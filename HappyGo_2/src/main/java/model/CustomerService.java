@@ -19,11 +19,7 @@ public class CustomerService {
 		return result;
 	}
 
-	public boolean insert(String MBR_MEMBERID, String MBR_NAME,
-			String MBR_PWD, String MBR_MOBIL, String MBR_EMAIL){
-		boolean b = dao.insert(MBR_MEMBERID, MBR_NAME, MBR_PWD, MBR_MOBIL, MBR_EMAIL);
-		return b;
-	}
+	
 	
 	public CustomerBean update(String MBR_MEMBERID, String MBR_NAME,
 			String MBR_PWD, String MBR_MOBIL, String MBR_EMAIL){
