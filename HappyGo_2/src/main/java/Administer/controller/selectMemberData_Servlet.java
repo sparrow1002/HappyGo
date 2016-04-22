@@ -55,7 +55,7 @@ public class selectMemberData_Servlet extends HttpServlet {
 				request.getRequestDispatcher(
 						"/Administer/selectMemberData/selectMemberData.jsp").forward(request, response);
 		}else{
-			error.put("MBR_MEMBERID", "查無該資料");
+			error.put("MBR_MEMBERID", "查無此會員");
 			request.getRequestDispatcher(
 					"/Administer/selectMemberData/selectMemberData.jsp").forward(request, response);
 			}
