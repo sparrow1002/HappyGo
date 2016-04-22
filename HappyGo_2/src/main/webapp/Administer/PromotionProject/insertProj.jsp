@@ -40,7 +40,7 @@
 	<form
 		action="<c:url value="/PromotionProject/PromotionProject.controller" />"
 		method="get">
-		<table height="600px" width="1200px" style="border: 1px solid black"
+		<table height="600px" width="800px" style="border: 1px solid black"
 			align="center">
 			<tr style="border: 1px solid black">
 				<td style="border: 1px solid black">促銷方案活動編號：<input type="text"
