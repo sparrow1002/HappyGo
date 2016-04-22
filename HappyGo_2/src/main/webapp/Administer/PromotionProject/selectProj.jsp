@@ -31,7 +31,7 @@
 	<form
 		action="<c:url value="/PromotionProject/selectPromotionProject.controller" />"
 		method="get">
-		<table height="300px" width="1200px" style="border: 1px solid black"
+		<table height="300px" width="900px" style="border: 1px solid black"
 			align="center">
 			<tr>
 				<td>查詢、修改活動方案</td>
