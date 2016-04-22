@@ -56,7 +56,7 @@ public class modify extends HttpServlet {
 			bean.setCos_updatetime(updatetime);
 			bean.setCos_updateuser(updateuser);
 			
-			if(prodaction!=null && prodaction.equals("Update")){
+			if(prodaction!=null && prodaction.equals("送出")){
 				ContractStoreBean result = contractStoreService.update(bean);
 				if(bean==null){
 					

@@ -37,13 +37,12 @@
 	
 	
 	<form action="<c:url value="/conStore/contractStore.controller"/>" method="get">
-	<span><a>您好!${storeLoginOK.cos_name} </a><input type="submit" name="prodaction" value="登出" /></span>
+	<span><a>${storeLoginOK.cos_name} </a><input type="submit" name="prodaction" value="登出" /></span>
 		<table id="myTable">
 			<thead>
 				<tr>
 					<th>特店代號</th>
 					<th>特店名稱</th>
-					<th>特店密碼</th>
 					<th>統一編號</th>
 					<th>特店地址</th>
 					<th>特店狀態</th>
@@ -53,6 +52,7 @@
 					<th>特店失效日</th>					
 					<th>異動者</th>
 					<th></th>
+					
 				</tr>
 			</thead>
 
@@ -60,11 +60,12 @@
 				<c:forEach var="row" items="<%=result%>">
 					<tr>
 						<td>${row.cos_storeid}</td>
-						<td>${row.cos_name}</td>
-						<td>${row.cos_pwd}</td>
+						<td>${row.cos_name}</td>						
 						<td>${row.cos_taxcode}</td>
 						<td>${row.cos_address}</td>
-						<td>${row.cos_status}</td>
+						<td><c:if test="${row.cos_status==1}">有效</c:if>
+							<c:if test="${row.cos_status==0}">無效</c:if>
+						</td>
 						<td>${row.cos_phone}</td>
 						<td>${row.cos_contact}</td>
 						<td>${row.cos_createtime}</td>
