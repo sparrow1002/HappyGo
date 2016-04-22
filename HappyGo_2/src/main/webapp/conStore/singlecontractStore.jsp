@@ -18,6 +18,11 @@
 		$('#myTable').DataTable();
 	});
 </script>
+<style>
+	span{
+	float: right;
+	}
+</style>
 <body>
 
 	<%@ page import="conStore.model.*"%>
@@ -29,15 +34,14 @@
 		ContractStoreService contractStoreService = new ContractStoreService();
 		List<ContractStoreBean> result = contractStoreService.select(cb);
 	%>
-	
-	<h2>您好!${storeLoginOK.cos_name}</h2>
+
 	<form action="<c:url value="/conStore/contractStore.controller"/>" method="get">
+	<span><a>${storeLoginOK.cos_name} </a><input type="submit" name="prodaction" value="登出" /></span>
 		<table id="myTable">
 			<thead>
 				<tr>
 					<th>特店代號</th>
 					<th>特店名稱</th>
-					<th>特店密碼</th>
 					<th>統一編號</th>
 					<th>特店地址</th>
 					<th>特店狀態</th>
@@ -54,8 +58,7 @@
 				<c:forEach var="row" items="<%=result%>">
 					<tr>
 						<td>${row.cos_storeid}</td>
-						<td>${row.cos_name}</td>
-						<td>${row.cos_pwd}</td>
+						<td>${row.cos_name}</td>						
 						<td>${row.cos_taxcode}</td>
 						<td>${row.cos_address}</td>
 						<td>${row.cos_status}</td>

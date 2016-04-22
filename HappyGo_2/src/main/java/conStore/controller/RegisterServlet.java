@@ -47,7 +47,7 @@ public class RegisterServlet extends HttpServlet {
 		bean.setCos_updatetime(updatetime);
 		bean.setCos_updateuser(updateuser);
 		
-		if(prodaction!=null && prodaction.equals("註冊")) {
+		if(prodaction!=null && prodaction.equals("申請特約商店")) {
 			ContractStoreBean result = contractStoreService.insert(bean);
 			if(result==null) {
 				//error.put("action", "Insert fail");
