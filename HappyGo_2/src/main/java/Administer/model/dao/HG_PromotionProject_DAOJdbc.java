@@ -275,12 +275,18 @@ public class HG_PromotionProject_DAOJdbc {
 				HG_PromotionProject_Bean bean = new HG_PromotionProject_Bean();
 				bean.setPTP_PROJID(rset.getInt("PTP_PROJID"));
 				bean.setPTP_NAME(rset.getString("PTP_NAME"));
-				//處理日期轉換
+				//處理日期轉換, 如果有設時間才轉，是null就直接回傳
 				DayDevice day = new DayDevice();
-				String createdate = day.parse_DBtoWeb(rset.getString("PTP_CREATEDATE"));
-				String deldate = day.parse_DBtoWeb(rset.getString("PTP_DELDATE"));
-				bean.setPTP_CREATEDATE(createdate);
-				bean.setPTP_DELDATE(deldate);
+				if(rset.getString("PTP_CREATEDATE")!=null && rset.getString("PTP_DELDATE")!=null)
+				{
+					String createdate = day.parse_DBtoWeb(rset.getString("PTP_CREATEDATE"));
+					String deldate = day.parse_DBtoWeb(rset.getString("PTP_DELDATE"));
+					bean.setPTP_CREATEDATE(createdate);
+					bean.setPTP_DELDATE(deldate);
+				}else{
+					bean.setPTP_CREATEDATE(rset.getString("PTP_CREATEDATE"));
+					bean.setPTP_DELDATE(rset.getString("PTP_DELDATE"));
+				}
 				bean.setPTP_STATUS(rset.getString("PTP_STATUS"));
 				bean.setPTP_DESC(rset.getString("PTP_DESC"));
 				bean.setPTP_COVER(rset.getBytes("PTP_COVER"));
