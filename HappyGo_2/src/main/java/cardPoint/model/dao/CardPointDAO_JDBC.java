@@ -49,15 +49,17 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 		bean.setUseTranId("0");
 		bean.setUpdateUser("tra01");
 		
-		for(CardPointBean testbean : dao.selectPoint(memberId, dDate, status))
-			System.out.println(testbean);
-		System.out.println(dao.selectLastPoint(memberId, dDate, status));
-		System.out.println(dao.selectByTran("201604110001"));	
-		/*if(dao.insert(bean)){
-			System.out.println("insert ok");
-		}else{
-			System.out.println("insert error");
-		};*/
+//		for(CardPointBean testbean : dao.selectPoint(memberId, dDate, status))
+//			System.out.println(testbean);
+//		System.out.println(dao.selectLastPoint(memberId, dDate, status));
+//		System.out.println(dao.selectByTran("201604110001"));	
+
+//		if(dao.insert(bean)){
+//			System.out.println("insert ok");
+//		}else{
+//			System.out.println("insert error");
+//		};
+
 		/*if(dao.update("1",bean)){
 			System.out.println("update ok");
 		}else{
@@ -179,18 +181,18 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 	}
 
 	private static final String UPDATE = "update HG_CardPoint set "
-			//+ "CPT_DDATE = ?,"
-			//+ "CPT_POINTADD = ?,"
-			//+ "CPT_POINTDRE = ?,"
-			//+ "CPT_TRANDATE = ?,"
-			//+ "CPT_MEMBERID = ?,"
+			+ "CPT_DDATE = ?,"
+			+ "CPT_POINTADD = ?,"
+			+ "CPT_POINTDRE = ?,"
+			+ "CPT_TRANDATE = ?,"
+			+ "CPT_MEMBERID = ?,"
 			+ "CPT_STATUS = ?,"
 			+ "CPT_USETRANID = ?,"
 			+ "CPT_UPDATETIME = getdate(),"
 			+ "CPT_UPDATEUSER = ?"
 			+ " where CPT_TRANID = ?"
 			+ " and CPT_POINTADD = ?"
-			+ " and CPT_POINTDRE = ?,";
+			+ " and CPT_POINTDRE = ?";
 	public boolean update(CardPointBean bean) {
 		Connection conn =null;
 		PreparedStatement pstmt;
@@ -198,17 +200,17 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(UPDATE);
-			//pstmt.setString(1, bean.getdDate());
-			//pstmt.setInt(2, bean.getPointAdd());
-			//pstmt.setInt(3, bean.getPointDre());
-			//pstmt.setString(4, bean.getTranDate());
-			//pstmt.setString(5, bean.getMemberId());
-			pstmt.setString(1, bean.getStatus());
-			pstmt.setString(2, bean.getUseTranId());
-			pstmt.setString(3, bean.getUpdateUser());
-			pstmt.setString(4,bean.getTranId());
-			pstmt.setInt(5, bean.getPointAdd());
-			pstmt.setInt(6, bean.getPointDre());
+			pstmt.setString(1, bean.getdDate());
+			pstmt.setInt(2, bean.getPointAdd());
+			pstmt.setInt(3, bean.getPointDre());
+			pstmt.setString(4, bean.getTranDate());
+			pstmt.setString(5, bean.getMemberId());
+			pstmt.setString(6, bean.getStatus());
+			pstmt.setString(7, bean.getUseTranId());
+			pstmt.setString(8, bean.getUpdateUser());
+			pstmt.setString(9,bean.getTranId());
+			pstmt.setInt(10, bean.getPointAdd());
+			pstmt.setInt(11, bean.getPointDre());
 			int i = pstmt.executeUpdate();
 			System.out.println("CardPointDAO_JDBC update i= "+i);
 			conn.close();
@@ -221,23 +223,40 @@ public class CardPointDAO_JDBC implements CardPointDAO {
 		return false;
 	}
 
-	private static final String INSERT = "insert into HG_CardPoint values (?,?,?,?,?,?,?,?,getdate(),?)";
+	private static final String INSERT = "insert into HG_CardPoint ("
+			+ "[CPT_TRANID], "//1
+			+ "[CPT_DDATE], "//2
+			+ "[CPT_POINTADD], [CPT_POINTDRE], "//3,4
+			+ "[CPT_TRANDATE], "//5
+			+ "[CPT_MEMBERID], [CPT_STATUS], "//6,7
+			+ "[CPT_USETRANID], "//8
+			+ "[CPT_UPDATETIME], [CPT_UPDATEUSER])"//9
+			+ "values (?,?,?,?,?,?,?,?,getdate(),?)";
 	public boolean insert(CardPointBean bean) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+//			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(INSERT);
 			pstmt.setString(1,bean.getTranId());
+			//System.out.println("1: "+bean.getTranId());
 			pstmt.setString(2, bean.getdDate());
+			//System.out.println("2: "+bean.getdDate());
 			pstmt.setInt(3, bean.getPointAdd());
+			//System.out.println("3: "+bean.getPointAdd());
 			pstmt.setInt(4, bean.getPointDre());
+			//System.out.println("4: "+bean.getPointDre());
 			pstmt.setString(5, bean.getTranDate());
+			//System.out.println("5: "+bean.getTranDate());
 			pstmt.setString(6, bean.getMemberId());
+			//System.out.println("6: "+bean.getMemberId());
 			pstmt.setString(7, bean.getStatus());
+			//System.out.println("7: "+bean.getStatus());
 			pstmt.setString(8, bean.getUseTranId());
+			//System.out.println("8: "+bean.getUseTranId());
 			pstmt.setString(9, bean.getUpdateUser());
+			//System.out.println("9: "+bean.getUpdateUser());
 			int i = pstmt.executeUpdate();
 			conn.close();
 			if(i>=1){

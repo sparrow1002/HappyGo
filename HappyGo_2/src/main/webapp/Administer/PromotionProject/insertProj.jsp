@@ -25,15 +25,16 @@
 	});
 	
 	function clearForm() {
-		var inputs = document.getElementsByTagName("textarea");
-		for(var i=0; i<inputs.length; i++) {
-				inputs[i].value="";
-		}
+// 		暫時關閉
+// 		var inputs = document.getElementsByTagName("textarea");
+// 		for(var i=0; i<inputs.length; i++) {
+// 				inputs[i].value="";
+// 		}
 	}
 </script>
 </head>
 <body>
-<div id="allpage">
+<div id="allpage" style="background-color:#FFDDAA">
 	<c:import url="/admin/TopMeau.jsp" />
 <h1>第一步：請設定促銷活動</h1>
 	<form
@@ -62,9 +63,9 @@
 				<td style="border: 1px solid black">
 				活動時間(永久) <input type="checkbox" name="PTP_FOREVER" value="1"> 
 				<br> 
-				促銷活動生效日期： <input type="text" name="PTP_CREATEDATE" id="PTP_CREATEDATE">
+				促銷活動生效日期： <input type="text" name="PTP_CREATEDATE" id="PTP_CREATEDATE"><span class="error">${error.PTP_CREATEDATE}</span>
 				<br>
-				促銷活動結束日期： <input type="text" name="PTP_DELDATE" id="PTP_DELDATE">
+				促銷活動結束日期： <input type="text" name="PTP_DELDATE" id="PTP_DELDATE"><span class="error">${error.PTP_DELDATE}</span>
 				</td>
 			<tr>
 				<!-- 4/12與宗保討論，固定給點PTP_FIXPOINT後方給TEXT欄位輸入，需寫入TABLE_HG_PromotionProject -->
@@ -95,7 +96,8 @@
 				<br>
 				只要消費時滿足以下條件
 				<br>
-				會員屬性 <select id="PTM_model">
+				會員屬性 <select name="PTM_model" >
+						<option value="0">選擇屬性
 						<option value="1">1_會員性別
 						<option value="2">2_會員生日
 						<option value="3">3_介紹人數
@@ -114,22 +116,22 @@
 					<input type="text" name="PTM_VARDATE" value="0">
 				</td>
 			</tr>
-			<tr>
-				<td style="border: 1px solid black">促銷特店群組<input type="checkbox" name="PPS_STORGPID"
-					value="noneGroup">無
-				<input type="checkbox" name="PPS_STORGPID"
-					value="SOGOGroup">SOGO集團
-				<input type="checkbox" name="PPS_STORGPID"
-					value="FarEastGroup">遠東集團
-				<!--	後續優化，自動生成選項	-->
-				<br>
-				促銷特約店家
-				<input type="checkbox" name="PPS_STOREID" value="noneGroup">阿嬤的古早味
-				<input type="checkbox" name="PPS_STOREID" value="SOGOZhongxiao">SOGO忠孝館
-				<input type="checkbox" name="PPS_STOREID" value="FarEastBanqiao">板橋大遠百
-				<!--	後續優化，自動生成選項	-->
-				</td>
-			</tr>
+<!-- 			<tr> -->
+<!-- 				<td style="border: 1px solid black">促銷特店群組<input type="checkbox" name="PPS_STORGPID" -->
+<!-- 					value="noneGroup">無 -->
+<!-- 				<input type="checkbox" name="PPS_STORGPID" -->
+<!-- 					value="SOGOGroup">SOGO集團 -->
+<!-- 				<input type="checkbox" name="PPS_STORGPID" -->
+<!-- 					value="FarEastGroup">遠東集團 -->
+<!-- 					後續優化，自動生成選項	 -->
+<!-- 				<br> -->
+<!-- 				促銷特約店家 -->
+<!-- 				<input type="checkbox" name="PPS_STOREID" value="noneGroup">阿嬤的古早味 -->
+<!-- 				<input type="checkbox" name="PPS_STOREID" value="SOGOZhongxiao">SOGO忠孝館 -->
+<!-- 				<input type="checkbox" name="PPS_STOREID" value="FarEastBanqiao">板橋大遠百 -->
+<!-- 					後續優化，自動生成選項	 -->
+<!-- 				</td> -->
+<!-- 			</tr> -->
 			<tr>
 				<td align="center"><input type="submit" name="promotionProject"
 					value="Insert"></td>

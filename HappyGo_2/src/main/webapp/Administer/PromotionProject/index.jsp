@@ -9,20 +9,21 @@
 <title>促銷方案首頁</title>
 </head>
 <body>
-<div id="allpage">
+<div id="allpage" style="background-color:#FFDDAA">
 	<c:import url="/admin/TopMeau.jsp" />
+	
 <h1>促銷方案首頁</h1>
+<c:if test="${not empty insert}">
+<h2>活動設定成功</h2>
+</c:if>
+
+<c:if test="${not empty update}">
+<h2>活動更新成功</h2>
+</c:if>
 <input type=button value="新增活動方案" onclick="location.href='<c:url value="/Administer/PromotionProject/insertProj.jsp" />'">
 <input type=button value="查詢活動方案" onclick="location.href='<c:url value="/Administer/PromotionProject/selectProj.jsp" />'">
 <input type=button value="修改活動方案" onclick="location.href='<c:url value="/Administer/PromotionProject/updateProj.jsp" />'">
 
-<c:if test="${not empty insert}">
-<h3>Insert PromotionProject Success</h3>
-</c:if>
-
-<c:if test="${not empty update}">
-<h3>Update PromotionProject Success</h3>
-</c:if>
 	<c:import url="/admin/FootBar.jsp" />
 </div>
 </body>

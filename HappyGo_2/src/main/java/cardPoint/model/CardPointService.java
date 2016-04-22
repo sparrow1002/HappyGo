@@ -224,7 +224,7 @@ public class CardPointService {
 			PointAddBean pointAddBean = this.pointAdd(memberId, cost, proListBean);
 			int projId = pointAddBean.getProjId();//SOP_PROJID
 			int pointAdd = pointAddBean.getPointAdd();//CPT_POINTADD
-			int overPoint = totalPoint - usePoint;//SOP_overPoint
+			int overPoint = totalPoint - usePoint + pointAdd;//SOP_overPoint
 			
 			ShoppingBean shopBean = new ShoppingBean();
 			shopBean.setTranId(tranId);
@@ -240,10 +240,12 @@ public class CardPointService {
 			boolean shopInsertResult = shoppingDAO.insert(shopBean);
 			if(!shopInsertResult){
 				apiReturnBean.setResult(false);
+				apiReturnBean.setPointAdd(0);
 				apiReturnBean.setOverPoint(totalPoint);
 				return apiReturnBean;
 			}
-			String dDate = today + lifeDay;
+			
+			String dDate = dayDevice.calculateAfterDate(today,this.lifeDay);
 			CardPointBean pointBean = new CardPointBean();
 			pointBean.setTranId(tranId);
 			pointBean.setdDate(dDate);
@@ -252,29 +254,34 @@ public class CardPointService {
 			pointBean.setTranDate(today);
 			pointBean.setMemberId(memberId);
 			pointBean.setStatus(unUse);
+			//pointBean.setUseTranId("");
 			//useTranId
 			pointBean.setUpdateUser(updateUser);
 			boolean pointInsertResult = pointDAO.insert(pointBean);
 			if(!pointInsertResult){
 				apiReturnBean.setResult(false);
+				apiReturnBean.setPointAdd(0);
 				apiReturnBean.setOverPoint(totalPoint);
 				return apiReturnBean;
 			}
 			
-			List<CardPointBean> pointListBean = this.selectPoint(memberId, today, unUse);
-			boolean updateUsePointResult= this.updateUsePoint(usePoint, pointListBean, tranId);
-			if(!updateUsePointResult){
-				apiReturnBean.setResult(false);
-				apiReturnBean.setOverPoint(totalPoint);
-				return apiReturnBean;
+			if(usePoint>0){
+				List<CardPointBean> pointListBean = this.selectPoint(memberId, today, unUse);
+				boolean updateUsePointResult= this.updateUsePoint(usePoint, pointListBean, tranId);
+				if(!updateUsePointResult){
+					apiReturnBean.setResult(false);
+					apiReturnBean.setPointAdd(0);
+					apiReturnBean.setOverPoint(totalPoint);
+					return apiReturnBean;
+				}
 			}
-			
-			apiReturnBean.setOverPoint(overPoint);
 			apiReturnBean.setResult(true);
-			
+			apiReturnBean.setPointAdd(pointAdd);
+			apiReturnBean.setOverPoint(overPoint);
 			return apiReturnBean;
 		}else{
 			apiReturnBean.setResult(false);
+			apiReturnBean.setPointAdd(0);
 			apiReturnBean.setOverPoint(totalPoint);
 			return apiReturnBean;
 		}

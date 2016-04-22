@@ -19,10 +19,12 @@ public class HG_PromotionProject_Service {
 	
 	public int insert(HG_PromotionProject_Bean bean) {
 		// 活動編號可在寫入資料庫時由資料庫新增或由這邊加入，前提是bean必須在這邊包裝
+		System.out.println("HG_PromotionProject_Service insert start");
 		int result = 0;
 		if (bean != null) {
 			result = PromotionProjectDao.insert(bean);
 		}
+		System.out.println("HG_PromotionProject_Service insert end");
 		return result;
 	}
 

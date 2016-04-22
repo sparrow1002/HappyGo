@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import MemberInfo.model.MemberBean;
+import MemberInfo.model.MemberService;
 import model.CustomerBean;
 import model.CustomerService;
 
@@ -22,7 +24,7 @@ import model.CustomerService;
 )
 public class MemberServlet extends HttpServlet {
 	private SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd");
-	private CustomerService service = new CustomerService();
+	private MemberService service = new MemberService();
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -141,7 +143,7 @@ public class MemberServlet extends HttpServlet {
 		}
 		
 		if(prodaction!=null && prodaction.equals("確定")) {
-			CustomerBean result = service.update(MBR_MEMBERID, MBR_NAME, MBR_PWD, MBR_MOBIL, MBR_EMAIL);
+			MemberBean result = service.update(MBR_MEMBERID, MBR_NAME, MBR_PWD, MBR_MOBIL, MBR_EMAIL);
 			if(result==null) {
 				error.put("action", "修改資料失敗, 請重新操作");
 			} else {
