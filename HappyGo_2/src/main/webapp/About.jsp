@@ -180,6 +180,30 @@ div.showCode {
 .menut a:hover {
 	margin-top: 20px;
 }
+
+/*  dayu new test */
+.wrap{ width:723px; margin:auto;margin-top: 0ex;}
+.header{ background:url(images/logo.png); width:420px; height:75px; margin:0 auto 20px; text-indent:-9999px;}
+.mask{ height:180px; overflow:hidden; border:solid 1px #999; float:left; margin:-1px 0 0 -1px;}
+.boxWrap{
+	width: 240px;
+	-moz-transition:margin-top .5s ease-out;
+	-webkit-transition:margin-top .5s ease-out;
+	-o-transition:margin-top .5s ease-out;
+	-ms-transition:margin-top .5s ease-out;
+	
+}
+.boxWrap:hover{ margin-top:-179px;}
+.boxWrap h1{ font-size:17px; color:#000;}
+.box1, .box2{ padding:10px;  color:#666; height:160px;background: #ffb76b; /* Old browsers */
+background: -moz-linear-gradient(top, #ffb76b 0%, #ffa73d 33%, #ff7c00 56%, #ffc38c 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #ffb76b 0%,#ffa73d 33%,#ff7c00 56%,#ffc38c 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #ffb76b 0%,#ffa73d 33%,#ff7c00 56%,#ffc38c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb76b', endColorstr='#ffc38c',GradientType=0 ); /* IE6-9 */}
+.box2{ margin-top: -1px; position:relative;}
+.box2 p{ margin-bottom:.5em;color:#111111;background-color:#121;}
+.box2 button{ box-shadow:0 0 5px #999; position:absolute; left:70px; bottom:10px; text-decoration:none; color:#FFF; display:block; border: solid 1px #69F; background-color:#6CF; border-radius:3px; width:100px; text-align:center;}
+.box2 button:hover{ box-shadow:0 0 5px #666; background-color:#6BF;}
 </style>
 <body>
 	<div id="allpage">
@@ -187,13 +211,39 @@ div.showCode {
 		<div id="tabs-left" class="demo">
 			<div class="wrapper">
 				<ul class="ulReset menut">
-					<img alt="" src="../img/happygi.png" style="width:10.5em;">
+					<img alt="" src="../img/happygi.png" style="width: 10.5em;">
 					<li><a href="#tabs-1" title="關於HAPPY GO">ABOUT HAPPY GO</a></li>
 					<li><a href="#tabs-2" title="影片介紹">Show MV</a></li>
 					<li><a href="#tabs-3" title="卡種說明">Card Type</a></li>
 				</ul>
 			</div>
 			<div id="tabs-3" style="height: 550px; overflow-y: scroll;">
+				<div class="wrap">					
+					<c:if test="${not empty select}">
+						<c:forEach var="row" items="${select}" varStatus="varStatus">
+							<c:url value="/photo.view" var="path_img" scope="page">
+								<c:param name="photoid" value="${row.CDI_CardID}" />
+								<c:param name="mode" value="selectitem" />
+							</c:url>
+							<div class="mask">
+								<div class="boxWrap">
+									<div class="box1">
+										<img id="${row.CDI_CardID}" src="${path_img}" alt="photoid"	onclick='showfrom(this);'  width="220" height="140" />
+										<h1>${row.CDI_CardName}</h1>
+										<input id="${row.CDI_CardID}_0"	value="${row.CDI_CardName}" type="hidden"> 
+										<input id="${row.CDI_CardID}_1" value="${row.CDI_CardInfo}"	type="hidden"> 
+										<input id="${row.CDI_CardID}_2"	value="${row.CDI_CardName}" type="hidden"> 
+									</div>
+									<div class="box2">
+										<h1>${row.CDI_CardName}</h1>
+										<p>${row.CDI_CardInfo}</p>										
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</c:if>
+				</div>
+				<!-- 
 				<table style="width: 570px;">
 					<tbody>
 						<tr>
@@ -207,13 +257,11 @@ div.showCode {
 														<c:param name="photoid" value="${row.CDI_CardID}" />
 														<c:param name="mode" value="selectitem" />
 													</c:url>
-													<td><input id="${row.CDI_CardID}_0"
-														value="${row.CDI_CardName}" type="hidden"> <input
-														id="${row.CDI_CardID}_1" value="${row.CDI_CardInfo}"
-														type="hidden"> <input id="${row.CDI_CardID}_2"
-														value="${row.CDI_CardName}" type="hidden"> <img
-														id="${row.CDI_CardID}" src="${path_img}" alt="photoid"
-														height="100" width="160" onclick='showfrom(this);' /></td>
+													<td>
+													<input id="${row.CDI_CardID}_0"	value="${row.CDI_CardName}" type="hidden"> 
+													<input id="${row.CDI_CardID}_1" value="${row.CDI_CardInfo}"	type="hidden"> 
+													<input id="${row.CDI_CardID}_2"	value="${row.CDI_CardName}" type="hidden"> 
+													<img id="${row.CDI_CardID}" src="${path_img}" alt="photoid"	height="100" width="160" onclick='showfrom(this);' /></td>
 													<c:if test="${ varStatus.count % 3 == 0 }">
 											</tr>
 											<tr>
@@ -224,7 +272,7 @@ div.showCode {
 								</c:if></td>
 						</tr>
 					</tbody>
-				</table>
+				</table> -->
 				<div id="users-contain">
 					<table id="users" style="width: 550px; height: 300px" class="t2">
 						<thead>
