@@ -13,9 +13,9 @@ input {
 }
 </style>
 <body>
-	<div class="allpage">
+	<div id="allpage">
 		<c:import url="/admin/TopMeau.jsp" />
-		<div >
+		<div class="demo">
 			<table style="background-color: #F0E68C;">
 				<thead>
 					<tr>

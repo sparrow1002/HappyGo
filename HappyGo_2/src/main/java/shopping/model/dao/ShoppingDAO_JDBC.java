@@ -74,8 +74,8 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			//conn = dataSource.getConnection();
+//			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SELECTBYTRAN);
 			pstmt.setLong(1, tranId);
 			rset = pstmt.executeQuery();
@@ -109,8 +109,8 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			//conn = dataSource.getConnection();
+//			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(SELECTBYMEMBER);
 			pstmt.setString(1, memberId);
 			rset = pstmt.executeQuery();
@@ -145,8 +145,8 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			//conn = dataSource.getConnection();
+//			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(STORE);
 			pstmt.setString(1, storeId);
 			rset = pstmt.executeQuery();
@@ -181,8 +181,8 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			//conn = dataSource.getConnection();
+//			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(PROJ);
 			pstmt.setInt(1, projId);
 			rset = pstmt.executeQuery();
@@ -217,8 +217,8 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			//conn = dataSource.getConnection();
+//			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(DATE);
 			pstmt.setString(1, begin);
 			pstmt.setString(2, end);
@@ -257,8 +257,8 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			//conn = dataSource.getConnection();
+//			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(UPDATE);
 			pstmt.setString(1, status);
 			pstmt.setString(2,bean.getUpdateUser());
@@ -281,8 +281,8 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		Connection conn = null;
 		PreparedStatement pstmt =null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			//conn = dataSource.getConnection();
+//			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
 			pstmt = conn.prepareStatement(INSERT);
 			pstmt.setString(1, bean.getTranId());
 			pstmt.setInt(2, bean.getTranAmt());

@@ -8,6 +8,12 @@
 <link rel="stylesheet" type="text/css" href="../css/main.css" />
 <link rel="stylesheet" type="text/css" href="../jquery-ui-1.11.4.custom/jquery-ui.min.css" />
 
+
+
+<link rel="stylesheet" type="text/css" href="/HappyGo_2/css/main.css">
+
+
+
 <title>Product</title>
 <script type="text/javascript" src="../js/jquery-2.2.1.min.js"></script>
 <script type="text/javascript" src="../jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
@@ -43,6 +49,9 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
+
+<div id="allpage" style="background-color: #FFDDAA">
+<c:import url="/admin/TopMeau.jsp" />
 
 <h2>會員中心...(會員資料維護) ${user.MBR_NAME} </h2>
 
@@ -221,6 +230,10 @@ $(document).ready(function() {
 </table>
 <script type="text/javascript">clearForm();</script>
 </c:if>
+
+
+<c:import url="/admin/FootBar.jsp" />
+</div>
 
 </body>
 </html>

@@ -5,34 +5,35 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-<link rel="stylesheet" type="text/css" href="" />
-
-<title>Login</title>
+<title>特約商店登入</title>
+<link rel="stylesheet" href="main.css">
 </head>
 <body>
-
-<h3>Login</h3>
-
-<form action="<c:url value="/conStore/login.controller" />" method="get">
-<table>
-	<tr>
-		<td>ID : </td>
-		<td><input type="text" name="username" value="${param.username}"></td>
-		<td>${error.username}</td>
-	</tr>
-	<tr>
-		<td>PWD : </td>
-		<td><input type="text" name="password" value="${param.password}"></td>
-		<td>${error.password}</td>
-	</tr>
-	<tr>
-		<td></td>
-		<td align="right"><input type="submit" value="登入"></td>
-		<td align="right"><input type=button onClick="location.href='<c:url value="/conStore/register.jsp"/>'" value='註冊'></td>
-	</tr>
-</table>
-</form>
-
+	<div>
+		<form action="<c:url value="/conStore/login.controller" />" method="get">
+			<table>
+				<tr>
+					<th colspan='2'  bgcolor='#d4edec'><label>特店登入</label></th>
+				</tr>
+				<tr>
+					<td bgcolor='#bce6e4' align="right">特約商店帳號</td>
+					<td bgcolor='#85d6d2'><input type="text" name="username" value="${param.username}"></td>
+					<td>${error.username}</td>
+				</tr>
+				<tr>
+					<td bgcolor='#bce6e4' align="right">特約商店密碼</td>
+					<td bgcolor='#85d6d2'><input type="text" name="password" value="${param.password}"></td>
+					<td>${error.password}</td>
+				</tr>
+				<tr>
+					<td colspan='2' bgcolor='#d4edec' align="center">
+						<input type="submit" value="登入">
+						<input type=button onClick="location.href='<c:url value="/conStore/register.jsp"/>'" value='申請特約商店'>
+						<input value="回首頁" onclick="window.location='../index.jsp'" type="button">
+					</td>					
+				</tr>
+			</table>
+		</form>
+	</div>
 </body>
 </html>

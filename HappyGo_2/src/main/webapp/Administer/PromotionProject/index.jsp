@@ -22,7 +22,8 @@
 </c:if>
 <input type=button value="新增活動方案" onclick="location.href='<c:url value="/Administer/PromotionProject/insertProj.jsp" />'">
 <input type=button value="查詢活動方案" onclick="location.href='<c:url value="/Administer/PromotionProject/selectProj.jsp" />'">
-<input type=button value="修改活動方案" onclick="location.href='<c:url value="/Administer/PromotionProject/updateProj.jsp" />'">
+<!-- demo時，只可從查詢介面進入修改介面 -->
+<%-- <input type=button value="修改活動方案" onclick="location.href='<c:url value="/Administer/PromotionProject/updateProj.jsp" />'"> --%>
 
 	<c:import url="/admin/FootBar.jsp" />
 </div>

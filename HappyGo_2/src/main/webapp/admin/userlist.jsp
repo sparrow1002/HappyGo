@@ -9,7 +9,7 @@
 
 </head>
 <body>
-	<div class="allpage">
+<div id="allpage">
 		<c:import url="/admin/TopMeau.jsp" />
 		<div class="demo">
 			<table style="background-color: #F0E68C;">
@@ -235,7 +235,6 @@ if(mode=='selectitem' || mode=='update'){
 			});
 		}
 	});
-	
 	var message = '<%=request.getAttribute("message")%>';
 	if (message != null && message.trim() != "" && message.trim() != "null")
 		alert(message);

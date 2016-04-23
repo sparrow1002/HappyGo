@@ -25,10 +25,11 @@
 	});
 	
 	function clearForm() {
-		var inputs = document.getElementsByTagName("textarea");
-		for(var i=0; i<inputs.length; i++) {
-				inputs[i].value="";
-		}
+// 		暫時關閉
+// 		var inputs = document.getElementsByTagName("textarea");
+// 		for(var i=0; i<inputs.length; i++) {
+// 				inputs[i].value="";
+// 		}
 	}
 </script>
 </head>
@@ -39,7 +40,7 @@
 	<form
 		action="<c:url value="/PromotionProject/PromotionProject.controller" />"
 		method="get">
-		<table height="600px" width="1200px" style="border: 1px solid black"
+		<table height="600px" width="800px" style="border: 1px solid black"
 			align="center">
 			<tr style="border: 1px solid black">
 				<td style="border: 1px solid black">促銷方案活動編號：<input type="text"
@@ -62,9 +63,9 @@
 				<td style="border: 1px solid black">
 				活動時間(永久) <input type="checkbox" name="PTP_FOREVER" value="1"> 
 				<br> 
-				促銷活動生效日期： <input type="text" name="PTP_CREATEDATE" id="PTP_CREATEDATE">
+				促銷活動生效日期： <input type="text" name="PTP_CREATEDATE" id="PTP_CREATEDATE"><span class="error">${error.PTP_CREATEDATE}</span>
 				<br>
-				促銷活動結束日期： <input type="text" name="PTP_DELDATE" id="PTP_DELDATE">
+				促銷活動結束日期： <input type="text" name="PTP_DELDATE" id="PTP_DELDATE"><span class="error">${error.PTP_DELDATE}</span>
 				</td>
 			<tr>
 				<!-- 4/12與宗保討論，固定給點PTP_FIXPOINT後方給TEXT欄位輸入，需寫入TABLE_HG_PromotionProject -->
@@ -95,7 +96,8 @@
 				<br>
 				只要消費時滿足以下條件
 				<br>
-				會員屬性 <select id="PTM_model">
+				會員屬性 <select name="PTM_model" >
+						<option value="0">選擇屬性
 						<option value="1">1_會員性別
 						<option value="2">2_會員生日
 						<option value="3">3_介紹人數

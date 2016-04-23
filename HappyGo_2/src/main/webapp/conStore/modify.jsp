@@ -9,57 +9,36 @@
 </head>
 <body>
 <form action="<c:url value="/conStore/modify.controller"/>" method="get">
-<c:if test="${not empty select}">
-<table>
-	<thead>
-	<tr>
-		<th>storeid</th>
-		<th>name</th>
-		<th>pwd</th>
-		<th>taxcode</th>
-		<th>address</th>
-		<th>status</th>
-		<th>phone</th>
-		<th>contact</th>
-		<th>createtime</th>
-		<th>deletime</th>
-		<th>updatetime</th>
-		<th>updateuser</th>		
-	</tr>
-	</thead>	
-</table>
-</c:if>
-
 <table>
 	<c:forEach var="row" items="${select}">
 	<tr>
-		<td>StoreID : </td>
-		<td><input type="text" name="storeid" value="${row.cos_storeid}" ></td>
+		<td>特店代號 : </td>
+		<td><input type="text" name="storeid" value="${row.cos_storeid}" readonly></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>Name : </td>
+		<td>特店名稱 : </td>
 		<td><input type="text" name="name" value="${row.cos_name}"></td>
 		<td></td>
 	</tr>
 
 	<tr>
-		<td>PassWord : </td>
-		<td><input type="text" name="pwd" value="${row.cos_pwd}"></td>
+		<td>密碼 : </td>
+		<td><input type="password" name="pwd" value="${row.cos_pwd}"></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>Taxcode : </td>
+		<td>統一編號 : </td>
 		<td><input type="text" name="taxcode" value="${row.cos_taxcode}"></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>Address : </td>
+		<td>特店地址 : </td>
 		<td><input type="text" name="address" value="${row.cos_address}"></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>Status : </td>
+		<td>特店狀態 : </td>
 		<td>
 			<c:if test="${row.cos_status=='1'}">
 				<input type="radio" name="status" value="1" checked="checked">有效
@@ -73,38 +52,34 @@
 		<td></td>
 	</tr>
 	<tr>
-		<td>Phone : </td>
+		<td>連絡電話 : </td>
 		<td><input type="text" name="phone" value="${row.cos_phone}"></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>Contact : </td>
+		<td>聯絡人 : </td>
 		<td><input type="text" name="contact" value="${row.cos_contact}"></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>Createtime : </td>
-		<td><input type="text" id="today"  name="createtime" value="${row.cos_createtime}" ></td>
+		<td>特店生效日 : </td>
+		<td><input type="text" id="today"  name="createtime" value="${row.cos_createtime}" readonly></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>Deletime : </td>
-		<td><input type="text" id="datepicker"  name="deletime" value="${row.cos_deletime}"></td>
+		<td>特店失效日 : </td>
+		<td><input type="text" id="datepicker"  name="deletime" value="${row.cos_deletime}" readonly></td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>Updatetime : </td>
-		<td><input type="text" name="updatetime" value="${row.cos_updatetime}" ></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td>Updateuser : </td>
-		<td><input type="text" name="Updateuser" value="${row.cos_updateuser}"></td>
+		<td>異動者 : </td>
+		<td><input type="text" name="Updateuser" value="${row.cos_updateuser}" readonly></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>		
-			<input type="submit" name="prodaction" value="Update">
+			<input type="submit" name="prodaction" value="送出" 
+				   onclick="if(confirm('您確定要修改嗎?')) return true;else return false">
 		</td>		
 	</tr>	
 	</c:forEach>	

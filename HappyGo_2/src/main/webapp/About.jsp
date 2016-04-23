@@ -22,7 +22,6 @@ div.showCode {
 	width: 600px;
 	height: 700px;
 	margin: 10px 0;
-
 }
 
 .ui-tabs {
@@ -78,7 +77,7 @@ div.showCode {
 
 #tabs-left {
 	position: relative;
- 	padding-left: 2.9em; 
+	padding-left: 2.9em;
 }
 
 #tabs-left .ui-tabs-nav {
@@ -112,7 +111,6 @@ div.showCode {
 	text-align: right;
 	color: #c575a5;
 	text-align: center;
-	
 }
 
 #tabs-left .ui-tabs-panel {
@@ -137,22 +135,71 @@ div.showCode {
 #tabs-left-vertical .ui-tabs-panel {
 	height: 20em;
 }
+
+.menut {
+	list-style: none;
+	width: 200px;
+	margin: 0px auto 0px;
+}
+
+.menut li {
+	height: 20px;
+	overflow: hidden;
+	position: relative;
+}
+
+.menut li:after {
+	content: "";
+	display: block;
+	height: 1px;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	background: -moz-linear-gradient(left, #222, #666, #222);
+	background: -webkit-linear-gradient(left, #222, #666, #222);
+}
+
+.menut a {
+	display: block;
+	line-height: 20px;
+	text-align: center;
+	color: #FFF;
+	text-decoration: none;
+	-moz-transition: all .3s ease-out;
+	-webkit-transition: all .3s ease-out;
+}
+
+.menut a:before {
+	content: attr(title);
+	display: block;
+	background: #FFF;
+	color: #000;
+	margin-top: -20px;
+}
+
+.menut a:hover {
+	margin-top: 20px;
+}
 </style>
 <body>
 	<div id="allpage">
 		<c:import url="/common/TopMeau.jsp" />
 		<div id="tabs-left" class="demo">
-			<ul>
-				<li><a href="#tabs-1">關於HappGo</a></li>
-				<li><a href="#tabs-2">相關影片</a></li>
-				<li><a href="#tabs-3">HappGo卡種</a></li>
-			</ul>
+			<div class="wrapper">
+				<ul class="ulReset menut">
+					<img alt="" src="../img/happygi.png" style="width:10.5em;">
+					<li><a href="#tabs-1" title="關於HAPPY GO">ABOUT HAPPY GO</a></li>
+					<li><a href="#tabs-2" title="影片介紹">Show MV</a></li>
+					<li><a href="#tabs-3" title="卡種說明">Card Type</a></li>
+				</ul>
+			</div>
 			<div id="tabs-3" style="height: 550px; overflow-y: scroll;">
 				<table style="width: 570px;">
 					<tbody>
 						<tr>
 							<td><c:if test="${not empty select}">
-									<table id="userslist" class="t2" style="width: 550px;margin: 0px auto;">
+									<table id="userslist" class="t2"
+										style="width: 550px; margin: 0px auto;">
 										<tbody>
 											<tr>
 												<c:forEach var="row" items="${select}" varStatus="varStatus">
@@ -208,7 +255,8 @@ div.showCode {
 				<p>HAPPY GO為你帶來「每天一點點‧快樂多一點」的生活體驗！擁有HAPPY
 					GO卡，讓你每一天都輕鬆享受集點樂趣，從早到晚、不管平日或假日，自己一個人或與朋友在一起，都可使用點數兌換帶來不同的消費感動，讓我們來看看大家是怎麼善用他的HAPPY
 					GO卡吧！</p>
-				<img width="700" height="520" alt="" src="../img/daily_about.png" style="margin-bottom: 1.25em;">
+				<img width="700" height="520" alt="" src="../img/daily_about.png"
+					style="margin-bottom: 1.25em;">
 			</div>
 			<div id="tabs-2">
 				<p>擁有HAPPY GO卡，讓你成為聰明購物家！HAPPY
@@ -221,7 +269,8 @@ div.showCode {
 					<param name="allowscriptaccess" value="always"></param>
 					<embed src="http://www.youtube.com/v/TA1fDnelcM4?fs=1&amp;hl=zh_TW"
 						type="application/x-shockwave-flash" allowscriptaccess="always"
-						allowfullscreen="true" width="700" height="520" style="margin-bottom: 1.25em;"></embed>
+						allowfullscreen="true" width="700" height="520"
+						style="margin-bottom: 1.25em;"></embed>
 				</object>
 			</div>
 		</div>
