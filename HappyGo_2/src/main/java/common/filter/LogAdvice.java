@@ -39,10 +39,7 @@ public class LogAdvice {
 		System.out
 				.println("After Throwing--------------------------------------------------------Exception:"
 						+ exception);
-	}
-	
-	
-	
+	}	
 }
 
 

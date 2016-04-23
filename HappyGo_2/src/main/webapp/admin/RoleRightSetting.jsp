@@ -8,62 +8,66 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:import url="/admin/TopMeau.jsp" />
-	<div class="demo">
-		<table style="background-color: #F0E68C;">
-			<thead>
-				<tr>
-					<th colspan="2">後台系統權限項目管理</th>
-				</tr>				
-			</thead>
-			<tbody>
-				<tr>
-					<td colspan="2"><c:if test="${not empty select}">
-							<table id="userslist" class="t2">
-								<thead>
-									<tr>
-										<th>權限代碼</th>
-										<th>權限說明</th>
-										<th>權限對應功能</th>
-										<th>權限更新日</th>
-										<th>權限更新者</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="row" items="${select}"  varStatus="varStatus">										
+	<div class="allpage">
+		<c:import url="/admin/TopMeau.jsp" />
+		<div class="demo">
+			<table style="background-color: #F0E68C;">
+				<thead>
+					<tr>
+						<th colspan="2">後台系統權限項目管理</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="2"><c:if test="${not empty select}">
+								<table id="userslist" class="t2">
+									<thead>
 										<tr>
-											<td><lable id="RIG_RIGHTID_${varStatus.count}" >${row.RIG_RIGHTID}</lable></td>
-											<td><lable id="RIG_DESC_${varStatus.count}" >${row.RIG_DESC}</lable></td>
-											<td><lable id="RIG_FUNTION_${varStatus.count}" >${row.RIG_FUNTION}</lable></td>
-											<td><lable id="RIG_UPDATETIME_${varStatus.count}" >${row.RIG_UPDATETIME}</lable></td>
-											<td><lable id="RIG_UPDATEUSER_${varStatus.count}" >${row.RIG_UPDATEUSER}</lable></td>
-											<td><input type="button" onclick="showfrom('update','${varStatus.count}');"	value="修改"></td>
+											<th>權限代碼</th>
+											<th>權限說明</th>
+											<th>權限對應功能</th>
+											<th>權限更新日</th>
+											<th>權限更新者</th>
+											<th></th>
 										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</c:if></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+									</thead>
+									<tbody>
+										<c:forEach var="row" items="${select}" varStatus="varStatus">
+											<tr>
+												<td><lable id="RIG_RIGHTID_${varStatus.count}">${row.RIG_RIGHTID}</lable></td>
+												<td><lable id="RIG_DESC_${varStatus.count}">${row.RIG_DESC}</lable></td>
+												<td><lable id="RIG_FUNTION_${varStatus.count}">${row.RIG_FUNTION}</lable></td>
+												<td><lable id="RIG_UPDATETIME_${varStatus.count}">${row.RIG_UPDATETIME}</lable></td>
+												<td><lable id="RIG_UPDATEUSER_${varStatus.count}">${row.RIG_UPDATEUSER}</lable></td>
+												<td><input type="button"
+													onclick="showfrom('update','${varStatus.count}');"
+													value="修改"></td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</c:if></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
 
-		<div id="users-contain" class="ui-widget">
-			<form name="myForm" id="myForm"
-				action='<c:url value="/dayuNameSpace/rightlist.action"/>'	method="get">
-				<h1>權限資料</h1>
-				<table id="users" class="t2">
-					<thead>
-						<tr>
-							<th>項目</th>
-							<th>內容</th>
-						</tr>
-					</thead>
-					<tbody>						
+			<div id="users-contain" class="ui-widget">
+				<form name="myForm" id="myForm"
+					action='<c:url value="/dayuNameSpace/rightlist.action"/>'
+					method="get">
+					<h1>權限資料</h1>
+					<table id="users" class="t2">
+						<thead>
+							<tr>
+								<th>項目</th>
+								<th>內容</th>
+							</tr>
+						</thead>
+						<tbody>
 							<tr>
 								<td>權限代碼</td>
 								<td><input id="RIG_RIGHTID" name="RIG_RIGHTID" type="text"
@@ -80,19 +84,20 @@
 									value=${edit.RIG_FUNTION}></td>
 							</tr>
 							<tr>
-								<td colspan="2" align="center">
-								<input name="formSubmit" type="submit"	value="儲存" />
-								<input id="cancel" value="取消" type="button">
-								<input type="hidden" name="mode" value="update"></td>
+								<td colspan="2" align="center"><input name="formSubmit"
+									type="submit" value="儲存" /> <input id="cancel" value="取消"
+									type="button"> <input type="hidden" name="mode"
+									value="update"></td>
 
 							</tr>
-						
-					</tbody>
-				</table>
-			</form>
+
+						</tbody>
+					</table>
+				</form>
+			</div>
 		</div>
+		<c:import url="/admin/FootBar.jsp" />
 	</div>
-	<c:import url="/admin/FootBar.jsp" />
 </body>
 <script>
 function showfrom(mode,index) {
@@ -197,7 +202,7 @@ function showfrom(mode,index) {
 	});
 	
 	var message = '<%=request.getAttribute("message")%>';
-	if (message != null && message != ""&& message != "null")
+	if (message != null && message != "" && message != "null")
 		alert(message);
 </script>
 </html>

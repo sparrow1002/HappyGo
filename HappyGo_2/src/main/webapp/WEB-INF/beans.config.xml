@@ -137,4 +137,6 @@
 		<property name="cardInfoDAOService" ref="cardInfoDAOService"></property>
 	</bean>
 	
+	<bean id="logAdvice" class="common.filter.LogAdvice"></bean>
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 </beans>

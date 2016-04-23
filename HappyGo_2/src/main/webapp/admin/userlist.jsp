@@ -9,123 +9,125 @@
 
 </head>
 <body>
-	<c:import url="/admin/TopMeau.jsp" />
-	<div class="demo">
-		<table style="background-color: #F0E68C;">
-			<thead>
-				<tr>
-					<th colspan="2">後台系統使用者管理</th>
-				</tr>
-				<tr>
-					<th align="right" style="width: 100px;"><label>使用者ID</label></th>
-					<th align="left">
-						<form action='<c:url value="/dayuNameSpace/maguserlist.action"/>'
-							method="get">
-							<input type="text" name="ADM_ID" value=""> <input
-								type="hidden" name="mode" value="select"> <input
-								type="submit" value="查詢"><input type="button"
-								onclick="showfrom('insert','');" value="新增">
-						</form>
-					</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td colspan="2"><c:if test="${not empty select}">
-							<table id="userslist" class="t2">
-								<thead>
-									<tr>
-										<th>使用者帳號</th>
-										<th>使用者密碼</th>
-										<th>使用者名稱</th>
-										<th>使用者身分</th>
-										<th>帳號更新者</th>
-										<th>帳號更新日</th>
-										<th></th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:forEach var="row" items="${select}" varStatus="varStatus">
+	<div class="allpage">
+		<c:import url="/admin/TopMeau.jsp" />
+		<div class="demo">
+			<table style="background-color: #F0E68C;">
+				<thead>
+					<tr>
+						<th colspan="2">後台系統使用者管理</th>
+					</tr>
+					<tr>
+						<th align="right" style="width: 100px;"><label>使用者ID</label></th>
+						<th align="left">
+							<form action='<c:url value="/dayuNameSpace/maguserlist.action"/>'
+								method="get">
+								<input type="text" name="ADM_ID" value=""> <input
+									type="hidden" name="mode" value="select"> <input
+									type="submit" value="查詢"><input type="button"
+									onclick="showfrom('insert','');" value="新增">
+							</form>
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="2"><c:if test="${not empty select}">
+								<table id="userslist" class="t2">
+									<thead>
 										<tr>
-											<td><lable id="ADM_ID_${varStatus.count}" name="ADM_ID">${row.ADM_ID}</lable></td>
-											<td><lable id="ADM_PWD_${varStatus.count}"
-													name="ADM_PWD">${row.ADM_PWD}</lable></td>
-											<td><lable id="ADM_NAME_${varStatus.count}"
-													name="ADM_NAME">${row.ADM_NAME}</lable></td>
-											<td><input id="ADM_ROLEID__${varStatus.count}"
-												type="hidden" value="${row.ADM_ROLEID}"> <c:forEach
-													var="roleid" items="${roleid}">
-													<c:if test="${roleid.DAP_ID==row.ADM_ROLEID}">
-														<lable id="ADM_ROLEID_${varStatus.count}">${roleid.DAP_VALUE}</lable>
-													</c:if>
-												</c:forEach></td>
-											<td><lable id="ADM_UPDATEUSER_${varStatus.count}"
-													name="ADM_UPDATEUSER">${row.ADM_UPDATEUSER}</lable></td>
-											<td><lable id="ADM_UPDATETIME_${varStatus.count}"
-													name="ADM_UPDATETIME">${row.ADM_UPDATETIME}</lable></td>
-											<td><input type="button"
-												onclick="showfrom('selectitem','${varStatus.count}');"
-												value="檢視"> <input type="button"
-												onclick="showfrom('update','${varStatus.count}');"
-												value="修改"></td>
+											<th>使用者帳號</th>
+											<th>使用者密碼</th>
+											<th>使用者名稱</th>
+											<th>使用者身分</th>
+											<th>帳號更新者</th>
+											<th>帳號更新日</th>
+											<th></th>
 										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
-						</c:if></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
+									</thead>
+									<tbody>
+										<c:forEach var="row" items="${select}" varStatus="varStatus">
+											<tr>
+												<td><lable id="ADM_ID_${varStatus.count}" name="ADM_ID">${row.ADM_ID}</lable></td>
+												<td><lable id="ADM_PWD_${varStatus.count}"
+														name="ADM_PWD">${row.ADM_PWD}</lable></td>
+												<td><lable id="ADM_NAME_${varStatus.count}"
+														name="ADM_NAME">${row.ADM_NAME}</lable></td>
+												<td><input id="ADM_ROLEID__${varStatus.count}"
+													type="hidden" value="${row.ADM_ROLEID}"> <c:forEach
+														var="roleid" items="${roleid}">
+														<c:if test="${roleid.DAP_ID==row.ADM_ROLEID}">
+															<lable id="ADM_ROLEID_${varStatus.count}">${roleid.DAP_VALUE}</lable>
+														</c:if>
+													</c:forEach></td>
+												<td><lable id="ADM_UPDATEUSER_${varStatus.count}"
+														name="ADM_UPDATEUSER">${row.ADM_UPDATEUSER}</lable></td>
+												<td><lable id="ADM_UPDATETIME_${varStatus.count}"
+														name="ADM_UPDATETIME">${row.ADM_UPDATETIME}</lable></td>
+												<td><input type="button"
+													onclick="showfrom('selectitem','${varStatus.count}');"
+													value="檢視"> <input type="button"
+													onclick="showfrom('update','${varStatus.count}');"
+													value="修改"></td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+							</c:if></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
 
-		<div id="users-contain" class="ui-widget">
-			<form name="myForm" id="myForm"
-				action='<c:url value="/dayuNameSpace/maguserlist.action"/>'
-				method="get">
-				<h1>使用者資料</h1>
-				<table id="users" class="t2">
-					<thead>
-						<tr>
-							<th>項目</th>
-							<th>內容</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>使用者帳號</td>
-							<td><input id="ADM_ID" name="ADM_ID" type="text"></td>
-						</tr>
-						<tr>
-							<td>使用者密碼</td>
-							<td><input id="ADM_PWD" name="ADM_PWD" type="text"></td>
-						</tr>
-						<tr>
-							<td>使用者名稱</td>
-							<td><input id="ADM_NAME" name="ADM_NAME" type="text"></td>
-						</tr>
-						<tr>
-							<td>使用者角色</td>
-							<td><select size="1" id="ADM_ROLEID" name="ADM_ROLEID">
-									<c:forEach var="roleid" items="${roleid}">
-										<option value="${roleid.DAP_ID}">${roleid.DAP_VALUE}
-									</c:forEach>
-							</select></td>
-						</tr>
-						<tr>
-							<td colspan="2" align="center"><input id="formSubmit"
-								name="formSubmit" type="submit" value="儲存" /> <input
-								id="cancel" value="返回" type="button"> <input id="mode"
-								name="mode" value="update" type="hidden"></td>
-						</tr>
-					</tbody>
-				</table>
-			</form>
+			<div id="users-contain" class="ui-widget">
+				<form name="myForm" id="myForm"
+					action='<c:url value="/dayuNameSpace/maguserlist.action"/>'
+					method="get">
+					<h1>使用者資料</h1>
+					<table id="users" class="t2">
+						<thead>
+							<tr>
+								<th>項目</th>
+								<th>內容</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>使用者帳號</td>
+								<td><input id="ADM_ID" name="ADM_ID" type="text"></td>
+							</tr>
+							<tr>
+								<td>使用者密碼</td>
+								<td><input id="ADM_PWD" name="ADM_PWD" type="text"></td>
+							</tr>
+							<tr>
+								<td>使用者名稱</td>
+								<td><input id="ADM_NAME" name="ADM_NAME" type="text"></td>
+							</tr>
+							<tr>
+								<td>使用者角色</td>
+								<td><select size="1" id="ADM_ROLEID" name="ADM_ROLEID">
+										<c:forEach var="roleid" items="${roleid}">
+											<option value="${roleid.DAP_ID}">${roleid.DAP_VALUE}
+										</c:forEach>
+								</select></td>
+							</tr>
+							<tr>
+								<td colspan="2" align="center"><input id="formSubmit"
+									name="formSubmit" type="submit" value="儲存" /> <input
+									id="cancel" value="返回" type="button"> <input id="mode"
+									name="mode" value="update" type="hidden"></td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+			</div>
 		</div>
+		<c:import url="/admin/FootBar.jsp" />
 	</div>
-	<c:import url="/admin/FootBar.jsp" />
 </body>
 <script>
 function showfrom(mode,index) {
@@ -234,7 +236,7 @@ if(mode=='selectitem' || mode=='update'){
 		}
 	});
 	
-	var message = '<%=request.getAttribute("message")%>	';
+	var message = '<%=request.getAttribute("message")%>';
 	if (message != null && message.trim() != "" && message.trim() != "null")
 		alert(message);
 </script>
