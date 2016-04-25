@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="/HappyGo_2/css/main.css">
 <style type="text/css"> 
 	@import"../jquery/jquery-ui.css";   
 /*  	@import"../jquery/dataTable/columnFilter/demo_table.css";  */
@@ -14,7 +15,7 @@
 		if want to use,may style will be unprediction
 	*/
 </style>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.css"/> -->
 
 <script type="text/javascript" src="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
 
@@ -22,16 +23,16 @@
 <script src="../jquery/dataTable/columnFilter/jquery.dataTables.columnFilter.js"type="text/javascript" language="javascript"></script>
 
 <script type="text/javascript" language="javascript">
-	jQuery(document).ready(function(){
+// 	jQuery(document).ready(function(){
 
-		//$.datepicker.regional[""].dateFormat = 'yy/mm/dd';
-        //$.datepicker.setDefaults($.datepicker.regional[""]);
+// 		//$.datepicker.regional[""].dateFormat = 'yy/mm/dd';
+//         //$.datepicker.setDefaults($.datepicker.regional[""]);
                 
-		jQuery('table').dataTable(
+// 		jQuery('table').dataTable(
 						
-		);
+// 		);
 		
-	});
+// 	});
 </script>
 
 <title>紅利點數記錄</title>
@@ -39,10 +40,21 @@
 
 
 <body>
+<div id="allpage" style="background-color: #FFDDAA">
+<c:import url="/admin/TopMeau.jsp" />
+	<form action="MemberPoint.do" method="post">
+		<div>會員點數查詢</div>
+		<input name="memberId" autofocus placeholder="輸入會員帳號" /><input type="submit" value="查詢">
+		<font>${error.errorEmpty}</font>
+		<font>${error.errorIdEmpty}</font>
+	</form>
+	<c:if test="${empty error}">
+	<h1>${memberId} 尚有:${totalPoint}點</h1>
+	</c:if>
 	
-	<h1>尚有:${totalPoint}點</h1>
-	<h4>您有 ${LastPoint.pointAdd}點,將在${LastPoint.dDate}過期</h4>
-	<table class="display">
+	<c:if test="${not empty point}">	
+	<h4>有 ${LastPoint.pointAdd}點  將在${LastPoint.dDate}過期</h4>
+	<table class="jtable">
 <!-- 	class="display"可以套用到dataTables的css樣式 -->
 <!-- 	class="display"可以套用到demo_table.css樣式 -->
 		<thead>
@@ -54,8 +66,8 @@
 <!-- 				<th >交易日</th> -->
 <!-- 			</tr> -->
 			<tr>
-				<th >失效日</th>
 				<th >點數</th>
+				<th >失效日</th>
 <!-- 				<th >點數狀態</th> -->
 <!-- 				<th >交易編號</th> -->
 				<th >交易日</th>
@@ -63,28 +75,35 @@
 		</thead>
 	<!-- ------------------------ -->	
 		<tbody>
-			<c:if test="${not empty point}">
+			
  			<c:forEach var="row" items="${point}"> 
 			<tr>
-				<td>${row.dDate}</td>
 				<td>${row.pointAdd}</td>
+				<td>${row.dDate}</td>				
 <%-- 				<td>${row.status}</td> --%>
 <%-- 				<td>${row.tranId}</td> --%>
 				<td>${row.tranDate}</td>
 			</tr>	
 			</c:forEach>
-			</c:if>
+			
 		</tbody>
 	<!-- ------------------------ -->
 		<tfoot>
 			<tr>
-				<th >失效日</th>
 				<th >點數</th>
+				<th >失效日</th>				
 <!-- 				<th >點數狀態</th> -->
 <!-- 				<th >交易編號</th> -->
 				<th >交易日</th>
 			</tr>
 		</tfoot>
 	</table>
+	</c:if>
+<c:import url="/admin/FootBar.jsp" />
+</div>
+
 </body>
+
+<link rel="stylesheet" type="text/css" href="/HappyGo_2/css/table.css">
+
 </html>
