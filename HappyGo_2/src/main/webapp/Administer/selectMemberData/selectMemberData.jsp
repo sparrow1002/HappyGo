@@ -34,7 +34,7 @@
 		<th>名稱</th>
 		<th>性別</th>
 		<th>生日</th>
-		<th>紅利點數</th>
+		<!-- <th>紅利點數</th> -->
 	</tr>
 	</thead>
 <tr>
@@ -46,7 +46,7 @@
 <%-- 	<td>${select.MBR_SEX}</td> --%>
 	</td>
 	<td>${select.MBR_BIRTHDAY}</td>
-	<td>${select.MBR_POINTS}</td>
+	<%-- <td>${select.MBR_POINTS}</td> --%>
 </tr>
 </table>
 </c:if>	

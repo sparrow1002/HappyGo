@@ -15,8 +15,8 @@
 			<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 			<li> <a
 				href='<c:url value="/dayuNameSpace/cardinfolist.action?mode=select"/>'>HappyGO說明</a></li>
-			<li><a href='<c:url value="/secure/login_cus.jsp"/>'>會員登入</a></li>
-			<li><a href='<c:url value="/conStore/login.jsp"/>'>特約商店登入</a></li>
+			<li><a href='<c:url value="/secure/login_mem.jsp"/>'>會員登入</a></li>
+			<li><a href='<c:url value="/secure/login_store.jsp"/>'>特約商店登入</a></li>
 			<li><a href='<c:url value="/dayuNameSpace/weblogin.action"/>'>系統人員登入</a></li>
 			<li><a href='<c:url value="/index.jsp"/>'>首頁</a></li>
 		</ul>

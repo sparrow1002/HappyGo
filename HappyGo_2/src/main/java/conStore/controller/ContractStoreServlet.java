@@ -61,7 +61,7 @@ public class ContractStoreServlet extends HttpServlet {
 		}else if("登出".equals(prodaction)){
 			session.removeAttribute("storeLoginOK");
 			String path = request.getContextPath();
-			response.sendRedirect(path+"/conStore/login.jsp");
+			response.sendRedirect(path+"/secure/login_store.jsp");
 		}
 
 	}
