@@ -18,7 +18,7 @@ import conStore.model.ContractStoreBean;
 import conStore.model.ContractStoreService;
 import conStore.model.dao.ContractStoreDAOJdbc;
 
-@WebServlet(urlPatterns = { "/conStore/login.controller" })
+@WebServlet(urlPatterns = { "/secure/login_store.controller" })
 public class LoginServlet extends HttpServlet {
 	private ContractStoreService service = new ContractStoreService();
 
@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 		}
 
 		if (error != null && !error.isEmpty()) {
-			request.getRequestDispatcher("/conStore/login.jsp").forward(request,
+			request.getRequestDispatcher("/secure/login_store.jsp").forward(request,
 					response);
 			return;
 		}
@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		// 根據Model執行結果顯示View
 		if (bean == null) {
 			error.put("password", "登入失敗，請再次輸入ID/PWD");
-			request.getRequestDispatcher("/conStore/login.jsp").forward(request,
+			request.getRequestDispatcher("/secure/login_store.jsp").forward(request,
 					response);
 		}else if("3".equals(bean.getCos_status())){//管理者登入頁面
 			HttpSession session = request.getSession();

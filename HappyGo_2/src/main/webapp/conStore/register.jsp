@@ -8,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>註冊</h1>
+<h1>申請特約商店</h1>
 <form action="<c:url value="/conStore/register.controller" />" method="get">
 <table>
 	<tr>
@@ -74,7 +74,7 @@
 	</tr>
 	<tr>
 		<td>		
-			<input type="submit" name="prodaction" value="註冊">
+			<input type="submit" name="prodaction" value="申請特約商店">
 		</td>		
 	</tr>	
 </table>

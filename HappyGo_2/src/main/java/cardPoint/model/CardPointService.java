@@ -51,7 +51,8 @@ public class CardPointService {
 	private String tranOkStatus = "1";
 	private String cancelTranStatus = "0";
 	private String updateUser = "lib0405";//目前寫死 還沒寫
-	private int lifeDay = 30;//dDate=today+lifeDay 目前寫死 should select from HG_DataProfile	
+	private int cancelLifeDay = 30;//dDate=today+lifeDay 目前寫死 should select from HG_DataProfile	
+	private int lifeDay = 365;
 	private int exchangePoint = 10;//目前寫死 還沒寫 HG_DataProfile 點數換現金比例
 	
 	public static void main(String[] args) {
@@ -306,7 +307,7 @@ public class CardPointService {
 		//insert new point
 		if (bean.getPointDre()>0 && pointUpdateOk) {
 			newBean.setTranId(tranId);
-			newBean.setdDate(dayDevice.calculateAfterDate(today,this.lifeDay));
+			newBean.setdDate(dayDevice.calculateAfterDate(today,cancelLifeDay));
 			newBean.setPointAdd(bean.getPointDre());
 			newBean.setTranDate(today);
 			newBean.setMemberId(bean.getMemberId());

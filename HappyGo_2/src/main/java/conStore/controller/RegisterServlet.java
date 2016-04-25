@@ -55,7 +55,7 @@ public class RegisterServlet extends HttpServlet {
 				request.setAttribute("insert", result);
 			}
 			request.getRequestDispatcher(
-					"/conStore/login.jsp").forward(request, response);
+					"/secure/login_store.jsp").forward(request, response);
 		}
 		
 	}
