@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="/HappyGo_2/css/main.css">
+<link rel="stylesheet" type="text/css" href="/HappyGo_2/css/table.css">
 <script type="text/javascript"
 	src="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
 <script src="/HappyGo_2/jquery/jquery-ui.js" type="text/javascript"></script>
@@ -21,7 +22,7 @@
 	});
 </script>
 <style type="text/css">
-TD{
+TD {
 	text-align: center;
 }
 </style>
@@ -31,8 +32,7 @@ TD{
 	<div id="allpage">
 		<c:import url="/admin/TopMeau.jsp" />
 		<div>
-			<form action="/HappyGo_2/reportServer_store" method="post"
-				target="_blank">
+			<form action="/HappyGo_2/reportServer_store" method="post" >
 				<div style="width: 300px; margin: 0 auto;">
 					<TABLE>
 						<TR>
@@ -41,17 +41,17 @@ TD{
 						<TR>
 							<TD bgcolor='#bce6e4' align="right">會員ID</TD>
 							<TD bgcolor='#85d6d2'><input type="text" id="userid"
-								name="reportstore_id"></TD>
+								name="reportstore_id" value="${param.reportstore_id}"></TD>
 						</TR>
 						<TR>
 							<TD bgcolor='#bce6e4' align="right">起始日期</TD>
 							<TD for="meeting"><input id="meeting" type="date"
-								name="reportstore_day1" value="2014-01-13"  style="width: 97%;"></TD>
+								name="reportstore_day1" value="${param.reportstore_day1}" style="width: 97%;"></TD>
 						</TR>
 						<TR>
 							<TD bgcolor='#bce6e4' align="right">結束日期</TD>
 							<TD for="meeting"><input id="meeting" type="date"
-								name="reportstore_day2" value="2014-01-13"  style="width: 97%;"></TD>
+								name="reportstore_day2" value="${param.reportstore_day2}" style="width: 97%;"></TD>
 						</TR>
 						<TR>
 							<TD colspan='2' bgcolor='#d4edec' align="center"><input
@@ -62,7 +62,7 @@ TD{
 				</div>
 				<div style="width: 720px; margin: 0 auto;">
 					<c:if test="${not empty reportstore_select}">
-						<table id="report_table">
+						<table id="report_table" class="jtable">
 							<thead>
 								<tr>
 									<th>會員編號</th>
@@ -113,4 +113,13 @@ TD{
 		<c:import url="/admin/FootBar.jsp" />
 	</div>
 </body>
+<link rel="stylesheet" href="/HappyGo_2/css/main.css">
+<script src="/HappyGo_2/jquery/jquery-2.1.4.min.js"></script>
+<script src="/HappyGo_2/jquery/jquery-ui.min.js"></script>
+<script src="/HappyGo_2/jquery/jquery.dataTables.min.js"></script>
+<link rel="stylesheet"
+	href="/HappyGo_2/jquery/base/jquery-ui-1.9.2.custom.min.css">
+<script src="/HappyGo_2/js/menu.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/HappyGo_2/jquery/jquery.dataTables.min.css" />
 </html>
