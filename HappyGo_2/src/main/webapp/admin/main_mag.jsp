@@ -14,7 +14,7 @@
 	<div class="demo">
 		<table>
 			<tr>
-				<td style="z-index: 1;"><img  width="900px" src="../img/bk.jpg"></td>
+				<td style="z-index: 1;"><img  width="895px" src="../img/bk.jpg"></td>
 			</tr>
 		</table>
 	</div>

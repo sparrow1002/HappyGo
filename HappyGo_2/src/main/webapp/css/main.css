@@ -10,6 +10,7 @@ body {
 #allpage{
 	width: 900px;
 	margin:0 auto;
+	background-color: #FFDDAA;
 }
 #allpage_out{
 	width: 950px;
@@ -33,21 +34,21 @@ body {
 	position: relative;/* 设置子元素为相对定位，可让子元素不继承Alpha值，保证字体颜色不透明 */
 }
 
-TABLE {
-	padding: 0;
-	border: 10px ridgt #38c2bb;
-	/*border-radius: 20px;*/
-	bgcolor: #FFFAFA;
-/* 	width: 900px; */
-}
-TH {
-	border: 0 groove #e98153;
-	border-radius: 5px;
-}
-TD {
-	border: 0 inset blue;
-	border-radius: 5px;
-}
+/* TABLE { */
+/* 	padding: 0; */
+/* 	border: 10px ridgt #38c2bb; */
+/* 	/*border-radius: 20px;*/ */
+/* 	bgcolor: #FFFAFA; */
+/* /* 	width: 900px; */ */
+/* } */
+/* TH { */
+/* 	border: 0 groove #e98153; */
+/* 	border-radius: 5px; */
+/* } */
+/* TD { */
+/* 	border: 0 inset blue; */
+/* 	border-radius: 5px; */
+/* } */
 /* TH:hover { */
 /* 	background: black; */
 /* 	color: #f3f0c9; */
@@ -220,8 +221,8 @@ table.t2 {
 	endColorstr = '#fb955e', GradientType = 0); /* IE6-9 */
 
 	border: 10px ridgt #FFBB00;
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
+/* 	border-top-left-radius: 20px; */
+/* 	border-top-right-radius: 20px; */
 	bgcolor: gold;
 	box-shadow: 1px 1px 100px 10px #FFEE99;
 }
