@@ -33,10 +33,8 @@
 		</table>
 	</div>
 </body>
-<link rel="stylesheet" href="base/jquery-ui-1.9.2.custom.min.css">
-<link rel="stylesheet" href="../css/main.css">
-<script src="../jquery/jquery-2.1.4.min.js"></script>
-<script src="../jquery/jquery-ui.min.js"></script>
-<script src="jquery/jquery-2.1.4.min.js"></script>
-<script src="jquery/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="<c:url value='/css/main.css'/>">
+<script src="<c:url value='/jquery/jquery-2.1.4.min.js'/>"></script>
+<script src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
+<link rel="stylesheet"	href="<c:url value='/jquery/base/jquery-ui-1.9.2.custom.min.css'/>">
 </html>

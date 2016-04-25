@@ -41,7 +41,7 @@ public class RightDAOhibernate implements RightDAO {
 	}
 	@Override
 	public List<RightDAOBean> select() {
-		Query query = this.getSession().createQuery("from RightDAOBean");
+		Query query = this.getSession().createQuery("from RightDAOBean order by RIG_RIGHTID");
 		return (List<RightDAOBean>) query.list();
 	}
 	@Override
