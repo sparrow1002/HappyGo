@@ -19,7 +19,7 @@
 			
 			<!-- 前台特店 -->
 			<c:if test="${empty adminuser}">
-				<table>
+				<table class="t2" style="background-color: #F0E68C;">
 					<c:forEach var="row" items="${select}">
 						<tr>
 							<td>特店代號 :</td>
@@ -89,7 +89,7 @@
 			
 			<!-- 後台特店 -->
 			<c:if test="${!empty adminuser}">
-				<table>
+				<table class="t2" style="background-color: #F0E68C;">
 					<c:forEach var="row" items="${select}">
 						<tr>
 							<td>特店代號 :</td>

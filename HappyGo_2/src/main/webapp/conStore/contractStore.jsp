@@ -24,24 +24,21 @@ span {
 }
 </style>
 <body>
-
 	<%@ page import="conStore.model.*"%>
 	<%@ page import="java.util.List"%>
 	<%@ page import="javax.servlet.*"%>
 	<%
 		Object cb = session.getAttribute("adminuser");
-
 		ContractStoreService contractStoreService = new ContractStoreService();
 		List<ContractStoreBean> result = contractStoreService.select();
 	%>
 	<div id="allpage" style="background-color: #FFDDAA">
 		<c:import url="/admin/TopMeau.jsp" />
-
 		<form action="<c:url value="/conStore/contractStore.controller"/>"
 			method="get">
 			<span><a>${cb} </a><input type="submit" name="prodaction"
 				value="登出" /></span>
-			<table id="myTable">
+			<table id="myTable" class="t2" style="background-color: #F0E68C;">
 				<thead>
 					<tr>
 						<th>特店代號</th>
@@ -54,10 +51,8 @@ span {
 						<th>特店生效日</th>
 						<th>特店失效日</th>
 						<th></th>
-
 					</tr>
 				</thead>
-
 				<tbody>
 					<c:forEach var="row" items="<%=result%>">
 						<tr>
@@ -71,8 +66,6 @@ span {
 							<td>${row.cos_contact}</td>
 							<td>${row.cos_createtime}</td>
 							<td>${row.cos_deletime}</td>
-
-
 							<td><input type="button" name="prodaction" value="修改"
 								onclick="location.href='<c:url value="/conStore/contractStore.controller?storeid=${row.cos_storeid}&prodaction=修改"/>'"></td>
 						</tr>
@@ -83,5 +76,4 @@ span {
 		<c:import url="/admin/FootBar.jsp" />
 	</div>
 </body>
-
 </html>

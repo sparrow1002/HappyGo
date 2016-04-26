@@ -9,26 +9,23 @@
 <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-	<div id="allpage_out">
+	<div id="allpage">
 		<c:import url="/common/TopMeau.jsp" />
-		<div id="content">
-			<form action="<c:url value="/secure/login_store.controller" />"
-				method="get">
-				<table>
+		<div id="content"  class="demo" style="width: 946px">
+			<form action="<c:url value="/secure/login_store.controller" />"	method="get">
+				<table class="t2" style="background-color: #F0E68C;">
 					<tr>
 						<th colspan='2' bgcolor='#d4edec'><label>特店登入</label></th>
 					</tr>
 					<tr>
 						<td bgcolor='#bce6e4' align="right">特約商店帳號</td>
 						<td bgcolor='#85d6d2'><input type="text" name="username"
-							value="${param.username}"></td>
-						<td>${error.username}</td>
+							value="${param.username}">${error.username}</td>
 					</tr>
 					<tr>
 						<td bgcolor='#bce6e4' align="right">特約商店密碼</td>
 						<td bgcolor='#85d6d2'><input type="text" name="password"
-							value="${param.password}"></td>
-						<td>${error.password}</td>
+							value="${param.password}">${error.password}</td>
 					</tr>
 					<tr>
 						<td colspan='2' bgcolor='#d4edec' align="center"><input

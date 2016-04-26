@@ -11,16 +11,17 @@
 	<div id="allpage">
 		<c:import url="/common/TopMeau.jsp" />
 		<div class="demo" style="width: 946px">
+		<form action="<c:url value="/dayuNameSpace/weblogin.action" />"	method="get">
 			<table  class="t2" style="background-color: #F0E68C;" >
 				<TR>
 					<TH colspan='2' bgcolor='#d4edec'><label>內部管理登入</label></TH>
 				</TR>
-				<TR>
-					<TD bgcolor='#bce6e4' align="right">使用者帳號</TD>
-					<TD bgcolor='#85d6d2'><input type="text" id="username"
-						name="username" value=${param.username}	></TD>
-				</TR>
-				<TR>
+					<TR>
+						<TD bgcolor='#bce6e4' align="right">使用者帳號</TD>
+						<TD bgcolor='#85d6d2'><input type="text" id="username"
+							name="username" value=${param.username}	></TD>
+					</TR>
+					<TR>
 					<TD bgcolor='#bce6e4' align="right">使用者密碼</TD>
 					<TD bgcolor='#85d6d2'><input type="password" id="password"
 						name="password" value=${param.password}	></TD>
@@ -30,14 +31,13 @@
 						type="submit" value="登入" /> <input value="回首頁"
 						onclick="window.location='../index.jsp'" type="button"> <lable>${param.errormsg}</lable></TD>
 				</TR>
-			</table>
+			</table></form>
 		</div>
 		<c:import url="/common/FootBar.jsp" />
 	</div>
 </body>
 <script>	
-	var message = '<%=request.getAttribute("errormsg")%>
-	';
+	var message = '<%=request.getAttribute("errormsg")%>';
 	if (message != null && message != "" && message != "null")
 		$.MessageBox(message);
 </script>
