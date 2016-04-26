@@ -12,7 +12,7 @@
 	<div id="allpage" style="background-color: #FFDDAA">
 		<c:import url="/admin/TopMeau.jsp" />
 		<form action="/HappyGo_2/reportCancelServer" method="post">
-			<table>
+			<table class="t2">
 				<tr>
 					<th><h1>確定要取消交易嗎?</h1></th>
 				</tr>

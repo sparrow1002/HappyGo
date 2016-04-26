@@ -8,7 +8,7 @@
 </head>
 <body>
 	<form action="../reportServer" target="_blank" method="post">
-		<table>
+		<table class="t2">
 			<tr>
 				<td>客戶ID:</td>
 				<td><input type="text" name="id"></td>
