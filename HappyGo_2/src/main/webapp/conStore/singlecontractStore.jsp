@@ -7,18 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>特約店</title>
 </head>
-<link rel="stylesheet" type="text/css" href="../css/main.css">
-<script src="../jquery/jquery-2.1.4.min.js"></script>
-<script src="../jquery/jquery-ui.js"></script>
-<script src="../jquery/jquery.dataTables.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="../jquery/jquery.dataTables.min.css" />
 
-<script>
-	$(document).ready(function() {
-		$('#myTable').DataTable();
-	});
-</script>
+
 <style>
 span {
 	float: right;
@@ -26,60 +16,86 @@ span {
 </style>
 <body>
 	<div id="allpage" style="background-color: #FFDDAA">
-		<c:import url="/admin/TopMeau.jsp" />
-	<%@ page import="conStore.model.*"%>
-	<%@ page import="java.util.List"%>
-	<%@ page import="javax.servlet.*"%>
-	<%
-		ContractStoreBean cb = (ContractStoreBean) session
+		<c:import url="/common/TopMeau.jsp" />
+		<%@ page import="conStore.model.*"%>
+		<%@ page import="java.util.List"%>
+		<%@ page import="javax.servlet.*"%>
+		<%
+			ContractStoreBean cb = (ContractStoreBean) session
 				.getAttribute("storeLoginOK");
 
-		ContractStoreService contractStoreService = new ContractStoreService();
-		List<ContractStoreBean> result = contractStoreService.select(cb);
-	%>
-
-		<form action="<c:url value="/conStore/contractStore.controller"/>"
-			method="get">
-			<span><a>${storeLoginOK.cos_name} </a><input type="submit"
-				name="prodaction" value="登出" /></span>
-			<table id="myTable">
-				<thead>
-					<tr>
-						<th>特店代號</th>
-						<th>特店名稱</th>
-						<th>統一編號</th>
-						<th>特店地址</th>
-						<th>特店狀態</th>
-						<th>連絡電話</th>
-						<th>聯絡人</th>
-						<th>特店生效日</th>
-						<th>特店失效日</th>
-						<th></th>
-					</tr>
-				</thead>
-
-				<tbody>
-					<c:forEach var="row" items="<%=result%>">
+				ContractStoreService contractStoreService = new ContractStoreService();
+				List<ContractStoreBean> result = contractStoreService.select(cb);
+		%>
+		<div class="demo" style="width: 946px">
+			<form action="<c:url value="/conStore/contractStore.controller"/>"
+				method="get">
+				<span><a>${storeLoginOK.cos_name} </a><input type="submit"
+					name="prodaction" value="登出" /></span>
+				<table id="myTable" class="t2">
+					<thead>
 						<tr>
-							<td>${row.cos_storeid}</td>
-							<td>${row.cos_name}</td>
-							<td>${row.cos_taxcode}</td>
-							<td>${row.cos_address}</td>
-							<td><c:if test="${row.cos_status==1}">有效</c:if> <c:if
-									test="${row.cos_status==0}">無效</c:if></td>
-							<td>${row.cos_phone}</td>
-							<td>${row.cos_contact}</td>
-							<td>${row.cos_createtime}</td>
-							<td>${row.cos_deletime}</td>							
-
-							<td><input type="button" name="prodaction" value="修改"
-								onclick="location.href='<c:url value="/conStore/contractStore.controller?storeid=${row.cos_storeid}&prodaction=修改"/>'"></td>
+							<th>特店代號</th>
+							<th>特店名稱</th>
+							<th>統一編號</th>
+							<th>特店地址</th>
+							<th>特店狀態</th>
+							<th>連絡電話</th>
+							<th>聯絡人</th>
+							<th>特店生效日</th>
+							<th>特店失效日</th>
+							<th></th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</form>
-		<c:import url="/admin/FootBar.jsp" />
+					</thead>
+
+					<tbody>
+						<c:forEach var="row" items="<%=result%>">
+							<tr>
+								<td>${row.cos_storeid}</td>
+								<td>${row.cos_name}</td>
+								<td>${row.cos_taxcode}</td>
+								<td>${row.cos_address}</td>
+								<td><c:if test="${row.cos_status==1}">有效</c:if> <c:if
+										test="${row.cos_status==0}">無效</c:if></td>
+								<td>${row.cos_phone}</td>
+								<td>${row.cos_contact}</td>
+								<td>${row.cos_createtime}</td>
+								<td>${row.cos_deletime}</td>
+
+								<td><input type="button" name="prodaction" value="修改"
+									onclick="location.href='<c:url value="/conStore/contractStore.controller?storeid=${row.cos_storeid}&prodaction=修改"/>'"></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</form>
+		</div>
+		<c:import url="/common/FootBar.jsp" />
 	</div>
+	<script>
+		var opt = {
+
+			"stateSave" : true,
+			"oLanguage" : {
+
+				"sProcessing" : "處理中...",
+				"sLengthMenu" : "顯示 _MENU_ 項結果",
+				"sZeroRecords" : "沒有匹配結果",
+				"sInfo" : "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+				"sInfoEmpty" : "顯示第 0 至 0 項結果，共 0 項",
+				"sInfoFiltered" : "(從 _MAX_ 項結果過濾)",
+				"sSearch" : "搜索:",
+				"oPaginate" : {
+					"sFirst" : "首頁",
+					"sPrevious" : "上頁",
+					"sNext" : "下頁",
+					"sLast" : "尾頁"
+				}
+			}
+		};
+		$(document).ready(function() {
+			$('#myTable').DataTable(opt);
+		});
+	</script>
 </body>
 </html>
