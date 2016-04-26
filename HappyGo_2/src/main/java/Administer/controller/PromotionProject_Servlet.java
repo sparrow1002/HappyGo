@@ -52,6 +52,9 @@ public class PromotionProject_Servlet extends HttpServlet {
 				String PTP_DELDATE = request.getParameter("PTP_DELDATE");
 				String PTP_FOREVER = request.getParameter("PTP_FOREVER");
 				String str_PTP_FIXPOINT = request.getParameter("PTP_FIXPOINT");
+				
+				System.out.println("PTP_PROJID"+PTP_PROJID+"end");
+				
 		//HG_PromotionBonus的欄位資料，由於可能會有1~多筆，必須用while迴圈+陣列處理
 				int j=0;
 				while(request.getParameter("PTB_VALUE"+j)!=null){
@@ -193,6 +196,7 @@ public class PromotionProject_Servlet extends HttpServlet {
 					if(error.get("pTP_PROJID")!=null){
 						request.getRequestDispatcher(
 								"/Administer/PromotionProject/insertProj.jsp").forward(request, response);
+					return;
 					}else{
 						request.getRequestDispatcher(
 								"/Administer/PromotionProject/insertProj.jsp").forward(request, response);
