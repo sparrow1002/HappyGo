@@ -96,14 +96,14 @@ public class RoleDAOhibernate implements RoleDAO {
 	@Override
 	public List<RoleDAOBean> select(String roleid) {
 		Query query = this.getSession()
-				.createQuery("from RoleDAOBean where ROL_ROLEID=:id")
+				.createQuery("from RoleDAOBean where ROL_ROLEID=:id order by ROL_ROLEID,ROL_RIGHTID")
 				.setParameter("id", roleid);
 		return (List<RoleDAOBean>) query.list();
 	}
 
 	@Override
 	public List<RoleDAOBean> select() {
-		Query query = this.getSession().createQuery("from RoleDAOBean");
+		Query query = this.getSession().createQuery("from RoleDAOBean order by ROL_ROLEID,ROL_RIGHTID");
 		return (List<RoleDAOBean>) query.list();
 	}
 
