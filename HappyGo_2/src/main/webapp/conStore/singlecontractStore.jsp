@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>特約店</title>
 </head>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
 <script src="../jquery/jquery-2.1.4.min.js"></script>
 <script src="../jquery/jquery-ui.js"></script>
 <script src="../jquery/jquery.dataTables.min.js"></script>
@@ -19,61 +20,66 @@
 	});
 </script>
 <style>
-	span{
+span {
 	float: right;
-	}
+}
 </style>
 <body>
-
+	<div id="allpage" style="background-color: #FFDDAA">
+		<c:import url="/admin/TopMeau.jsp" />
 	<%@ page import="conStore.model.*"%>
 	<%@ page import="java.util.List"%>
 	<%@ page import="javax.servlet.*"%>
 	<%
-		ContractStoreBean cb = (ContractStoreBean) session.getAttribute("storeLoginOK");
+		ContractStoreBean cb = (ContractStoreBean) session
+				.getAttribute("storeLoginOK");
 
 		ContractStoreService contractStoreService = new ContractStoreService();
 		List<ContractStoreBean> result = contractStoreService.select(cb);
 	%>
 
-	<form action="<c:url value="/conStore/contractStore.controller"/>" method="get">
-	<span><a>${storeLoginOK.cos_name} </a><input type="submit" name="prodaction" value="登出" /></span>
-		<table id="myTable">
-			<thead>
-				<tr>
-					<th>特店代號</th>
-					<th>特店名稱</th>
-					<th>統一編號</th>
-					<th>特店地址</th>
-					<th>特店狀態</th>
-					<th>連絡電話</th>
-					<th>聯絡人</th>
-					<th>特店生效日</th>
-					<th>特店失效日</th>					
-					<th>異動者</th>
-					<th></th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<c:forEach var="row" items="<%=result%>">
+		<form action="<c:url value="/conStore/contractStore.controller"/>"
+			method="get">
+			<span><a>${storeLoginOK.cos_name} </a><input type="submit"
+				name="prodaction" value="登出" /></span>
+			<table id="myTable">
+				<thead>
 					<tr>
-						<td>${row.cos_storeid}</td>
-						<td>${row.cos_name}</td>						
-						<td>${row.cos_taxcode}</td>
-						<td>${row.cos_address}</td>
-						<td>${row.cos_status}</td>
-						<td>${row.cos_phone}</td>
-						<td>${row.cos_contact}</td>
-						<td>${row.cos_createtime}</td>
-						<td>${row.cos_deletime}</td>						
-						<td>${row.cos_updateuser}</td>
-
-						<td><input type="button" name="prodaction" value="修改"
-							onclick="location.href='<c:url value="/conStore/contractStore.controller?storeid=${row.cos_storeid}&prodaction=修改"/>'"></td>
+						<th>特店代號</th>
+						<th>特店名稱</th>
+						<th>統一編號</th>
+						<th>特店地址</th>
+						<th>特店狀態</th>
+						<th>連絡電話</th>
+						<th>聯絡人</th>
+						<th>特店生效日</th>
+						<th>特店失效日</th>
+						<th></th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</form>
+				</thead>
+
+				<tbody>
+					<c:forEach var="row" items="<%=result%>">
+						<tr>
+							<td>${row.cos_storeid}</td>
+							<td>${row.cos_name}</td>
+							<td>${row.cos_taxcode}</td>
+							<td>${row.cos_address}</td>
+							<td><c:if test="${row.cos_status==1}">有效</c:if> <c:if
+									test="${row.cos_status==0}">無效</c:if></td>
+							<td>${row.cos_phone}</td>
+							<td>${row.cos_contact}</td>
+							<td>${row.cos_createtime}</td>
+							<td>${row.cos_deletime}</td>							
+
+							<td><input type="button" name="prodaction" value="修改"
+								onclick="location.href='<c:url value="/conStore/contractStore.controller?storeid=${row.cos_storeid}&prodaction=修改"/>'"></td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</form>
+		<c:import url="/admin/FootBar.jsp" />
+	</div>
 </body>
 </html>

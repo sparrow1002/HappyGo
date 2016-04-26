@@ -20,13 +20,11 @@ import javax.servlet.http.HttpSession;
 @WebFilter(
 		urlPatterns = { "/*" }, 
 		initParams = { 
-				@WebInitParam(name = "mustLogin1", value = "/conStore/contractStore.jsp"), 
+//				@WebInitParam(name = "mustLogin1", value = "/conStore/contractStore.jsp"), 
 				@WebInitParam(name = "mustLogin2", value = "/conStore/modify.jsp"), 
 				@WebInitParam(name = "mustLogin3", value = "/conStore/singlecontractStore.jsp"),
 //				@WebInitParam(name = "mustLogin4", value = "/_20_productMaintain/*")				
 		})
-//@WebFilter(urlPatterns = { "/conStore/*" })
-
 public class ConStoreFilter implements Filter {
 	Collection<String> url = new ArrayList<String>();
 	String servletPath;

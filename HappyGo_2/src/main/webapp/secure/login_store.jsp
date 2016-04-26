@@ -6,10 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>特約商店登入</title>
-<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-	<div>
+<div id="allpage_out">
+	<c:import url="/common/TopMeau.jsp" />
+		<div id="content" >
 		<form action="<c:url value="/secure/login_store.controller" />" method="get">
 			<table>
 				<tr>
@@ -34,6 +36,10 @@
 				</tr>
 			</table>
 		</form>
+		</div>
+	<c:import url="/common/FootBar.jsp" />	
 	</div>
 </body>
+<script src="js/jquery.cycle2.js"></script>
+<link rel="stylesheet" href="base/jquery-ui-1.9.2.custom.min.css">
 </html>

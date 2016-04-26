@@ -166,7 +166,7 @@ public class ContractStoreDAOJdbc implements ContractStoreDAO {
 
 	private static final String UPDATE = "update HG_ContractStore set cos_name=?, cos_pwd=?, cos_taxcode=?,"+
 										 " cos_address=?, cos_status=?, cos_phone=?, cos_contact=?,"+
-										 " cos_createtime=?, cos_deletime=?, cos_updatetime=?, cos_updateuser=? where cos_storeid=?";
+										 " cos_createtime=?, cos_deletime=?, cos_updatetime=GETDATE(), cos_updateuser=? where cos_storeid=?";
 	@Override
 	/*public ContractStoreBean update(String cos_name, String cos_pwd, String cos_taxcode,
 			String cos_address, String cos_status, String cos_phone, String cos_contact, String cos_createtime,
@@ -211,14 +211,12 @@ public class ContractStoreDAOJdbc implements ContractStoreDAO {
 			stmt.setString(4, bean.getCos_address());
 			stmt.setString(5, bean.getCos_status());
 			stmt.setString(6, bean.getCos_phone());
-			stmt.setString(7, bean.getCos_contact());
-			
-			stmt.setString(8, day.parse_WebtoDB(bean.getCos_createtime()));
-			
+			stmt.setString(7, bean.getCos_contact());			
+			stmt.setString(8, day.parse_WebtoDB(bean.getCos_createtime()));			
 			stmt.setString(9, day.parse_WebtoDB(bean.getCos_deletime()));
-			stmt.setString(10, bean.getCos_updatetime());
-			stmt.setString(11, bean.getCos_updateuser());
-			stmt.setString(12, bean.getCos_storeid());
+			//stmt.setString(10, bean.getCos_updatetime());
+			stmt.setString(10, bean.getCos_updateuser());
+			stmt.setString(11, bean.getCos_storeid());
 			int i = stmt.executeUpdate();
 			if(i == 1){
 				result = this.select(bean.getCos_storeid());

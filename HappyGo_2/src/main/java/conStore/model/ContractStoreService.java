@@ -30,6 +30,14 @@ public class ContractStoreService {
 		return result;
 	}
 	
+	public List<ContractStoreBean> select (){
+		List<ContractStoreBean> result = null;
+		
+			result = contractStoreDao.select();
+	
+		return result;
+	}
+	
 	public ContractStoreBean insert(ContractStoreBean bean){
 		ContractStoreBean result = null;
 		if(bean!=null){
