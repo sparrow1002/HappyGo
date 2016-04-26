@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import report.model.reportDAOBean;
 import shopping.model.ShoppingBean;
 import shopping.model.ShoppingDAO;
 
@@ -66,7 +67,86 @@ public class ShoppingDAO_JDBC implements ShoppingDAO {
 		else
 			System.out.println("insert error");*/
 	}
-
+	
+	private static final String SELECT_BY_USERID = "select * from HG_CardPoint"
+			+ " join HG_Shopping on HG_CardPoint.CPT_TRANID = HG_Shopping.SOP_TRANID"
+			+ " join HG_ContractStore on HG_Shopping.SOP_STOREID = HG_ContractStore.COS_STOREID"
+			+ " where SOP_MEMBERID=? AND CPT_TRANDATE>=? AND CPT_TRANDATE<=?";
+	private static final String SELECT_BY_store = "select * from HG_CardPoint"
+			+ " join HG_Shopping on HG_CardPoint.CPT_TRANID = HG_Shopping.SOP_TRANID"
+			+ " join HG_ContractStore on HG_Shopping.SOP_STOREID = HG_ContractStore.COS_STOREID"
+			+ " where SOP_STOREID=? AND CPT_TRANDATE>=? AND CPT_TRANDATE<=?";
+	private static final String SELECT_BY_USERID_IDandstore = "select * from HG_CardPoint"
+			+ " join HG_Shopping on HG_CardPoint.CPT_TRANID = HG_Shopping.SOP_TRANID"
+			+ " join HG_ContractStore on HG_Shopping.SOP_STOREID = HG_ContractStore.COS_STOREID"
+			+ " where SOP_MEMBERID=? AND CPT_TRANDATE>=? AND CPT_TRANDATE<=? AND SOP_STOREID=?";
+	public List<reportDAOBean> select_bean(String id, String day1, String day2, String store) {
+		Connection conn = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		reportDAOBean bean = null;
+		List<reportDAOBean> result = null;
+		try {
+			conn = dataSource.getConnection();
+			if (store == null) {
+				pst = conn.prepareStatement(SELECT_BY_USERID);
+				pst.setString(1, id);
+				pst.setString(2, day1);
+				pst.setString(3, day2);
+			} else if (id == null) {
+				pst = conn.prepareStatement(SELECT_BY_store);
+				pst.setString(1, store);
+				pst.setString(2, day1);
+				pst.setString(3, day2);
+			} else {
+				pst = conn.prepareStatement(SELECT_BY_USERID_IDandstore);
+				pst.setString(1, id);
+				pst.setString(2, day1);
+				pst.setString(3, day2);
+				pst.setString(4, store);
+			}
+			rs = pst.executeQuery();
+			System.out.println("AdminUserDAObean select process:" + SELECT_BY_USERID);
+			result = new ArrayList<reportDAOBean>();
+			while (rs.next()) {
+				bean = new reportDAOBean();
+				bean.setSOP_MEMBERID(rs.getString("SOP_MEMBERID"));
+				bean.setCOS_NAME(rs.getString("COS_NAME"));
+				bean.setCPT_TRANDATE(rs.getString("CPT_TRANDATE"));
+				//bean.setTranDate(rset.getString("SOP_tranDate"));
+				bean.setSOP_TRANAMT(rs.getBigDecimal("SOP_TRANAMT"));
+				bean.setSOP_DISCOUNT(rs.getBigDecimal("SOP_DISCOUNT"));
+				bean.setCPT_POINTADD(rs.getBigDecimal("CPT_POINTADD"));
+				bean.setCPT_POINTDRE(rs.getBigDecimal("CPT_POINTDRE"));
+				//bean.setSOP_overPoint(rs.getInt("SOP_overPoint"));
+				bean.setSOP_TRANID(rs.getString("SOP_TRANID"));
+				bean.setSOP_STATUS(rs.getString("SOP_STATUS"));
+				
+								
+				if (rs.getString("SOP_STATUS").equals("0")) {
+					if (rs.getString("CPT_STATUS").equals("0")) {
+						bean.setTransation("交易取消");
+					} else if (rs.getString("CPT_STATUS").equals("1")) {
+						bean.setTransation("退還點數");
+					}
+				} else if (rs.getString("SOP_STATUS").equals("1")) {
+					bean.setTransation("交易完成");
+				}
+				result.add(bean);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return result;
+	}
+	
 	private static final String SELECTBYTRAN = "select * from HG_Shopping where SOP_TRANID= ?";
 	public ShoppingBean selectByTran(long tranId) {
 		ShoppingBean result = null;

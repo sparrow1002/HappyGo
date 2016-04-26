@@ -21,30 +21,7 @@
 <script src="../jquery/jquery-ui.js" type="text/javascript"></script>
 <script src="../jquery/dataTable/columnFilter/jquery.dataTables.columnFilter.js"type="text/javascript" language="javascript"></script>
 
-<script type="text/javascript" language="javascript">
-	jQuery(document).ready(function(){
-		$.datepicker.regional[""].dateFormat = 'yy/mm/dd';
-        $.datepicker.setDefaults($.datepicker.regional['']);
-                
-		jQuery("table").dataTable(
-						
-		).columnFilter({ sPlaceHolder: "head:before",
-            aoColumns: [
-						{ type: "text" },//交易編號
-						{ type: "text" },//會員編號
-						{ type: "number" },//交易金額
-						{ type: "number" },//交易折抵
-                        { type: "date-range" },//交易日期
-                        { type: "select", values:['已使用','未使用'] },//交易狀態
-                        { type: "text" },//消費店家
-                        { type: "text" }//促銷專案
-                        
-                        
-                        ]
-					});
-		
-	});
-</script>
+
 
 
 
@@ -55,17 +32,6 @@
 	
 	<table >
 		<thead>
-			<tr>
-				<th>交易編號</th>
-				<th>會員編號</th>
-				<th>交易金額</th>
-				<th>交易折抵</th>
-				<th>交易日期</th><!--  點數table-->
-				<th>交易狀態</th>
-				<th>消費店家</th>
-				<th>促銷專案</th>
-				<th></th>
-			</tr>
 			<tr>
 				<th>交易編號</th>
 				<th>會員編號</th>
