@@ -73,7 +73,6 @@ TD {
 									<th>消費給點</th>
 									<th>消耗點數</th>
 									<th>促銷專案</th>
-									<th>取消交易</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -87,8 +86,6 @@ TD {
 										<td>${row.CPT_POINTADD}</td>
 										<td>${row.CPT_POINTDRE}</td>
 										<td>${row.SOP_PROJID}</td>
-										<td><input type="submit" name="reportstore_prodaction"
-											value="取消交易" /></td>
 									</tr>
 								</c:forEach>
 							</tbody>
