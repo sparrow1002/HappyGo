@@ -48,7 +48,7 @@
 		<font>${error.errorEmpty}</font>
 		<font>${error.errorIdEmpty}</font>
 	</form>
-	<c:if test="${empty error}">
+	<c:if test="${not empty totalPoint}">
 	<h1>${memberId} 尚有:${totalPoint}點</h1>
 	</c:if>
 	

@@ -12,7 +12,7 @@
 		<c:import url="/admin/TopMeau.jsp" />
 		<div style="width: 300px;margin: 0 auto;">
 			<h1>取消交易成功!!!!</h1>
-			<button onclick="location.href='/HappyGo_2/report/Count_inquiry.jsp'">
+			<button onclick="location.href='/HappyGo_2/shopping/Count_inquiry.jsp'">
 				返回查詢
 			</button>
 		</div>
