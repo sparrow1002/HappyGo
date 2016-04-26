@@ -43,7 +43,7 @@
 <div id="allpage" style="background-color: #FFDDAA">
 <c:import url="/admin/TopMeau.jsp" />
 	<form action="MemberPoint.do" method="post">
-		<div>會員點數查詢</div>
+		<h2>會員點數查詢</h2>
 		<input name="memberId" autofocus placeholder="輸入會員帳號" /><input type="submit" value="查詢">
 		<font>${error.errorEmpty}</font>
 		<font>${error.errorIdEmpty}</font>
