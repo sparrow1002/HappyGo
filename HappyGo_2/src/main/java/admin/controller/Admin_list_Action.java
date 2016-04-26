@@ -192,9 +192,9 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 			if (bean == null) {
 				System.out.println("insert fail");
 				this.addFieldError("action", "insert fail");
-				req.setAttribute("message", "insert fail");
+				req.setAttribute("message", "資料新增失敗");
 			} else {
-				req.setAttribute("message", "insert ok");				
+				req.setAttribute("message", "資料新增成功");				
 			}
 			List<AdminUserDAObean> results;
 			results = adminUserDAOService.select(null);
@@ -215,9 +215,9 @@ public class Admin_list_Action extends ActionSupport implements SessionAware {
 			if (bean == null) {
 				System.out.println("update fail");
 				this.addFieldError("action", "update fail");
-				req.setAttribute("message", "update fail");
+				req.setAttribute("message", "資料更新失敗");
 			} else {
-				req.setAttribute("message", "update ok");				
+				req.setAttribute("message", "資料更新成功");				
 			}
 			List<AdminUserDAObean> result;
 			result = adminUserDAOService.select(null);

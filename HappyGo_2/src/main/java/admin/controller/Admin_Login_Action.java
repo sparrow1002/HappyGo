@@ -109,13 +109,15 @@ public class Admin_Login_Action extends ActionSupport implements SessionAware {
 //		}
 		if (username == null || username.equals("") || password == null
 				|| password.equals("")) {
-			this.addFieldError("errormsg", "登入資訊有空白!!ID/PWD");
+//			this.addFieldError("errormsg", "登入資訊有空白!!ID/PWD");
+//			req.setAttribute("errormsg", "登入資訊有空白!!ID/PWD");
 			return Action.INPUT;
 		} else {
 			AdminUserDAObean bean = adminUserDAOService.login(username,
 					password);
 			if (bean == null) {
 				this.addFieldError("errormsg", "登入失敗!!ID/PWD");
+				req.setAttribute("errormsg", "登入失敗!!ID/PWD");
 				SyslogDAOBean lognean=new SyslogDAOBean();
 				lognean.setLOG_TYPE("LN01");
 				lognean.setLOG_USERID(username);

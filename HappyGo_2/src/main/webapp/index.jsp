@@ -10,18 +10,18 @@
 </style>
 </head>
 <body>
-<div id="allpage">
-	<c:import url="/common/TopMeau.jsp" />
-	<div id="content" >
-		<div class="cycle-slideshow">
-			<img src="img/ad1.jpg"> <img src="img/ad2.jpg"> 
-			<img src="img/ad3.jpg"> <img src="img/ad4.jpg"> 
-			<img src="img/ad5.jpg"> <img src="img/ad6.jpg"> 
-			<img src="img/ad7.jpg"> <img src="img/ad8.jpg">
+	<div id="allpage">
+		<c:import url="/common/TopMeau.jsp" />
+		<div id="content">
+			<div class="cycle-slideshow">
+				<img src="img/ad1.jpg"> <img src="img/ad2.jpg"> <img
+					src="img/ad3.jpg"> <img src="img/ad4.jpg"> <img
+					src="img/ad5.jpg"> <img src="img/ad6.jpg"> <img
+					src="img/ad7.jpg"> <img src="img/ad8.jpg">
+			</div>
 		</div>
+		<c:import url="/common/FootBar.jsp" />
 	</div>
-	<c:import url="/common/FootBar.jsp" />
-</div>
 </body>
 <script src="js/jquery.cycle2.js"></script>
 <link rel="stylesheet" href="base/jquery-ui-1.9.2.custom.min.css">

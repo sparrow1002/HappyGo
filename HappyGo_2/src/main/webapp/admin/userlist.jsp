@@ -33,7 +33,8 @@
 				<tbody>
 					<tr>
 						<td colspan="2"><c:if test="${not empty select}">
-								<table id="userslist" class="t2">
+						<div class="tableEff">
+								<table id="userslist" >
 									<thead>
 										<tr>
 											<th>使用者帳號</th>
@@ -72,7 +73,7 @@
 											</tr>
 										</c:forEach>
 									</tbody>
-								</table>
+								</table></div>
 							</c:if></td>
 					</tr>
 					<tr>
@@ -237,6 +238,6 @@ if(mode=='selectitem' || mode=='update'){
 	});
 	var message = '<%=request.getAttribute("message")%>';
 	if (message != null && message.trim() != "" && message.trim() != "null")
-		alert(message);
+		 $.MessageBox(message);
 </script>
 </html>
