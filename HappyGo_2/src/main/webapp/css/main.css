@@ -5,7 +5,7 @@ body {
 	font-family: Gentium;
 	font-family: MyHelvetica;
 	src: local("Helvetica Neue Bold"), local("HelveticaNeue-Bold"), url(MgOpenModernaBold.ttf);
-	font-weight: bold;
+	font-weight: bold;	
 }
 #allpage{
 	width: 900px;
@@ -357,4 +357,82 @@ table.t2 {
 
 #mainmenu li ul li a:hover {
 	text-decoration: underline;
+}
+
+*.tableEff *.tWrapper {
+	width: 80%;
+}
+
+*.tableEff table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+*.tableEff caption {
+	background: #63C;
+	color: white;
+	text-align: center;
+	padding: 0.5em;
+	font-size: 125%;
+}
+
+*.tableEff caption *.notes {
+	float: right;
+	margin-top: 0.3em;
+	font-size: 80%;
+}
+
+*.tableEff col:first-of-type {
+	min-width: 4em;
+}
+
+*.tableEff col:nth-of-type(2) {
+	width: 4em;
+}
+
+*.tableEff col:nth-of-type(3) {
+	width: 4em;
+}
+
+*.tableEff col:last-of-type {
+	width: 7em;
+}
+
+*.tableEff thead {
+	background: #EA7500;
+}
+
+*.tableEff tbody tr, *.tableEff td {
+	transition: all 0.5s;
+}
+
+*.tableEff th {
+	font-weight: normal;
+	padding: 0.5em 0.1em;
+}
+
+*.tableEff td {
+	text-align: center;
+}
+
+*.tableEff tbody th, *.tableEff td {
+	border: 1px solid white;
+}
+
+*.tableEff tbody tr:nth-child(2n) {
+	background:  #FFF4C1;
+}
+
+*.tableEff tbody tr:hover {
+	background: #FFC78E;
+}
+
+*.tableEff tbody tr:nth-child(2n):hover {
+	background: #FFC78E;
+}
+
+*.tableEff tbody tr:hover td:hover {
+	background: #FFD306;
+	color: white;
+	box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.4);
 }

@@ -248,6 +248,6 @@ input {
 
 	var message = '<%=request.getAttribute("message")%>';
 	if (message != null && message.trim() != "" && message.trim() != "null")
-		alert(message);
+		$.MessageBox(message);
 </script>
 </html>
