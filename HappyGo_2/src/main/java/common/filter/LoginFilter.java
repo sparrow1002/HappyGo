@@ -12,7 +12,7 @@ import javax.servlet.http.*;
 		urlPatterns = { "/*" }, 
 		initParams = { 
 				@WebInitParam(name = "mustLogin1", value = "/admin/*"), 
-//				@WebInitParam(name = "mustLogin2", value = "/_04_ShoppingCart/*"), 
+				@WebInitParam(name = "mustLogin2", value = "/conStore/contractStore.jsp"), 
 //				@WebInitParam(name = "mustLogin3", value = "/_05_orderProcess/*"),
 //				@WebInitParam(name = "mustLogin4", value = "/_20_productMaintain/*")				
 		})

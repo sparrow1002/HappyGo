@@ -6,33 +6,33 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>特約商店登入</title>
-<link rel="stylesheet" href="main.css">
+<link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-	<div id="allpage">
+	<div id="allpage_out">
 		<c:import url="/common/TopMeau.jsp" />
-		<div class="demo" style="width: 946px">
+		<div id="content">
 			<form action="<c:url value="/secure/login_store.controller" />"
 				method="get">
-				<table class="t2" style="background-color: #F0E68C;">
+				<table>
 					<tr>
-						<th colspan='2'><label>特店登入</label></th>
+						<th colspan='2' bgcolor='#d4edec'><label>特店登入</label></th>
 					</tr>
 					<tr>
-						<td align="right">特約商店帳號</td>
-						<td><input type="text" name="username"
+						<td bgcolor='#bce6e4' align="right">特約商店帳號</td>
+						<td bgcolor='#85d6d2'><input type="text" name="username"
 							value="${param.username}"></td>
 						<td>${error.username}</td>
 					</tr>
 					<tr>
-						<td align="right">特約商店密碼</td>
-						<td><input type="text" name="password"
+						<td bgcolor='#bce6e4' align="right">特約商店密碼</td>
+						<td bgcolor='#85d6d2'><input type="text" name="password"
 							value="${param.password}"></td>
 						<td>${error.password}</td>
 					</tr>
 					<tr>
-						<td colspan='2' align="center"><input type="submit"
-							value="登入"> <input type=button
+						<td colspan='2' bgcolor='#d4edec' align="center"><input
+							type="submit" value="登入"> <input type=button
 							onClick="location.href='<c:url value="/conStore/register.jsp"/>'"
 							value='申請特約商店'> <input value="回首頁"
 							onclick="window.location='../index.jsp'" type="button"></td>
@@ -43,4 +43,6 @@
 		<c:import url="/common/FootBar.jsp" />
 	</div>
 </body>
+<script src="js/jquery.cycle2.js"></script>
+<link rel="stylesheet" href="base/jquery-ui-1.9.2.custom.min.css">
 </html>
