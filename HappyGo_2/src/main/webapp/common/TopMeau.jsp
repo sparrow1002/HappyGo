@@ -35,5 +35,6 @@
 <link rel="stylesheet" href="<c:url value='/css/main.css'/>">
 <script src="<c:url value='/jquery/jquery-2.1.4.min.js'/>"></script>
 <script src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
-
+<script src="<c:url value='/jquery/jquery.dataTables.min.js'/>"></script>
+<link rel="stylesheet" type="text/css"	href="<c:url value='/jquery/jquery.dataTables.min.css'/>" />
 </html>
