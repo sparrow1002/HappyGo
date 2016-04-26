@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>MENU</title>
 </head>
+<link rel="stylesheet" href="<c:url value='/css/lanrenzhijia.css'/>">
 <link rel="stylesheet" href="<c:url value='/css/main.css'/>">
 
 <script src="<c:url value='/jquery/jquery-2.1.4.min.js'/>"></script>

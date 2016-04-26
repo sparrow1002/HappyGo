@@ -72,7 +72,7 @@ public class reportDAOjdbc {
 				data.put("SOP_DISCOUNT", rs.getBigDecimal("SOP_DISCOUNT"));
 				data.put("CPT_POINTADD", rs.getBigDecimal("CPT_POINTADD"));
 				data.put("CPT_POINTDRE", rs.getBigDecimal("CPT_POINTDRE"));
-				data.put("SOP_overPoint", rs.getInt("SOP_overPoint"));
+				data.put("SOP_TRANID", rs.getString("SOP_TRANID"));
 				if (rs.getString("SOP_STATUS").equals("0")) {
 					if (rs.getString("CPT_STATUS").equals("0")) {
 						data.put("transation", "交易取消");

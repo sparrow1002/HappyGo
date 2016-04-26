@@ -73,6 +73,7 @@ TD {
 						<table id="report_table" class="jtable">
 							<thead>
 								<tr>
+									<th>交易編號</th>
 									<th>會員編號</th>
 									<th>消費地點</th>
 									<th>交易日期</th>
@@ -80,17 +81,13 @@ TD {
 									<th>折抵金額</th>
 									<th>消費給點</th>
 									<th>消耗點數</th>
-									<th>剩餘點數</th>
 									<th>交易狀態</th>
-									<th>取消交易</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="row" items="${report_select}">
-									<c:url value="/report/cancel.jsp" var="path" scope="page">
-										<c:param name="cancel" value="${row.SOP_TRANID}" />
-									</c:url>
 									<tr>
+										<td>${row.SOP_TRANID}</td>
 										<td>${row.SOP_MEMBERID}</td>
 										<td>${row.COS_NAME}</td>
 										<td>${row.CPT_TRANDATE}</td>
@@ -98,17 +95,13 @@ TD {
 										<td>${row.SOP_DISCOUNT}</td>
 										<td>${row.CPT_POINTADD}</td>
 										<td>${row.CPT_POINTDRE}</td>
-										<td>${row.SOP_overPoint}</td>
 										<td>${row.transation}</td>
-										<td><c:if test="${row.SOP_STATUS !='0'}">
-												<input type=button value="取消交易"
-													onclick="location.href='${path}'">
-											</c:if></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 							<tfoot>
 								<tr>
+									<th>交易編號</th>
 									<th>會員編號</th>
 									<th>消費地點</th>
 									<th>交易日期</th>
@@ -116,9 +109,7 @@ TD {
 									<th>折抵金額</th>
 									<th>消費給點</th>
 									<th>消耗點數</th>
-									<th>剩餘點數</th>
 									<th>交易狀態</th>
-									<th>取消交易</th>
 								</tr>
 							</tfoot>
 						</table>
