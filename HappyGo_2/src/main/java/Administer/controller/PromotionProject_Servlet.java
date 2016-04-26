@@ -165,10 +165,10 @@ public class PromotionProject_Servlet extends HttpServlet {
 				//目前判斷無效T.T
 				System.out.println("time check start");
 				System.out.println(StartDate);
-				if(StartDate=="" || EndDate==""){
+				if(StartDate.trim().length()==0||StartDate=="" || EndDate==""||EndDate.trim().length()==0){
 					System.out.println("time catch");
-					error.put("PTP_CREATEDATE", "請選擇活動時間");
-					error.put("PTP_DELDATE", "請選擇活動時間");
+					error.put("pTP_CREATEDATE", "請選擇活動時間");
+					error.put("pTP_DELDATE", "請選擇活動時間");
 				}
 				System.out.println("time check end");
 					
@@ -186,9 +186,9 @@ public class PromotionProject_Servlet extends HttpServlet {
 				}
 				
 				if("Insert".equals(promotionProject)) {
-					if(StartDate==null || EndDate==null) {
-						error.put("PTP_CREATEDATE", "請選擇活動時間以便於執行"+promotionProject);
-						error.put("PTP_DELDATE", "請選擇活動時間以便於執行"+promotionProject);
+					if(StartDate=="" || EndDate=="") {
+						error.put("pTP_CREATEDATE", "請選擇活動時間以便於執行"+promotionProject);
+						error.put("pTP_DELDATE", "請選擇活動時間以便於執行"+promotionProject);
 					}
 				}
 				

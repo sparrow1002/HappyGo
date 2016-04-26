@@ -73,13 +73,13 @@
 				<tr>
 					<td align="right">促銷活動生效日期：</td>
 					<td><input type="text" name="PTP_CREATEDATE"
-						id="PTP_CREATEDATE"><span class="error">${error.PTP_CREATEDATE}</span>
+						id="PTP_CREATEDATE"><span class="error">${error.pTP_CREATEDATE}</span>
 					</td>
 				</tr>
 				<tr>
 					<td align="right">促銷活動結束日期：</td>
 					<td><input type="text" name="PTP_DELDATE" id="PTP_DELDATE"><span
-						class="error">${error.PTP_DELDATE}</span></td>
+						class="error">${error.pTP_DELDATE}</span></td>
 				</tr>
 				<tr>
 					<!-- 4/12與宗保討論，固定給點PTP_FIXPOINT後方給TEXT欄位輸入，需寫入TABLE_HG_PromotionProject -->
