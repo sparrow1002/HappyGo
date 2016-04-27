@@ -57,7 +57,11 @@ public class ContractStoreServlet extends HttpServlet {
 		if("修改".equals(prodaction)){
 			List<ContractStoreBean> result = contractStoreService.select(bean);
 			request.setAttribute("select", result);
-			request.getRequestDispatcher("/conStore/modify_forad.jsp").forward(request, response);
+			if(bean.getCos_status()=="1" || bean.getCos_status()=="0"){
+				request.getRequestDispatcher("/conStore/modify.jsp").forward(request, response);
+			}else{
+			request.getRequestDispatcher("/conStore/modify.jsp").forward(request, response);
+			}
 		}else if("登出".equals(prodaction)){
 			session.removeAttribute("storeLoginOK");
 			String path = request.getContextPath();
