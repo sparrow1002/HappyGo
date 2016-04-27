@@ -15,18 +15,25 @@
 	type="text/javascript" language="javascript"></script>
 <script type="text/javascript" language="javascript">
 	jQuery(document).ready(function() {
-		jQuery("#report_table").dataTable(
+		jQuery("#report_table").dataTable({
+			"oLanguage" : {
+				"oPaginate" : {
+					"sFirst" : "首頁",
+					"sPrevious" : "上頁",
+					"sNext" : "下頁",
+					"sLast" : "尾頁"
+				}
+			}
+		});
 
-		);
-
-	});
+	});	
 </script>
 <style type="text/css">
 TD {
 	text-align: center;
 }
 
-.jtable TH {
+.tableEff TH {
 	font-size: 10px;
 }
 </style>
@@ -79,49 +86,51 @@ TD {
 				</div>
 				<div style="margin: 0 auto;">
 					<c:if test="${not empty report_select}">
-						<table id="report_table" class="jtable">
-							<thead>
-								<tr>
-									<th>交易編號</th>
-									<th>會員編號</th>
-									<th>消費地點</th>
-									<th>交易日期</th>
-									<th>消費金額</th>
-									<th>折抵金額</th>
-									<th>消費給點</th>
-									<th>消耗點數</th>
-									<th>交易狀態</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="row" items="${report_select}">
+						<div class="tableEff">
+							<table id="report_table">
+								<thead>
 									<tr>
-										<td>${row.SOP_TRANID}</td>
-										<td>${row.SOP_MEMBERID}</td>
-										<td>${row.COS_NAME}</td>
-										<td>${row.CPT_TRANDATE}</td>
-										<td>${row.SOP_TRANAMT}</td>
-										<td>${row.SOP_DISCOUNT}</td>
-										<td>${row.CPT_POINTADD}</td>
-										<td>${row.CPT_POINTDRE}</td>
-										<td>${row.transation}</td>
+										<th>交易編號</th>
+										<th>會員編號</th>
+										<th>消費地點</th>
+										<th>交易日期</th>
+										<th>消費金額</th>
+										<th>折抵金額</th>
+										<th>消費給點</th>
+										<th>消耗點數</th>
+										<th>交易狀態</th>
 									</tr>
-								</c:forEach>
-							</tbody>
-							<tfoot>
-								<tr>
-									<th>交易編號</th>
-									<th>會員編號</th>
-									<th>消費地點</th>
-									<th>交易日期</th>
-									<th>消費金額</th>
-									<th>折抵金額</th>
-									<th>消費給點</th>
-									<th>消耗點數</th>
-									<th>交易狀態</th>
-								</tr>
-							</tfoot>
-						</table>
+								</thead>
+								<tbody>
+									<c:forEach var="row" items="${report_select}">
+										<tr>
+											<td>${row.SOP_TRANID}</td>
+											<td>${row.SOP_MEMBERID}</td>
+											<td>${row.COS_NAME}</td>
+											<td>${row.CPT_TRANDATE}</td>
+											<td>${row.SOP_TRANAMT}</td>
+											<td>${row.SOP_DISCOUNT}</td>
+											<td>${row.CPT_POINTADD}</td>
+											<td>${row.CPT_POINTDRE}</td>
+											<td>${row.transation}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>交易編號</th>
+										<th>會員編號</th>
+										<th>消費地點</th>
+										<th>交易日期</th>
+										<th>消費金額</th>
+										<th>折抵金額</th>
+										<th>消費給點</th>
+										<th>消耗點數</th>
+										<th>交易狀態</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
 					</c:if>
 				</div>
 			</form>

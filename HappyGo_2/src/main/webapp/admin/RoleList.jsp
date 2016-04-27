@@ -14,67 +14,65 @@
 	<img id="cloud02" src="/HappyGo_2/images/cloud_02.png">
 	<img id="cloud03" src="/HappyGo_2/images/cloud_03.png">
 	<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
-<div id="allpage">
-	<c:import url="/admin/TopMeau.jsp" />
-	<div class="demo">
-		<table style="background-color: #F0E68C;">
-			<thead>
-				<tr>
-					<th>後台系統使用者管理</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td><c:if test="${not empty userlist}">
-							<table id="userslist" class="t2">
-								<tbody>
-									<tr>
-										<td><c:forEach var="userlist" items="${userlist}">
-												<form
-													action='<c:url value="/dayuNameSpace/rolelist.action?mode=select"/>'
-													method="get">
-													<table style="width: 870PX;">
-														<tr>
-															<td style="width: 100px">${userlist.value}</td>
-															<td><c:forEach var="right" items="${right}">
-																	<c:set var="salary" scope="page" value="1" />
-																	<c:forEach var="rolelist" items="${rolelist}">
-																		<c:if
-																			test="${userlist.key==rolelist.ROL_ROLEID && right.RIG_RIGHTID==rolelist.ROL_RIGHTID}">
-																			<c:set var="salary" scope="page" value="2" />
-																		</c:if>
-																	</c:forEach>
-																	<c:choose>
-																		<c:when test="${salary==2}">
-																			<input type="checkbox" id="${right.RIG_RIGHTID}"
-																				name="${right.RIG_RIGHTID}" checked="checked" />
-																			<label for="${right.RIG_RIGHTID}">${right.RIG_DESC}</label>
-																			<br />
-																		</c:when>
-																		<c:otherwise>
-																			<input type="checkbox" id="${right.RIG_RIGHTID}"
-																				name="${right.RIG_RIGHTID}" />
-																			<label for="${right.RIG_RIGHTID}">${right.RIG_DESC}</label>
-																			<br />
-																		</c:otherwise>
-																	</c:choose>
-																</c:forEach></td>
-															<td><input type="submit" value="修改"> <input
-																type="hidden" name="userid" value="${userlist.key}">
-																<input type="hidden" name="mode" value="edit"></td>
-														</tr>
-													</table>
-												</form>
-											</c:forEach></td>
-									</tr>
-								</tbody>
-							</table>
-						</c:if></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<c:import url="/admin/FootBar.jsp" />
+	<div id="allpage">
+		<c:import url="/admin/TopMeau.jsp" />
+		<div class="demo">
+			<table style="background-color: #F0E68C;">
+				<thead>
+					<tr>
+						<th>後台系統使用者管理</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><c:if test="${not empty userlist}">
+								<table id="userslist" class="t2">
+									<tbody>
+										<tr>
+											<td><c:forEach var="userlist" items="${userlist}">
+													<form action='<c:url value="/dayuNameSpace/rolelist.action?mode=select"/>' method="get">
+														<table style="width: 870PX;">
+															<tr>
+																<td style="width: 100px">${userlist.value}</td>
+																<td><c:forEach var="right" items="${right}">
+																		<c:set var="salary" scope="page" value="1" />
+																		<c:forEach var="rolelist" items="${rolelist}">
+																			<c:if
+																				test="${userlist.key==rolelist.ROL_ROLEID && right.RIG_RIGHTID==rolelist.ROL_RIGHTID}">
+																				<c:set var="salary" scope="page" value="2" />
+																			</c:if>
+																		</c:forEach>
+																		<c:choose>
+																			<c:when test="${salary==2}">
+																				<input type="checkbox" id="${right.RIG_RIGHTID}"
+																					name="${right.RIG_RIGHTID}" checked="checked" />
+																				<label for="${right.RIG_RIGHTID}">${right.RIG_DESC}</label>
+																				<br />
+																			</c:when>
+																			<c:otherwise>
+																				<input type="checkbox" id="${right.RIG_RIGHTID}"
+																					name="${right.RIG_RIGHTID}" />
+																				<label for="${right.RIG_RIGHTID}">${right.RIG_DESC}</label>
+																				<br />
+																			</c:otherwise>
+																		</c:choose>
+																	</c:forEach></td>
+																<td><input type="submit" value="修改"> <input
+																	type="hidden" name="userid" value="${userlist.key}">
+																	<input type="hidden" name="mode" value="edit"></td>
+															</tr>
+														</table>
+													</form>
+												</c:forEach></td>
+										</tr>
+									</tbody>
+								</table>
+							</c:if></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<c:import url="/admin/FootBar.jsp" />
 	</div>
 </body>
 <script>
