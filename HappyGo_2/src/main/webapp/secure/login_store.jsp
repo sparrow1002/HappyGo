@@ -18,8 +18,9 @@
 	<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
 	<div id="allpage">
 		<c:import url="/common/TopMeau.jsp" />
-		<div id="content"  class="demo" style="width: 946px">
-			<form action="<c:url value="/secure/login_store.controller" />"	method="get">
+		<div id="content" class="demo" style="width: 946px">
+			<form action="<c:url value="/secure/login_store.controller" />"
+				method="get">
 				<table class="t2" style="background-color: #F0E68C;">
 					<tr>
 						<th colspan='2' bgcolor='#d4edec'><label>特店登入</label></th>
