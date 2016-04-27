@@ -28,7 +28,7 @@
 
 					<tr>
 						<td align="right">特店密碼 :</td>
-						<td><input type="text" name="pwd" value=""></td>
+						<td><input type="password" name="pwd" value=""></td>
 					</tr>
 					<tr>
 						<td align="right">統一編號 :</td>
@@ -54,14 +54,6 @@
 						<td align="right">特店失效日 :</td>
 						<td><input type="text" id="datepicker" name="deletime"
 							value=""></td>
-					</tr>
-					<tr>
-						<td align="right">異動日期 :</td>
-						<td><input type="text" name="updatetime" value=""></td>
-					</tr>
-					<tr>
-						<td align="right">異動者 :</td>
-						<td><input type="text" name="Updateuser" value=""></td>
 					</tr>
 					<tr>
 						<td align="center" colspan="2"><input type="submit" name="prodaction"

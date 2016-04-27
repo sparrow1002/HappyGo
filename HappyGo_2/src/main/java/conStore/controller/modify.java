@@ -40,7 +40,7 @@ public class modify extends HttpServlet {
 			ContractStoreBean beanuser = new ContractStoreBean();
 			HttpSession session = request.getSession();
 			beanuser = (ContractStoreBean)session.getAttribute("storeLoginOK");
-			System.out.println(updateuser = beanuser.getCos_storeid());
+			//System.out.println(updateuser = beanuser.getCos_storeid());
 			
 			ContractStoreBean bean = new ContractStoreBean();
 			bean.setCos_storeid(storeid);
@@ -63,7 +63,12 @@ public class modify extends HttpServlet {
 				} else{
 					request.setAttribute("update", result);
 				}
-				request.getRequestDispatcher("/conStore/contractStore.jsp").forward(request, response);
+				Object user = session.getAttribute("adminuser");
+				if(user != null){
+					request.getRequestDispatcher("/conStore/contractStore.jsp").forward(request, response);
+				}else{
+					request.getRequestDispatcher("/conStore/singlecontractStore.jsp").forward(request, response);
+				}
 			}
 
 		}

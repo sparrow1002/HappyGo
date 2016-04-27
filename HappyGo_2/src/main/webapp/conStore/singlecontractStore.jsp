@@ -7,12 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>特約店</title>
 </head>
-
-
 <style>
 span {
-	float: right;
-}
+	float: left;
+	}
 </style>
 <body>
 	<div id="allpage" style="background-color: #FFDDAA">
@@ -30,13 +28,11 @@ span {
 		<div class="demo" style="width: 946px">
 			<form action="<c:url value="/conStore/contractStore.controller"/>"
 				method="get">
-				<span><a>${storeLoginOK.cos_name} </a><input type="submit"
-					name="prodaction" value="登出" /></span>
+				<span><a>特店名稱:${storeLoginOK.cos_name} </a></span>
 				<table id="myTable" class="t2">
 					<thead>
 						<tr>
-							<th>特店代號</th>
-							<th>特店名稱</th>
+							<th>特店代號</th>							
 							<th>統一編號</th>
 							<th>特店地址</th>
 							<th>特店狀態</th>
@@ -52,7 +48,6 @@ span {
 						<c:forEach var="row" items="<%=result%>">
 							<tr>
 								<td>${row.cos_storeid}</td>
-								<td>${row.cos_name}</td>
 								<td>${row.cos_taxcode}</td>
 								<td>${row.cos_address}</td>
 								<td><c:if test="${row.cos_status==1}">有效</c:if> <c:if
@@ -74,10 +69,12 @@ span {
 	</div>
 	<script>
 		var opt = {
-
+			"info" : false,
+			"lengthChange" : false,
+			"searching" : false,
 			"stateSave" : true,
+			"paging": false,
 			"oLanguage" : {
-
 				"sProcessing" : "處理中...",
 				"sLengthMenu" : "顯示 _MENU_ 項結果",
 				"sZeroRecords" : "沒有匹配結果",
