@@ -36,7 +36,8 @@ span {
 			<form action="<c:url value="/conStore/contractStore.controller"/>"
 				method="get">
 				<span><a>特店名稱:${storeLoginOK.cos_name} </a></span>
-				<table id="myTable" class="t2">
+				<div class="tableEff">
+				<table id="myTable">
 					<thead>
 						<tr>
 							<th>特店代號</th>							
@@ -70,6 +71,7 @@ span {
 						</c:forEach>
 					</tbody>
 				</table>
+				</div>
 			</form>
 		</div>
 		<c:import url="/common/FootBar.jsp" />

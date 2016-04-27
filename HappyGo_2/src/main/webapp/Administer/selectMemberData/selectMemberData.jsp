@@ -17,7 +17,8 @@
 			action="<c:url value="/Administer/selectMemberData.controller" />
 		"
 			method="get">
-			<table class="t2">
+			<div class="tableEff">
+			<table >
 				<tr>
 					<td>會員帳號： <input type="text" name="MBR_MEMBERID"> <input
 						type="submit" name="selectMemberData" value="select"> <span
@@ -25,10 +26,12 @@
 					</td>
 				</tr>
 			</table>
+			</div>
 		</form>
 
 		<c:if test="${not empty select}">
-			<table class="jtable" class="t2">
+		<div class="tableEff">
+			<table class="jtable">
 				<thead>
 					<tr>
 						<th>帳號</th>
@@ -48,6 +51,7 @@
 					<%-- <td>${select.MBR_POINTS}</td> --%>
 				</tr>
 			</table>
+			</div>
 		</c:if>
 		<c:import url="/admin/FootBar.jsp" />
 	</div>

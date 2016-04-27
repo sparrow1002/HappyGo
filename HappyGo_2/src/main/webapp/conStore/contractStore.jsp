@@ -66,7 +66,8 @@ span {
 		<c:import url="/admin/TopMeau.jsp" />
 		<form action="<c:url value="/conStore/contractStore.controller"/>"
 			method="get">
-			<table id="myTable" class="t2" style="background-color: #F0E68C;">
+			<div class="tableEff">
+			<table id="myTable"  style="background-color: #F0E68C;">
 				<thead>
 					<tr>
 						<th>特店代號</th>
@@ -100,6 +101,7 @@ span {
 					</c:forEach>
 				</tbody>
 			</table>
+			</div>
 		</form>
 		<c:import url="/admin/FootBar.jsp" />
 	</div>
