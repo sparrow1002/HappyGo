@@ -52,8 +52,10 @@
 	<h1>${memberId} 尚有:${totalPoint}點</h1>
 	</c:if>
 	
-	<c:if test="${not empty point}">	
-	<h4>有 ${LastPoint.pointAdd}點  將在${LastPoint.dDate}過期</h4>
+	<c:if test="${not empty point}">
+	<div></div>
+	<div></div>
+	<h3>有 ${LastPoint.pointAdd}點  將在${LastPoint.dDate}過期</h3>
 	<div class="tableEff">
 	<table class="jtable" class="t2">
 <!-- 	class="display"可以套用到dataTables的css樣式 -->
@@ -70,7 +72,7 @@
 				<th >點數</th>
 				<th >失效日</th>
 <!-- 				<th >點數狀態</th> -->
-<!-- 				<th >交易編號</th> -->
+				<th >交易編號</th>
 				<th >交易日</th>
 			</tr>
 		</thead>
@@ -82,7 +84,7 @@
 				<td>${row.pointAdd}</td>
 				<td>${row.dDate}</td>				
 <%-- 				<td>${row.status}</td> --%>
-<%-- 				<td>${row.tranId}</td> --%>
+				<td>${row.tranId}</td>
 				<td>${row.tranDate}</td>
 			</tr>	
 			</c:forEach>
@@ -94,7 +96,7 @@
 				<th >點數</th>
 				<th >失效日</th>				
 <!-- 				<th >點數狀態</th> -->
-<!-- 				<th >交易編號</th> -->
+				<th >交易編號</th>
 				<th >交易日</th>
 			</tr>
 		</tfoot>
