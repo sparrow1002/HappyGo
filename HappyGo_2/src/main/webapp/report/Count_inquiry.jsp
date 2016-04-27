@@ -41,10 +41,10 @@ TD {
 	<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
 	<div id="allpage" style="background-color: #FFDDAA;">
 		<c:import url="/admin/TopMeau.jsp" />
-		<div>
+		<div class="c1">
 			<form action="/HappyGo_2/reportServer" name="form" method="post">
 				<div style="width: 300px; margin: 0 auto;">
-					<TABLE>
+					<TABLE class="t2">
 						<TR>
 							<TH colspan='2' bgcolor='#d4edec'><label>點數交易查詢</label></TH>
 						</TR>

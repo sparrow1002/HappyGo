@@ -8,6 +8,12 @@
 <title>ROLE SETTING</title>
 </head>
 <body>
+	<img id="sky" src="/HappyGo_2/images/bg_00.png" />
+	<img id="ground" src="/HappyGo_2/images/bg_01.png">
+	<img id="cloud01" src="/HappyGo_2/images/cloud_01.png">
+	<img id="cloud02" src="/HappyGo_2/images/cloud_02.png">
+	<img id="cloud03" src="/HappyGo_2/images/cloud_03.png">
+	<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
 <div id="allpage">
 	<c:import url="/admin/TopMeau.jsp" />
 	<div class="demo">
