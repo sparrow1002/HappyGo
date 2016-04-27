@@ -15,9 +15,16 @@
 	type="text/javascript" language="javascript"></script>
 <script type="text/javascript" language="javascript">
 	jQuery(document).ready(function() {
-		jQuery("#report_table").dataTable(
-
-		);
+		jQuery("#report_table").dataTable({
+				"oLanguage" : {
+					"oPaginate" : {
+						"sFirst" : "首頁",
+						"sPrevious" : "上頁",
+						"sNext" : "下頁",
+						"sLast" : "尾頁"
+					}
+				}
+		});
 
 	});
 </script>
@@ -69,7 +76,8 @@ TD {
 				</div>
 				<div style="margin: 0 auto;">
 					<c:if test="${not empty report_select}">
-						<table id="report_table" class="jtable">
+					<div class="tableEff">
+						<table id="report_table">
 							<thead>
 								<tr>
 									<th>交易編號</th>
@@ -121,6 +129,7 @@ TD {
 								</tr>
 							</tfoot>
 						</table>
+					</div>
 					</c:if>
 				</div>
 			</form>

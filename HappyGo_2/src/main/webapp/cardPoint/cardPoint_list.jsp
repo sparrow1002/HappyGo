@@ -54,6 +54,7 @@
 	
 	<c:if test="${not empty point}">	
 	<h4>有 ${LastPoint.pointAdd}點  將在${LastPoint.dDate}過期</h4>
+	<div class="tableEff">
 	<table class="jtable" class="t2">
 <!-- 	class="display"可以套用到dataTables的css樣式 -->
 <!-- 	class="display"可以套用到demo_table.css樣式 -->
@@ -98,6 +99,7 @@
 			</tr>
 		</tfoot>
 	</table>
+	</div>
 	</c:if>
 <c:import url="/admin/FootBar.jsp" />
 </div>
