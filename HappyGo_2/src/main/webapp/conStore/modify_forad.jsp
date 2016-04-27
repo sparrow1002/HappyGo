@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/main.css">
 <title>修改</title>
 </head>
 <%
@@ -12,6 +13,12 @@
 	Object storeuser = session.getAttribute("storeLoginOK");
 %>
 <body>
+<img id="sky" src="/HappyGo_2/images/bg_00.png" />
+<img id="ground" src="/HappyGo_2/images/bg_01.png">
+<img id="cloud01" src="/HappyGo_2/images/cloud_01.png">
+<img id="cloud02" src="/HappyGo_2/images/cloud_02.png">
+<img id="cloud03" src="/HappyGo_2/images/cloud_03.png">
+<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
 	<div id="allpage" style="background-color: #FFDDAA">
 		<c:import url="/admin/TopMeau.jsp" />
 		<div id="content" class="demo" style="width: 900px">
