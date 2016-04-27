@@ -25,17 +25,24 @@
 TD {
 	text-align: center;
 }
-.jtable TH{
+
+.jtable TH {
 	font-size: 10px;
 }
 </style>
 <title>點數交易查詢</title>
 </head>
 <body>
+	<img id="sky" src="/HappyGo_2/images/bg_00.png" />
+	<img id="ground" src="/HappyGo_2/images/bg_01.png">
+	<img id="cloud01" src="/HappyGo_2/images/cloud_01.png">
+	<img id="cloud02" src="/HappyGo_2/images/cloud_02.png">
+	<img id="cloud03" src="/HappyGo_2/images/cloud_03.png">
+	<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
 	<div id="allpage" style="background-color: #FFDDAA;">
 		<c:import url="/admin/TopMeau.jsp" />
 		<div>
-			<form action="/HappyGo_2/reportServer" name="form" method="post" >
+			<form action="/HappyGo_2/reportServer" name="form" method="post">
 				<div style="width: 300px; margin: 0 auto;">
 					<TABLE>
 						<TR>
@@ -54,12 +61,14 @@ TD {
 						<TR>
 							<TD bgcolor='#bce6e4' align="right">起始日期</TD>
 							<TD for="meeting"><input id="meeting" type="date"
-								name="report_day1" value="${param.report_day1}" style="width: 97%;"></TD>
+								name="report_day1" value="${param.report_day1}"
+								style="width: 97%;"></TD>
 						</TR>
 						<TR>
 							<TD bgcolor='#bce6e4' align="right">結束日期</TD>
 							<TD for="meeting"><input id="meeting" type="date"
-								name="report_day2" value="${param.report_day2}" style="width: 97%;"></TD>
+								name="report_day2" value="${param.report_day2}"
+								style="width: 97%;"></TD>
 						</TR>
 						<TR>
 							<TD colspan='2' bgcolor='#d4edec' align="center"><input

@@ -1,6 +1,6 @@
 body {
-	background: #FFFFDD;
-	background-image: url("../img/bg8.png");
+/* 	background: #FFFFDD; */
+/* 	background-image: url("../img/bg8.png"); */
 	padding: 0 auto;
 	font-family: Gentium;
 	font-family: MyHelvetica;
@@ -436,3 +436,106 @@ table.t2 {
 	color: white;
 	box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.4);
 }
+
+#sky{
+				position:fixed;
+				z-index:-4;
+			}
+			#ground{
+				position:fixed;
+				z-index:-2;
+			}
+			#role1{
+				position:fixed;
+				left:0px;
+				z-index:-1;
+			}
+			#role2{
+				position:fixed;
+				right:0px;
+				z-index:-1;
+			}
+			#cloud01{
+				position:fixed;
+				z-index:-3;
+				animation-name: cloud01;
+				animation-duration: 180s;
+  				animation-iteration-count: infinite;
+			}
+			@keyframes cloud01{
+  				from {
+  				left:150px;
+    			top:900px;
+    			width:972px;
+  				height:99px;
+  				}
+  				to {
+    			top:-2322px;
+    			left:-1800px;
+    			width:5720px;
+  				height:2322px;
+  				}
+			}
+			#cloud02{
+				position:fixed;
+				z-index:-3;
+				animation-name: cloud02;
+				animation-duration: 220s;
+  				animation-iteration-count: infinite;
+			}
+			@keyframes cloud02{
+  				from {
+  				left:150px;
+    			top:620px;
+    			width:990px;
+  				height:108px;
+  				}
+  				to {
+    			top:-2322px;
+    			left:-1800px;
+    			width:5720px;
+  				height:2322px;
+  				}
+			}
+			#cloud03{
+				position:fixed;
+				z-index:-3;
+				animation-name: cloud03;
+				animation-duration: 100s;
+  				animation-iteration-count: infinite;
+			}
+			@keyframes cloud03{
+  				from {
+  				left:150px;
+    			top:620px;
+    			width:990px;
+  				height:108px;
+  				}
+  				to {
+    			top:-2322px;
+    			left:-1800px;
+    			width:5720px;
+  				height:2322px;
+  				}
+			}
+			#cloud04{
+				position:fixed;
+				z-index:-3;
+				animation-name: cloud04;
+				animation-duration: 75s;
+  				animation-iteration-count: infinite;
+			}
+			@keyframes cloud04{
+  				from {
+  				left:150px;
+    			top:620px;
+    			width:990px;
+  				height:108px;
+  				}
+  				to {
+    			top:-2322px;
+    			left:-1800px;
+    			width:5720px;
+  				height:2322px;
+  				}
+			}
