@@ -31,7 +31,7 @@
 					</tr>
 					<tr>
 						<td bgcolor='#bce6e4' align="right">特約商店密碼</td>
-						<td bgcolor='#85d6d2'><input type="text" name="password"
+						<td bgcolor='#85d6d2'><input type="password" name="password"
 							value="${param.password}">${error.password}</td>
 					</tr>
 					<tr>
