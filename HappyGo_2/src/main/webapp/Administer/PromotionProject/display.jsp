@@ -21,7 +21,8 @@
 		<h2>活動查詢結果</h2>
 
 		<c:if test="${not empty select}">
-			<table class="jtable">
+		<div class="tableEff">
+			<table>
 				<thead>
 					<tr>
 						<th>編號</th>
@@ -61,6 +62,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			</div>
 		</c:if>
 		<h3>
 			<a

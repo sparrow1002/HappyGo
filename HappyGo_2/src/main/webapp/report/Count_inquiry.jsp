@@ -17,6 +17,10 @@
 	jQuery(document).ready(function() {
 		jQuery("#report_table").dataTable({
 			"oLanguage" : {
+				"info" : false,
+				"lengthChange" : false,
+				"searching" : false,
+				"stateSave" : true,
 				"oPaginate" : {
 					"sFirst" : "首頁",
 					"sPrevious" : "上頁",
@@ -127,6 +131,53 @@ TD {
 										<th>消費給點</th>
 										<th>消耗點數</th>
 										<th>交易狀態</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</c:if>
+				</div>
+				<div style="margin: 0 auto;">
+					<c:if test="${not empty report_select_store}">
+					<h1>總給點數為：${total01}		總收點數為：${total02}</h1>
+						<div class="tableEff">
+							<table id="report_table">
+								<thead>
+									<tr>
+										<th>交易編號</th>
+										<th>會員編號</th>
+										<th>交易日期</th>
+										<th>消費金額</th>
+										<th>折抵金額</th>
+										<th>消費給點</th>
+										<th>消耗點數</th>
+										<th>促銷專案</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="row" items="${report_select_store}">
+										<tr>
+											<td>${row.SOP_TRANID}</td>
+											<td>${row.SOP_MEMBERID}</td>
+											<td>${row.CPT_TRANDATE}</td>
+											<td>${row.SOP_TRANAMT}</td>
+											<td>${row.SOP_DISCOUNT}</td>
+											<td>${row.CPT_POINTADD}</td>
+											<td>${row.CPT_POINTDRE}</td>
+											<td>${row.SOP_PROJID}</td>	
+										</tr>
+									</c:forEach>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>交易編號</th>
+										<th>會員編號</th>
+										<th>交易日期</th>
+										<th>消費金額</th>
+										<th>折抵金額</th>
+										<th>消費給點</th>
+										<th>消耗點數</th>
+										<th>促銷專案</th>
 									</tr>
 								</tfoot>
 							</table>

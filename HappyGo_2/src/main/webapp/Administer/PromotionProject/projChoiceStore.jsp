@@ -56,7 +56,8 @@ input[type=text] {
 		<form
 			action="<c:url value="/PromotionProject/PromotionStore.controller" />"
 			method="get">
-			<table id="myTable" class="t2" >
+			<div class="tableEff">
+			<table id="myTable">
 				<thead>
 					<tr>
 						<th></th>
@@ -105,6 +106,7 @@ input[type=text] {
 						value="Insert"></td>
 				</tr>
 			</table>
+			</div>
 		</form>
 		<h2>${error.noStore}</h2>
 		<h2>${error.action}</h2>

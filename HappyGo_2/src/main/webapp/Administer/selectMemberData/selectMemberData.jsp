@@ -10,6 +10,12 @@
 <title>查詢會員資料</title>
 </head>
 <body>
+	<img id="sky" src="/HappyGo_2/images/bg_00.png" />
+	<img id="ground" src="/HappyGo_2/images/bg_01.png">
+	<img id="cloud01" src="/HappyGo_2/images/cloud_01.png">
+	<img id="cloud02" src="/HappyGo_2/images/cloud_02.png">
+	<img id="cloud03" src="/HappyGo_2/images/cloud_03.png">
+	<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
 	<div id="allpage" style="background-color: #FFDDAA">
 		<c:import url="/admin/TopMeau.jsp" />
 		<h2>請輸入會員帳號</h2>
@@ -17,8 +23,7 @@
 			action="<c:url value="/Administer/selectMemberData.controller" />
 		"
 			method="get">
-			<div class="tableEff">
-			<table >
+			<table>
 				<tr>
 					<td>會員帳號： <input type="text" name="MBR_MEMBERID"> <input
 						type="submit" name="selectMemberData" value="select"> <span
@@ -26,12 +31,11 @@
 					</td>
 				</tr>
 			</table>
-			</div>
 		</form>
 
 		<c:if test="${not empty select}">
 		<div class="tableEff">
-			<table class="jtable">
+			<table>
 				<thead>
 					<tr>
 						<th>帳號</th>
