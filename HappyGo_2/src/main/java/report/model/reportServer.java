@@ -47,6 +47,7 @@ public class reportServer extends HttpServlet {
     	String store = request.getParameter("report_store");
     	String id = request.getParameter("report_id");
     	String day[];
+    	System.out.println(request.getParameter("report_day1"));
     	day=request.getParameter("report_day1").split("-");
     	String day1 = day[0]+day[1]+day[2];
     	day=request.getParameter("report_day2").split("-");

@@ -72,6 +72,7 @@ TD {
 						<table id="report_table" class="jtable">
 							<thead>
 								<tr>
+									<th>交易編號</th>
 									<th>會員編號</th>
 									<th>消費地點</th>
 									<th>交易日期</th>
@@ -89,6 +90,7 @@ TD {
 										<c:param name="cancel" value="${row.SOP_TRANID}" />
 									</c:url>
 									<tr>
+										<td>${row.SOP_TRANID}</td>
 										<td>${row.SOP_MEMBERID}</td>
 										<td>${row.COS_NAME}</td>
 										<td>${row.CPT_TRANDATE}</td>
@@ -106,6 +108,7 @@ TD {
 							</tbody>
 							<tfoot>
 								<tr>
+									<th>交易編號</th>
 									<th>會員編號</th>
 									<th>消費地點</th>
 									<th>交易日期</th>

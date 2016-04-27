@@ -12,20 +12,25 @@
 	<div id="allpage" style="background-color: #FFDDAA">
 		<c:import url="/admin/TopMeau.jsp" />
 		<form action="/HappyGo_2/reportCancelServer" method="post">
-			<table>
+
+			<table class="t2">
+				<thead>
+
 				<tr>
 					<th><h1>確定要取消交易嗎?</h1></th>
 				</tr>
+				</thead>
+				<tbody>
 				<tr>
-					<td>交易編號：</td>
-					<td><input type="text" name="report_cancel"
+					<td>交易編號：${param.cancel}
+					<input type="hidden" name="report_cancel"
 						value="${param.cancel}" /></td>
 				</tr>
 				<tr>
-					<td><input type="submit" name="reportstore_prodaction"
-						value="確定" /> <input type="submit" name="reportstore_prodaction"
-						value="取消" /></td>
+					<td><input type="submit" name="reportstore_prodaction" value="確定" />
+						<input type="button" value="取消" onclick="location.href='/HappyGo_2/shopping/Count_inquiry.jsp'"></td>
 				</tr>
+				</tbody>
 			</table>
 		</form>
 		<c:import url="/admin/FootBar.jsp" />

@@ -43,7 +43,7 @@
 <div id="allpage" style="background-color: #FFDDAA">
 <c:import url="/admin/TopMeau.jsp" />
 	<form action="MemberPoint.do" method="post">
-		<div>會員點數查詢</div>
+		<h2>會員點數查詢</h2>
 		<input name="memberId" autofocus placeholder="輸入會員帳號" /><input type="submit" value="查詢">
 		<font>${error.errorEmpty}</font>
 		<font>${error.errorIdEmpty}</font>
@@ -54,7 +54,7 @@
 	
 	<c:if test="${not empty point}">	
 	<h4>有 ${LastPoint.pointAdd}點  將在${LastPoint.dDate}過期</h4>
-	<table class="jtable">
+	<table class="jtable" class="t2">
 <!-- 	class="display"可以套用到dataTables的css樣式 -->
 <!-- 	class="display"可以套用到demo_table.css樣式 -->
 		<thead>
