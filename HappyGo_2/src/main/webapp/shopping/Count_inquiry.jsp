@@ -44,7 +44,7 @@ TD {
 		<div>
 			<form action="/HappyGo_2/searchTra" name="form" method="post" >
 				<div style="width: 300px; margin: 0 auto;">
-					<TABLE>
+					<TABLE class="t2">
 						<TR>
 							<TH colspan='2' bgcolor='#d4edec'><label>點數交易查詢</label></TH>
 						</TR>
