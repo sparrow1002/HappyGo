@@ -36,7 +36,7 @@ TD {
 	font-size: 10px;
 }
 </style>
-<title>點數交易查詢</title>
+<title>交易查詢</title>
 </head>
 <body>
 	<div id="allpage" style="background-color: #FFDDAA;">
@@ -46,13 +46,13 @@ TD {
 				<div style="width: 300px; margin: 0 auto;">
 					<TABLE class="t2">
 						<TR>
-							<TH colspan='2' bgcolor='#d4edec'><label>點數交易查詢</label></TH>
+							<TH colspan='2' bgcolor='#d4edec'><label>交易查詢</label></TH>
 						</TR>
-						<TR>
-							<TD bgcolor='#bce6e4' align="right">會員ID</TD>
-							<TD bgcolor='#85d6d2'><input type="text" id="userid"
-								name="report_id" value="${param.report_id}"></TD>
-						</TR>
+<!-- 						<TR> -->
+<!-- 							<TD bgcolor='#bce6e4' align="right">會員ID</TD> -->
+<!-- 							<TD bgcolor='#85d6d2'><input type="text" id="userid" -->
+<%-- 								name="report_id" value="${param.report_id}"></TD> --%>
+<!-- 						</TR> -->
 						<TR>
 							<TD bgcolor='#bce6e4' align="right">特約商店ID</TD>
 							<TD bgcolor='#85d6d2'><input type="text" id="userid"
