@@ -84,7 +84,7 @@ TD {
 						<TR>
 							<TD colspan='2' bgcolor='#d4edec' align="center"><input
 								type="submit" name="report_prodaction" value="查詢" /> <input
-								type="submit" name="report_prodaction" value="產生PDF" /></TD>
+								type="submit" name="report_prodaction" value="列印報表" /></TD>
 						</TR>
 					</TABLE>
 				</div>

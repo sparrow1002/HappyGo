@@ -65,7 +65,7 @@ public class reportServer extends HttpServlet {
 		if (request.getParameter("report_id") == null || request.getParameter("report_id").trim().length() == 0) {
 			id = null;
 		}
-		if ("產生PDF".equals(prodaction)) {
+		if ("列印報表".equals(prodaction)) {
 			if (store == null) {
 				list = re.select(id, day1, day2, store);
 				bp.PDFBuid(list, reportFile.getPath());
