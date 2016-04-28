@@ -98,7 +98,7 @@ public class ContractStoreDAOJdbc implements ContractStoreDAO {
 		return result;	
 	}
 	
-	private static final String SELECT_ALL = "select * from HG_ContractStore where COS_STOREID != 'admin' and COS_STATUS !='2'"; 
+	private static final String SELECT_ALL = "select * from HG_ContractStore where COS_STOREID != 'admin'"; 
 	@Override
 	public List<ContractStoreBean> select() {
 		List<ContractStoreBean> result = null;

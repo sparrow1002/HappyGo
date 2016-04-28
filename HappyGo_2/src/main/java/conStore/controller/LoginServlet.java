@@ -62,12 +62,12 @@ public class LoginServlet extends HttpServlet {
 			String path = request.getContextPath();
 			response.sendRedirect(path+"/conStore/contractStore.jsp");
 		} 
-		else if("2".equals(bean.getCos_status())){//群組主管頁面
+		else if("2".equals(bean.getCos_status())){//待審核
 			HttpSession session = request.getSession();
 			session.setAttribute("storeLoginOK", bean);
 			//System.out.println(session.setAttribute("user", bean));
 			String path = request.getContextPath();
-			response.sendRedirect(path+"/conStore/contractStore.jsp");					
+			response.sendRedirect(path+"/conStore/singlecontractStore.jsp");					
 		}else{//各特店頁面
 			HttpSession session = request.getSession();
 			session.setAttribute("storeLoginOK", bean);

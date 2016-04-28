@@ -28,7 +28,7 @@
 		</c:if>
 		
 			<form action="<c:url value="/conStore/modify.controller"/>"
-				method="get">
+				method="post">
 
 				<!-- 前台特店 -->
 				<c:if test="${empty adminuser}">
@@ -61,16 +61,27 @@
 							</tr>
 							<tr>
 								<td>特店狀態 :</td>
-								<td><c:if test="${row.cos_status=='1'}">
-										<input type="radio" name="status" value="1" checked="checked" >有效
-	 		    						<input type="radio" name="status" value="0" disabled>無效
+								<td>
+									<c:if test="${row.cos_status==2}"><input type="radio" name="status" value="2" checked disabled>申請中</c:if>
+									<c:if test="${row.cos_status==1}"><input type="radio" name="status" value="1" checked disabled>有效</c:if>
+		 		   					<c:if test="${row.cos_status==0}"><input type="radio" name="status" value="0" checked disabled>無效</c:if>
+		 		   				</td>
+								<%-- <td><c:if test="${row.cos_status=='2'}">
+										<input type="radio" name="status" value="2" checked="checked">申請中
+										<input type="radio" name="status" value="1">有效
+		 		   						<input type="radio" name="status" value="0">無效
 									</c:if>
+									<c:if test="${row.cos_status=='1'}">
+										<input type="radio" name="status" value="2">申請中
+										<input type="radio" name="status" value="1" checked="checked">有效
+		 		   						<input type="radio" name="status" value="0">無效
+									</c:if> 
 									<c:if test="${row.cos_status=='0'}">
-										<input type="radio" name="status" value="1" disabled>有效
-			 							<input type="radio" name="status" value="0" checked="checked" >無效		
+										<input type="radio" name="status" value="2">申請中
+										<input type="radio" name="status" value="1">有效
+			 							<input type="radio" name="status" value="0" checked="checked">無效		
 									</c:if>
-								</td>
-
+								</td> --%>
 							</tr>
 							<tr>
 								<td>連絡電話 :</td>
@@ -139,14 +150,26 @@
 							</tr>
 							<tr>
 								<td>特店狀態 :</td>
-								<td><c:if test="${row.cos_status=='1'}">
-										<input type="radio" name="status" value="1" checked="checked">有效
-	 		    <input type="radio" name="status" value="0">無效
-			</c:if> <c:if test="${row.cos_status=='0'}">
+								<td>
+									<input type="radio" name="status" value="1" checked="checked">有效
+		 		   					<input type="radio" name="status" value="0">無效
+		 		   				</td>
+								<%-- <td><c:if test="${row.cos_status=='2'}">
+										<input type="radio" name="status" value="2" checked="checked">申請中
 										<input type="radio" name="status" value="1">有效
-			 	<input type="radio" name="status" value="0" checked="checked">無效		
-			</c:if></td>
-
+		 		   						<input type="radio" name="status" value="0">無效
+									</c:if>
+									<c:if test="${row.cos_status=='1'}">
+										<input type="radio" name="status" value="2">申請中
+										<input type="radio" name="status" value="1" checked="checked">有效
+		 		   						<input type="radio" name="status" value="0">無效
+									</c:if> 
+									<c:if test="${row.cos_status=='0'}">
+										<input type="radio" name="status" value="2">申請中
+										<input type="radio" name="status" value="1">有效
+			 							<input type="radio" name="status" value="0" checked="checked">無效		
+									</c:if>
+								</td> --%>
 							</tr>
 							<tr>
 								<td>連絡電話 :</td>
