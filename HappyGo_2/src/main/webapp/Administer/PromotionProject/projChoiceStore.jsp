@@ -72,7 +72,7 @@ input[type=text] {
 						<th>聯絡人</th>
 						<th>特店生效日</th>
 						<th>特店失效日</th>
-						<th></th>
+						
 					</tr>
 				</thead>
 
@@ -94,10 +94,10 @@ input[type=text] {
 							<td>${row.cos_phone}</td>
 							<td>${row.cos_contact}</td>
 							<td>${row.cos_createtime}</td>
-							<td>${row.cos_deletime}</td>
-							<td><input type="hidden" value="${param.PTP_PROJID}"
+							<td>${row.cos_deletime}<input type="hidden" value="${param.PTP_PROJID}"
 								name="PTP_PROJID">
 							</inpute></td>
+							
 						</tr>
 					</c:forEach>
 				</tbody>
