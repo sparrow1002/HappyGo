@@ -17,6 +17,7 @@ import javax.ws.rs.QueryParam;
 
 import org.hibernate.type.SortedMapType;
 
+import admin.model.DataProfileDAOService;
 import shopping.model.ShoppingBean;
 import shopping.model.ShoppingDAO;
 import shopping.model.dao.ShoppingDAO_JDBC;
@@ -43,6 +44,7 @@ public class CardPointService {
 	private static HG_PromotionBonus_Service pbService = new HG_PromotionBonus_Service();
 	private static HG_PromotionMethod_Service pmService = new HG_PromotionMethod_Service();
 	private static CustomerService custService = new CustomerService();
+	private static DataProfileDAOService dataService = new DataProfileDAOService();
 	
 	private DayDevice dayDevice = new DayDevice();
 	private String today = dayDevice.getToday();//今天yyyymmdd
@@ -53,7 +55,7 @@ public class CardPointService {
 	private String updateUser = "lib0405";//目前寫死 還沒寫
 	private int cancelLifeDay = 30;//dDate=today+lifeDay 目前寫死 should select from HG_DataProfile	
 	private int lifeDay = 365;
-	private int exchangePoint = 10;//目前寫死 還沒寫 HG_DataProfile 點數換現金比例
+	//private int exchangePoint = 10;//目前寫死 還沒寫 HG_DataProfile 點數換現金比例
 	
 	public static void main(String[] args) {
 		CardPointService service = new CardPointService();
@@ -155,6 +157,8 @@ public class CardPointService {
 	@Path("/{point}")
 	@Produces("text/plain")
 	public int calculateDiscount(@PathParam("point") int point){
+		int exchangePoint = Integer.parseInt(dataService.select("point", "exchange"));
+		
 		int discount = point/exchangePoint;
 		return discount;
 	}
