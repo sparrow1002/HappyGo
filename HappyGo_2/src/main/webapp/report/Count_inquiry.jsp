@@ -102,7 +102,7 @@ TD {
 										<th>折抵金額</th>
 										<th>消費給點</th>
 										<th>消耗點數</th>
-										<th>交易狀態</th>
+<!-- 										<th>交易狀態</th> -->
 									</tr>
 								</thead>
 								<tbody>
@@ -116,7 +116,7 @@ TD {
 											<td>${row.SOP_DISCOUNT}</td>
 											<td>${row.CPT_POINTADD}</td>
 											<td>${row.CPT_POINTDRE}</td>
-											<td>${row.transation}</td>
+<%-- 											<td>${row.transation}</td> --%>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -130,7 +130,7 @@ TD {
 										<th>折抵金額</th>
 										<th>消費給點</th>
 										<th>消耗點數</th>
-										<th>交易狀態</th>
+<!-- 										<th>交易狀態</th> -->
 									</tr>
 								</tfoot>
 							</table>
