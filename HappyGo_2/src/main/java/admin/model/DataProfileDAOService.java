@@ -102,4 +102,10 @@ public class DataProfileDAOService {
 		result = dataProfileDAO.select("ROLEID");
 		return result;
 	}
+	//2016/4 28 dayu add new method
+	public String select(String psDAP_GROUP, String psDAP_ID) {
+		String result = "";		
+		result = dataProfileDAO.selectitem(psDAP_GROUP,psDAP_ID);
+		return result;
+	}
 }
