@@ -8,6 +8,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<img id="sky" src="/HappyGo_2/images/bg_00.png" />
+	<img id="ground" src="/HappyGo_2/images/bg_01.png">
+	<img id="cloud01" src="/HappyGo_2/images/cloud_01.png">
+	<img id="cloud02" src="/HappyGo_2/images/cloud_02.png">
+	<img id="cloud03" src="/HappyGo_2/images/cloud_03.png">
+	<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
 	<div id="allpage">
 		<c:import url="/admin/TopMeau.jsp" />
 		<div class="demo">
@@ -20,32 +26,34 @@
 				<tbody>
 					<tr>
 						<td colspan="2"><c:if test="${not empty select}">
-								<table id="userslist" class="t2">
-									<thead>
-										<tr>
-											<th>權限代碼</th>
-											<th>權限說明</th>
-											<th>權限對應功能</th>
-											<th>權限更新日</th>
-											<th>權限更新者</th>
-											<th></th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="row" items="${select}" varStatus="varStatus">
+								<div class="tableEff">
+									<table id="userslist">
+										<thead>
 											<tr>
-												<td><lable id="RIG_RIGHTID_${varStatus.count}">${row.RIG_RIGHTID}</lable></td>
-												<td><lable id="RIG_DESC_${varStatus.count}">${row.RIG_DESC}</lable></td>
-												<td><lable id="RIG_FUNTION_${varStatus.count}">${row.RIG_FUNTION}</lable></td>
-												<td><lable id="RIG_UPDATETIME_${varStatus.count}">${row.RIG_UPDATETIME}</lable></td>
-												<td><lable id="RIG_UPDATEUSER_${varStatus.count}">${row.RIG_UPDATEUSER}</lable></td>
-												<td><input type="button"
-													onclick="showfrom('update','${varStatus.count}');"
-													value="修改"></td>
+												<th>權限代碼</th>
+												<th>權限說明</th>
+												<th>權限對應功能</th>
+												<th>權限更新日</th>
+												<th>權限更新者</th>
+												<th></th>
 											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+										</thead>
+										<tbody>
+											<c:forEach var="row" items="${select}" varStatus="varStatus">
+												<tr>
+													<td><lable id="RIG_RIGHTID_${varStatus.count}">${row.RIG_RIGHTID}</lable></td>
+													<td><lable id="RIG_DESC_${varStatus.count}">${row.RIG_DESC}</lable></td>
+													<td><lable id="RIG_FUNTION_${varStatus.count}">${row.RIG_FUNTION}</lable></td>
+													<td><lable id="RIG_UPDATETIME_${varStatus.count}">${row.RIG_UPDATETIME}</lable></td>
+													<td><lable id="RIG_UPDATEUSER_${varStatus.count}">${row.RIG_UPDATEUSER}</lable></td>
+													<td><input type="button"
+														onclick="showfrom('update','${varStatus.count}');"
+														value="修改"></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
 							</c:if></td>
 					</tr>
 					<tr>

@@ -52,6 +52,9 @@ public class PromotionProject_Servlet extends HttpServlet {
 				String PTP_DELDATE = request.getParameter("PTP_DELDATE");
 				String PTP_FOREVER = request.getParameter("PTP_FOREVER");
 				String str_PTP_FIXPOINT = request.getParameter("PTP_FIXPOINT");
+				
+				System.out.println("PTP_PROJID"+PTP_PROJID+"end");
+				
 		//HG_PromotionBonus的欄位資料，由於可能會有1~多筆，必須用while迴圈+陣列處理
 				int j=0;
 				while(request.getParameter("PTB_VALUE"+j)!=null){
@@ -162,10 +165,10 @@ public class PromotionProject_Servlet extends HttpServlet {
 				//目前判斷無效T.T
 				System.out.println("time check start");
 				System.out.println(StartDate);
-				if(StartDate=="" || EndDate==""){
+				if(StartDate.trim().length()==0||StartDate=="" || EndDate==""||EndDate.trim().length()==0){
 					System.out.println("time catch");
-					error.put("PTP_CREATEDATE", "請選擇活動時間");
-					error.put("PTP_DELDATE", "請選擇活動時間");
+					error.put("pTP_CREATEDATE", "請選擇活動時間");
+					error.put("pTP_DELDATE", "請選擇活動時間");
 				}
 				System.out.println("time check end");
 					
@@ -183,9 +186,9 @@ public class PromotionProject_Servlet extends HttpServlet {
 				}
 				
 				if("Insert".equals(promotionProject)) {
-					if(StartDate==null || EndDate==null) {
-						error.put("PTP_CREATEDATE", "請選擇活動時間以便於執行"+promotionProject);
-						error.put("PTP_DELDATE", "請選擇活動時間以便於執行"+promotionProject);
+					if(StartDate=="" || EndDate=="") {
+						error.put("pTP_CREATEDATE", "請選擇活動時間以便於執行"+promotionProject);
+						error.put("pTP_DELDATE", "請選擇活動時間以便於執行"+promotionProject);
 					}
 				}
 				
@@ -193,6 +196,7 @@ public class PromotionProject_Servlet extends HttpServlet {
 					if(error.get("pTP_PROJID")!=null){
 						request.getRequestDispatcher(
 								"/Administer/PromotionProject/insertProj.jsp").forward(request, response);
+					return;
 					}else{
 						request.getRequestDispatcher(
 								"/Administer/PromotionProject/insertProj.jsp").forward(request, response);

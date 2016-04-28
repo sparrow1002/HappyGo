@@ -15,29 +15,47 @@
 	type="text/javascript" language="javascript"></script>
 <script type="text/javascript" language="javascript">
 	jQuery(document).ready(function() {
-		jQuery("#report_table").dataTable(
+		jQuery("#report_table").dataTable({
+			"oLanguage" : {
+				"info" : false,
+				"lengthChange" : false,
+				"searching" : false,
+				"stateSave" : true,
+				"oPaginate" : {
+					"sFirst" : "首頁",
+					"sPrevious" : "上頁",
+					"sNext" : "下頁",
+					"sLast" : "尾頁"
+				}
+			}
+		});
 
-		);
-
-	});
+	});	
 </script>
 <style type="text/css">
 TD {
 	text-align: center;
 }
-.jtable TH{
+
+.tableEff TH {
 	font-size: 10px;
 }
 </style>
 <title>點數交易查詢</title>
 </head>
 <body>
+	<img id="sky" src="/HappyGo_2/images/bg_00.png" />
+	<img id="ground" src="/HappyGo_2/images/bg_01.png">
+	<img id="cloud01" src="/HappyGo_2/images/cloud_01.png">
+	<img id="cloud02" src="/HappyGo_2/images/cloud_02.png">
+	<img id="cloud03" src="/HappyGo_2/images/cloud_03.png">
+	<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
 	<div id="allpage" style="background-color: #FFDDAA;">
 		<c:import url="/admin/TopMeau.jsp" />
-		<div>
-			<form action="/HappyGo_2/reportServer" name="form" method="post" >
+		<div class="c1">
+			<form action="/HappyGo_2/reportServer" name="form" method="post">
 				<div style="width: 300px; margin: 0 auto;">
-					<TABLE>
+					<TABLE class="t2">
 						<TR>
 							<TH colspan='2' bgcolor='#d4edec'><label>點數交易查詢</label></TH>
 						</TR>
@@ -54,65 +72,116 @@ TD {
 						<TR>
 							<TD bgcolor='#bce6e4' align="right">起始日期</TD>
 							<TD for="meeting"><input id="meeting" type="date"
-								name="report_day1" value="${param.report_day1}" style="width: 97%;"></TD>
+								name="report_day1" value="${param.report_day1}"
+								style="width: 97%;"></TD>
 						</TR>
 						<TR>
 							<TD bgcolor='#bce6e4' align="right">結束日期</TD>
 							<TD for="meeting"><input id="meeting" type="date"
-								name="report_day2" value="${param.report_day2}" style="width: 97%;"></TD>
+								name="report_day2" value="${param.report_day2}"
+								style="width: 97%;"></TD>
 						</TR>
 						<TR>
 							<TD colspan='2' bgcolor='#d4edec' align="center"><input
 								type="submit" name="report_prodaction" value="查詢" /> <input
-								type="submit" name="report_prodaction" value="產生PDF" /></TD>
+								type="submit" name="report_prodaction" value="列印報表" /></TD>
 						</TR>
 					</TABLE>
 				</div>
 				<div style="margin: 0 auto;">
 					<c:if test="${not empty report_select}">
-						<table id="report_table" class="jtable">
-							<thead>
-								<tr>
-									<th>交易編號</th>
-									<th>會員編號</th>
-									<th>消費地點</th>
-									<th>交易日期</th>
-									<th>消費金額</th>
-									<th>折抵金額</th>
-									<th>消費給點</th>
-									<th>消耗點數</th>
-									<th>交易狀態</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="row" items="${report_select}">
+						<div class="tableEff">
+							<table id="report_table">
+								<thead>
 									<tr>
-										<td>${row.SOP_TRANID}</td>
-										<td>${row.SOP_MEMBERID}</td>
-										<td>${row.COS_NAME}</td>
-										<td>${row.CPT_TRANDATE}</td>
-										<td>${row.SOP_TRANAMT}</td>
-										<td>${row.SOP_DISCOUNT}</td>
-										<td>${row.CPT_POINTADD}</td>
-										<td>${row.CPT_POINTDRE}</td>
-										<td>${row.transation}</td>
+										<th>交易編號</th>
+										<th>會員編號</th>
+										<th>消費地點</th>
+										<th>交易日期</th>
+										<th>消費金額</th>
+										<th>折抵金額</th>
+										<th>消費給點</th>
+										<th>消耗點數</th>
+										<th>交易狀態</th>
 									</tr>
-								</c:forEach>
-							</tbody>
-							<tfoot>
-								<tr>
-									<th>交易編號</th>
-									<th>會員編號</th>
-									<th>消費地點</th>
-									<th>交易日期</th>
-									<th>消費金額</th>
-									<th>折抵金額</th>
-									<th>消費給點</th>
-									<th>消耗點數</th>
-									<th>交易狀態</th>
-								</tr>
-							</tfoot>
-						</table>
+								</thead>
+								<tbody>
+									<c:forEach var="row" items="${report_select}">
+										<tr>
+											<td>${row.SOP_TRANID}</td>
+											<td>${row.SOP_MEMBERID}</td>
+											<td>${row.COS_NAME}</td>
+											<td>${row.CPT_TRANDATE}</td>
+											<td>${row.SOP_TRANAMT}</td>
+											<td>${row.SOP_DISCOUNT}</td>
+											<td>${row.CPT_POINTADD}</td>
+											<td>${row.CPT_POINTDRE}</td>
+											<td>${row.transation}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>交易編號</th>
+										<th>會員編號</th>
+										<th>消費地點</th>
+										<th>交易日期</th>
+										<th>消費金額</th>
+										<th>折抵金額</th>
+										<th>消費給點</th>
+										<th>消耗點數</th>
+										<th>交易狀態</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</c:if>
+				</div>
+				<div style="margin: 0 auto;">
+					<c:if test="${not empty report_select_store}">
+					<h1>總給點數為：${total01}		總收點數為：${total02}</h1>
+						<div class="tableEff">
+							<table id="report_table">
+								<thead>
+									<tr>
+										<th>交易編號</th>
+										<th>會員編號</th>
+										<th>交易日期</th>
+										<th>消費金額</th>
+										<th>折抵金額</th>
+										<th>消費給點</th>
+										<th>消耗點數</th>
+										<th>促銷專案</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="row" items="${report_select_store}">
+										<tr>
+											<td>${row.SOP_TRANID}</td>
+											<td>${row.SOP_MEMBERID}</td>
+											<td>${row.CPT_TRANDATE}</td>
+											<td>${row.SOP_TRANAMT}</td>
+											<td>${row.SOP_DISCOUNT}</td>
+											<td>${row.CPT_POINTADD}</td>
+											<td>${row.CPT_POINTDRE}</td>
+											<td>${row.SOP_PROJID}</td>	
+										</tr>
+									</c:forEach>
+								</tbody>
+								<tfoot>
+									<tr>
+										<th>交易編號</th>
+										<th>會員編號</th>
+										<th>交易日期</th>
+										<th>消費金額</th>
+										<th>折抵金額</th>
+										<th>消費給點</th>
+										<th>消耗點數</th>
+										<th>促銷專案</th>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
 					</c:if>
 				</div>
 			</form>

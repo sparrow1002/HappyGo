@@ -5,9 +5,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/main.css">
 <title>Insert title here</title>
 </head>
 <body>	
+<img id="sky" src="/HappyGo_2/images/bg_00.png" />
+<img id="ground" src="/HappyGo_2/images/bg_01.png">
+<img id="cloud01" src="/HappyGo_2/images/cloud_01.png">
+<img id="cloud02" src="/HappyGo_2/images/cloud_02.png">
+<img id="cloud03" src="/HappyGo_2/images/cloud_03.png">
+<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
 	<div id="allpage">
 		<c:import url="/common/TopMeau.jsp" />
 		<div id="content" class="demo" style="width: 946px">
@@ -28,7 +35,7 @@
 
 					<tr>
 						<td align="right">特店密碼 :</td>
-						<td><input type="text" name="pwd" value=""></td>
+						<td><input type="password" name="pwd" value=""></td>
 					</tr>
 					<tr>
 						<td align="right">統一編號 :</td>
@@ -54,14 +61,6 @@
 						<td align="right">特店失效日 :</td>
 						<td><input type="text" id="datepicker" name="deletime"
 							value=""></td>
-					</tr>
-					<tr>
-						<td align="right">異動日期 :</td>
-						<td><input type="text" name="updatetime" value=""></td>
-					</tr>
-					<tr>
-						<td align="right">異動者 :</td>
-						<td><input type="text" name="Updateuser" value=""></td>
 					</tr>
 					<tr>
 						<td align="center" colspan="2"><input type="submit" name="prodaction"

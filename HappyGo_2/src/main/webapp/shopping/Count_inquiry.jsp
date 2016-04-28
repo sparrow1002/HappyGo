@@ -15,9 +15,16 @@
 	type="text/javascript" language="javascript"></script>
 <script type="text/javascript" language="javascript">
 	jQuery(document).ready(function() {
-		jQuery("#report_table").dataTable(
-
-		);
+		jQuery("#report_table").dataTable({
+				"oLanguage" : {
+					"oPaginate" : {
+						"sFirst" : "首頁",
+						"sPrevious" : "上頁",
+						"sNext" : "下頁",
+						"sLast" : "尾頁"
+					}
+				}
+		});
 
 	});
 </script>
@@ -29,7 +36,7 @@ TD {
 	font-size: 10px;
 }
 </style>
-<title>點數交易查詢</title>
+<title>交易查詢</title>
 </head>
 <body>
 	<div id="allpage" style="background-color: #FFDDAA;">
@@ -37,15 +44,15 @@ TD {
 		<div>
 			<form action="/HappyGo_2/searchTra" name="form" method="post" >
 				<div style="width: 300px; margin: 0 auto;">
-					<TABLE>
+					<TABLE class="t2">
 						<TR>
-							<TH colspan='2' bgcolor='#d4edec'><label>點數交易查詢</label></TH>
+							<TH colspan='2' bgcolor='#d4edec'><label>交易查詢</label></TH>
 						</TR>
-						<TR>
-							<TD bgcolor='#bce6e4' align="right">會員ID</TD>
-							<TD bgcolor='#85d6d2'><input type="text" id="userid"
-								name="report_id" value="${param.report_id}"></TD>
-						</TR>
+<!-- 						<TR> -->
+<!-- 							<TD bgcolor='#bce6e4' align="right">會員ID</TD> -->
+<!-- 							<TD bgcolor='#85d6d2'><input type="text" id="userid" -->
+<%-- 								name="report_id" value="${param.report_id}"></TD> --%>
+<!-- 						</TR> -->
 						<TR>
 							<TD bgcolor='#bce6e4' align="right">特約商店ID</TD>
 							<TD bgcolor='#85d6d2'><input type="text" id="userid"
@@ -69,9 +76,11 @@ TD {
 				</div>
 				<div style="margin: 0 auto;">
 					<c:if test="${not empty report_select}">
-						<table id="report_table" class="jtable">
+					<div class="tableEff">
+						<table id="report_table">
 							<thead>
 								<tr>
+									<th>交易編號</th>
 									<th>會員編號</th>
 									<th>消費地點</th>
 									<th>交易日期</th>
@@ -89,6 +98,7 @@ TD {
 										<c:param name="cancel" value="${row.SOP_TRANID}" />
 									</c:url>
 									<tr>
+										<td>${row.SOP_TRANID}</td>
 										<td>${row.SOP_MEMBERID}</td>
 										<td>${row.COS_NAME}</td>
 										<td>${row.CPT_TRANDATE}</td>
@@ -106,6 +116,7 @@ TD {
 							</tbody>
 							<tfoot>
 								<tr>
+									<th>交易編號</th>
 									<th>會員編號</th>
 									<th>消費地點</th>
 									<th>交易日期</th>
@@ -118,6 +129,7 @@ TD {
 								</tr>
 							</tfoot>
 						</table>
+					</div>
 					</c:if>
 				</div>
 			</form>

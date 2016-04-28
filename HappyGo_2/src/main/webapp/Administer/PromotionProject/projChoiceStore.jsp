@@ -27,6 +27,12 @@ input[type=text] {
 }
 </style>
 <body>
+	<img id="sky" src="/HappyGo_2/images/bg_00.png" />
+	<img id="ground" src="/HappyGo_2/images/bg_01.png">
+	<img id="cloud01" src="/HappyGo_2/images/cloud_01.png">
+	<img id="cloud02" src="/HappyGo_2/images/cloud_02.png">
+	<img id="cloud03" src="/HappyGo_2/images/cloud_03.png">
+	<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
 	<div id="allpage" style="background-color: #FFDDAA">
 		<c:import url="/admin/TopMeau.jsp" />
 		<h1>第二步：請設定促銷店家</h1>
@@ -50,7 +56,8 @@ input[type=text] {
 		<form
 			action="<c:url value="/PromotionProject/PromotionStore.controller" />"
 			method="get">
-			<table id="myTable" class="t2" >
+			<div class="tableEff">
+			<table id="myTable">
 				<thead>
 					<tr>
 						<th></th>
@@ -65,7 +72,7 @@ input[type=text] {
 						<th>聯絡人</th>
 						<th>特店生效日</th>
 						<th>特店失效日</th>
-						<th></th>
+						
 					</tr>
 				</thead>
 
@@ -87,10 +94,10 @@ input[type=text] {
 							<td>${row.cos_phone}</td>
 							<td>${row.cos_contact}</td>
 							<td>${row.cos_createtime}</td>
-							<td>${row.cos_deletime}</td>
-							<td><input type="hidden" value="${param.PTP_PROJID}"
+							<td>${row.cos_deletime}<input type="hidden" value="${param.PTP_PROJID}"
 								name="PTP_PROJID">
 							</inpute></td>
+							
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -99,6 +106,7 @@ input[type=text] {
 						value="Insert"></td>
 				</tr>
 			</table>
+			</div>
 		</form>
 		<h2>${error.noStore}</h2>
 		<h2>${error.action}</h2>

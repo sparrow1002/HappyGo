@@ -1,5 +1,6 @@
 package report.model.dao;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -110,11 +111,11 @@ public class reportDAOjdbc {
 		return result;
 	}
 
-	private static final String SELECT_STORE = "select SOP_MEMBERID,COS_NAME,CPT_TRANDATE,SOP_TRANAMT,SOP_DISCOUNT,CPT_POINTADD,CPT_POINTDRE,SOP_PROJID"
+	private static final String SELECT_STORE = "select SOP_MEMBERID,COS_NAME,CPT_TRANDATE,SOP_TRANAMT,SOP_DISCOUNT,CPT_POINTADD,CPT_POINTDRE,SOP_PROJID,SOP_TRANID"
 			+ " from HG_CardPoint" + " join HG_Shopping on HG_CardPoint.CPT_TRANID = HG_Shopping.SOP_TRANID"
 			+ " join HG_ContractStore on HG_Shopping.SOP_STOREID = HG_ContractStore.COS_STOREID"
 			+ " where SOP_STOREID=? AND CPT_TRANDATE>=? AND CPT_TRANDATE<=?";
-	private static final String SELECT_STORE_ID = "select SOP_MEMBERID,COS_NAME,CPT_TRANDATE,SOP_TRANAMT,SOP_DISCOUNT,CPT_POINTADD,CPT_POINTDRE,SOP_PROJID"
+	private static final String SELECT_STORE_ID = "select SOP_MEMBERID,COS_NAME,CPT_TRANDATE,SOP_TRANAMT,SOP_DISCOUNT,CPT_POINTADD,CPT_POINTDRE,SOP_PROJID,SOP_TRANID"
 			+ " from HG_CardPoint" + " join HG_Shopping on HG_CardPoint.CPT_TRANID = HG_Shopping.SOP_TRANID"
 			+ " join HG_ContractStore on HG_Shopping.SOP_STOREID = HG_ContractStore.COS_STOREID"
 			+ " where SOP_STOREID=? AND CPT_TRANDATE>=? AND CPT_TRANDATE<=? AND SOP_MEMBERID=?";
@@ -143,13 +144,13 @@ public class reportDAOjdbc {
 			while (rs.next()) {
 				Map<String, Object> data = new HashMap<String, Object>();
 				data.put("SOP_MEMBERID", rs.getString("SOP_MEMBERID"));
-				data.put("COS_NAME", rs.getString("COS_NAME"));
 				data.put("CPT_TRANDATE", rs.getString("CPT_TRANDATE"));
 				data.put("SOP_TRANAMT", rs.getBigDecimal("SOP_TRANAMT"));
 				data.put("SOP_DISCOUNT", rs.getBigDecimal("SOP_DISCOUNT"));
 				data.put("CPT_POINTADD", rs.getBigDecimal("CPT_POINTADD"));
 				data.put("CPT_POINTDRE", rs.getBigDecimal("CPT_POINTDRE"));
 				data.put("SOP_PROJID", rs.getInt("SOP_PROJID"));
+				data.put("SOP_TRANID", rs.getString("SOP_TRANID"));
 				result.add(data);
 			}
 		} catch (SQLException e) {
@@ -281,13 +282,13 @@ public class reportDAOjdbc {
 			while (rs.next()) {
 				bean = new reportDAOBean_store();
 				bean.setSOP_MEMBERID(rs.getString("SOP_MEMBERID"));
-				bean.setCOS_NAME(rs.getString("COS_NAME"));
 				bean.setCPT_TRANDATE(rs.getString("CPT_TRANDATE"));
 				bean.setSOP_TRANAMT(rs.getBigDecimal("SOP_TRANAMT"));
 				bean.setSOP_DISCOUNT(rs.getBigDecimal("SOP_DISCOUNT"));
 				bean.setCPT_POINTADD(rs.getBigDecimal("CPT_POINTADD"));
 				bean.setCPT_POINTDRE(rs.getBigDecimal("CPT_POINTDRE"));
 				bean.setSOP_PROJID(rs.getString("SOP_PROJID"));
+				bean.setSOP_TRANID(rs.getString("SOP_TRANID"));
 				result.add(bean);
 			}
 		} catch (SQLException e) {
@@ -315,5 +316,21 @@ public class reportDAOjdbc {
 		}
 		return result;
 
+	}
+	public BigDecimal total01(List<reportDAOBean_store> a){
+		BigDecimal result = BigDecimal.ZERO;
+		
+		for(int i=0;i<a.size();i++){
+			result =result.add(a.get(i).getCPT_POINTADD()); 
+		}
+		return result;
+	}
+	public BigDecimal total02(List<reportDAOBean_store> a){
+		BigDecimal result = BigDecimal.ZERO;
+		
+		for(int i=0;i<a.size();i++){
+			result =result.add(a.get(i).getCPT_POINTDRE()); 
+		}
+		return result;
 	}
 }

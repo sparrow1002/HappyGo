@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/main.css">
 <title>特約店</title>
 </head>
 <script src="../jquery/jquery-2.1.4.min.js"></script>
@@ -14,8 +15,31 @@
 	href="../jquery/jquery.dataTables.min.css" />
 
 <script>
+var opt = {
+		"info" : false,
+		"lengthChange" : true,
+		"searching" : true,
+		"stateSave" : true,
+		"paging": true,
+		"aLengthMenu": [[5, 10, 20, -1], [5, 10, 20, "All"]],
+		"oLanguage" : {
+			"sProcessing" : "處理中...",
+			"sLengthMenu" : "顯示 _MENU_ 項結果",
+			"sZeroRecords" : "沒有匹配結果",
+			"sInfo" : "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+			"sInfoEmpty" : "顯示第 0 至 0 項結果，共 0 項",
+			"sInfoFiltered" : "(從 _MAX_ 項結果過濾)",
+			"sSearch" : "搜索:",
+			"oPaginate" : {
+				"sFirst" : "首頁",
+				"sPrevious" : "上頁",
+				"sNext" : "下頁",
+				"sLast" : "尾頁"
+			}
+		}
+	};
 	$(document).ready(function() {
-		$('#myTable').DataTable();
+		$('#myTable').DataTable(opt);
 	});
 </script>
 <style>
@@ -32,13 +56,18 @@ span {
 		ContractStoreService contractStoreService = new ContractStoreService();
 		List<ContractStoreBean> result = contractStoreService.select();
 	%>
+	<img id="sky" src="/HappyGo_2/images/bg_00.png" />
+<img id="ground" src="/HappyGo_2/images/bg_01.png">
+<img id="cloud01" src="/HappyGo_2/images/cloud_01.png">
+<img id="cloud02" src="/HappyGo_2/images/cloud_02.png">
+<img id="cloud03" src="/HappyGo_2/images/cloud_03.png">
+<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
 	<div id="allpage" style="background-color: #FFDDAA">
 		<c:import url="/admin/TopMeau.jsp" />
 		<form action="<c:url value="/conStore/contractStore.controller"/>"
 			method="get">
-			<span><a>${cb} </a><input type="submit" name="prodaction"
-				value="登出" /></span>
-			<table id="myTable" class="t2" style="background-color: #F0E68C;">
+			<div class="tableEff">
+			<table id="myTable"  style="background-color: #F0E68C;">
 				<thead>
 					<tr>
 						<th>特店代號</th>
@@ -72,6 +101,7 @@ span {
 					</c:forEach>
 				</tbody>
 			</table>
+			</div>
 		</form>
 		<c:import url="/admin/FootBar.jsp" />
 	</div>

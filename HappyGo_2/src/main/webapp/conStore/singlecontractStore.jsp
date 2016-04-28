@@ -5,16 +5,21 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/main.css">
 <title>特約店</title>
 </head>
-
-
 <style>
 span {
-	float: right;
-}
+	float: left;
+	}
 </style>
 <body>
+<img id="sky" src="/HappyGo_2/images/bg_00.png" />
+<img id="ground" src="/HappyGo_2/images/bg_01.png">
+<img id="cloud01" src="/HappyGo_2/images/cloud_01.png">
+<img id="cloud02" src="/HappyGo_2/images/cloud_02.png">
+<img id="cloud03" src="/HappyGo_2/images/cloud_03.png">
+<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
 	<div id="allpage" style="background-color: #FFDDAA">
 		<c:import url="/common/TopMeau.jsp" />
 		<%@ page import="conStore.model.*"%>
@@ -30,13 +35,12 @@ span {
 		<div class="demo" style="width: 946px">
 			<form action="<c:url value="/conStore/contractStore.controller"/>"
 				method="get">
-				<span><a>${storeLoginOK.cos_name} </a><input type="submit"
-					name="prodaction" value="登出" /></span>
-				<table id="myTable" class="t2">
+				<span><a>特店名稱:${storeLoginOK.cos_name} </a></span>
+				<div class="tableEff">
+				<table id="myTable">
 					<thead>
 						<tr>
-							<th>特店代號</th>
-							<th>特店名稱</th>
+							<th>特店代號</th>							
 							<th>統一編號</th>
 							<th>特店地址</th>
 							<th>特店狀態</th>
@@ -52,7 +56,6 @@ span {
 						<c:forEach var="row" items="<%=result%>">
 							<tr>
 								<td>${row.cos_storeid}</td>
-								<td>${row.cos_name}</td>
 								<td>${row.cos_taxcode}</td>
 								<td>${row.cos_address}</td>
 								<td><c:if test="${row.cos_status==1}">有效</c:if> <c:if
@@ -68,16 +71,19 @@ span {
 						</c:forEach>
 					</tbody>
 				</table>
+				</div>
 			</form>
 		</div>
 		<c:import url="/common/FootBar.jsp" />
 	</div>
 	<script>
 		var opt = {
-
+			"info" : false,
+			"lengthChange" : false,
+			"searching" : false,
 			"stateSave" : true,
+			"paging": false,
 			"oLanguage" : {
-
 				"sProcessing" : "處理中...",
 				"sLengthMenu" : "顯示 _MENU_ 項結果",
 				"sZeroRecords" : "沒有匹配結果",

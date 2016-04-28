@@ -42,6 +42,8 @@ public class AdminUserDAOhibernate  implements AdminUserDAO{
 	}
 	@Override
 	public List<AdminUserDAObean> select() {
+		this.getSession().getTransaction().commit();
+		this.getSession().beginTransaction();
 		Query query = this.getSession().createQuery("from AdminUserDAObean");
 		return (List<AdminUserDAObean>) query.list();
 	}
