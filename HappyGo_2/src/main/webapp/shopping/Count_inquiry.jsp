@@ -45,7 +45,7 @@ TD {
 	<img id="cloud02" src="/HappyGo_2/images/cloud_02.png">
 	<img id="cloud03" src="/HappyGo_2/images/cloud_03.png">
 	<img id="cloud04" src="/HappyGo_2/images/cloud_04.png">
-	<div id="allpage" style="background-color: #FFDDAA">
+	<div id="allpage" style="background-color: #FFDDAA;">
 		<c:import url="/admin/TopMeau.jsp" />
 		<div>
 			<form action="/HappyGo_2/searchTra" name="form" method="post" >

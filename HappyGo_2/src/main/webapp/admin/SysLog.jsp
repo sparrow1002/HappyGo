@@ -17,7 +17,7 @@
 <div id="allpage">
 		<c:import url="/admin/TopMeau.jsp" />
 		<div class="demo">
-			<table style="background-color: #F0E68C;">
+			<table style="background-color: #F0E68C;width:100%;">
 				<thead>
 					<tr>
 						<th colspan="2">後台系統紀錄檢視</th>
@@ -37,6 +37,7 @@
 				<tbody>
 					<tr>
 						<td colspan="2"><c:if test="${not empty select}">
+						<div class="tableEff">
 								<table id="userslist" class="t2">
 									<thead>
 										<tr>
@@ -61,6 +62,7 @@
 										</c:forEach>
 									</tbody>
 								</table>
+								</div>
 							</c:if></td>
 					</tr>
 					<tr>
