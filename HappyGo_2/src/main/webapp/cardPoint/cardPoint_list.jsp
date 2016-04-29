@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" type="text/css" href="/HappyGo_2/css/main.css">
 <style type="text/css">
-@import "../jquery/jquery-ui.css";
+//@import "../jquery/jquery-ui.css";
 /*  	@import"../jquery/dataTable/columnFilter/demo_table.css";  */
 /*
 		Lin Juang-Bao:
@@ -17,16 +17,16 @@
 </style>
 <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.css"/> -->
 
-<script type="text/javascript"
-	src="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.js"></script>
+<!-- <script type="text/javascript" -->
+<!-- 	src="https://cdn.datatables.net/t/dt/jq-2.2.0,dt-1.10.11/datatables.min.js"></script> -->
 
-<script src="../jquery/jquery-ui.js" type="text/javascript"></script>
-<script
-	src="../jquery/dataTable/columnFilter/jquery.dataTables.columnFilter.js"
-	type="text/javascript" language="javascript"></script>
+<!-- <script src="../jquery/jquery-ui.js" type="text/javascript"></script> -->
+<!-- <script -->
+<!-- 	src="../jquery/dataTable/columnFilter/jquery.dataTables.columnFilter.js" -->
+<!-- 	type="text/javascript" language="javascript"></script> -->
 
 <script type="text/javascript" language="javascript">
-		jQuery(document).ready(function(){
+	/*	jQuery(document).ready(function(){
 
 	// 		//$.datepicker.regional[""].dateFormat = 'yy/mm/dd';
 	//         //$.datepicker.setDefaults($.datepicker.regional[""]);
@@ -46,7 +46,7 @@
 				}
 			});
 
-		});
+		});*/
 </script>
 
 <title>紅利點數記錄</title>
@@ -68,13 +68,13 @@
 				type="submit" value="查詢"> <font>${error.errorEmpty}</font> <font>${error.errorIdEmpty}</font>
 		</form>
 		<c:if test="${not empty totalPoint}">
-			<h1>${memberId}尚有:${totalPoint}點</h1>
+			<h1>${memberId}尚有:<span color="blue">${totalPoint}</span>點</h1>
 		</c:if>
 
 		<c:if test="${not empty point}">
 			<div></div>
 			<div></div>
-			<h3>有 ${LastPoint.pointAdd}點 將在${LastPoint.dDate}過期</h3>
+			<h3>有 <span color="blue">${LastPoint.pointAdd}</span>點  將在<span color="blue">${LastPoint.dDate}</span>過期</h3>
 			<div class="tableEff">
 				<table id="ctable">
 					<!-- 	class="display"可以套用到dataTables的css樣式 -->

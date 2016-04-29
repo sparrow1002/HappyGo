@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import admin.model.DataProfileDAO;
@@ -23,7 +26,12 @@ public class DataProfileDAOjdbc implements DataProfileDAO {
 	private DataSource datasource;
 
 	public DataProfileDAOjdbc() {
-
+		try {
+			Context ctx = new InitialContext();
+			datasource = (DataSource) ctx.lookup("java:comp/env/jdbc/websource");
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static void main(String[] args) {

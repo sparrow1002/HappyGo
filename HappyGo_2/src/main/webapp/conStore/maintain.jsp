@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/main.css">
-<title>特約店</title>
+<title>特店維護</title>
 </head>
 <script src="../jquery/jquery-2.1.4.min.js"></script>
 <script src="../jquery/jquery-ui.js"></script>
@@ -81,31 +81,32 @@ span {
 						<th>特店失效日</th>
 						<th></th>
 					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="row" items="<%=result%>">
-						<c:if test="${row.cos_status==2}">
-						<tr>
-							<td>${row.cos_storeid}</td>
-							<td>${row.cos_name}</td>
-							<td>${row.cos_taxcode}</td>
-							<td>${row.cos_address}</td>
-							<td><c:if test="${row.cos_status==2}">申請中</c:if> 
-								<c:if test="${row.cos_status==1}">有效</c:if> 
-								<c:if test="${row.cos_status==0}">無效</c:if>
-							</td>
-							<td>${row.cos_phone}</td>
-							<td>${row.cos_contact}</td>
-							<td>${row.cos_createtime}</td>
-							<td>${row.cos_deletime}</td>
-							<td><input type="button" name="prodaction" value="修改"
-								onclick="location.href='<c:url value="/conStore/contractStore.controller?storeid=${row.cos_storeid}&prodaction=修改"/>'"></td>
-						</tr>
-						</c:if> 
+				</thead>				
+				<tbody>				
+					<c:forEach var="row" items="<%=result%>">	
+						<c:if test="${row.cos_status!=2}">					
+							<tr>
+								<td>${row.cos_storeid}</td>
+								<td>${row.cos_name}</td>
+								<td>${row.cos_taxcode}</td>
+								<td>${row.cos_address}</td>
+								<td><c:if test="${row.cos_status==2}">申請中</c:if> 
+									<c:if test="${row.cos_status==1}">有效</c:if> 
+									<c:if test="${row.cos_status==0}">無效</c:if>
+								</td>
+								<td>${row.cos_phone}</td>
+								<td>${row.cos_contact}</td>
+								<td>${row.cos_createtime}</td>
+								<td>${row.cos_deletime}</td>
+								<td><input type="button" name="prodaction" value="修改"
+									onclick="location.href='<c:url value="/conStore/contractStore.controller?storeid=${row.cos_storeid}&prodaction=修改"/>'"></td>
+							</tr>
+						</c:if>						
 					</c:forEach>
-				</tbody>
+				</tbody>				
 			</table>
 			</div>
+			
 		</form>
 		<c:import url="/admin/FootBar.jsp" />
 	</div>

@@ -58,8 +58,10 @@ span {
 								<td>${row.cos_storeid}</td>
 								<td>${row.cos_taxcode}</td>
 								<td>${row.cos_address}</td>
-								<td><c:if test="${row.cos_status==1}">有效</c:if> <c:if
-										test="${row.cos_status==0}">無效</c:if></td>
+								<td><c:if test="${row.cos_status==2}">申請中</c:if> 
+									<c:if test="${row.cos_status==1}">有效</c:if> 
+									<c:if test="${row.cos_status==0}">無效</c:if>
+								</td>
 								<td>${row.cos_phone}</td>
 								<td>${row.cos_contact}</td>
 								<td>${row.cos_createtime}</td>

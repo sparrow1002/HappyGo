@@ -20,7 +20,7 @@
 		<c:import url="/common/TopMeau.jsp" />
 		<div id="content" class="demo" style="width: 946px">
 			<form action="<c:url value="/secure/login_store.controller" />"
-				method="get">
+				method="post">
 				<table class="t2" style="background-color: #F0E68C;">
 					<tr>
 						<th colspan='2' bgcolor='#d4edec'><label>特店登入</label></th>

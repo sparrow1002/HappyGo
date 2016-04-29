@@ -55,7 +55,7 @@ public class modify extends HttpServlet {
 			bean.setCos_deletime(deletime);
 			bean.setCos_updatetime(updatetime);
 			bean.setCos_updateuser(updateuser);
-			
+
 			if(prodaction!=null && prodaction.equals("送出")){
 				ContractStoreBean result = contractStoreService.update(bean);
 				if(bean==null){
@@ -65,7 +65,9 @@ public class modify extends HttpServlet {
 				}
 				Object user = session.getAttribute("adminuser");
 				if(user != null){
-					request.getRequestDispatcher("/conStore/contractStore.jsp").forward(request, response);
+					String prePath = (String)session.getAttribute("prePath");
+					response.sendRedirect(prePath);
+					//request.getRequestDispatcher(prePath).forward(request, response);
 				}else{
 					request.getRequestDispatcher("/conStore/singlecontractStore.jsp").forward(request, response);
 				}

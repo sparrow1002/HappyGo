@@ -23,7 +23,7 @@
 		<c:import url="/admin/TopMeau.jsp" />
 		<div id="content" class="demo" style="width: 900px">
 			<form action="<c:url value="/conStore/modify.controller"/>"
-				method="get">
+				method="post">
 				<!-- 後台特店 -->
 				<c:if test="${!empty adminuser}">
 					<table class="t2" style="background-color: #F0E68C;">
@@ -57,14 +57,27 @@
 							</tr>
 							<tr>
 								<td>特店狀態 :</td>
-								<td><c:if test="${row.cos_status=='1'}">
-										<input type="radio" name="status" value="1" checked="checked">有效
-	 		    <input type="radio" name="status" value="0">無效
-			</c:if> <c:if test="${row.cos_status=='0'}">
+								<td>
+										<input type="radio" name="status" value="2" checked="checked">申請中
 										<input type="radio" name="status" value="1">有效
-			 	<input type="radio" name="status" value="0" checked="checked">無效		
-			</c:if></td>
-
+		 		   						<input type="radio" name="status" value="0">無效
+		 		   				</td>
+<%-- 								<td><c:if test="${row.cos_status==2}">
+										<input type="radio" name="status" value="2" checked="checked">申請中
+										<input type="radio" name="status" value="1">有效
+		 		   						<input type="radio" name="status" value="0">無效
+									</c:if>
+									<c:if test="${row.cos_status==1}">
+										<input type="radio" name="status" value="2">申請中
+										<input type="radio" name="status" value="1" checked="checked">有效
+		 		   						<input type="radio" name="status" value="0">無效
+									</c:if> 
+									<c:if test="${row.cos_status==0}">
+										<input type="radio" name="status" value="2">申請中
+										<input type="radio" name="status" value="1">有效
+			 							<input type="radio" name="status" value="0" checked="checked">無效		
+									</c:if>
+								</td> --%>
 							</tr>
 							<tr>
 								<td>連絡電話 :</td>
