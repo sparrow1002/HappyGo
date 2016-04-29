@@ -42,7 +42,9 @@
 			<result name="input" >/admin/SysLog.jsp</result>
 			<result name="success" >/admin/SysLog.jsp</result>
 		</action>
-		
+		<action name="dbbackup" class="admin.controller.DBBackup_Action">			
+			<result name="success" >/admin/DBBackup.jsp</result>
+		</action>
 		<action name="cardinfolist" class="common.controller.CardInfo_Action">
 			<!-- controller.Login_Action-->
 			<result name="input" >/About.jsp</result>
