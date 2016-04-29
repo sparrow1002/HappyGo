@@ -52,8 +52,9 @@ public class ContractStoreServlet extends HttpServlet {
 		bean.setCos_updatetime(updatetime);
 		bean.setCos_updateuser(updateuser);
 		
+		String prePath = request.getHeader("Referer");
+		session.setAttribute("prePath", prePath);
 
-		
 		if("修改".equals(prodaction)){
 			List<ContractStoreBean> result = contractStoreService.select(bean);
 			request.setAttribute("select", result);

@@ -19,7 +19,7 @@
 		<c:import url="/common/TopMeau.jsp" />
 		<div id="content" class="demo" style="width: 946px">
 			<form action="<c:url value="/conStore/register.controller" />"
-				method="get">
+				method="post">
 				<table class="t2" style="background-color: #F0E68C;">
 					<tr>
 						<td colspan="2" align="center">申請特約商店</td>

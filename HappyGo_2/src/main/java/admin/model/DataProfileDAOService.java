@@ -7,6 +7,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
+import admin.model.dao.DataProfileDAOjdbc;
+
 @Service(value = "dataProfileDAOService")
 public class DataProfileDAOService {
 
@@ -100,6 +102,14 @@ public class DataProfileDAOService {
 	public List<DataProfileDAOBean> getRoleID() {
 		List<DataProfileDAOBean> result = null;
 		result = dataProfileDAO.select("ROLEID");
+		return result;
+	}
+	//2016/4 28 dayu add new method
+	public String select(String psDAP_GROUP, String psDAP_ID) {
+		String result = "";	
+		if(dataProfileDAO==null)
+			dataProfileDAO = new DataProfileDAOjdbc();
+		result = dataProfileDAO.selectitem(psDAP_GROUP,psDAP_ID);
 		return result;
 	}
 }
