@@ -40,6 +40,8 @@ public class SyslogDAOhibernate  implements SyslogDAO  {
 	}
 	@Override
 	public List<SyslogDAOBean> select(SyslogDAOBean orgbean) {
+		this.getSession().getTransaction().commit();
+		this.getSession().beginTransaction();
 		Query query = this.getSession()
 				.createQuery("from SyslogDAOBean where LOG_USERID=:id")
 				.setParameter("id", orgbean.getLOG_USERID());

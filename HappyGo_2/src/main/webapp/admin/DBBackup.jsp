@@ -17,10 +17,10 @@
 	<div id="allpage">
 		<c:import url="/admin/TopMeau.jsp" />
 		<div class="demo">
-			<table style="background-color: #F0E68C;">
+			<table style="background-color: #F0E68C; width: 100%;">
 				<thead>
 					<tr>
-						<th colspan="2">後台系統紀錄檢視</th>
+						<th colspan="2">後台資料庫備份紀錄檢視</th>
 					</tr>
 					<tr>
 						<th align="right" style="width: 100px;"><label>使用者ID</label></th>
@@ -36,30 +36,30 @@
 				<tbody>
 					<tr>
 						<td colspan="2"><c:if test="${not empty select}">
-								<table id="userslist" class="t2">
-									<thead>
-										<tr>
-											<th>紀錄編號</th>
-											<th>使用者</th>
-											<th>紀錄類型</th>
-											<th>紀錄說明</th>
-											<th>紀錄時間</th>
-											<th>紀錄者</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:forEach var="row" items="${select}">
+								<div class="tableEff">
+									<table id="userslist" class="t2">
+										<thead>
 											<tr>
-												<td>${row.LOG_NO}</td>
-												<td>${row.LOG_USERID}</td>
-												<td>${row.LOG_TYPE}</td>
-												<td>${row.LOG_DESC}</td>
-												<td>${row.LOG_UPDATETIME}</td>
-												<td>${row.LOG_UPDATEUSER}</td>
+												<th>使用者</th>
+												<th>紀錄類型</th>
+												<th>紀錄說明</th>
+												<th>紀錄時間</th>
+												<th>紀錄者</th>
 											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+										</thead>
+										<tbody>
+											<c:forEach var="row" items="${select}">
+												<tr>
+													<td>${row.LOG_USERID}</td>
+													<td>${row.LOG_TYPE}</td>
+													<td>${row.LOG_DESC}</td>
+													<td>${row.LOG_UPDATETIME}</td>
+													<td>${row.LOG_UPDATEUSER}</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
 							</c:if></td>
 					</tr>
 					<tr>
@@ -151,8 +151,7 @@
 				}
 			});
 		}
-	});
-	
+	});	
 	var message = '<%=request.getAttribute("message")%>';
 	if (message != null && message.trim() != "" && message.trim() != "null")
 		alert(message);
