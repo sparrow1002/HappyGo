@@ -22,7 +22,7 @@ input {
 	<div id="allpage">
 		<c:import url="/admin/TopMeau.jsp" />
 		<div class="demo">
-			<table style="background-color: #F0E68C;">
+			<table style="background-color: #F0E68C;width:100%;">
 				<thead>
 					<tr>
 						<th colspan="2">後台系統代碼管理</th>
@@ -51,7 +51,8 @@ input {
 				<tbody>
 					<tr>
 						<td colspan="3"><c:if test="${not empty select}">
-								<table id="userslist" class="t2">
+						<div class="tableEff">
+								<table id="userslist">
 									<thead>
 										<tr>
 											<th>代碼群組</th>
@@ -102,6 +103,7 @@ input {
 										</c:forEach>
 									</tbody>
 								</table>
+								</div>
 							</c:if></td>
 					</tr>
 				</tbody>
