@@ -115,8 +115,8 @@
 					<td align="right">方式三： </td><td>
 						只要消費時滿足以下條件 <br> 會員屬性 <select name="PTM_model">
 							<option value="0">選擇屬性
-							<option value="1">1_會員性別
-							<option value="2">2_會員生日
+							<option value="1">1_會員生日
+							<option value="2">2_會員性別
 							<option value="3">3_介紹人數
 					</select> <br> <!-- 4/13與宗保討論：PTM_VALUE需要寫入TABLE_HG_PromotionMethod -->
 						屬性參數：<input type="text" name="PTM_VALUE" value="請輸入參數"> <br>
