@@ -83,9 +83,9 @@ public class HG_PromotionProject_DAOJdbc {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		try {
-			//conn = dataSource.getConnection();
+			conn = dataSource.getConnection();
 			//Web專用
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = conn.prepareStatement(SELECT_TODAY1);	  //測試從活動編號找活動
 			stmt.setString(1, storeId);
 			stmt.setString(2, today);
@@ -317,8 +317,8 @@ public class HG_PromotionProject_DAOJdbc {
 		PreparedStatement stmt = null;
 		try {
 			System.out.println("This is HG_PromotionProject_DAOJdbc selectAll DAO start");
-//			conn = dataSource.getConnection(); //Web專用
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); //SE JDBC測試用
+			conn = dataSource.getConnection(); //Web專用
+//			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); //SE JDBC測試用
 			stmt = conn.prepareStatement(SELECT_FOREVER);	  //找永久活動
 			rset = stmt.executeQuery();
 			result = new ArrayList<HG_PromotionProject_Bean>();

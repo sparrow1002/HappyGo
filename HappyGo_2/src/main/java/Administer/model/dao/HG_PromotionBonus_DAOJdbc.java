@@ -61,9 +61,9 @@ public class HG_PromotionBonus_DAOJdbc implements HG_PromotionBonus_DAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			//conn = dataSource.getConnection();
+			conn = dataSource.getConnection();
 			//Web專用
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			pstmt = conn.prepareStatement(SELECT);
 			pstmt.setInt(1, projId);
 			rset = pstmt.executeQuery();
@@ -102,7 +102,8 @@ public class HG_PromotionBonus_DAOJdbc implements HG_PromotionBonus_DAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
+			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			pstmt = conn.prepareStatement(UPDATE);
 			pstmt.setString(1, bean.getPTB_OPER());
 			pstmt.setInt(2, bean.getPTB_VALUE());

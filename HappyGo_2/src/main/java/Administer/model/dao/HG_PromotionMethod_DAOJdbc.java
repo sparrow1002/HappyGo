@@ -57,7 +57,8 @@ public class HG_PromotionMethod_DAOJdbc implements HG_PromotionMethod_DAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
+			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			pstmt = conn.prepareStatement(SELECT);
 			pstmt.setInt(1, projId);
 			rset = pstmt.executeQuery();
@@ -99,7 +100,8 @@ public class HG_PromotionMethod_DAOJdbc implements HG_PromotionMethod_DAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
-			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn = dataSource.getConnection();
+			//conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			pstmt = conn.prepareStatement(UPDATE);
 			pstmt.setString(1, bean.getPTM_NAME());
 			pstmt.setString(2, bean.getPTM_DESC());
