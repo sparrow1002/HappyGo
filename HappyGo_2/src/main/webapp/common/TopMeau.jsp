@@ -37,4 +37,6 @@
 <script src="<c:url value='/jquery/jquery-ui.min.js'/>"></script>
 <script src="<c:url value='/jquery/jquery.dataTables.min.js'/>"></script>
 <link rel="stylesheet" type="text/css"	href="<c:url value='/jquery/jquery.dataTables.min.css'/>" />
+<link rel="stylesheet" href="<c:url value='/css/messagebox.css'/>">
+<script src="<c:url value='/js/messagebox.js'/>"></script> 
 </html>

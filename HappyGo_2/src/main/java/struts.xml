@@ -4,14 +4,18 @@
 "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<constant name="struts.action.extension" value="action"></constant>
-	<constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="false" />
 	<package name="dayuPackage" namespace="/dayuNameSpace" extends="struts-default">
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Throwable" result="error" />
+			<exception-mapping exception="org.hibernate.exception" result="error" />
+		</global-exception-mappings>
 		<action name="weblogin" class="admin.controller.Admin_Login_Action">
 			<!-- controller.Login_Action-->
 			<result name="input" >/secure/login_admin.jsp</result>
 			<result name="dayu" type="redirect">
 				<param name="location">/index.jsp</param >
-				</result>
+			</result>
 			<result name="success" type="redirect">
 				<param name="location">/admin/main_mag.jsp</param >
 			</result>
@@ -20,42 +24,46 @@
 			<!-- controller.Login_Action-->
 			<result name="input" >/admin/userlist.jsp</result>
 			<result name="success" >/admin/userlist.jsp</result>
-		</action>		
+			<result name="error">/common/error.jsp</result>
+		</action>
 		<action name="dataprofilelist" class="admin.controller.Dataprofile_list_Action">
 			<!-- controller.Login_Action-->
 			<result name="input" >/admin/DataProfile.jsp</result>
 			<result name="success" >/admin/DataProfile.jsp</result>
+			<result name="error">/common/error.jsp</result>
 		</action>
 		<action name="rolelist" class="admin.controller.Role_list_Action">
 			<!-- controller.Login_Action-->
 			<result name="input" >/admin/RoleList.jsp</result>
 			<result name="success" >/admin/RoleList.jsp</result>
+			<result name="error">/common/error.jsp</result>
 		</action>
 		<action name="rightlist" class="admin.controller.Role_right_Action">
 			<!-- controller.Login_Action-->
 			<result name="input" >/admin/RoleRightSetting.jsp</result>
 			<result name="success" >/admin/RoleRightSetting.jsp</result>
+			<result name="error">/common/error.jsp</result>
 		</action>
-		
 		<action name="sysloglist" class="admin.controller.Sylog_Action">
 			<!-- controller.Login_Action-->
 			<result name="input" >/admin/SysLog.jsp</result>
 			<result name="success" >/admin/SysLog.jsp</result>
+			<result name="error">/common/error.jsp</result>
 		</action>
-		<action name="dbbackup" class="admin.controller.DBBackup_Action">			
+		<action name="dbbackup" class="admin.controller.DBBackup_Action">
 			<result name="success" >/admin/DBBackup.jsp</result>
+			<result name="error">/common/error.jsp</result>
 		</action>
 		<action name="cardinfolist" class="common.controller.CardInfo_Action">
 			<!-- controller.Login_Action-->
 			<result name="input" >/About.jsp</result>
 			<result name="success" >/About.jsp</result>
+			<result name="error">/common/error.jsp</result>
 		</action>
 	</package>
-	<package name="dayuPackage2" namespace="/dayu" extends="struts-default">		
-		<action name="maguserlist" class="admin.controller.Admin_list_Servlet">
-			<!-- controller.Login_Action-->
-			<result name="input" >/admin/userlist.jsp</result>
-			<result name="success" >/admin/userlist.jsp</result>
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="defaultAction" class="common.controller.defaultAction">
+			<result name="error">/common/error.jsp</result>
 		</action>
 	</package>
 </struts>

@@ -168,7 +168,11 @@ input {
 		$('#users-contain').show();
 		$('#users-contain').dialog({
 			autoOpen : true,
-			modal : false
+			  modal: false,
+			  closeOnEscape: false,
+			  open: function(event, ui) {			    
+			    $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+			    }
 		});
 	}
 	
@@ -236,22 +240,7 @@ input {
 
 		$('#userslist').DataTable(opt);
 		$('#users-contain').hide();
-		if (aryPara["mode"] != null
-				&& (aryPara["mode"].toString() == "edit" || aryPara["mode"].toString() == "selectitem"|| aryPara["mode"].toString() == "newitem")) {
-			//alert("test");
-			$('#users-contain').show();
-			$('#users-contain').dialog({
-				open : function() {
-					// On open, hide the original submit button
-					$(this).find("[type=button]").click(function() {
-						$('#users-contain').dialog("close");
-					});
-				},
-				close : function() {
-					$('#users-contain').dialog("close");
-				}
-			});
-		}
+		
 	});	
 
 	var message = '<%=request.getAttribute("message")%>';
