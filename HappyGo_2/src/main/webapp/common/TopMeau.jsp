@@ -13,7 +13,7 @@
 		<nav>
 		<ul id="mainmenu">
 			<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-			<li><a href='<c:url value="/dayuNameSpace/cardinfolist.action?mode=select"/>'>HappyGO說明</a></li>
+			<li><a href='<c:url value="/dayuNameSpace/cardinfolist.action?mode=select"/>'>紅利點數說明</a></li>
 			<li><a href='<c:url value="/secure/login_mem.jsp"/>'>會員登入</a></li>
 			<li><a href='<c:url value="/secure/login_store.jsp"/>'>特約商店登入</a></li>
 			<li><a href='<c:url value="/dayuNameSpace/weblogin.action"/>'>系統人員登入</a></li>
